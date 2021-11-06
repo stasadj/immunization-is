@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iskazivanje_interesovanja_za_vakcinaciju datum="2021-2-2">
+    <pacijent>
+        <drzavljanstvo>Državljanin Republike Srbije</drzavljanstvo>
+        <jmbg>1111111111111</jmbg>
+        <puno_ime>
+            <licno_ime>Dina</licno_ime>
+            <prezime>Petrov</prezime>
+        </puno_ime>
+        <kontakt_informacije>
+            <email_adresa>xxxx@xxxxx.com</email_adresa>
+            <fiksni_telefon>11111111</fiksni_telefon>
+            <mobilni_telefon>1111111111</mobilni_telefon>
+        </kontakt_informacije>
+        <zeljena_opstina_vakcinacije>Novi Sad</zeljena_opstina_vakcinacije>
+        <odabir_vakcina>
+            <opcija>
+                <odabran>true</odabran>
+                <proizvodjac>Pfizer-BioNTech</proizvodjac>
+            </opcija>
+            <opcija>
+                <odabran>false</odabran>
+                <proizvodjac>Sputnik V</proizvodjac>
+            </opcija>
+            <opcija>
+                <odabran>false</odabran>
+                <proizvodjac>Sinopharm</proizvodjac>
+            </opcija>
+            <opcija>
+                <odabran>true</odabran>
+                <proizvodjac>AstraZeneca</proizvodjac>
+            </opcija>
+            <opcija>
+                <odabran>true</odabran>
+                <proizvodjac>Moderna</proizvodjac>
+            </opcija>
+                <odabran>false</odabran>
+                <proizvodjac>Bilo koja</proizvodjac>
+            <opcija>
+                
+            </opcija>
+        </odabir_vakcina>
+        <dobrovoljni_davalac_krvi>true</dobrovoljni_davalac_krvi>
+    </pacijent>
+</iskazivanje_interesovanja_za_vakcinaciju>
