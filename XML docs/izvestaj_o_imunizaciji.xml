@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <izvestaj_o_imunizaciji od="01.08.2021." do="01.09.2021." datum_izdavanja="11.09.2022.">
+    
     <broj_dokumenata_o_interesovanju>2758</broj_dokumenata_o_interesovanju>
     <broj_zahteva_za_digitalni_sertifikat>453</broj_zahteva_za_digitalni_sertifikat>
     <broj_izdatih_digitalnih_sertifikata>428</broj_izdatih_digitalnih_sertifikata>
@@ -38,4 +39,5 @@
             <broj_datih_doza>144</broj_datih_doza>
         </proizvodjac>
     </raspodela_datih_vakcina_po_proizvodjacima>
+    
 </izvestaj_o_imunizaciji>
