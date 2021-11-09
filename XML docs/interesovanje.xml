@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iskazivanje_interesovanja_za_vakcinaciju datum="2021-2-2">
+<iskazivanje_interesovanja_za_vakcinaciju datum="2021-02-02">
     <pacijent>
         <drzavljanstvo>Državljanin Republike Srbije</drzavljanstvo>
         <jmbg>1111111111111</jmbg>
@@ -15,16 +15,7 @@
         <zeljena_opstina_vakcinacije>Novi Sad</zeljena_opstina_vakcinacije>
         <odabir_vakcina>
             <opcija>
-                <odabran>true</odabran>
                 <proizvodjac>Pfizer-BioNTech</proizvodjac>
-            </opcija>
-            <opcija>
-                <odabran>false</odabran>
-                <proizvodjac>Sputnik V</proizvodjac>
-            </opcija>
-            <opcija>
-                <odabran>false</odabran>
-                <proizvodjac>Sinopharm</proizvodjac>
             </opcija>
             <opcija>
                 <odabran>true</odabran>
@@ -33,10 +24,6 @@
             <opcija>
                 <odabran>true</odabran>
                 <proizvodjac>Moderna</proizvodjac>
-            </opcija>
-                <odabran>false</odabran>
-                <proizvodjac>Bilo koja</proizvodjac>
-            <opcija>
                 
             </opcija>
         </odabir_vakcina>

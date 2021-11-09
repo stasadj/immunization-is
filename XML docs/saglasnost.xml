@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<obrazac_saglasnosti_za_imunizaciju datum="2021-6-11">
+<obrazac_saglasnosti_za_imunizaciju datum="2021-06-11">
     <informacije_o_pacijentu>
         <drzavljanstvo>
             <srpsko_drzavljanstvo>
@@ -15,9 +15,9 @@
             <licno_ime>Dina</licno_ime>
             <ime_roditelja>Branislav</ime_roditelja>
         </puno_ime>
-        <pol>zenski</pol>
+        <pol>Z</pol>
         <datum_i_mesto_rodjenja>
-            <datum_rodjenja>1999-6-4</datum_rodjenja>
+            <datum_rodjenja>1999-06-04</datum_rodjenja>
             <mesto_rodjenja>Zrenjanin</mesto_rodjenja>
         </datum_i_mesto_rodjenja>
         <prebivaliste>
@@ -34,7 +34,7 @@
         <radni_status>student</radni_status>
         <zanimanje_zaposlenog></zanimanje_zaposlenog>
         <ustanova_socijalne_zastite>
-            <pacijent_koristi_zastitu>da</pacijent_koristi_zastitu>
+            <pacijent_koristi_zastitu>true</pacijent_koristi_zastitu>
             <naziv_sedista></naziv_sedista>
             <opstina_sedista></opstina_sedista>
         </ustanova_socijalne_zastite>
@@ -58,7 +58,7 @@
             <vakcina>
                 <broj_doze>1</broj_doze>
                 <naziv>AstraZeneca</naziv>
-                <datum_davanja>2021-4-4</datum_davanja>
+                <datum_davanja>2021-04-04</datum_davanja>
                 <nacin_davanja>IM</nacin_davanja>
                 <ekstremitet>LR</ekstremitet>
                 <serija>43872</serija>
@@ -68,7 +68,7 @@
             <vakcina>
                 <broj_doze>2</broj_doze>
                 <naziv>AstraZeneca</naziv>
-                <datum_davanja>2021-6-4</datum_davanja>
+                <datum_davanja>2021-06-04</datum_davanja>
                 <nacin_davanja>IM</nacin_davanja>
                 <ekstremitet>LR</ekstremitet>
                 <serija>93872</serija>
