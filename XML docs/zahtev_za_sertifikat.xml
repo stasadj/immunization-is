@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zahtev_za_sertifikat mesto_izdavanja="Novi Sad" datum_izdavanja="01.10.2021.">
-    
-    <tekst_zahteva>
-        U skladu sa odredbom Republike Srbije o izdavanju digitalnog zelenog
-        sertifikata kao potvrde o izvršenoj vakcinaciji protiv COVID-19, rezultatima
-        testiranja na zaraznu bolest SARS-CoV-2 ili oporavku od bolesti COVID-19,
-        podnosim zahtev za izdavanje digitalnog zelenog sertifikata. 
-    </tekst_zahteva>
+<zahtev_za_sertifikat mesto_izdavanja="Novi Sad" datum_izdavanja="2021-10-01">
     
     <podnosilac_zahteva>
         <ime>Petar</ime>
@@ -16,7 +9,6 @@
         <pol>muški</pol>
         <jmbg>0101987123123</jmbg>
         <broj_pasosa>123123</broj_pasosa>
-        
         <razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>
     </podnosilac_zahteva>
     

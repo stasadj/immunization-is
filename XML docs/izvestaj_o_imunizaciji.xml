@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<izvestaj_o_imunizaciji od="01.08.2021." do="01.09.2021." datum_izdavanja="11.09.2022.">
+<izvestaj_o_imunizaciji od="2021-08-01" do="2021-09-01" datum_izdavanja="2022-11-09">
     
     <broj_dokumenata_o_interesovanju>2758</broj_dokumenata_o_interesovanju>
     <broj_zahteva_za_digitalni_sertifikat>453</broj_zahteva_za_digitalni_sertifikat>
