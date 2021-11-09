@@ -33,28 +33,29 @@
     </vakcinacija>
     <testovi>
         <test tip="RT">
-            <vrsta_uzroka></vrsta_uzroka>
+            <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzrokovanja></datum_vreme_uzrokovanja>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
             <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
             <rezultat></rezultat>
             <laboratorija></laboratorija>
         </test>
         <test tip="Ag-RDT">
-            <vrsta_uzroka></vrsta_uzroka>
+            <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzrokovanja></datum_vreme_uzrokovanja>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
             <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
             <rezultat></rezultat>
             <laboratorija></laboratorija>
         </test>
         <test tip="RBD S-protein">
-            <vrsta_uzroka></vrsta_uzroka>
+            <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzrokovanja></datum_vreme_uzrokovanja>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
             <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
             <rezultat></rezultat>
             <laboratorija></laboratorija>
         </test>
     </testovi>
+    <potpis></potpis>
 </digitalni_sertifikat>
