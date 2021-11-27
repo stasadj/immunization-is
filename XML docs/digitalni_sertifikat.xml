@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<digitalni_sertifikat broj="00001" datum_izdavanja="2021-11-06">
+<digitalni_sertifikat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="digitalni_sertifikat.xsd" broj="00001" datum_izdavanja="2021-11-06">
     <qr>https://sertifikat/broj</qr>
     <licni_podaci>
         <ime_prezime>Albert Makan</ime_prezime>
         <pol>M</pol>
         <datum_rodjenja>1999-12-23</datum_rodjenja>
-        <JMBG>2312999xxxxxx</JMBG>
-        <broj_pasosa>xxxxxxxxxx</broj_pasosa>
+        <JMBG>2312999850013</JMBG>
+        <broj_pasosa>001000000</broj_pasosa>
     </licni_podaci>
     <vakcinacija>
         <vakcina doza="1">
@@ -35,25 +36,25 @@
         <test tip="RT">
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
-            <rezultat></rezultat>
+            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
+            <rezultat>false</rezultat>
             <laboratorija></laboratorija>
         </test>
         <test tip="Ag-RDT">
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
-            <rezultat></rezultat>
+            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
+            <rezultat>false</rezultat>
             <laboratorija></laboratorija>
         </test>
         <test tip="RBD S-protein">
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
-            <rezultat></rezultat>
+            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
+            <rezultat>false</rezultat>
             <laboratorija></laboratorija>
         </test>
     </testovi>
