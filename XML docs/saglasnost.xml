@@ -26,11 +26,11 @@
             <mesto>Novi Sad</mesto>
             <opstina>Novi Sad</opstina>
         </prebivaliste>
-        <kontakt_informacija>
+        <kontakt_informacije>
             <fiksni_telefon>111111111</fiksni_telefon>
             <mobilni_telefon>1111111111</mobilni_telefon>
             <email_adresa>xxxxxx@xxxx.com</email_adresa>
-        </kontakt_informacija>
+        </kontakt_informacije>
         <radni_status>student</radni_status>
         <zanimanje_zaposlenog></zanimanje_zaposlenog>
         <ustanova_socijalne_zastite>

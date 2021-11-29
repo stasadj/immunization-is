@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="obrazac_saglasnosti_za_imunizaciju">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="informacije_o_pacijentu"/>
+                <xs:element ref="evidencija_o_vakcinaciji"/>
+            </xs:sequence>
+            <xs:attribute name="datum" type="xs:date"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="informacije_o_pacijentu">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="drzavljanstvo"/>
+                <xs:element ref="puno_ime"/>
+                <xs:element ref="pol"/>
+                <xs:element ref="datum_i_mesto_rodjenja"/>
+                <xs:element ref="prebivaliste"/>
+                <xs:element ref="kontakt_informacije"/>
+                <xs:element ref="radni_status"/>
+                <xs:element ref="zanimanje_zaposlenog"/>
+                <xs:element ref="ustanova_socijalne_zastite"/>
+                <xs:element ref="izjava_saglasnosti"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="drzavljanstvo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="srpsko_drzavljanstvo">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="jmbg">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                        <xs:pattern value="[0-9]{13}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="strano_drzavljanstvo">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="naziv_stranog_drzavljanstva" type="xs:string"/>
+                            <xs:element name="broj_pasosa_ili_ebs" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="puno_ime">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="prezime" type="xs:string"/>
+                <xs:element name="licno_ime" type="xs:string"/>
+                <xs:element name="ime_roditelja" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="pol">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[MZ]{1}"/>
+                <xs:pattern value=""/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="datum_i_mesto_rodjenja">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="datum_rodjenja" type="xs:date"/>
+                <xs:element name="mesto_rodjenja" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="prebivaliste">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ulica" type="xs:string"/>
+                <xs:element name="broj" type="xs:string"/>
+                <xs:element name="mesto" type="xs:string"/>
+                <xs:element name="opstina" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="kontakt_informacije">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fiksni_telefon">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:pattern value="[0-9]{9,10}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="mobilni_telefon">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:pattern value="[0-9]{9,11}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="email_adresa" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="radni_status" type="xs:string"/>
+    <xs:element name="zanimanje_zaposlenog" type="xs:string"/>
+    <xs:element name="ustanova_socijalne_zastite">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pacijent_koristi_zastitu" type="xs:boolean"/>
+                <xs:element name="naziv_sedista" type="xs:string"/>
+                <xs:element name="opstina_sedista" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="izjava_saglasnosti">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="saglasan" type="xs:boolean"/>
+                <xs:element name="naziv_imunoloskog_leka" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="evidencija_o_vakcinaciji">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="zdravstvena_ustanova"/>
+                <xs:element ref="izvrsena_imunizacija"/>
+                <xs:element ref="kontraindikacija"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="zdravstvena_ustanova">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="naziv" type="xs:string"/>
+                <xs:element name="vakcinacijski_punkt" type="xs:string"/>
+                <xs:element name="informacije_o_lekaru">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ime" type="xs:string"/>
+                            <xs:element name="prezime" type="xs:string"/>
+                            <xs:element name="faksimil" type="xs:string"/>
+                            <xs:element name="broj_telefona" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="izvrsena_imunizacija">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="vakcina"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="kontraindikacija">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="privremene_kontraindikacije"/>
+                <xs:element ref="trajne_kontraindikacije"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="informacije_o_lekaru">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ime" type="xs:string"/>
+                <xs:element name="prezime" type="xs:string"/>
+                <xs:element name="faksimil" type="xs:string"/>
+                <xs:element name="broj_telefona">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:pattern value="[0-9]{9,10}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="vakcina">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="broj_doze" type="xs:positiveInteger"/>
+                <xs:element name="naziv" type="xs:string"/>
+                <xs:element name="datum_davanja" type="xs:date"/>
+                <xs:element name="nacin_davanja">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="ekstremitet">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="([L][R])|([D][R])"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="serija" type="xs:positiveInteger"/>
+                <xs:element name="proizvodjac" type="xs:string"/>
+                <xs:element name="nezeljena_reakcija" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="privremene_kontraindikacije">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="datum_utvrdjivanja" type="nillableDate" minOccurs="0"
+                    nillable="true"/>
+                <xs:element name="dijagnoza" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="trajne_kontraindikacije">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="odluka_komisije" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="nillableDate">
+
+        <xs:union memberTypes="xs:dateTime emptyString"/>
+
+    </xs:simpleType>
+
+    <xs:simpleType name="emptyString">
+
+        <xs:restriction base="xs:string">
+
+            <xs:length value="0"/>
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+</xs:schema>
