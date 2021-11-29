@@ -46,7 +46,7 @@
     <evidencija_o_vakcinaciji>
         <zdravstvena_ustanova>
             <naziv></naziv>
-            <vakcinakcijski_punkt></vakcinakcijski_punkt>
+            <vakcinacijski_punkt></vakcinacijski_punkt>
             <informacije_o_lekaru>
                 <ime></ime>
                 <prezime></prezime>
