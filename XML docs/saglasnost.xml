@@ -39,7 +39,7 @@
             <opstina_sedista></opstina_sedista>
         </ustanova_socijalne_zastite>
         <izjava_saglasnosti>
-            <saglasan>da</saglasan>
+            <saglasan>true</saglasan>
             <naziv_imunoloskog_leka></naziv_imunoloskog_leka>
         </izjava_saglasnosti>
     </informacije_o_pacijentu>
