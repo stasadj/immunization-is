@@ -9,12 +9,14 @@
         <pol>M</pol>
         <jmbg>2001990111111</jmbg>
     </licni_podaci>
-    <vakcinacije zdravstvena_ustanova="Dom Zdravlja Novi Sad" naziv_vakcine="Pfizer-BioNTech">
+    <vakcinacije zdravstvena_ustanova="Dom Zdravlja Novi Sad">
         <vakcinacija>
+            <naziv_vakcine>Pfizer-BioNTech</naziv_vakcine>
             <datum_davanja>2021-04-10</datum_davanja>
             <broj_serije>14</broj_serije>
         </vakcinacija>
         <vakcinacija>
+            <naziv_vakcine>Pfizer-BioNTech</naziv_vakcine>
             <datum_davanja>2021-10-10</datum_davanja>
             <broj_serije>15</broj_serije>
         </vakcinacija>

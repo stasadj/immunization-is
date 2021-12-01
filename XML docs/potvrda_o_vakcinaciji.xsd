@@ -12,7 +12,7 @@
       <xs:attribute name="potreban_pecat" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="sifra_potvrde" type="xs:integer"/>
+  <xs:element name="sifra_potvrde" type="xs:positiveInteger"/>
   <xs:element name="datum_izdavanja_potvrde" type="xs:date"/>
   <xs:element name="qr_kod" type="xs:anyURI"/>
   <xs:element name="licni_podaci">
@@ -45,20 +45,21 @@
   <xs:element name="vakcinacije">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="3" ref="vakcinacija" minOccurs="1"/>
+        <xs:element maxOccurs="unbounded" ref="vakcinacija" minOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="naziv_vakcine" use="required" type="xs:string"/>
       <xs:attribute name="zdravstvena_ustanova" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="vakcinacija">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="naziv_vakcine"/>
         <xs:element ref="datum_davanja"/>
         <xs:element ref="broj_serije"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="naziv_vakcine" type="xs:string"/>
   <xs:element name="datum_davanja" type="xs:date"/>
-  <xs:element name="broj_serije" type="xs:integer"/>
+  <xs:element name="broj_serije" type="xs:positiveInteger"/>
 </xs:schema>
