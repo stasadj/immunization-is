@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat"
+    xmlns="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat">
+
+    <xs:element name="zahtev_za_sertifikat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="podnosilac_zahteva">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ime" type="xs:string"/>
+                            <xs:element name="prezime" type="xs:string"/>
+                            <xs:element name="datum_rodjenja" type="xs:date"/>
+                            <xs:element name="pol">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[MŽ]{1}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="jmbg">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                        <xs:pattern value="[0-9]{13}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="broj_pasosa">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                        <xs:pattern value="[0-9]{9}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="razlog_za_podnosenje_zahteva" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="mesto_izdavanja" type="xs:string"/>
+            <xs:attribute name="datum_izdavanja" type="xs:date"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

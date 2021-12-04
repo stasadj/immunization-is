@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zahtev_za_sertifikat mesto_izdavanja="Novi Sad" datum_izdavanja="2021-10-01">
+<zahtev_za_sertifikat xmlns="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat zahtev_za_sertifikat.xsd" 
+    mesto_izdavanja="Novi Sad" datum_izdavanja="2021-10-01">
     
     <podnosilac_zahteva>
         <ime>Petar</ime>
         <prezime>Petrović</prezime>
-        <datum_rodjenja>01.01.1987.</datum_rodjenja>
-        <pol>muški</pol>
-        <jmbg>0101987123123</jmbg>
-        <broj_pasosa>123123</broj_pasosa>
+        <datum_rodjenja>1987-01-01</datum_rodjenja>
+        <pol>M</pol>
+        <jmbg>0234567891234</jmbg>
+        <broj_pasosa>123456789</broj_pasosa>
         <razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>
     </podnosilac_zahteva>
     
