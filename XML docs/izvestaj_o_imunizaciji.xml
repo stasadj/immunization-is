@@ -2,7 +2,7 @@
 
 <izvestaj_o_imunizaciji xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji" 
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji izvestaj_o_imunizaciji.xsd" 
     od="2021-08-01" do="2021-09-01" datum_izdavanja="2022-11-09">
     
     <broj_dokumenata_o_interesovanju>2758</broj_dokumenata_o_interesovanju>
