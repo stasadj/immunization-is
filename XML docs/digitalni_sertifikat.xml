@@ -33,30 +33,30 @@
         </vakcina>
     </vakcinacija>
     <testovi>
-        <test tip="RT">
+        <RT_test>
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
-            <rezultat>false</rezultat>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
             <laboratorija></laboratorija>
-        </test>
-        <test tip="Ag-RDT">
+        </RT_test>
+        <Ag_RDT_test>
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
-            <rezultat>false</rezultat>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
             <laboratorija></laboratorija>
-        </test>
-        <test tip="RBD S-protein">
+        </Ag_RDT_test>
+        <RBD_S_protein_test>
             <vrsta_uzorka></vrsta_uzorka>
             <proizvodjac></proizvodjac>
-            <datum_vreme_uzorkovanja>2021-07-22T00:00:00</datum_vreme_uzorkovanja>
-            <datum_vreme_izdavanja_rezultata>2021-07-23T00:00:00</datum_vreme_izdavanja_rezultata>
-            <rezultat>false</rezultat>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
             <laboratorija></laboratorija>
-        </test>
+        </RBD_S_protein_test>
     </testovi>
     <potpis></potpis>
 </digitalni_sertifikat>

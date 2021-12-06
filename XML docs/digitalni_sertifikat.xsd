@@ -26,7 +26,14 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ime_prezime" type="xs:string"/>
-  <xs:element name="pol" type="xs:string"/>
+  <xs:element name="pol">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="M"/>
+        <xs:enumeration value="Z"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
   <xs:element name="datum_rodjenja" type="xs:date"/>
   <xs:element name="JMBG">
     <xs:simpleType>
@@ -67,28 +74,42 @@
   <xs:element name="testovi">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="3" ref="test" minOccurs="0"/>
+        <xs:element ref="RT_test"/>
+        <xs:element ref="Ag_RDT_test"/>
+        <xs:element ref="RBD_S_protein_test"/>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="test">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="vrsta_uzorka" maxOccurs="1"/>
-        <xs:element ref="proizvodjac"/>
-        <xs:element ref="datum_vreme_uzorkovanja"/>
-        <xs:element ref="datum_vreme_izdavanja_rezultata"/>
-        <xs:element ref="rezultat"/>
-        <xs:element ref="laboratorija"/>
-      </xs:sequence>
-      <xs:attribute name="tip" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="vrsta_uzorka" type="xs:string"/>
   <xs:element name="proizvodjac" type="xs:string"/>
-  <xs:element name="datum_vreme_uzorkovanja" type="xs:dateTime"/>
-  <xs:element name="datum_vreme_izdavanja_rezultata" type="xs:dateTime"/>
-  <xs:element name="rezultat" type="xs:boolean"/>
+  <xs:element name="datum_vreme_uzorkovanja" type="nillableDateTime"/>
+  <xs:element name="datum_vreme_izdavanja_rezultata" type="nillableDateTime"/>
+  <xs:element name="rezultat" type="nillableBool"/>
   <xs:element name="laboratorija" type="xs:string"/>
   <xs:element name="potpis" type="xs:base64Binary"/>
+  <xs:complexType name="TTest">
+    <xs:sequence>
+      <xs:element ref="vrsta_uzorka" maxOccurs="1"/>
+      <xs:element ref="proizvodjac"/>
+      <xs:element ref="datum_vreme_uzorkovanja"/>
+      <xs:element ref="datum_vreme_izdavanja_rezultata"/>
+      <xs:element ref="rezultat"/>
+      <xs:element ref="laboratorija"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RT_test" type="TTest"/>
+  <xs:element name="Ag_RDT_test" type="TTest"/>
+  <xs:element name="RBD_S_protein_test" type="TTest"/>
+
+  <xs:simpleType name="nillableDateTime">
+    <xs:union memberTypes="xs:dateTime emptyString"/>
+  </xs:simpleType>
+  <xs:simpleType name="nillableBool">
+    <xs:union memberTypes="xs:boolean emptyString"/>
+  </xs:simpleType>
+  <xs:simpleType name="emptyString">
+    <xs:restriction base="xs:string">
+      <xs:length value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
