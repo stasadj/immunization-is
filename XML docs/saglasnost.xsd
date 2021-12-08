@@ -172,21 +172,8 @@
                 <xs:element name="broj_doze" type="xs:positiveInteger"/>
                 <xs:element name="naziv" type="xs:string"/>
                 <xs:element name="datum_davanja" type="xs:date"/>
-                <xs:element name="nacin_davanja">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="IM"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element name="ekstremitet">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="LR"/>
-                            <xs:enumeration value="DR"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
+                <xs:element name="nacin_davanja" type="util:nacin_davanja"/>
+                <xs:element name="ekstremitet" type="util:ekstremitet"/>
                 <xs:element name="serija" type="xs:positiveInteger"/>
                 <xs:element name="proizvodjac" type="xs:string"/>
                 <xs:element name="nezeljena_reakcija" type="xs:string"/>

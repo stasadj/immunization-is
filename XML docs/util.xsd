@@ -81,4 +81,17 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:simpleType name="ekstremitet">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LR"/>
+            <xs:enumeration value="DR"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="nacin_davanja">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IM"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>
