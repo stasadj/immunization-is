@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iskazivanje_interesovanja_za_vakcinaciju xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="interesovanje.xsd" datum="2021-02-02">
+<iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/interesovanje interesovanje.xsd" 
+    datum="2021-02-02">
     <pacijent>
         <drzavljanstvo>Državljanin Republike Srbije</drzavljanstvo>
         <jmbg>1111111111111</jmbg>
