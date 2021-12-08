@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
   targetNamespace="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji"
-  xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji">
+  xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji"
+  xmlns:util="http://ftn.uns.ac.rs/util">
+  
+  <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
+  
   <xs:element name="potvrda_o_vakcinaciji">
     <xs:complexType>
       <xs:sequence>
@@ -29,21 +33,8 @@
   </xs:element>
   <xs:element name="ime" type="xs:string"/>
   <xs:element name="prezime" type="xs:string"/>
-  <xs:element name="pol">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="M"/>
-        <xs:enumeration value="Z"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="jmbg">
-    <xs:simpleType>
-      <xs:restriction base="xs:positiveInteger">
-        <xs:pattern value="[0-9]{13}"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
+  <xs:element name="pol" type="util:pol"/>
+  <xs:element name="jmbg" type="util:jmbg"/>
   <xs:element name="vakcinacije">
     <xs:complexType>
       <xs:sequence>

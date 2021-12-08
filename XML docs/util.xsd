@@ -21,4 +21,22 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:simpleType name="email">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="fiksni">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:pattern value="[0-9]{9,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mobilni">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:pattern value="[0-9]{9,11}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>

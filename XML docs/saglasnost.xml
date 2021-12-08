@@ -10,7 +10,7 @@
             </srpsko_drzavljanstvo>
             <strano_drzavljanstvo>
                 <naziv_stranog_drzavljanstva>Austrija</naziv_stranog_drzavljanstva>
-                <broj_pasosa_ili_ebs>1234564</broj_pasosa_ili_ebs>
+                <broj_pasosa_ili_ebs>123456489</broj_pasosa_ili_ebs>
             </strano_drzavljanstvo>
         </drzavljanstvo>
         <puno_ime>
@@ -18,7 +18,7 @@
             <licno_ime>Dina</licno_ime>
             <ime_roditelja>Branislav</ime_roditelja>
         </puno_ime>
-        <pol>Z</pol>
+        <pol>Ž</pol>
         <datum_i_mesto_rodjenja>
             <datum_rodjenja>1999-06-04</datum_rodjenja>
             <mesto_rodjenja>Zrenjanin</mesto_rodjenja>

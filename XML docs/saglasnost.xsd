@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.ftn.uns.ac.rs/saglasnost"
-    xmlns="http://www.ftn.uns.ac.rs/saglasnost">
+    xmlns="http://www.ftn.uns.ac.rs/saglasnost"
+    xmlns:util="http://ftn.uns.ac.rs/util">
+    
+    <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
+    
     <xs:element name="obrazac_saglasnosti_za_imunizaciju">
         <xs:complexType>
             <xs:sequence>
@@ -33,13 +37,7 @@
                 <xs:element name="srpsko_drzavljanstvo">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="jmbg">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:positiveInteger">
-                                        <xs:pattern value="[0-9]{13}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:element>
+                            <xs:element name="jmbg" type="util:jmbg"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -47,7 +45,7 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="naziv_stranog_drzavljanstva" type="xs:string"/>
-                            <xs:element name="broj_pasosa_ili_ebs" type="xs:string"/>
+                            <xs:element name="broj_pasosa_ili_ebs" type="util:broj_pasosa"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -63,14 +61,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="pol">
-        <xs:simpleType>
-            <xs:restriction base="xs:string">
-                <xs:pattern value="[MZ]{1}"/>
-                <xs:pattern value=""/>
-            </xs:restriction>
-        </xs:simpleType>
-    </xs:element>
+    <xs:element name="pol" type="util:pol"/>
     <xs:element name="datum_i_mesto_rodjenja">
         <xs:complexType>
             <xs:sequence>
@@ -92,21 +83,9 @@
     <xs:element name="kontakt_informacije">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="fiksni_telefon">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:positiveInteger">
-                            <xs:pattern value="[0-9]{9,10}"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element name="mobilni_telefon">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:positiveInteger">
-                            <xs:pattern value="[0-9]{9,11}"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element name="email_adresa" type="xs:string"/>
+                <xs:element name="fiksni_telefon" type="util:fiksni"/>
+                <xs:element name="mobilni_telefon" type="util:mobilni"/>
+                <xs:element name="email_adresa" type="util:email"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
