@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
   targetNamespace="http://www.ftn.uns.ac.rs/interesovanje"
-  xmlns="http://www.ftn.uns.ac.rs/interesovanje"
-  xmlns:util="http://ftn.uns.ac.rs/util">
-  
+  xmlns="http://www.ftn.uns.ac.rs/interesovanje" xmlns:util="http://ftn.uns.ac.rs/util">
+
   <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
-  
+
   <xs:element name="iskazivanje_interesovanja_za_vakcinaciju">
     <xs:complexType>
       <xs:sequence>
@@ -54,11 +53,15 @@
   <xs:element name="zeljena_opstina_vakcinacije" type="xs:string"/>
   <xs:element name="odabir_vakcina">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="opcija"/>
-      </xs:sequence>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" ref="opcija"/>
+        </xs:sequence>
+        <xs:element ref="bilo_koja_vakcina"/>
+      </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="opcija" type="xs:string"/>
+  <xs:element name="bilo_koja_vakcina" type="util:emptyString"/>
   <xs:element name="dobrovoljni_davalac_krvi" type="xs:boolean"/>
 </xs:schema>
