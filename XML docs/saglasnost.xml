@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<obrazac_saglasnosti_za_imunizaciju datum="2021-06-11">
+<obrazac_saglasnosti_za_imunizaciju xmlns="http://www.ftn.uns.ac.rs/saglasnost"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/saglasnost saglasnost.xsd" 
+    datum="2021-06-11">
     <informacije_o_pacijentu>
         <drzavljanstvo>
             <srpsko_drzavljanstvo>
