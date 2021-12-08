@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<potvrda_o_vakcinaciji potreban_pecat="false">
+<potvrda_o_vakcinaciji xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji potvrda_o_vakcinaciji.xsd" 
+    potreban_pecat="false">
     <sifra_potvrde>0123456789</sifra_potvrde>
     <datum_izdavanja_potvrde>2021-11-21</datum_izdavanja_potvrde>
     <qr_kod>zdravstvena-ustanova.gov.rs/putanja/ka/dokumentu</qr_kod>
