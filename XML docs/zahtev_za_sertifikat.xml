@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zahtev_za_sertifikat xmlns="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat"
+<zahtev_za_sertifikat xmlns="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat zahtev_za_sertifikat.xsd" 
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat zahtev_za_sertifikat.xsd" 
     mesto_izdavanja="Novi Sad" datum_izdavanja="2021-10-01">
     
     <podnosilac_zahteva>
