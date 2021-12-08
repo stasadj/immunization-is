@@ -69,9 +69,9 @@
   </xs:element>
   <xs:element name="vrsta_uzorka" type="xs:string"/>
   <xs:element name="proizvodjac" type="xs:string"/>
-  <xs:element name="datum_vreme_uzorkovanja" type="nillableDateTime"/>
-  <xs:element name="datum_vreme_izdavanja_rezultata" type="nillableDateTime"/>
-  <xs:element name="rezultat" type="nillableBool"/>
+  <xs:element name="datum_vreme_uzorkovanja" type="util:nillableDateTime"/>
+  <xs:element name="datum_vreme_izdavanja_rezultata" type="util:nillableDateTime"/>
+  <xs:element name="rezultat" type="util:nillableBool"/>
   <xs:element name="laboratorija" type="xs:string"/>
   <xs:element name="potpis" type="xs:base64Binary"/>
   <xs:complexType name="TTest">
@@ -88,15 +88,4 @@
   <xs:element name="Ag_RDT_test" type="TTest"/>
   <xs:element name="RBD_S_protein_test" type="TTest"/>
 
-  <xs:simpleType name="nillableDateTime">
-    <xs:union memberTypes="xs:dateTime emptyString"/>
-  </xs:simpleType>
-  <xs:simpleType name="nillableBool">
-    <xs:union memberTypes="xs:boolean emptyString"/>
-  </xs:simpleType>
-  <xs:simpleType name="emptyString">
-    <xs:restriction base="xs:string">
-      <xs:length value="0"/>
-    </xs:restriction>
-  </xs:simpleType>
 </xs:schema>

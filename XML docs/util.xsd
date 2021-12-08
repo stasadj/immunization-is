@@ -63,4 +63,22 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:simpleType name="nillableDate">
+        <xs:union memberTypes="xs:date emptyString"/>        
+    </xs:simpleType>
+    
+    <xs:simpleType name="nillableDateTime">
+        <xs:union memberTypes="xs:dateTime emptyString"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="nillableBool">
+        <xs:union memberTypes="xs:boolean emptyString"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="emptyString">
+        <xs:restriction base="xs:string">
+            <xs:length value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>

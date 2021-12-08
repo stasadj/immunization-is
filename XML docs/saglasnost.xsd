@@ -196,8 +196,7 @@
     <xs:element name="privremene_kontraindikacije">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="datum_utvrdjivanja" type="nillableDate" minOccurs="0"
-                    nillable="true"/>
+                <xs:element name="datum_utvrdjivanja" type="util:nillableDate"/>
                 <xs:element name="dijagnoza" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
@@ -209,21 +208,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <xs:simpleType name="nillableDate">
-
-        <xs:union memberTypes="xs:dateTime emptyString"/>
-
-    </xs:simpleType>
-
-    <xs:simpleType name="emptyString">
-
-        <xs:restriction base="xs:string">
-
-            <xs:length value="0"/>
-
-        </xs:restriction>
-
-    </xs:simpleType>
-
 </xs:schema>
