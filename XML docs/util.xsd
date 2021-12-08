@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://ftn.uns.ac.rs/util"
+    xmlns="http://ftn.uns.ac.rs/util">
+    
+    <xs:simpleType name="pol">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[MŽ]{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="jmbg">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:pattern value="[0-9]{13}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="broj_pasosa">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
