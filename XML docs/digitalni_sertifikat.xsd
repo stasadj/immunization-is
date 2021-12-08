@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
+  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat">
   <xs:element name="digitalni_sertifikat">
     <xs:complexType>
       <xs:sequence>

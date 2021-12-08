@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<digitalni_sertifikat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="digitalni_sertifikat.xsd" broj="00001" datum_izdavanja="2021-11-06">
+<digitalni_sertifikat xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/digitalni-sertifikat digitalni_sertifikat.xsd" 
+    broj="00001" datum_izdavanja="2021-11-06">
     <qr>https://sertifikat/broj</qr>
     <licni_podaci>
         <ime_prezime>Albert Makan</ime_prezime>
