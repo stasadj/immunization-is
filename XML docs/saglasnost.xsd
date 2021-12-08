@@ -33,7 +33,7 @@
     </xs:element>
     <xs:element name="drzavljanstvo">
         <xs:complexType>
-            <xs:sequence>
+            <xs:choice>
                 <xs:element name="srpsko_drzavljanstvo">
                     <xs:complexType>
                         <xs:sequence>
@@ -49,7 +49,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-            </xs:sequence>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:element name="puno_ime">
@@ -89,8 +89,8 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="radni_status" type="xs:string"/>
-    <xs:element name="zanimanje_zaposlenog" type="xs:string"/>
+    <xs:element name="radni_status" type="util:radni_status"/>
+    <xs:element name="zanimanje_zaposlenog" type="util:zanimanje"/>
     <xs:element name="ustanova_socijalne_zastite">
         <xs:complexType>
             <xs:sequence>
@@ -174,13 +174,16 @@
                 <xs:element name="datum_davanja" type="xs:date"/>
                 <xs:element name="nacin_davanja">
                     <xs:simpleType>
-                        <xs:restriction base="xs:string"/>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="IM"/>
+                        </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
                 <xs:element name="ekstremitet">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
-                            <xs:pattern value="([L][R])|([D][R])"/>
+                            <xs:enumeration value="LR"/>
+                            <xs:enumeration value="DR"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>

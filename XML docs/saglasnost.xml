@@ -8,10 +8,6 @@
             <srpsko_drzavljanstvo>
                 <jmbg>1234567890123</jmbg>
             </srpsko_drzavljanstvo>
-            <strano_drzavljanstvo>
-                <naziv_stranog_drzavljanstva>Austrija</naziv_stranog_drzavljanstva>
-                <broj_pasosa_ili_ebs>123456489</broj_pasosa_ili_ebs>
-            </strano_drzavljanstvo>
         </drzavljanstvo>
         <puno_ime>
             <prezime>Petrov</prezime>

@@ -39,4 +39,28 @@
         </xs:restriction>
     </xs:simpleType>
     
+    
+    <xs:simpleType name="radni_status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zaposlen"/>
+            <xs:enumeration value="nezaposlen"/>
+            <xs:enumeration value="penzioner"/>
+            <xs:enumeration value="učenik"/>
+            <xs:enumeration value="student"/>
+            <xs:enumeration value="dete"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="zanimanje">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zdravstvena zaštita"/>
+            <xs:enumeration value="socijalna zaštita"/>
+            <xs:enumeration value="prosveta"/>
+            <xs:enumeration value="MUP"/>
+            <xs:enumeration value="vojska RS"/>
+            <xs:enumeration value="drugo"/>
+            <xs:enumeration value=""/>
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>
