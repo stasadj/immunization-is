@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
+  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
+  xmlns:util="http://ftn.uns.ac.rs/util">
+  
+  <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
+  
+  <xs:element name="digitalni_sertifikat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="qr"/>
+        <xs:element ref="licni_podaci"/>
+        <xs:element ref="vakcinacija"/>
+        <xs:element ref="testovi"/>
+        <xs:element ref="potpis"/>
+      </xs:sequence>
+      <xs:attribute name="broj" use="required" type="xs:integer"/>
+      <xs:attribute name="datum_izdavanja" use="required" type="xs:date"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="qr" type="xs:anyURI"/>
+  <xs:element name="licni_podaci">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ime_prezime"/>
+        <xs:element ref="pol"/>
+        <xs:element ref="datum_rodjenja"/>
+        <xs:element ref="JMBG"/>
+        <xs:element ref="broj_pasosa"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ime_prezime" type="xs:string"/>
+  <xs:element name="pol" type="util:pol"/>
+  <xs:element name="datum_rodjenja" type="xs:date"/>
+  <xs:element name="JMBG" type="util:jmbg"/>
+  <xs:element name="broj_pasosa" type="util:broj_pasosa"/>
+  <xs:element name="vakcinacija">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="vakcina"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vakcina">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tip"/>
+        <xs:element ref="proizvodjac_serija"/>
+        <xs:element ref="datum"/>
+        <xs:element ref="zdravstvena_ustanova"/>
+      </xs:sequence>
+      <xs:attribute name="doza" use="required" type="xs:positiveInteger"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tip" type="xs:string"/>
+  <xs:element name="proizvodjac_serija" type="xs:string"/>
+  <xs:element name="datum" type="xs:date"/>
+  <xs:element name="zdravstvena_ustanova" type="xs:string"/>
+  <xs:element name="testovi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="RT_test"/>
+        <xs:element ref="Ag_RDT_test"/>
+        <xs:element ref="RBD_S_protein_test"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vrsta_uzorka" type="xs:string"/>
+  <xs:element name="proizvodjac" type="xs:string"/>
+  <xs:element name="datum_vreme_uzorkovanja" type="util:nillableDateTime"/>
+  <xs:element name="datum_vreme_izdavanja_rezultata" type="util:nillableDateTime"/>
+  <xs:element name="rezultat" type="util:nillableBool"/>
+  <xs:element name="laboratorija" type="xs:string"/>
+  <xs:element name="potpis" type="xs:base64Binary"/>
+  <xs:complexType name="TTest">
+    <xs:sequence>
+      <xs:element ref="vrsta_uzorka" maxOccurs="1"/>
+      <xs:element ref="proizvodjac"/>
+      <xs:element ref="datum_vreme_uzorkovanja"/>
+      <xs:element ref="datum_vreme_izdavanja_rezultata"/>
+      <xs:element ref="rezultat"/>
+      <xs:element ref="laboratorija"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RT_test" type="TTest"/>
+  <xs:element name="Ag_RDT_test" type="TTest"/>
+  <xs:element name="RBD_S_protein_test" type="TTest"/>
+
+</xs:schema>

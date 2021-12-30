@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://www.ftn.uns.ac.rs/interesovanje"
+  xmlns="http://www.ftn.uns.ac.rs/interesovanje" xmlns:util="http://ftn.uns.ac.rs/util">
+
+  <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
+
+  <xs:element name="iskazivanje_interesovanja_za_vakcinaciju">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pacijent"/>
+        <xs:element ref="zeljena_opstina_vakcinacije"/>
+        <xs:element ref="odabir_vakcina"/>
+      </xs:sequence>
+      <xs:attribute name="datum" use="required" type="xs:date"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pacijent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="drzavljanstvo"/>
+        <xs:element ref="jmbg"/>
+        <xs:element ref="puno_ime"/>
+        <xs:element ref="kontakt_informacije"/>
+        <xs:element ref="dobrovoljni_davalac_krvi"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="drzavljanstvo" type="xs:string"/>
+  <xs:element name="jmbg" type="util:jmbg"/>
+  <xs:element name="puno_ime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="licno_ime"/>
+        <xs:element ref="prezime"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="licno_ime" type="xs:string"/>
+  <xs:element name="prezime" type="xs:string"/>
+  <xs:element name="kontakt_informacije">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="email_adresa"/>
+        <xs:element ref="fiksni_telefon"/>
+        <xs:element ref="mobilni_telefon"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="email_adresa" type="util:email"/>
+  <xs:element name="fiksni_telefon" type="util:fiksni"/>
+  <xs:element name="mobilni_telefon" type="util:mobilni"/>
+  <xs:element name="zeljena_opstina_vakcinacije" type="xs:string"/>
+  <xs:element name="odabir_vakcina">
+    <xs:complexType>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" ref="opcija"/>
+        </xs:sequence>
+        <xs:element ref="bilo_koja_vakcina"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="opcija" type="xs:string"/>
+  <xs:element name="bilo_koja_vakcina" type="util:emptyString"/>
+  <xs:element name="dobrovoljni_davalac_krvi" type="xs:boolean"/>
+</xs:schema>

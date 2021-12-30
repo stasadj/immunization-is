@@ -14,7 +14,7 @@
 	<name>backend</name>
 	<description>Test backend project for XML course - Team 404</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,6 +35,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!-- Plugin za automatsko generisanje klasa na osnovu nasih sema (xsd fajlova) -->
+		    <!-- Klase se generisu u target/generated-sources/xjc -->
+	    	<plugin>
+	            <groupId>org.jvnet.jaxb2.maven2</groupId>
+	            <artifactId>maven-jaxb2-plugin</artifactId>
+	            <executions>
+	                <execution>
+	                    <goals>
+	                        <goal>generate</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	            <configuration>
+	        		<schemaDirectory>src/main/resources/schemas</schemaDirectory>
+	        		<schemaIncludes>
+	        			<include>*.xsd</include>
+	        		</schemaIncludes>
+	        		 <packageName>com.immunization.backend</packageName>
+				</configuration>
+	        </plugin>
 		</plugins>
 	</build>
 
