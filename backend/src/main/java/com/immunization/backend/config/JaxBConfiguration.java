@@ -11,18 +11,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JaxBConfiguration {
 	
-	private String instancePath = "com.immunization.backend.model";
+	private String instancePathBase = "rs.ac.uns.ftn";
+	private String digitalniSertifikatPath = instancePathBase + ".digitalni_sertifikat";
 
     @Bean
-    public Unmarshaller createUnmarshaller() throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(instancePath);
+    public Unmarshaller createDigitalniSertifikatUnmarshaller() throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(digitalniSertifikatPath);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return unmarshaller;
     }
 
     @Bean
-    public Marshaller createMarshaller() throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(instancePath);
+    public Marshaller createDigitalniSertifikatMarshaller() throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(digitalniSertifikatPath);
         Marshaller marshaller = context.createMarshaller();
         //marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new NSPrefixMapper()); //ovo jos ne znam sta je
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
