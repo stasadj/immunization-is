@@ -18,7 +18,7 @@ public class JaxBConfiguration {
     public Unmarshaller createDigitalniSertifikatUnmarshaller() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(digitalniSertifikatPath);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return unmarshaller;
+        return unmarshaller; 
     }
 
     @Bean
