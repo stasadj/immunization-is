@@ -14,10 +14,10 @@ import com.immunization.backend.util.AuthenticationUtilities;
 import com.immunization.backend.util.AuthenticationUtilities.ConnectionProperties;
 
 
-public class DatabaseRetrievingTest {
+public class DatabaseRetrievalExample {
     
 	public static void main(String[] args) throws Exception {
-		DatabaseRetrievingTest.run(AuthenticationUtilities.loadProperties(), args);
+		DatabaseRetrievalExample.run(AuthenticationUtilities.loadProperties(), args);
 	}
     
     /**
@@ -28,7 +28,7 @@ public class DatabaseRetrievingTest {
     public static void run(ConnectionProperties conn, String args[]) throws Exception {
        
 
-    	System.out.println("[INFO] " + DatabaseRetrievingTest.class.getSimpleName());
+    	System.out.println("[INFO] " + DatabaseRetrievalExample.class.getSimpleName());
     	
     	// initialize collection and document identifiers
         String collectionId = null;

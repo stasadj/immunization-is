@@ -13,12 +13,12 @@ import org.xmldb.api.modules.XMLResource;
 import com.immunization.backend.util.AuthenticationUtilities;
 import com.immunization.backend.util.AuthenticationUtilities.ConnectionProperties;
 
-public class DatabaseStoringTest {
+public class DatabaseStoringExample {
     
 	private static ConnectionProperties conn;
 	
     public static void main(String[] args) throws Exception {
-		DatabaseStoringTest.run(conn = AuthenticationUtilities.loadProperties(), args);
+		DatabaseStoringExample.run(conn = AuthenticationUtilities.loadProperties(), args);
 	}
     
     /**
@@ -29,7 +29,7 @@ public class DatabaseStoringTest {
      */
     public static void run(ConnectionProperties conn, String args[]) throws Exception {
        
-    	System.out.println("[INFO] " + DatabaseStoringTest.class.getSimpleName());
+    	System.out.println("[INFO] " + DatabaseStoringExample.class.getSimpleName());
     	
     	// initialize collection and document identifiers
         String collectionId = null;

@@ -31,7 +31,7 @@ public class MarshallerService {
 
 	public void marshal(Object object) throws MarshalException {
 		try {
-			createMarshaller(object.getClass()).marshal(object, System.out);
+			createMarshaller(object.getClass()).marshal(object, System.out); //prints marshalled content to System.out
 
 		} catch (JAXBException e) {
 			System.out.println(e.getLocalizedMessage());
