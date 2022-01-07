@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
+
+  <!-- Subject is defined with rdf:about attribute -->
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_za_sertifikat/0234567891234">
+    <pred:mesto_izdavanja>Novi Sad</pred:mesto_izdavanja>
+    <pred:datum_izdavanja>2021-10-01</pred:datum_izdavanja>
+  </rdf:Description>
+
+</rdf:RDF>
