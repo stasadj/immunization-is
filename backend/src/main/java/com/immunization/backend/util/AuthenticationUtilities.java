@@ -4,34 +4,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Utilities to support and simplify examples.
- */
 public class AuthenticationUtilities {
-	
-	private static String connectionUri = "xmldb:exist://%1$s:%2$s/exist/xmlrpc";
-	
+
 	/**
 	 * Connection parameters.
 	 */
 	static public class ConnectionProperties {
-
 		public String host;
-		public int port = -1;
+		public int port;
 		public String user;
 		public String password;
 		public String driver;
 		public String uri;
 
 		public ConnectionProperties(Properties props) {
-			super();
-			
 			user = props.getProperty("conn.user").trim();
 			password = props.getProperty("conn.password").trim();
 
 			host = props.getProperty("conn.host").trim();
 			port = Integer.parseInt(props.getProperty("conn.port"));
-			
+
+			String connectionUri = "xmldb:exist://%1$s:%2$s/exist/xmlrpc";
 			uri = String.format(connectionUri, host, port);
 			
 			driver = props.getProperty("conn.driver").trim();
@@ -39,7 +32,7 @@ public class AuthenticationUtilities {
 	}
 
 	/**
-	 * Read the configuration properties for the example.
+	 * Read the configuration properties.
 	 * 
 	 * @return the configuration object
 	 */
@@ -57,14 +50,13 @@ public class AuthenticationUtilities {
 	}
 
 	/**
-	 * Read a resource for an example.
+	 * Read a resource.
 	 * 
 	 * @param fileName
 	 *            the name of the resource
 	 * @return an input stream for the resource
-	 * @throws IOException
 	 */
-	public static InputStream openStream(String fileName) throws IOException {
+	public static InputStream openStream(String fileName) {
 		return AuthenticationUtilities.class.getClassLoader().getResourceAsStream(fileName);
 	}
 	

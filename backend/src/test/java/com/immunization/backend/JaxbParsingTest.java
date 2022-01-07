@@ -5,12 +5,14 @@ import com.immunization.backend.model.izvestaj_o_imunizaciji.IzvestajOImunizacij
 import com.immunization.backend.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.backend.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.backend.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.backend.service.MarshallerService;
 import com.immunization.backend.service.UnmarshallerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.immunization.backend.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 
+import javax.xml.crypto.MarshalException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,8 +23,11 @@ public class JaxbParsingTest {
     @Autowired
     private UnmarshallerService unmarshallerService;
 
+    @Autowired
+    private MarshallerService marshallerService;
+
     @Test
-    public void testUnmarshalling() throws IOException {
+    public void testUnmarshalling() throws IOException, MarshalException {
         System.out.println("TEST digitalni_sertifikat");
         String xmlString = new String(Files.readAllBytes(Paths.get("./src/main/resources/documents/digitalni_sertifikat.xml")));
         DigitalniSertifikat sertifikat = (DigitalniSertifikat) unmarshallerService.unmarshal(xmlString);
@@ -51,5 +56,10 @@ public class JaxbParsingTest {
         System.out.println("TEST zahtev_za_sertifikat");
         xmlString = new String(Files.readAllBytes(Paths.get("./src/main/resources/documents/zahtev_za_sertifikat.xml")));
         ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) unmarshallerService.unmarshal(xmlString);
+
+        String result = marshallerService.marshal(zahtev);
+        System.out.println("TEST Marshaller: ");
+        System.out.println(result);
+
     }
 }

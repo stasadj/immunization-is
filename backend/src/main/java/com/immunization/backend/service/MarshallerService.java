@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.crypto.MarshalException;
+import java.io.StringWriter;
 
 @Service
 public class MarshallerService {
@@ -13,13 +14,14 @@ public class MarshallerService {
 	@Autowired
 	private Marshaller marshaller;
 
-	public void marshal(Object object) throws MarshalException {
+	public String marshal(Object object) throws MarshalException {
 		try {
-			marshaller.marshal(object, System.out); // prints marshalled content to System.out
+			StringWriter writer = new StringWriter();
+			marshaller.marshal(object, writer);
+			return writer.toString();
 		} catch (JAXBException e) {
 			System.out.println(e.getLocalizedMessage());
 			throw new MarshalException("Parsing from object to xml failed");
 		}
 	}
-
 }
