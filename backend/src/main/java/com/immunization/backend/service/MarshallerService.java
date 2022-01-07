@@ -1,42 +1,27 @@
 package com.immunization.backend.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.crypto.MarshalException;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Service;
-
-import com.immunization.backend.config.JaxBConfiguration;
+import java.io.StringWriter;
 
 @Service
 public class MarshallerService {
 
-	public Marshaller createMarshaller(Class c) throws JAXBException {
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(JaxBConfiguration.class);
-		ctx.refresh();
-		Map<Class, String> instancePathsMap = (HashMap<Class, String>) ctx.getBean("getInstancePathsMap");
+	@Autowired
+	private Marshaller marshaller;
 
-		JAXBContext context = JAXBContext.newInstance(instancePathsMap.get(c));
-		Marshaller marshaller = context.createMarshaller();
-		// NSPrefixMapper()); //ovo jos ne znam sta je
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		return marshaller;
-	}
-
-	public void marshal(Object object) throws MarshalException {
+	public String marshal(Object object) throws MarshalException {
 		try {
-			createMarshaller(object.getClass()).marshal(object, System.out); //prints marshalled content to System.out
-
+			StringWriter writer = new StringWriter();
+			marshaller.marshal(object, writer);
+			return writer.toString();
 		} catch (JAXBException e) {
 			System.out.println(e.getLocalizedMessage());
 			throw new MarshalException("Parsing from object to xml failed");
 		}
 	}
-
 }
