@@ -1,6 +1,7 @@
 package com.immunization.backend.service;
 
 import org.apache.jena.query.QueryExecution;
+
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
@@ -12,7 +13,6 @@ import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
 
-import com.immunization.backend.util.AuthenticationUtilitiesFuseki;
 import com.immunization.backend.util.AuthenticationUtilitiesFuseki.ConnectionProperties;
 
 import com.immunization.backend.util.SparqlUtil;
@@ -25,10 +25,8 @@ import java.io.*;
 @Service
 public class MetadataExtractorService {
 	private static final String SPARQL_NAMED_GRAPH_URI = "/zahtev-za-sertifikat/metadata";
-	
-	private static final String XML_FILE = "./src/main/resources/documents/zahtev_za_sertifikat.xml";
+
 	private static final String XSLT_FILE = "./src/main/resources/xsl/grddl.xsl";
-	private static final String RDF_FILE = "./src/main/resources/rdf/zahtev_za_sertifikat.rdf";
 
 	public void extractMetadata(InputStream in, OutputStream out) throws TransformerException {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -101,10 +99,6 @@ public class MetadataExtractorService {
 		query.close();
 
 		System.out.println("[INFO] End.");
-	}
-
-	public static void main(String[] args) throws Exception {
-		new MetadataExtractorService().initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE, RDF_FILE);
 	}
 
 }
