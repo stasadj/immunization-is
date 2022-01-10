@@ -1,0 +1,17 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+    <se_zove xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Albert Makan</se_zove>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+    <ima_pol xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">M</ima_pol>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+    <je_rodjen xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">1999-12-23</je_rodjen>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+    <ima_jmbg xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">2312999850013</ima_jmbg>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+    <ima_broj_pasosa xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">001000000</ima_broj_pasosa>
+  </rdf:Description>
+</rdf:RDF>
