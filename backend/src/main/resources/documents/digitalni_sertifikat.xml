@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<digitalni_sertifikat xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
+<digitalni_sertifikat xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.ftn.uns.ac.rs/digitalni-sertifikat digitalni_sertifikat.xsd" 
-    broj="00001" datum_izdavanja="2021-11-06">
+    broj="00001" datum_izdavanja="2021-11-06"
+    about="http://www.ftn.uns.ac.rs/digitalni-sertifikat/2312999850013">
     <qr>https://sertifikat/broj</qr>
-    <licni_podaci>
-        <ime_prezime>Albert Makan</ime_prezime>
-        <pol>M</pol>
-        <datum_rodjenja>1999-12-23</datum_rodjenja>
-        <JMBG>2312999850013</JMBG>
-        <broj_pasosa>001000000</broj_pasosa>
+    <licni_podaci about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+        <ime_prezime property="se_zove">Albert Makan</ime_prezime>
+        <pol property="ima_pol">M</pol>
+        <datum_rodjenja property="je_rodjen">1999-12-23</datum_rodjenja>
+        <JMBG property="ima_jmbg">2312999850013</JMBG>
+        <broj_pasosa property="ima_broj_pasosa">001000000</broj_pasosa>
     </licni_podaci>
     <vakcinacija>
         <vakcina doza="1">

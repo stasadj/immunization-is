@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
-  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat"
-  xmlns:util="http://ftn.uns.ac.rs/util">
-  
+  targetNamespace="http://www.ftn.uns.ac.rs/digitalni-sertifikat/"
+  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" xmlns:util="http://ftn.uns.ac.rs/util">
+
   <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
-  
+
   <xs:element name="digitalni_sertifikat">
     <xs:complexType>
       <xs:sequence>
@@ -17,6 +17,7 @@
       </xs:sequence>
       <xs:attribute name="broj" use="required" type="xs:integer"/>
       <xs:attribute name="datum_izdavanja" use="required" type="xs:date"/>
+      <xs:attribute name="about" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="qr" type="xs:anyURI"/>
@@ -29,13 +30,54 @@
         <xs:element ref="JMBG"/>
         <xs:element ref="broj_pasosa"/>
       </xs:sequence>
+      <xs:attribute name="about" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ime_prezime" type="xs:string"/>
-  <xs:element name="pol" type="util:pol"/>
-  <xs:element name="datum_rodjenja" type="xs:date"/>
-  <xs:element name="JMBG" type="util:jmbg"/>
-  <xs:element name="broj_pasosa" type="util:broj_pasosa"/>
+  <xs:element name="ime_prezime">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pol">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="util:pol">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_pol"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datum_rodjenja">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:date">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="je_rodjen"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JMBG">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="util:jmbg">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="broj_pasosa">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="util:broj_pasosa">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_broj_pasosa"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="vakcinacija">
     <xs:complexType>
       <xs:sequence>
