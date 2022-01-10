@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://www.ftn.uns.ac.rs/interesovanje"
-  xmlns="http://www.ftn.uns.ac.rs/interesovanje" xmlns:util="http://ftn.uns.ac.rs/util">
+  targetNamespace="http://www.ftn.uns.ac.rs/interesovanje/"
+  xmlns="http://www.ftn.uns.ac.rs/interesovanje/" xmlns:util="http://ftn.uns.ac.rs/util">
 
   <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
 
@@ -13,6 +13,7 @@
         <xs:element ref="odabir_vakcina"/>
       </xs:sequence>
       <xs:attribute name="datum" use="required" type="xs:date"/>
+      <xs:attribute name="about" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="pacijent">
@@ -24,20 +25,36 @@
         <xs:element ref="kontakt_informacije"/>
         <xs:element ref="dobrovoljni_davalac_krvi"/>
       </xs:sequence>
+      <xs:attribute name="about" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="drzavljanstvo" type="xs:string"/>
-  <xs:element name="jmbg" type="util:jmbg"/>
+  <xs:element name="drzavljanstvo">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_drzavljanstvo"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="jmbg">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="util:jmbg">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="puno_ime">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="licno_ime"/>
-        <xs:element ref="prezime"/>
-      </xs:sequence>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
+        </xs:extension>
+      </xs:simpleContent>
     </xs:complexType>
   </xs:element>
-  <xs:element name="licno_ime" type="xs:string"/>
-  <xs:element name="prezime" type="xs:string"/>
   <xs:element name="kontakt_informacije">
     <xs:complexType>
       <xs:sequence>
@@ -63,5 +80,13 @@
   </xs:element>
   <xs:element name="opcija" type="xs:string"/>
   <xs:element name="bilo_koja_vakcina" type="util:emptyString"/>
-  <xs:element name="dobrovoljni_davalac_krvi" type="xs:boolean"/>
+  <xs:element name="dobrovoljni_davalac_krvi">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:boolean">
+          <xs:attribute name="property" use="required" type="xs:string" fixed="je_dobrovoljni_davalac_krvi"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
