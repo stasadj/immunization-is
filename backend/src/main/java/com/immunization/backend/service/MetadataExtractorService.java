@@ -24,7 +24,6 @@ import java.io.*;
 
 @Service
 public class MetadataExtractorService {
-	private static final String SPARQL_NAMED_GRAPH_URI = "/zahtev-za-sertifikat/metadata";
 
 	private static final String XSLT_FILE = "./src/main/resources/xsl/grddl.xsl";
 
@@ -50,7 +49,7 @@ public class MetadataExtractorService {
 		grddlTransformer.transform(source, result);
 	}
 
-	public void initRDFStore(ConnectionProperties conn, String xmlFilePath, String rdfFilePath)
+	public void initRDFStore(ConnectionProperties conn, String xmlFilePath, String rdfFilePath, String graphUri)
 			throws FileNotFoundException, TransformerException {
 		System.out.println("[INFO] " + MetadataExtractorService.class.getSimpleName());
 
@@ -69,10 +68,9 @@ public class MetadataExtractorService {
 		model.write(System.out, SparqlUtil.RDF_XML);
 
 		// Writing the named graph
-		System.out.println("[INFO] Populating named graph \"" + SPARQL_NAMED_GRAPH_URI + "\" with extracted metadata.");
-		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI,
-				new String(out.toByteArray()));
-		System.out.println(sparqlUpdate);
+		System.out.println("[INFO] Populating named graph \"" + graphUri + "\" with extracted metadata.");
+		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + graphUri, new String(out.toByteArray()));
+		// System.out.println(sparqlUpdate);
 
 		// UpdateRequest represents a unit of execution
 		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -83,10 +81,10 @@ public class MetadataExtractorService {
 		// Read the triples from the named graph
 		System.out.println();
 		System.out.println("[INFO] Retrieving triples from RDF store.");
-		System.out.println("[INFO] Using \"" + SPARQL_NAMED_GRAPH_URI + "\" named graph.");
+		System.out.println("[INFO] Using \"" + graphUri + "\" named graph.");
 
-		System.out.println("[INFO] Selecting the triples from the named graph \"" + SPARQL_NAMED_GRAPH_URI + "\".");
-		String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, "?s ?p ?o");
+		System.out.println("[INFO] Selecting the triples from the named graph \"" + graphUri + "\".");
+		String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + graphUri, "?s ?p ?o");
 
 		// Create a QueryExecution that will access a SPARQL service over HTTP
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -97,6 +95,23 @@ public class MetadataExtractorService {
 		ResultSetFormatter.out(System.out, results);
 
 		query.close();
+
+		System.out.println("[INFO] End.");
+	}
+
+	public void dropGraph(ConnectionProperties conn, String graphUri) {
+		// Dropping the third graph...
+		System.out.println("[INFO] Dropping the named graph \"" + graphUri + "\"...");
+
+		UpdateRequest dropRequest = UpdateFactory.create();
+
+		String sparqlUpdate = SparqlUtil.dropGraph(conn.dataEndpoint + graphUri);
+		System.out.println(graphUri);
+
+		dropRequest.add(sparqlUpdate);
+
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(dropRequest, conn.updateEndpoint);
+		processor.execute();
 
 		System.out.println("[INFO] End.");
 	}
