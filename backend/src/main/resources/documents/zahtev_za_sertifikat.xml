@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zahtev_za_sertifikat xmlns="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat"
+<zahtev_za_sertifikat xmlns="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat zahtev_za_sertifikat.xsd" 
-    mesto_izdavanja="Novi Sad" datum_izdavanja="2021-10-01">
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/ zahtev_za_sertifikat.xsd" 
+    about="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/0234567891234">
     
-    <podnosilac_zahteva>
-        <ime>Petar</ime>
-        <prezime>Petrović</prezime>
-        <datum_rodjenja>1987-01-01</datum_rodjenja>
-        <pol>M</pol>
-        <jmbg>0234567891234</jmbg>
-        <broj_pasosa>123456789</broj_pasosa>
+    <meta_podaci>
+        <mesto_izdavanja property="ima_mesto_izdavanja">Novi Sad</mesto_izdavanja>
+        <datum_izdavanja property="ima_datum_izdavanja">2021-10-01</datum_izdavanja>
+    </meta_podaci>
+    
+    <podnosilac_zahteva about="http://www.ftn.uns.ac.rs/licni-podaci/0234567891234">
+        <ime_prezime property="se_zove">Petar Petrović</ime_prezime>
+        <datum_rodjenja property="je_rodjen">1987-01-01</datum_rodjenja>
+        <pol property="ima_pol">M</pol>
+        <jmbg property="ima_jmbg">0234567891234</jmbg>
+        <broj_pasosa property="ima_broj_pasosa">123456789</broj_pasosa>
         <razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>
     </podnosilac_zahteva>
     
