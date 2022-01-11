@@ -3,7 +3,13 @@
 <izvestaj_o_imunizaciji xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji izvestaj_o_imunizaciji.xsd" 
-    od="2021-08-01" do="2021-09-01" datum_izdavanja="2022-11-09">
+    about="http://www.ftn.uns.ac.rs/izvestaj/2021-08-01-2021-09-01">
+    
+    <meta_podaci>
+        <period_od property="obuhvata_period_od">2021-08-01</period_od>
+        <period_do property="obuhvata_period_do">2021-09-01</period_do>
+        <datum_izdavanja property="izdato">2021-11-09</datum_izdavanja>
+    </meta_podaci>
     
     <broj_dokumenata_o_interesovanju>2758</broj_dokumenata_o_interesovanju>
     <broj_zahteva_za_digitalni_sertifikat>453</broj_zahteva_za_digitalni_sertifikat>
