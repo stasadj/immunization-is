@@ -14,7 +14,7 @@
             </xs:sequence>
             <xs:attribute name="datum" use="required" type="xs:date"/>
             <xs:attribute name="broj" use="required" type="xs:positiveInteger"/>
-            <xs:attribute name="about" use="required" type="xs:string"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="informacije_o_pacijentu">
@@ -31,7 +31,7 @@
                 <xs:element ref="ustanova_socijalne_zastite"/>
                 <xs:element ref="izjava_saglasnosti"/>
             </xs:sequence>
-            <xs:attribute name="about" use="required" type="xs:string"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="drzavljanstvo">
@@ -80,7 +80,7 @@
                 <xs:element name="mesto" type="util:mesto"/>
                 <xs:element name="opstina" type="util:opstina"/>
             </xs:sequence>
-            <xs:attribute name="about" use="required" type="xs:string"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="kontakt_informacije">

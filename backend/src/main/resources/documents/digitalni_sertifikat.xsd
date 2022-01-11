@@ -17,7 +17,7 @@
       </xs:sequence>
       <xs:attribute name="broj" use="required" type="xs:integer"/>
       <xs:attribute name="datum_izdavanja" use="required" type="xs:date"/>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="qr" type="xs:anyURI"/>
@@ -30,7 +30,7 @@
         <xs:element ref="JMBG"/>
         <xs:element ref="broj_pasosa"/>
       </xs:sequence>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="JMBG" type="util:jmbg" />

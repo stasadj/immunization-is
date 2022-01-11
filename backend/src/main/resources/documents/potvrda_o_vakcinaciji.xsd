@@ -16,7 +16,7 @@
         <xs:element ref="vakcinacije"/>
       </xs:sequence>
       <xs:attribute name="potreban_pecat" use="required" type="xs:boolean"/>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="sifra_potvrde" type="xs:positiveInteger"/>
@@ -29,7 +29,7 @@
         <xs:element ref="pol"/>
         <xs:element ref="jmbg"/>
       </xs:sequence>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ime_prezime" type="util:ime_prezime"/>

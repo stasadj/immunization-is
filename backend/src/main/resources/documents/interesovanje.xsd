@@ -13,7 +13,7 @@
         <xs:element ref="odabir_vakcina"/>
       </xs:sequence>
       <xs:attribute name="datum" use="required" type="xs:date"/>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="pacijent">
@@ -25,7 +25,7 @@
         <xs:element ref="kontakt_informacije"/>
         <xs:element ref="dobrovoljni_davalac_krvi"/>
       </xs:sequence>
-      <xs:attribute name="about" use="required" type="xs:string"/>
+      <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="drzavljanstvo">

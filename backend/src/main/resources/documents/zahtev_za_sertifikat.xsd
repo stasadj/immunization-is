@@ -48,11 +48,11 @@
                             <xs:element name="broj_pasosa" type="util:broj_pasosa"/>                            
                             <xs:element name="razlog_za_podnosenje_zahteva" type="xs:string"/>
                         </xs:sequence>
-                        <xs:attribute name="about" use="required" type="xs:string"/>
+                        <xs:attribute name="about" use="required" type="xs:anyURI"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="about" use="required" type="xs:string"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
 
