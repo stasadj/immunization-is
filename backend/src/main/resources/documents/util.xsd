@@ -2,24 +2,64 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://ftn.uns.ac.rs/util"
     xmlns="http://ftn.uns.ac.rs/util">
-    
-    <xs:simpleType name="pol">
+
+    <xs:complexType name="ime_prezime">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="datum_rodjenja">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" type="xs:string" fixed="je_rodjen"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="pol_string">
         <xs:restriction base="xs:string">
             <xs:pattern value="[MŽ]{1}"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="jmbg">
+    <xs:complexType name="pol">
+        <xs:simpleContent>
+            <xs:extension base="pol_string">
+                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_pol"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="jmbg_value">
         <xs:restriction base="xs:positiveInteger">
             <xs:pattern value="[0-9]{13}"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="jmbg">
+        <xs:simpleContent>
+            <xs:extension base="jmbg_value">
+                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
     
-    <xs:simpleType name="broj_pasosa">
+    <xs:simpleType name="broj_pasosa_value">
         <xs:restriction base="xs:positiveInteger">
             <xs:pattern value="[0-9]{9}"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="broj_pasosa">
+        <xs:simpleContent>
+            <xs:extension base="broj_pasosa_value">
+                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_broj_pasosa"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
     
     <xs:simpleType name="email">
         <xs:restriction base="xs:string">

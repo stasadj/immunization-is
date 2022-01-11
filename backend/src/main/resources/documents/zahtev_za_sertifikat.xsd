@@ -11,7 +11,7 @@
                 <xs:element name="meta_podaci">
                     <xs:complexType>
                         <xs:sequence>
-                            
+
                             <xs:element name="mesto_izdavanja">
                                 <xs:complexType>
                                     <xs:simpleContent>
@@ -22,7 +22,7 @@
                                     </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
-                            
+
                             <xs:element name="datum_izdavanja">
                                 <xs:complexType>
                                     <xs:simpleContent>
@@ -33,6 +33,7 @@
                                     </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
+
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -40,59 +41,12 @@
                 <xs:element name="podnosilac_zahteva">
                     <xs:complexType>
                         <xs:sequence>
-          
-                            <xs:element name="ime_prezime">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="xs:string">
-                                            <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                            
-                            <xs:element name="datum_rodjenja">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="xs:date">
-                                            <xs:attribute name="property" use="required" type="xs:string" fixed="je_rodjen"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                            
-                            <xs:element name="pol">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="util:pol">
-                                            <xs:attribute name="property" use="required" type="xs:string" fixed="ima_pol"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                     
-                            <xs:element name="jmbg">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="util:jmbg">
-                                            <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                            
-                            <xs:element name="broj_pasosa">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="util:broj_pasosa">
-                                            <xs:attribute name="property" use="required" type="xs:string" fixed="ima_broj_pasosa"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
-                            </xs:element>
-                            
+                            <xs:element name="ime_prezime" type="util:ime_prezime"/>
+                            <xs:element name="datum_rodjenja" type="util:datum_rodjenja"/>
+                            <xs:element name="pol" type="util:pol"/>
+                            <xs:element name="jmbg" type="util:jmbg"/>
+                            <xs:element name="broj_pasosa" type="util:broj_pasosa"/>                            
                             <xs:element name="razlog_za_podnosenje_zahteva" type="xs:string"/>
-                            
                         </xs:sequence>
                         <xs:attribute name="about" use="required" type="xs:string"/>
                     </xs:complexType>

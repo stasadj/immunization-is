@@ -37,24 +37,8 @@
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
-  <xs:element name="jmbg">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="util:jmbg">
-          <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="puno_ime">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:string">
-          <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
+  <xs:element name="jmbg" type="util:jmbg"/>
+  <xs:element name="puno_ime" type="util:ime_prezime"/>
   <xs:element name="kontakt_informacije">
     <xs:complexType>
       <xs:sequence>
