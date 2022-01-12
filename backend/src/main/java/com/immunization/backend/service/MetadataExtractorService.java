@@ -69,7 +69,7 @@ public class MetadataExtractorService {
 
 		// Writing the named graph
 		System.out.println("[INFO] Populating named graph \"" + graphUri + "\" with extracted metadata.");
-		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + graphUri, new String(out.toByteArray()));
+		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + graphUri, out.toString());
 		// System.out.println(sparqlUpdate);
 
 		// UpdateRequest represents a unit of execution
