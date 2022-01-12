@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.ftn.uns.ac.rs/saglasnost"
-    xmlns="http://www.ftn.uns.ac.rs/saglasnost"
-    xmlns:util="http://ftn.uns.ac.rs/util">
+    targetNamespace="http://www.ftn.uns.ac.rs/saglasnost/"
+    xmlns="http://www.ftn.uns.ac.rs/saglasnost/"
+    xmlns:util="http://ftn.uns.ac.rs/util"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
     
     <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
     
@@ -127,7 +128,8 @@
                     <xs:complexType>
                         <xs:simpleContent>
                             <xs:extension base="xs:string">
-                                <xs:attribute name="property" use="required" type="xs:string" fixed="vakcinisan_u"/>
+                                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:vakcinisan_u"/>
+                                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
                             </xs:extension>
                         </xs:simpleContent>
                     </xs:complexType>

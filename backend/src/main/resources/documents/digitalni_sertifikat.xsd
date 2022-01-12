@@ -2,7 +2,8 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
   targetNamespace="http://www.ftn.uns.ac.rs/digitalni-sertifikat/"
-  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" xmlns:util="http://ftn.uns.ac.rs/util">
+  xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/" xmlns:util="http://ftn.uns.ac.rs/util"
+  xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
 
   <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
 

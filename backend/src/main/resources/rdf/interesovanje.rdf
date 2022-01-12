@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1111111111111">
-    <ima_drzavljanstvo xmlns="http://www.ftn.uns.ac.rs/interesovanje/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Državljanin Republike Srbije</ima_drzavljanstvo>
+    <pred:ima_drzavljanstvo xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Državljanin Republike Srbije</pred:ima_drzavljanstvo>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1111111111111">
-    <ima_jmbg xmlns="http://www.ftn.uns.ac.rs/interesovanje/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">1111111111111</ima_jmbg>
+    <pred:ima_jmbg xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1111111111111</pred:ima_jmbg>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1111111111111">
-    <se_zove xmlns="http://www.ftn.uns.ac.rs/interesovanje/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Dina Petrov</se_zove>
+    <pred:se_zove xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dina Petrov</pred:se_zove>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1111111111111">
-    <je_dobrovoljni_davalac_krvi xmlns="http://www.ftn.uns.ac.rs/interesovanje/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">true</je_dobrovoljni_davalac_krvi>
+    <pred:je_dobrovoljni_davalac_krvi xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">true</pred:je_dobrovoljni_davalac_krvi>
   </rdf:Description>
 </rdf:RDF>

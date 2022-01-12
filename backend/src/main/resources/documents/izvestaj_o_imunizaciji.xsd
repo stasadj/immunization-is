@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji"
-    xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji">
+    targetNamespace="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/"
+    xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
 
     <xs:element name="izvestaj_o_imunizaciji">
         <xs:complexType>
@@ -14,7 +15,8 @@
                                     <xs:simpleContent>
                                         <xs:extension base="xs:date">
                                             <xs:attribute name="property" use="required"
-                                                type="xs:string" fixed="obuhvata_period_od"/>
+                                                type="xs:string" fixed="pred:obuhvata_period_od"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -24,7 +26,8 @@
                                     <xs:simpleContent>
                                         <xs:extension base="xs:date">
                                             <xs:attribute name="property" use="required"
-                                                type="xs:string" fixed="obuhvata_period_do"/>
+                                                type="xs:string" fixed="pred:obuhvata_period_do"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -34,7 +37,8 @@
                                     <xs:simpleContent>
                                         <xs:extension base="xs:date">
                                             <xs:attribute name="property" use="required"
-                                                type="xs:string" fixed="izdato"/>
+                                                type="xs:string" fixed="pred:izdato"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>

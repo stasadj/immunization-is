@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://ftn.uns.ac.rs/util"
-    xmlns="http://ftn.uns.ac.rs/util">
+    xmlns="http://ftn.uns.ac.rs/util"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
 
     <xs:complexType name="ime_prezime">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="se_zove"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:se_zove"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -14,7 +16,8 @@
     <xs:complexType name="datum_rodjenja">
         <xs:simpleContent>
             <xs:extension base="xs:date">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="je_rodjen"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:je_rodjen"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -28,7 +31,8 @@
     <xs:complexType name="pol">
         <xs:simpleContent>
             <xs:extension base="pol_string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_pol"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_pol"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -42,7 +46,8 @@
     <xs:complexType name="jmbg">
         <xs:simpleContent>
             <xs:extension base="jmbg_value">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_jmbg"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_jmbg"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -56,7 +61,8 @@
     <xs:complexType name="broj_pasosa">
         <xs:simpleContent>
             <xs:extension base="broj_pasosa_value">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_broj_pasosa"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_broj_pasosa"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -82,7 +88,8 @@
     <xs:complexType name="ulica">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="nalazi_se_u_ulici"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:nalazi_se_u_ulici"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -90,7 +97,8 @@
     <xs:complexType name="broj">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="nalazi_se_na_broju"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:nalazi_se_na_broju"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -98,7 +106,8 @@
     <xs:complexType name="mesto">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="nalazi_se_u_mestu"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:nalazi_se_u_mestu"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -106,7 +115,8 @@
     <xs:complexType name="opstina">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="nalazi_se_u_opstini"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:nalazi_se_u_opstini"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -114,7 +124,8 @@
     <xs:complexType name="mesto_rodjenja">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="je_rodjen_u"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:je_rodjen_u"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -133,7 +144,8 @@
     <xs:complexType name="radni_status">
         <xs:simpleContent>
             <xs:extension base="radni_status_value">
-                <xs:attribute name="property" use="required" type="xs:string" fixed="ima_radni_status"/>
+                <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_radni_status"/>
+                <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

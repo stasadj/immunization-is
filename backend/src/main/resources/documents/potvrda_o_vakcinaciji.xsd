@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji"
-  xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji"
+  targetNamespace="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/"
+  xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/"
   xmlns:util="http://ftn.uns.ac.rs/util">
   
   <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
@@ -30,6 +30,7 @@
         <xs:element ref="jmbg"/>
       </xs:sequence>
       <xs:attribute name="about" use="required" type="xs:anyURI"/>
+      <xs:attribute name="vocab" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ime_prezime" type="util:ime_prezime"/>

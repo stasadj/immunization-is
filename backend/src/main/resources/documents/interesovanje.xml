@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
     xsi:schemaLocation="http://www.ftn.uns.ac.rs/interesovanje/ interesovanje.xsd" 
     datum="2021-02-02"
     about="http://www.ftn.uns.ac.rs/interesovanje/1111111111111">
     <pacijent about="http://www.ftn.uns.ac.rs/licni-podaci/1111111111111">
-        <drzavljanstvo property="ima_drzavljanstvo">Državljanin Republike Srbije</drzavljanstvo>
-        <jmbg property="ima_jmbg">1111111111111</jmbg>
-        <puno_ime property="se_zove">Dina Petrov</puno_ime>
+        <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">Državljanin Republike Srbije</drzavljanstvo>
+        <jmbg property="pred:ima_jmbg" datatype="xs:string">1111111111111</jmbg>
+        <puno_ime property="pred:se_zove" datatype="xs:string">Dina Petrov</puno_ime>
         <kontakt_informacije>
             <email_adresa>xxxx@xxxxx.com</email_adresa>
             <fiksni_telefon>023111111</fiksni_telefon>
             <mobilni_telefon>0611111111</mobilni_telefon>
         </kontakt_informacije>
-        <dobrovoljni_davalac_krvi property="je_dobrovoljni_davalac_krvi">true</dobrovoljni_davalac_krvi>
+        <dobrovoljni_davalac_krvi property="pred:je_dobrovoljni_davalac_krvi" datatype="xs:string">true</dobrovoljni_davalac_krvi>
     </pacijent>
     <zeljena_opstina_vakcinacije>Novi Sad</zeljena_opstina_vakcinacije>
     <odabir_vakcina>
