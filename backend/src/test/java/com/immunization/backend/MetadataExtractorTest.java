@@ -1,10 +1,6 @@
 package com.immunization.backend;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import javax.xml.transform.TransformerException;
-
+import com.immunization.backend.service.MetadataExtractorService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,8 +8,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.immunization.backend.service.MetadataExtractorService;
-import com.immunization.backend.util.AuthenticationUtilitiesFuseki;
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -47,49 +43,43 @@ public class MetadataExtractorTest {
 
 	@Test
 	@Order(1)
-	public void testInitRDFStore_zahtevZaSertifikat() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_ZAHTEV,
-				RDF_FILE_ZAHTEV, GRAPH_URI_ZAHTEV);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_ZAHTEV);
+	public void testInitRDFStore_zahtevZaSertifikat() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_ZAHTEV, RDF_FILE_ZAHTEV, GRAPH_URI_ZAHTEV);
+		metadataExtractorService.dropGraph(GRAPH_URI_ZAHTEV);
 	}
 
 	@Test
 	@Order(2)
-	public void testInitRDFStore_sertifikat() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_SERT,
-				RDF_FILE_SERT, GRAPH_URI_SERT);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_SERT);
+	public void testInitRDFStore_sertifikat() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_SERT, RDF_FILE_SERT, GRAPH_URI_SERT);
+		metadataExtractorService.dropGraph(GRAPH_URI_SERT);
 	}
 
 	@Test
 	@Order(3)
-	public void testInitRDFStore_interesovanje() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_INTERESOVANJE,
-				RDF_FILE_INTERESOVANJE, GRAPH_URI_INTERESOVANJE);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_INTERESOVANJE);
+	public void testInitRDFStore_interesovanje() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_INTERESOVANJE, RDF_FILE_INTERESOVANJE, GRAPH_URI_INTERESOVANJE);
+		metadataExtractorService.dropGraph(GRAPH_URI_INTERESOVANJE);
 	}
 
 	@Test
 	@Order(4)
-	public void testInitRDFStore_izvestaj() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_IZVESTAJ,
-				RDF_FILE_IZVESTAJ, GRAPH_URI_IZVESTAJ);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_IZVESTAJ);
+	public void testInitRDFStore_izvestaj() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_IZVESTAJ, RDF_FILE_IZVESTAJ, GRAPH_URI_IZVESTAJ);
+		metadataExtractorService.dropGraph(GRAPH_URI_IZVESTAJ);
 	}
 
 	@Test
 	@Order(5)
-	public void testInitRDFStore_saglasnost() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_SAGLASNOST,
-				RDF_FILE_SAGLASNOST, GRAPH_URI_SAGLASNOST);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_SAGLASNOST);
+	public void testInitRDFStore_saglasnost() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_SAGLASNOST, RDF_FILE_SAGLASNOST, GRAPH_URI_SAGLASNOST);
+		metadataExtractorService.dropGraph(GRAPH_URI_SAGLASNOST);
 	}
 
 	@Test
 	@Order(6)
-	public void testInitRDFStore_potvrda() throws FileNotFoundException, TransformerException, IOException {
-		metadataExtractorService.initRDFStore(AuthenticationUtilitiesFuseki.loadProperties(), XML_FILE_POTVRDA,
-				RDF_FILE_POTVRDA, GRAPH_URI_POTVRDA);
-		metadataExtractorService.dropGraph(AuthenticationUtilitiesFuseki.loadProperties(), GRAPH_URI_POTVRDA);
+	public void testInitRDFStore_potvrda() throws TransformerException, IOException {
+		metadataExtractorService.initRDFStore(XML_FILE_POTVRDA, RDF_FILE_POTVRDA, GRAPH_URI_POTVRDA);
+		metadataExtractorService.dropGraph(GRAPH_URI_POTVRDA);
 	}
 }

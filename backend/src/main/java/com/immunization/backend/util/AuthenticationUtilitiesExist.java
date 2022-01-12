@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class AuthenticationUtilities {
+public class AuthenticationUtilitiesExist {
 
 	/**
 	 * Connection parameters.
@@ -57,7 +57,7 @@ public class AuthenticationUtilities {
 	 * @return an input stream for the resource
 	 */
 	public static InputStream openStream(String fileName) {
-		return AuthenticationUtilities.class.getClassLoader().getResourceAsStream(fileName);
+		return AuthenticationUtilitiesExist.class.getClassLoader().getResourceAsStream(fileName);
 	}
 	
 }

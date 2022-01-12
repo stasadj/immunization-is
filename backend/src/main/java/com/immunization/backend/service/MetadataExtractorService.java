@@ -11,6 +11,7 @@ import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.immunization.backend.util.AuthenticationUtilitiesFuseki.ConnectionProperties;
@@ -24,6 +25,8 @@ import java.io.*;
 
 @Service
 public class MetadataExtractorService {
+	@Autowired
+	private ConnectionProperties conn;
 
 	private static final String XSLT_FILE = "./src/main/resources/xsl/grddl.xsl";
 
@@ -49,12 +52,12 @@ public class MetadataExtractorService {
 		grddlTransformer.transform(source, result);
 	}
 
-	public void initRDFStore(ConnectionProperties conn, String xmlFilePath, String rdfFilePath, String graphUri)
+	public void initRDFStore(String xmlFilePath, String rdfFilePath, String graphUri)
 			throws FileNotFoundException, TransformerException {
 		System.out.println("[INFO] " + MetadataExtractorService.class.getSimpleName());
 
 		System.out.println("[INFO] Extracting metadata from RDFa attributes...");
-		extractMetadata(new FileInputStream(new File(xmlFilePath)), new FileOutputStream(new File(rdfFilePath)));
+		extractMetadata(new FileInputStream(xmlFilePath), new FileOutputStream(rdfFilePath));
 
 		// Loading a default model with extracted metadata
 		Model model = ModelFactory.createDefaultModel();
@@ -99,7 +102,7 @@ public class MetadataExtractorService {
 		System.out.println("[INFO] End.");
 	}
 
-	public void dropGraph(ConnectionProperties conn, String graphUri) {
+	public void dropGraph(String graphUri) {
 		// Dropping the third graph...
 		System.out.println("[INFO] Dropping the named graph \"" + graphUri + "\"...");
 

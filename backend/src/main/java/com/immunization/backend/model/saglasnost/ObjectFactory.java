@@ -206,11 +206,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link rs.ac.uns.ftn.saglasnost.InformacijeOLekaru }
+     * Create an instance of {@link com.immunization.backend.model.saglasnost.InformacijeOLekaru }
      * 
      */
-    public rs.ac.uns.ftn.saglasnost.InformacijeOLekaru createInformacijeOLekaru() {
-        return new rs.ac.uns.ftn.saglasnost.InformacijeOLekaru();
+    public com.immunization.backend.model.saglasnost.InformacijeOLekaru createInformacijeOLekaru() {
+        return new com.immunization.backend.model.saglasnost.InformacijeOLekaru();
     }
 
     /**
@@ -223,7 +223,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.ftn.uns.ac.rs/saglasnost/", name = "pol")
     public JAXBElement<Pol> createPol(Pol value) {
-        return new JAXBElement<Pol>(_Pol_QNAME, Pol.class, null, value);
+        return new JAXBElement<>(_Pol_QNAME, Pol.class, null, value);
     }
 
     /**
@@ -236,7 +236,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.ftn.uns.ac.rs/saglasnost/", name = "radni_status")
     public JAXBElement<RadniStatus> createRadniStatus(RadniStatus value) {
-        return new JAXBElement<RadniStatus>(_RadniStatus_QNAME, RadniStatus.class, null, value);
+        return new JAXBElement<>(_RadniStatus_QNAME, RadniStatus.class, null, value);
     }
 
     /**
@@ -249,7 +249,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.ftn.uns.ac.rs/saglasnost/", name = "zanimanje_zaposlenog")
     public JAXBElement<String> createZanimanjeZaposlenog(String value) {
-        return new JAXBElement<String>(_ZanimanjeZaposlenog_QNAME, String.class, null, value);
+        return new JAXBElement<>(_ZanimanjeZaposlenog_QNAME, String.class, null, value);
     }
 
 }

@@ -2,7 +2,7 @@ package com.immunization.backend.repository;
 
 import com.immunization.backend.service.MarshallerService;
 import com.immunization.backend.service.UnmarshallerService;
-import com.immunization.backend.util.AuthenticationUtilities.ConnectionProperties;
+import com.immunization.backend.util.AuthenticationUtilitiesExist.ConnectionProperties;
 import org.exist.xmldb.EXistResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

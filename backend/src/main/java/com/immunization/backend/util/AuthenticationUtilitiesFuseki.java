@@ -56,10 +56,9 @@ public class AuthenticationUtilitiesFuseki {
 	 * 
 	 * @param fileName the name of the resource
 	 * @return an input stream for the resource
-	 * @throws IOException
 	 */
-	public static InputStream openStream(String fileName) throws IOException {
-		return AuthenticationUtilities.class.getClassLoader().getResourceAsStream(fileName);
+	public static InputStream openStream(String fileName) {
+		return AuthenticationUtilitiesExist.class.getClassLoader().getResourceAsStream(fileName);
 	}
 
 }
