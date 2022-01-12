@@ -22,7 +22,7 @@ public class ExistTest {
     public void testSave() throws Exception {
         String xmlString = new String(Files.readAllBytes(Paths.get("./src/main/resources/documents/digitalni_sertifikat.xml")));
         DigitalniSertifikat sertifikat = (DigitalniSertifikat) unmarshallerService.unmarshal(xmlString);
-        sertifikat.getLicniPodaci().setImePrezime("IME PREZIME");
+        sertifikat.getLicniPodaci().getImePrezime().setValue("Ime Prezime");
 
         String id = exist.save("ds0.xml", sertifikat);
     }
@@ -31,6 +31,6 @@ public class ExistTest {
     public void testGet() throws Exception {
         DigitalniSertifikat sertifikat =  (DigitalniSertifikat) exist.retrieveById("ds0.xml", DigitalniSertifikat.class);
 
-        Assertions.assertEquals("IME PREZIME", sertifikat.getLicniPodaci().getImePrezime());
+        Assertions.assertEquals("Ime Prezime", sertifikat.getLicniPodaci().getImePrezime().getValue());
     }
 }

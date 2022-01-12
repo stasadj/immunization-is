@@ -6,25 +6,26 @@
 //
 
 
-package com.immunization.backend.model.util;
+package com.immunization.backend.model.interesovanje;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for radni_status complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="radni_status"&gt;
+ * &lt;complexType&gt;
  *   &lt;simpleContent&gt;
- *     &lt;extension base="&lt;http://ftn.uns.ac.rs/util&gt;radni_status_value"&gt;
- *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="ima_radni_status" /&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;boolean"&gt;
+ *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="je_dobrovoljni_davalac_krvi" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -33,37 +34,30 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "radni_status", propOrder = {
+@XmlType(name = "", propOrder = {
     "value"
 })
-public class RadniStatus {
+@XmlRootElement(name = "dobrovoljni_davalac_krvi")
+public class DobrovoljniDavalacKrvi {
 
     @XmlValue
-    protected RadniStatusValue value;
+    protected boolean value;
     @XmlAttribute(name = "property", required = true)
     protected String property;
 
     /**
      * Gets the value of the value property.
      * 
-     * @return
-     *     possible object is
-     *     {@link RadniStatusValue }
-     *     
      */
-    public RadniStatusValue getValue() {
+    public boolean isValue() {
         return value;
     }
 
     /**
      * Sets the value of the value property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link RadniStatusValue }
-     *     
      */
-    public void setValue(RadniStatusValue value) {
+    public void setValue(boolean value) {
         this.value = value;
     }
 
@@ -77,7 +71,7 @@ public class RadniStatus {
      */
     public String getProperty() {
         if (property == null) {
-            return "ima_radni_status";
+            return "je_dobrovoljni_davalac_krvi";
         } else {
             return property;
         }

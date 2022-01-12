@@ -16,15 +16,15 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for radni_status complex type.
+ * <p>Java class for opstina complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="radni_status"&gt;
+ * &lt;complexType name="opstina"&gt;
  *   &lt;simpleContent&gt;
- *     &lt;extension base="&lt;http://ftn.uns.ac.rs/util&gt;radni_status_value"&gt;
- *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="ima_radni_status" /&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="nalazi_se_u_opstini" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -33,13 +33,13 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "radni_status", propOrder = {
+@XmlType(name = "opstina", propOrder = {
     "value"
 })
-public class RadniStatus {
+public class Opstina {
 
     @XmlValue
-    protected RadniStatusValue value;
+    protected String value;
     @XmlAttribute(name = "property", required = true)
     protected String property;
 
@@ -48,10 +48,10 @@ public class RadniStatus {
      * 
      * @return
      *     possible object is
-     *     {@link RadniStatusValue }
+     *     {@link String }
      *     
      */
-    public RadniStatusValue getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -60,10 +60,10 @@ public class RadniStatus {
      * 
      * @param value
      *     allowed object is
-     *     {@link RadniStatusValue }
+     *     {@link String }
      *     
      */
-    public void setValue(RadniStatusValue value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -77,7 +77,7 @@ public class RadniStatus {
      */
     public String getProperty() {
         if (property == null) {
-            return "ima_radni_status";
+            return "nalazi_se_u_opstini";
         } else {
             return property;
         }

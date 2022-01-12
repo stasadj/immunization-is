@@ -11,20 +11,22 @@ package com.immunization.backend.model.util;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for radni_status complex type.
+ * <p>Java class for datum_rodjenja complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="radni_status"&gt;
+ * &lt;complexType name="datum_rodjenja"&gt;
  *   &lt;simpleContent&gt;
- *     &lt;extension base="&lt;http://ftn.uns.ac.rs/util&gt;radni_status_value"&gt;
- *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="ima_radni_status" /&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;date"&gt;
+ *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="je_rodjen" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -33,13 +35,14 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "radni_status", propOrder = {
+@XmlType(name = "datum_rodjenja", propOrder = {
     "value"
 })
-public class RadniStatus {
+public class DatumRodjenja {
 
     @XmlValue
-    protected RadniStatusValue value;
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar value;
     @XmlAttribute(name = "property", required = true)
     protected String property;
 
@@ -48,10 +51,10 @@ public class RadniStatus {
      * 
      * @return
      *     possible object is
-     *     {@link RadniStatusValue }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public RadniStatusValue getValue() {
+    public XMLGregorianCalendar getValue() {
         return value;
     }
 
@@ -60,10 +63,10 @@ public class RadniStatus {
      * 
      * @param value
      *     allowed object is
-     *     {@link RadniStatusValue }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setValue(RadniStatusValue value) {
+    public void setValue(XMLGregorianCalendar value) {
         this.value = value;
     }
 
@@ -77,7 +80,7 @@ public class RadniStatus {
      */
     public String getProperty() {
         if (property == null) {
-            return "ima_radni_status";
+            return "je_rodjen";
         } else {
             return property;
         }

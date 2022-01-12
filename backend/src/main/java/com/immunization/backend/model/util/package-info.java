@@ -5,5 +5,5 @@
 // Generated on: 2022.01.12 at 11:03:10 AM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package com.immunization.backend.model.potvrda_o_vakcinaciji;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://ftn.uns.ac.rs/util")
+package com.immunization.backend.model.util;
