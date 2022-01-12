@@ -1,0 +1,11 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/izvestaj/2021-08-01-2021-09-01">
+    <obuhvata_period_od xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">2021-08-01</obuhvata_period_od>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/izvestaj/2021-08-01-2021-09-01">
+    <obuhvata_period_do xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">2021-09-01</obuhvata_period_do>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/izvestaj/2021-08-01-2021-09-01">
+    <izdato xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">2021-11-09</izdato>
+  </rdf:Description>
+</rdf:RDF>

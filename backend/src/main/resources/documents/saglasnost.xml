@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <obrazac_saglasnosti_za_imunizaciju xmlns="http://www.ftn.uns.ac.rs/saglasnost"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.ftn.uns.ac.rs/saglasnost saglasnost.xsd" 
-    datum="2021-06-11">
-    <informacije_o_pacijentu>
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/saglasnost saglasnost.xsd"
+    broj="0000000001" datum="2021-06-11"
+    about="http://www.ftn.uns.ac.rs/saglasnost/0000000001">
+    <informacije_o_pacijentu about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
         <drzavljanstvo>
             <srpsko_drzavljanstvo>
-                <jmbg>1234567890123</jmbg>
+                <jmbg property="ima_jmbg">1234567890123</jmbg>
             </srpsko_drzavljanstvo>
         </drzavljanstvo>
         <puno_ime>
-            <prezime>Petrov</prezime>
-            <licno_ime>Dina</licno_ime>
+            <ime_prezime property="se_zove">Dina Petrov</ime_prezime>
             <ime_roditelja>Branislav</ime_roditelja>
         </puno_ime>
-        <pol>Ž</pol>
+        <pol property="ima_pol">Ž</pol>
         <datum_i_mesto_rodjenja>
-            <datum_rodjenja>1999-06-04</datum_rodjenja>
-            <mesto_rodjenja>Zrenjanin</mesto_rodjenja>
+            <datum_rodjenja property="je_rodjen">1999-06-04</datum_rodjenja>
+            <mesto_rodjenja property="je_rodjen_u">Zrenjanin</mesto_rodjenja>
         </datum_i_mesto_rodjenja>
-        <prebivaliste>
-            <ulica>Bulevar Despota Stefana</ulica>
-            <broj>7a</broj>
-            <mesto>Novi Sad</mesto>
-            <opstina>Novi Sad</opstina>
+        <prebivaliste about="http://www.ftn.uns.ac.rs/prebivaliste/1234567890123">
+            <ulica property="nalazi_se_u_ulici">Bulevar Despota Stefana</ulica>
+            <broj property="nalazi_se_na_broju">7a</broj>
+            <mesto property="nalazi_se_u_mestu">Novi Sad</mesto>
+            <opstina property="nalazi_se_u_opstini">Novi Sad</opstina>
         </prebivaliste>
         <kontakt_informacije>
             <fiksni_telefon>111111111</fiksni_telefon>
             <mobilni_telefon>1111111111</mobilni_telefon>
             <email_adresa>xxxxxx@xxxx.com</email_adresa>
         </kontakt_informacije>
-        <radni_status>student</radni_status>
+        <radni_status property="ima_radni_status">student</radni_status>
         <zanimanje_zaposlenog></zanimanje_zaposlenog>
         <ustanova_socijalne_zastite>
             <pacijent_koristi_zastitu>true</pacijent_koristi_zastitu>
@@ -44,7 +44,7 @@
     </informacije_o_pacijentu>
     <evidencija_o_vakcinaciji>
         <zdravstvena_ustanova>
-            <naziv></naziv>
+            <naziv property="vakcinisan_u"></naziv>
             <vakcinacijski_punkt></vakcinacijski_punkt>
             <informacije_o_lekaru>
                 <ime></ime>

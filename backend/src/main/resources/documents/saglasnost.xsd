@@ -12,7 +12,9 @@
                 <xs:element ref="informacije_o_pacijentu"/>
                 <xs:element ref="evidencija_o_vakcinaciji"/>
             </xs:sequence>
-            <xs:attribute name="datum" type="xs:date"/>
+            <xs:attribute name="datum" use="required" type="xs:date"/>
+            <xs:attribute name="broj" use="required" type="xs:positiveInteger"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="informacije_o_pacijentu">
@@ -29,6 +31,7 @@
                 <xs:element ref="ustanova_socijalne_zastite"/>
                 <xs:element ref="izjava_saglasnosti"/>
             </xs:sequence>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="drzavljanstvo">
@@ -55,8 +58,7 @@
     <xs:element name="puno_ime">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="prezime" type="xs:string"/>
-                <xs:element name="licno_ime" type="xs:string"/>
+                <xs:element name="ime_prezime" type="util:ime_prezime"/>
                 <xs:element name="ime_roditelja" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
@@ -65,19 +67,20 @@
     <xs:element name="datum_i_mesto_rodjenja">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="datum_rodjenja" type="xs:date"/>
-                <xs:element name="mesto_rodjenja" type="xs:string"/>
+                <xs:element name="datum_rodjenja" type="util:datum_rodjenja"/>
+                <xs:element name="mesto_rodjenja" type="util:mesto_rodjenja"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="prebivaliste">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="ulica" type="xs:string"/>
-                <xs:element name="broj" type="xs:string"/>
-                <xs:element name="mesto" type="xs:string"/>
-                <xs:element name="opstina" type="xs:string"/>
+                <xs:element name="ulica" type="util:ulica"/>
+                <xs:element name="broj" type="util:broj"/>
+                <xs:element name="mesto" type="util:mesto"/>
+                <xs:element name="opstina" type="util:opstina"/>
             </xs:sequence>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="kontakt_informacije">
@@ -120,7 +123,15 @@
     <xs:element name="zdravstvena_ustanova">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="naziv" type="xs:string"/>
+                <xs:element name="naziv">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="property" use="required" type="xs:string" fixed="vakcinisan_u"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="vakcinacijski_punkt" type="xs:string"/>
                 <xs:element name="informacije_o_lekaru">
                     <xs:complexType>

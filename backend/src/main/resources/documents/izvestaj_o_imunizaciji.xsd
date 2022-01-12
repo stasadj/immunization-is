@@ -6,6 +6,42 @@
     <xs:element name="izvestaj_o_imunizaciji">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="meta_podaci">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="period_od">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="obuhvata_period_od"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="period_do">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="obuhvata_period_do"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="datum_izdavanja">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="izdato"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element default="0" name="broj_dokumenata_o_interesovanju" type="xs:unsignedInt"/>
                 <xs:element default="0" name="broj_zahteva_za_digitalni_sertifikat"
                     type="xs:unsignedInt"/>
@@ -42,9 +78,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="od" type="xs:date"/>
-            <xs:attribute name="do" type="xs:date"/>
-            <xs:attribute name="datum_izdavanja" type="xs:date"/>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

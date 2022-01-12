@@ -1,0 +1,11 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <se_zove xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Pera Peric</se_zove>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <ima_pol xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">M</ima_pol>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <ima_jmbg xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">2001990111111</ima_jmbg>
+  </rdf:Description>
+</rdf:RDF>

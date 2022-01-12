@@ -1,0 +1,35 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <ima_jmbg xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">1234567890123</ima_jmbg>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <se_zove xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Dina Petrov</se_zove>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <ima_pol xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Ž</ima_pol>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <je_rodjen xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">1999-06-04</je_rodjen>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <je_rodjen_u xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Zrenjanin</je_rodjen_u>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/prebivaliste/1234567890123">
+    <nalazi_se_u_ulici xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Bulevar Despota Stefana</nalazi_se_u_ulici>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/prebivaliste/1234567890123">
+    <nalazi_se_na_broju xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">7a</nalazi_se_na_broju>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/prebivaliste/1234567890123">
+    <nalazi_se_u_mestu xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Novi Sad</nalazi_se_u_mestu>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/prebivaliste/1234567890123">
+    <nalazi_se_u_opstini xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">Novi Sad</nalazi_se_u_opstini>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/1234567890123">
+    <ima_radni_status xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">student</ima_radni_status>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/saglasnost/0000000001">
+    <vakcinisan_u xmlns="http://www.ftn.uns.ac.rs/saglasnost" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"/>
+  </rdf:Description>
+</rdf:RDF>
