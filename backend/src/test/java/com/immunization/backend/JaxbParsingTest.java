@@ -28,13 +28,13 @@ public class JaxbParsingTest {
 
     @Test
     public void testUnmarshalling() throws IOException, MarshalException {
-        System.out.println("TEST digitalni_sertifikat");
+        System.out.println("TEST digitalni_sertifikat ");
         String xmlString = new String(Files.readAllBytes(Paths.get("./src/main/resources/documents/digitalni_sertifikat.xml")));
         DigitalniSertifikat sertifikat = (DigitalniSertifikat) unmarshallerService.unmarshal(xmlString);
         System.out.println("Digitalni sertifikat date: " + sertifikat.getDatumIzdavanja());
-        System.out.println("Digitalni sertifikat osoba: " + sertifikat.getLicniPodaci().getPol());
+        System.out.println("Digitalni sertifikat osoba: " + sertifikat.getLicniPodaci().getPol().getValue());
         System.out.println("Digitalni sertifikat broj doza osobe: " + sertifikat.getVakcinacija().getVakcina().size());
-        sertifikat.getVakcinacija().getVakcina().forEach(vakc -> System.out.println(vakc.getProizvodjacSerija()));
+        sertifikat.getVakcinacija().getVakcina().forEach(vakc -> System.out.println("Proizvodjac vakcine: " + vakc.getProizvodjacSerija().trim()));
 
         System.out.println("TEST interesovanje");
         xmlString = new String(Files.readAllBytes(Paths.get("./src/main/resources/documents/interesovanje.xml")));
