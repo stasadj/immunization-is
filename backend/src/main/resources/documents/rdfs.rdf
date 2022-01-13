@@ -10,6 +10,7 @@
     <rdfs:Class rdf:ID="potvrda_o_vakcinaciji" />
     <rdfs:Class rdf:ID="saglasnost" />
     <rdfs:Class rdf:ID="zahtev_za_sertifikat" />
+    
     <rdfs:Class rdf:ID="licni_podaci" />
     <rdfs:Class rdf:ID="prebivaliste" />
     
@@ -84,7 +85,7 @@
         <rdfs:domain rdf:resource="#izvestaj_o_imunizaciji"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
-    <rdf:Property rdf:ID="datum_izdavanja">
+    <rdf:Property rdf:ID="datum_izdavanja_izvestaja">
         <rdfs:domain rdf:resource="#izvestaj_o_imunizaciji"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
