@@ -1,0 +1,11 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <pred:se_zove xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pera Peric</pred:se_zove>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <pred:ima_pol xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">M</pred:ima_pol>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111">
+    <pred:ima_jmbg xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2001990111111</pred:ima_jmbg>
+  </rdf:Description>
+</rdf:RDF>

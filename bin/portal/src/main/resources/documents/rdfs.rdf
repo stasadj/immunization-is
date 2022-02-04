@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xml:lang="en"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://www.immunization-is.io/#">
+    
+    <rdfs:Class rdf:ID="digitalni_sertifikat" />
+    <rdfs:Class rdf:ID="interesovanje" />
+    <rdfs:Class rdf:ID="izvestaj_o_imunizaciji" />
+    <rdfs:Class rdf:ID="potvrda_o_vakcinaciji" />
+    <rdfs:Class rdf:ID="saglasnost" />
+    <rdfs:Class rdf:ID="zahtev_za_sertifikat" />
+    
+    <rdfs:Class rdf:ID="licni_podaci" />
+    <rdfs:Class rdf:ID="prebivaliste" />
+    
+    <!-- licni_podaci -->
+    <rdf:Property rdf:ID="ime_prezime">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="datum_rodjenja">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="pol">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="jmbg">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="broj_pasosa">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="drzavljanstvo">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="dobrovoljni_davalac_krvi">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="mesto_rodjenja">
+        <rdfs:domain rdf:resource="#licni_podaci"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    
+    <!-- prebivaliste -->
+    <rdf:Property rdf:ID="ulica">
+        <rdfs:domain rdf:resource="#prebivaliste"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="broj">
+        <rdfs:domain rdf:resource="#prebivaliste"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="mesto">
+        <rdfs:domain rdf:resource="#prebivaliste"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="opstina">
+        <rdfs:domain rdf:resource="#prebivaliste"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    
+    <!-- zahtev_za_sertifikat -->
+    <rdf:Property rdf:ID="mesto_izdavanja">
+        <rdfs:domain rdf:resource="#zahtev_za_sertifikat"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="datum_izdavanja">
+        <rdfs:domain rdf:resource="#zahtev_za_sertifikat"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    
+    <!-- izvestaj_o_imunizaciji -->
+    <rdf:Property rdf:ID="period_od">
+        <rdfs:domain rdf:resource="#izvestaj_o_imunizaciji"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="period_do">
+        <rdfs:domain rdf:resource="#izvestaj_o_imunizaciji"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    <rdf:Property rdf:ID="datum_izdavanja_izvestaja">
+        <rdfs:domain rdf:resource="#izvestaj_o_imunizaciji"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+    
+    <!-- saglasnost -->
+    <rdf:Property rdf:ID="zdravstvena_ustanova">
+        <rdfs:domain rdf:resource="#saglasnost"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+</rdf:RDF>

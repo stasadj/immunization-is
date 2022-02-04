@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/"
+    xmlns="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/" xmlns:util="http://ftn.uns.ac.rs/util"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
+
+    <xs:import namespace="http://ftn.uns.ac.rs/util" schemaLocation="util.xsd"/>
+
+    <xs:element name="zahtev_za_sertifikat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meta_podaci">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <xs:element name="mesto_izdavanja">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="pred:ima_mesto_izdavanja"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+
+                            <xs:element name="datum_izdavanja">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="pred:ima_datum_izdavanja"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="podnosilac_zahteva">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ime_prezime" type="util:ime_prezime"/>
+                            <xs:element name="datum_rodjenja" type="util:datum_rodjenja"/>
+                            <xs:element name="pol" type="util:pol"/>
+                            <xs:element name="jmbg" type="util:jmbg"/>
+                            <xs:element name="broj_pasosa" type="util:broj_pasosa"/>                            
+                            <xs:element name="razlog_za_podnosenje_zahteva" type="xs:string"/>
+                        </xs:sequence>
+                        <xs:attribute name="about" use="required" type="xs:anyURI"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
