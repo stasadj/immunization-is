@@ -1,6 +1,0 @@
-http://www.ftn.uns.ac.rs/digitalni-sertifikat/[jmbg]
-http://www.ftn.uns.ac.rs/interesovanje/[jmbg]
-http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/[od]-[do]
-http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/[sifra_potvrde]
-http://www.ftn.uns.ac.rs/saglasnost/[id-dokumenta]
-http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/[jmbg]
