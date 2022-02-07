@@ -43,6 +43,7 @@ public class UserControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    // TODO: Add this test back
     // @Test
     // @Order(2)
     // void registerUser_unsuccessfully() throws Exception {
