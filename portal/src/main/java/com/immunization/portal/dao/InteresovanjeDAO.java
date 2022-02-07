@@ -18,12 +18,12 @@ public class InteresovanjeDAO {
     private Exist exist;
 	
 	
-	public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
+    public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
 		IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
 		return interesovanje == null ? Optional.empty() : Optional.of(interesovanje);
 	}
 
-	public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
+    public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
 		exist.save(documentId, interesovanje);
 		
 	}

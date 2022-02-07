@@ -20,20 +20,20 @@ public class InteresovanjeService {
     private InteresovanjeDAO interesovanjeDAO;
 
 
-	public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
-		
-		String documentId = interesovanje.getPacijent().getJmbg().getValue() + ".xml";
-		
-		Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
-		if (result.isPresent()) {
-			throw new BadRequestException("Interesovanje for this user already exists. ");
-		}
-			
-		interesovanjeDAO.save(documentId, interesovanje);
-		return interesovanje;
-		
-		//TODO extract and save metadata here
-			
-	}
+    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
+    	
+    	String documentId = interesovanje.getPacijent().getJmbg().getValue() + ".xml";
+    
+        Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
+        if (result.isPresent()) {
+        	throw new BadRequestException("Interesovanje for this user already exists. ");
+        }
+        	
+        interesovanjeDAO.save(documentId, interesovanje);
+        return interesovanje;
+        
+        //TODO extract and save metadata here
+    		
+    }
 
 }
