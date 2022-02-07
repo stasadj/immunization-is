@@ -1,43 +1,39 @@
 package com.immunization.portal.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.immunization.common.exception.BadRequestException;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
-import com.immunization.common.repository.Exist;
-import com.immunization.common.service.UUIDService;
+import com.immunization.portal.dao.InteresovanjeDAO;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class InteresovanjeService {
-
+	
+	
     @Autowired
-    private Exist exist;
+    private InteresovanjeDAO interesovanjeDAO;
 
-	public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws BadRequestException {
+
+	public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
 		
-		//TODO check if person in document already has an Interesovanje from before in database	
+		String documentId = interesovanje.getPacijent().getJmbg().getValue() + ".xml";
 		
-		try {
-			//TODO generate new document id and document name??
-			//String newId = uuidService.getUUID();
-			//String documentName = exist.save("interesovanje" + newId + ".xml", interesovanje);
-			
-			exist.save(interesovanje.getPacijent().getJmbg() + ".xml", interesovanje);
-			return interesovanje;
-			
-			//TODO extract and save metadata here
-			
-		} catch (Exception e) {
-			// Exist exception
-			e.printStackTrace();
+		Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
+		if (result.isPresent()) {
+			throw new BadRequestException("Interesovanje for this user already exists. ");
 		}
-
-		return null;
+			
+		interesovanjeDAO.save(documentId, interesovanje);
+		return interesovanje;
 		
+		//TODO extract and save metadata here
+			
 	}
 
 }
