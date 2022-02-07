@@ -19,12 +19,12 @@ public class InteresovanjeDAO {
 	
 	
     public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
-		IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
-		return interesovanje == null ? Optional.empty() : Optional.of(interesovanje);
+        IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+        return interesovanje == null ? Optional.empty() : Optional.of(interesovanje);
 	}
 
     public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
-		exist.save(documentId, interesovanje);
+        exist.save(documentId, interesovanje);
 		
 	}
 
