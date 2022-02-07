@@ -22,9 +22,15 @@ public class InteresovanjeController {
     @Autowired
     private final InteresovanjeService interesovanjeService;
 	
+//	@PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
+//	    ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody String body) {
+//	        return new ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju>(this.interesovanjeService.create(body), HttpStatus.OK);
+//	    }
+	
 	@PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
-	    ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody String body) {
-	        return new ResponseEntity<>(this.interesovanjeService.create(body), HttpStatus.OK);
-	    }
+    ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody IskazivanjeInteresovanjaZaVakcinaciju interesovanje) {
+		System.out.println(interesovanje.getZeljenaOpstinaVakcinacije());
+        return new ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju>(this.interesovanjeService.create(interesovanje), HttpStatus.OK);
+    }
 
 }
