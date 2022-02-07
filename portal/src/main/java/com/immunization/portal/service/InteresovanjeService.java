@@ -27,13 +27,17 @@ public class InteresovanjeService {
 			IskazivanjeInteresovanjaZaVakcinaciju interesovanje = 
 					(IskazivanjeInteresovanjaZaVakcinaciju) unmarshallerService.unmarshal(xmlString);
 						
-			//TODO generate new document ID and document name!
+			//TODO check if person in document already has an Interesovanje from before in database
+			
+			//TODO generate new document UUID and document name!
 			String id = exist.save("PROBA.xml", interesovanje);
 			System.out.println(id);
 			
+			//TODO extract metadata and save to RDF??
+			
 			
 		} catch (UnmarshalException e) {
-			throw new BadRequestException("Bad document format!");
+			throw new BadRequestException("Bad Interesovanje document format!");
 			
 		} catch (Exception e) {
 			// Some exist exception
