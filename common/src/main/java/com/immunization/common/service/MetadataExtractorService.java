@@ -12,6 +12,8 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.immunization.common.util.AuthenticationUtilitiesFuseki.ConnectionProperties;
@@ -22,18 +24,23 @@ import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class MetadataExtractorService {
 	@Autowired
 	private ConnectionProperties conn;
 
-	private static final String XSLT_FILE = "./src/main/resources/xsl/grddl.xsl";
+	private static final String XSLT_FILE = "xsl/grddl.xsl";
 
-	public void extractMetadata(InputStream in, OutputStream out) throws TransformerException {
+    private Resource loadXsltFileAsResource() {
+        return new ClassPathResource(XSLT_FILE);
+    }
+
+	public void extractMetadata(InputStream in, OutputStream out) throws TransformerException, IOException {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		// Create transformation source
-		StreamSource transformSource = new StreamSource(new File(XSLT_FILE));
+		StreamSource transformSource = new StreamSource(loadXsltFileAsResource().getFile());
 
 		// Initialize GRDDL transformer object
 		Transformer grddlTransformer = transformerFactory.newTransformer(transformSource);
@@ -52,8 +59,64 @@ public class MetadataExtractorService {
 		grddlTransformer.transform(source, result);
 	}
 
+	public void insertFromString(String data, String graphUri)
+			throws TransformerException, IOException {
+		// TODO: Refactor and remove System.out
+		System.out.println("[INFO] " + MetadataExtractorService.class.getSimpleName());
+
+		InputStream inStream = new ByteArrayInputStream(data.getBytes());
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		
+		System.out.println("[INFO] Extracting metadata from RDFa attributes...");
+		System.out.println(data);
+		extractMetadata(inStream, outStream);
+		
+		String rdfContents = new String(outStream.toByteArray(), StandardCharsets.UTF_8);
+		System.out.println(rdfContents);
+
+		// Loading a default model with extracted metadata
+		Model model = ModelFactory.createDefaultModel();
+		model.read(new ByteArrayInputStream(rdfContents.getBytes()), null);;
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+		model.write(out, SparqlUtil.NTRIPLES);
+
+		System.out.println("[INFO] Extracted metadata as RDF/XML...");
+		model.write(System.out, SparqlUtil.RDF_XML);
+
+		// Writing the named graph
+		System.out.println("[INFO] Populating named graph \"" + graphUri + "\" with extracted metadata.");
+		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + graphUri, out.toString());
+		System.out.println(sparqlUpdate);
+
+		// UpdateRequest represents a unit of execution
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
+		processor.execute();
+
+		System.out.println("[INFO] End.");
+	}
+
+	public boolean getPatientExists(String patientID, String graphUri) {
+		String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + graphUri, "?s ?p ?o . filter( ?s = <" + patientID + "> )");
+
+		// Create a QueryExecution that will access a SPARQL service over HTTP
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		// Query the collection, dump output response as XML
+		ResultSet results = query.execSelect();
+		boolean result = results.hasNext();
+
+		ResultSetFormatter.out(System.out, results);
+		query.close();
+
+		return result;
+	}
+
 	public void initRDFStore(String xmlFilePath, String rdfFilePath, String graphUri)
-			throws FileNotFoundException, TransformerException {
+			throws TransformerException, IOException {
 		System.out.println("[INFO] " + MetadataExtractorService.class.getSimpleName());
 
 		System.out.println("[INFO] Extracting metadata from RDFa attributes...");

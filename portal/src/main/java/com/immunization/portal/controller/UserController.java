@@ -29,6 +29,6 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         
-        return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
