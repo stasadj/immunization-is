@@ -24,7 +24,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 
 @Service
 public class MetadataExtractorService {
@@ -62,21 +63,33 @@ public class MetadataExtractorService {
 	public void insertFromString(String data, String graphUri)
 			throws TransformerException, IOException {
 		// TODO: Refactor and remove System.out
-		System.out.println("[INFO] " + MetadataExtractorService.class.getSimpleName());
+        byte[] byteArray = Charset.forName("UTF-8").encode(data).array();
+		// Special fuckery with encododed byte array having inexplicably a set amount o null characters in the end.
+		// Found this by writing the byteArray to a file.
+		int nullCount = 0;
+		for (byte byteVar : byteArray) {
+			if (byteVar == 0) {
+				nullCount++;
+			}
+		}
+		byte[] filteredByteArray = Arrays.copyOfRange(byteArray, 0, byteArray.length - nullCount - 1);
+		InputStream inStream = new ByteArrayInputStream(filteredByteArray);
 
-		InputStream inStream = new ByteArrayInputStream(data.getBytes());
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-		
-		System.out.println("[INFO] Extracting metadata from RDFa attributes...");
-		System.out.println(data);
 		extractMetadata(inStream, outStream);
 		
-		String rdfContents = new String(outStream.toByteArray(), StandardCharsets.UTF_8);
-		System.out.println(rdfContents);
+		byte[] outByteArray = outStream.toByteArray();
+		nullCount = 0;
+		for (byte byteVar : outByteArray) {
+			if (byteVar == 0) {
+				nullCount++;
+			}
+		}
+		byte[] filteredOutByteArray = Arrays.copyOfRange(outByteArray, 0, outByteArray.length - nullCount - 2);
 
 		// Loading a default model with extracted metadata
 		Model model = ModelFactory.createDefaultModel();
-		model.read(new ByteArrayInputStream(rdfContents.getBytes()), null);;
+		model.read(new ByteArrayInputStream(filteredOutByteArray), null);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 

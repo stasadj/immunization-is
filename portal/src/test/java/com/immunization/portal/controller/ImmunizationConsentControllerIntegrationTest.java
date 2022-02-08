@@ -46,14 +46,12 @@ public class ImmunizationConsentControllerIntegrationTest {
 
     @AfterAll
     void dropGraph() throws Exception {
-		// metadataExtractorService.dropGraph(RDF_GRAPH_URI);
+		metadataExtractorService.dropGraph(RDF_GRAPH_URI);
     }
 
     @Test
     @Order(1)
     void consentToImmunization_succesfully() throws Exception {
-        // TODO: This is passing in debug but Ž is being read as ? during unmarshalling of the object.
-        // Tried putting parameter of controller to be String but that still printed ? when reading it.
         File file = new File("./src/main/resources/documents/saglasnost.xml");
         String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
