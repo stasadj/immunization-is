@@ -12,6 +12,7 @@ import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.common.util.NSPrefixMapper;
 import com.immunization.portal.dto.UserRegistrationDTO;
 
 import javax.xml.bind.JAXBContext;
@@ -48,7 +49,7 @@ public class JaxBPortalConfiguration {
 	public Marshaller createPortalMarshaller() throws JAXBException {
 		JAXBContext context = createPortalJAXBContext();
 		Marshaller marshaller = context.createMarshaller();
-		//marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new NSPrefixMapper());
+		marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new NSPrefixMapper());
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		return marshaller;
 	}

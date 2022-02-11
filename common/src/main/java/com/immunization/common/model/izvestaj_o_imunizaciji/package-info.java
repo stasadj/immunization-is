@@ -5,5 +5,5 @@
 // Generated on: 2022.01.12 at 04:37:41 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = {@javax.xml.bind.annotation.XmlNs(prefix = "pred", namespaceURI = "http://www.ftn.uns.ac.rs/rdf/predicate/")})
 package com.immunization.common.model.izvestaj_o_imunizaciji;
