@@ -41,6 +41,9 @@ public class InteresovanjeService {
         }
 
         interesovanjeDAO.save(documentId, interesovanje);
+
+        //TODO Send email to patient
+        
         return interesovanje;
     		
     }

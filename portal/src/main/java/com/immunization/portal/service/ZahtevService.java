@@ -2,18 +2,17 @@
 package com.immunization.portal.service;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
-import com.immunization.common.exception.BadRequestException;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
 import com.immunization.portal.constants.MetadataConstants;
+import com.immunization.portal.dao.ZahtevDAO;
 
 import org.springframework.stereotype.Service;
 
@@ -23,15 +22,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ZahtevService {
 	
-    // private ZahtevDAO zahtevDAO; //TODO
+    private ZahtevDAO zahtevDAO; 
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private UUIDService uuidService;
 
 
     public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev) throws Exception {
-    	
-        //TODO get new UUID
 
     	String documentId = uuidService.getUUID() + ".xml";
 
@@ -39,8 +36,7 @@ public class ZahtevService {
             throw new FailedMetadataExtractionException();
         }
 
-        //TODO save to database
-        // zahtevDAO.save(documentId, zahtev);
+        zahtevDAO.save(documentId, zahtev);
         return zahtev;
     		
     }

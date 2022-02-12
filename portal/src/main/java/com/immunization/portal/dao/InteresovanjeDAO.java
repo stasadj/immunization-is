@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor 
 public class InteresovanjeDAO {
 	
-    @Autowired
     private Exist exist;
 	
 	
