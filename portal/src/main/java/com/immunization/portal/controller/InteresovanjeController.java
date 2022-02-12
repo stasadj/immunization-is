@@ -15,16 +15,16 @@ import com.immunization.portal.service.InteresovanjeService;
 import lombok.AllArgsConstructor; 
 
 @RestController
-@AllArgsConstructor
-@RequestMapping(value = "/interesovanje")
-public class InteresovanjeController {
+@AllArgsConstructor 
+@RequestMapping(value = "api/interesovanjee") 
+public class InteresovanjeController { 
 	
     @Autowired
-    private final InteresovanjeService interesovanjeService;
+    private final InteresovanjeService interesovanjeService; 
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
     ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
         return new ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju>(this.interesovanjeService.create(interesovanje), HttpStatus.OK);
     }
-
+ 
 }
