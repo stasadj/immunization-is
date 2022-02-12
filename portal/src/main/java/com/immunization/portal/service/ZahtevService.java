@@ -12,6 +12,7 @@ import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
+import com.immunization.common.service.UUIDService;
 import com.immunization.portal.constants.MetadataConstants;
 
 import org.springframework.stereotype.Service;
@@ -25,19 +26,15 @@ public class ZahtevService {
     // private ZahtevDAO zahtevDAO; //TODO
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
+    private UUIDService uuidService;
 
 
     public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev) throws Exception {
     	
-    	String documentId = zahtev.getPodnosilacZahteva().getJmbg().getValue() + ".xml";
-    
-        //TODO check if zahtev already exists
+        //TODO get new UUID
 
-        // Optional<ZahtevZaSertifikat> result = zahtevDAO.retrieveById(documentId);
-        // if (result.isPresent()) {
-        // 	throw new BadRequestException("Zahtev for this user already exists. ");
-        // }
-        	
+    	String documentId = uuidService.getUUID() + ".xml";
+
         if (!extractAndSaveMetadata(zahtev)) {
             throw new FailedMetadataExtractionException();
         }
