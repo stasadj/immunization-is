@@ -1,3 +1,4 @@
+
 package com.immunization.portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
+import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.portal.service.InteresovanjeService;
+import com.immunization.portal.service.ZahtevService;
 
 import lombok.AllArgsConstructor; 
 
 @RestController
 @AllArgsConstructor 
-@RequestMapping(value = "api/interesovanje") 
-public class InteresovanjeController { 
+@RequestMapping(value = "api/zahtev-za-sertifikat") 
+public class ZahtevController { 
 	
-    private final InteresovanjeService interesovanjeService; 
+    private final ZahtevService zahtevService; 
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
-        return new ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju>(this.interesovanjeService.create(interesovanje), HttpStatus.OK);
+    ResponseEntity<ZahtevZaSertifikat> create(@RequestBody ZahtevZaSertifikat zahtev) throws Exception {
+        return new ResponseEntity<ZahtevZaSertifikat>(this.zahtevService.create(zahtev), HttpStatus.OK);
     }
  
 }
+
