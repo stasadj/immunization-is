@@ -13,6 +13,7 @@ import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.portal.constants.MetadataConstants;
 import com.immunization.portal.dao.InteresovanjeDAO;
+import com.immunization.portal.service.email.PortalEmailService;
 
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class InteresovanjeService {
     private InteresovanjeDAO interesovanjeDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
+    private PortalEmailService emailService;
 
 
     public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
@@ -34,16 +36,17 @@ public class InteresovanjeService {
         Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
         if (result.isPresent()) {
         	throw new BadRequestException("Interesovanje for this user already exists. ");
-        }
+        } 
         	
         if (!extractAndSaveMetadata(interesovanje)) {
-            throw new FailedMetadataExtractionException();
+            throw new FailedMetadataExtractionException(); 
         }
 
         interesovanjeDAO.save(documentId, interesovanje);
 
-        //TODO Send email to patient
-        
+        //send email to patient 
+        emailService.sendInteresovanjeConfirmation(interesovanje, interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
+
         return interesovanje;
     		
     }
