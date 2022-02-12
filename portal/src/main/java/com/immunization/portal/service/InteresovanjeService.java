@@ -39,7 +39,7 @@ public class InteresovanjeService {
         } 
         	
         if (!extractAndSaveMetadata(interesovanje)) {
-            throw new FailedMetadataExtractionException(); 
+            throw new FailedMetadataExtractionException();
         }
 
         interesovanjeDAO.save(documentId, interesovanje);
