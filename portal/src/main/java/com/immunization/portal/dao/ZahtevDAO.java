@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.repository.Exist;
 
@@ -17,7 +16,7 @@ public class ZahtevDAO {
     private Exist exist;
 	
     public Optional<ZahtevZaSertifikat> retrieveById(String documentId) throws Exception {
-        ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+        ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(documentId, ZahtevZaSertifikat.class);
         return zahtev == null ? Optional.empty() : Optional.of(zahtev);
 	}
 
