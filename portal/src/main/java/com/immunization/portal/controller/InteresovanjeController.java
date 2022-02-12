@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor 
-@RequestMapping(value = "api/interesovanjee") 
+@RequestMapping(value = "api/interesovanje") 
 public class InteresovanjeController { 
 	
     @Autowired
