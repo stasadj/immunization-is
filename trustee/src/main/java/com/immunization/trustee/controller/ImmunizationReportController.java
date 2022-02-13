@@ -20,8 +20,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/api/immunization-report", consumes = MediaType.APPLICATION_XML_VALUE
-		+ ";charset=utf-8", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+@RequestMapping(value = "/api/immunization-report", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
 public class ImmunizationReportController {
 	private ImmunizationReportService immunizationReportService;
 
