@@ -11,6 +11,7 @@ import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
+import com.immunization.common.service.XMLCalendarService;
 import com.immunization.portal.constants.MetadataConstants;
 import com.immunization.portal.dao.InteresovanjeDAO;
 import com.immunization.portal.service.email.PortalEmailService;
@@ -27,6 +28,7 @@ public class InteresovanjeService {
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private PortalEmailService emailService;
+    private XMLCalendarService calendarUtil;
 
 
     public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
@@ -37,6 +39,14 @@ public class InteresovanjeService {
         if (result.isPresent()) {
         	throw new BadRequestException("Interesovanje for this user already exists. ");
         } 
+
+        //setting unique about
+        interesovanje.setAbout("http://www.ftn.uns.ac.rs/interesovanje/" + documentId);
+
+        //TODO SETTING PATIENT ABOUT TOO?
+
+        //setting date
+        interesovanje.setDatum(calendarUtil.getCurrentDate());
         	
         if (!extractAndSaveMetadata(interesovanje)) {
             throw new FailedMetadataExtractionException();
