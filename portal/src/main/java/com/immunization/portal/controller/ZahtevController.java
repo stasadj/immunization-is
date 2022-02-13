@@ -26,7 +26,12 @@ public class ZahtevController {
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
     ResponseEntity<ZahtevZaSertifikat> create(@RequestBody ZahtevZaSertifikat zahtev) throws Exception {
-        return new ResponseEntity<ZahtevZaSertifikat>(this.zahtevService.create(zahtev), HttpStatus.OK);
+        try{
+            return new ResponseEntity<ZahtevZaSertifikat>(this.zahtevService.create(zahtev), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<ZahtevZaSertifikat>(new ZahtevZaSertifikat(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
     }
  
 }
