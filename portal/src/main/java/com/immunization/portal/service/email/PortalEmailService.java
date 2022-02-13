@@ -39,22 +39,22 @@ public class PortalEmailService {
             String recipientEmail) {
 
         StringBuilder emailBody =  new StringBuilder();
-        emailBody.append("Postovana/i " + interesovanje.getPacijent().getPunoIme().getValue() + ", \n");
+        emailBody.append("Postovana/i ").append(interesovanje.getPacijent().getPunoIme().getValue()).append(", \n");
         emailBody.append("Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n");
 
-        emailBody.append("Ime pacijenta: " + interesovanje.getPacijent().getPunoIme().getValue() + " \n");
-        emailBody.append("JMBG: " + interesovanje.getPacijent().getJmbg().getValue() + " \n");
-        emailBody.append("Opstina vakcinacije: " + interesovanje.getZeljenaOpstinaVakcinacije() + " \n");
+        emailBody.append("Ime pacijenta: ").append(interesovanje.getPacijent().getPunoIme().getValue()).append(" \n");
+        emailBody.append("JMBG: ").append(interesovanje.getPacijent().getJmbg().getValue()).append(" \n");
+        emailBody.append("Opstina vakcinacije: ").append(interesovanje.getZeljenaOpstinaVakcinacije()).append(" \n");
 
         StringBuilder vaccines = new StringBuilder();
-        interesovanje.getOdabirVakcina().getOpcija().forEach(opcija -> vaccines.append(opcija));
+        interesovanje.getOdabirVakcina().getOpcija().forEach(vaccines::append);
 
         String vaccineString = vaccines.toString();
         if (vaccineString.equals("")){
             vaccineString = "BILO KOJA";
         }
 
-        emailBody.append("Odabrane vakcine: " + vaccineString + " \n");
+        emailBody.append("Odabrane vakcine: ").append(vaccineString).append(" \n");
         emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
 
         EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspesno zabelezeno.", emailBody.toString());
