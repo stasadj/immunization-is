@@ -38,12 +38,13 @@ public class PortalEmailService {
     public void sendInteresovanjeConfirmation(IskazivanjeInteresovanjaZaVakcinaciju interesovanje,
             String recipientEmail) {
 
-        String emailBody = "Postovana/i " + interesovanje.getPacijent().getPunoIme().getValue() + ", \n";
-        emailBody += "Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n";
+        StringBuilder emailBody =  new StringBuilder();
+        emailBody.append("Postovana/i " + interesovanje.getPacijent().getPunoIme().getValue() + ", \n");
+        emailBody.append("Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n");
 
-        emailBody += "Ime pacijenta: " + interesovanje.getPacijent().getPunoIme().getValue() + " \n";
-        emailBody += "JMBG: " + interesovanje.getPacijent().getJmbg().getValue() + " \n";
-        emailBody += "Opstina vakcinacije: " + interesovanje.getZeljenaOpstinaVakcinacije() + " \n";
+        emailBody.append("Ime pacijenta: " + interesovanje.getPacijent().getPunoIme().getValue() + " \n");
+        emailBody.append("JMBG: " + interesovanje.getPacijent().getJmbg().getValue() + " \n");
+        emailBody.append("Opstina vakcinacije: " + interesovanje.getZeljenaOpstinaVakcinacije() + " \n");
 
         StringBuilder vaccines = new StringBuilder();
         interesovanje.getOdabirVakcina().getOpcija().forEach(opcija -> vaccines.append(opcija));
@@ -53,10 +54,10 @@ public class PortalEmailService {
             vaccineString = "BILO KOJA";
         }
 
-        emailBody += "Odabrane vakcine: " + vaccineString + " \n";
-        emailBody += "\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404";
+        emailBody.append("Odabrane vakcine: " + vaccineString + " \n");
+        emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
 
-        EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspesno zabelezeno.", emailBody);
+        EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspesno zabelezeno.", emailBody.toString());
         email.addRecipient(recipientEmail);
         sendEmail(email);
 
