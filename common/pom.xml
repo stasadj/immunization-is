@@ -78,6 +78,15 @@
 			<version>2.2.5.1</version>
 		</dependency>
 
+		<!--
+			This dependency allows us to omit writting many of the getters, setters,
+			and constructors typically required in a java project.
+		-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+		</dependency>
 	</dependencies>
 
 	<build>
