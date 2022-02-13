@@ -2,13 +2,22 @@
 package com.immunization.portal.service;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.crypto.MarshalException;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.TransformerException;
 
+import com.ibm.icu.util.Calendar;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat.MetaPodaci.DatumIzdavanja;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat.MetaPodaci.StatusZahteva;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
@@ -44,7 +53,12 @@ public class ZahtevService {
         zahtev.getMetaPodaci().setStatusZahteva(status);
 
         //setting date
-        // zahtev.getMetaPodaci().setDatumIzdavanja(new XMLGre);
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(new Date());
+        XMLGregorianCalendar xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendarDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
+        DatumIzdavanja datumIzdavanja = new DatumIzdavanja();
+        datumIzdavanja.setValue(xmlCalendar);
+        zahtev.getMetaPodaci().setDatumIzdavanja(datumIzdavanja);
 
         //extracting metadata
         if (!extractAndSaveMetadata(zahtev)) {
