@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ImmunizationReportService {
-	private Exist exist;
+	private final Exist exist;
 
 	public IzvestajOImunizaciji getImmunizationReport(LocalDate startDate, LocalDate endDate)
 			throws DatatypeConfigurationException {
