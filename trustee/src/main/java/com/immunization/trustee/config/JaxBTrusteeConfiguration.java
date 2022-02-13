@@ -21,32 +21,27 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 @Configuration
-@Import({JaxBConfiguration.class})
-public class JaxBPortalConfiguration {
+@Import({ JaxBConfiguration.class })
+public class JaxBTrusteeConfiguration {
 
 	@Bean
 	@Primary
-	public JAXBContext createPortalJAXBContext() throws JAXBException {
-		return JAXBContext.newInstance(
-				DigitalniSertifikat.class,
-				IskazivanjeInteresovanjaZaVakcinaciju.class,
-				IzvestajOImunizaciji.class,
-				PotvrdaOVakcinaciji.class,
-				ObrazacSaglasnostiZaImunizaciju.class,
-				ZahtevZaSertifikat.class
-		);
+	public JAXBContext createTrusteeJAXBContext() throws JAXBException {
+		return JAXBContext.newInstance(DigitalniSertifikat.class, IskazivanjeInteresovanjaZaVakcinaciju.class,
+				IzvestajOImunizaciji.class, PotvrdaOVakcinaciji.class, ObrazacSaglasnostiZaImunizaciju.class,
+				ZahtevZaSertifikat.class);
 	}
 
 	@Bean
 	@Primary
-	public Unmarshaller createPortalUnMarshaller() throws JAXBException {
-		return createPortalJAXBContext().createUnmarshaller();
+	public Unmarshaller createTrusteeUnMarshaller() throws JAXBException {
+		return createTrusteeJAXBContext().createUnmarshaller();
 	}
 
 	@Bean
 	@Primary
-	public Marshaller createPortalMarshaller() throws JAXBException {
-		JAXBContext context = createPortalJAXBContext();
+	public Marshaller createTrusteeMarshaller() throws JAXBException {
+		JAXBContext context = createTrusteeJAXBContext();
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new NSPrefixMapper());
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
