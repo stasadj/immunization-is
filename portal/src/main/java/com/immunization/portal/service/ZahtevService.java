@@ -7,7 +7,9 @@ import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
 import com.immunization.common.exception.FailedMetadataExtractionException;
+import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat.MetaPodaci.StatusZahteva;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
@@ -30,12 +32,26 @@ public class ZahtevService {
 
     public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev) throws Exception {
 
-    	String documentId = uuidService.getUUID() + ".xml";
+        String uuid = uuidService.getUUID();
+    	String documentId = uuid + ".xml";
 
+        //setting uuid in about
+        zahtev.setAbout("http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/" + uuid);
+
+        //setting new zahtev status
+        StatusZahteva status = new StatusZahteva();
+        status.setValue(StatusZahtevaValue.NA_CEKANJU);
+        zahtev.getMetaPodaci().setStatusZahteva(status);
+
+        //setting date
+        // zahtev.getMetaPodaci().setDatumIzdavanja(new XMLGre);
+
+        //extracting metadata
         if (!extractAndSaveMetadata(zahtev)) {
             throw new FailedMetadataExtractionException();
         }
 
+        //saving
         zahtevDAO.save(documentId, zahtev);
         return zahtev;
     		
