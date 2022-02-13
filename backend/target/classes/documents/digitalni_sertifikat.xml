@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<digitalni_sertifikat xmlns="http://www.ftn.uns.ac.rs/digitalni-sertifikat/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/digitalni-sertifikat digitalni_sertifikat.xsd" 
+    broj="00001" datum_izdavanja="2021-11-06"
+    about="http://www.ftn.uns.ac.rs/digitalni-sertifikat/2312999850013">
+    <qr>https://sertifikat/broj</qr>
+    <licni_podaci about="http://www.ftn.uns.ac.rs/licni-podaci/2312999850013">
+        <ime_prezime property="pred:se_zove" datatype="xs:string">Albert Makan</ime_prezime>
+        <pol property="pred:ima_pol" datatype="xs:string">M</pol>
+        <datum_rodjenja property="pred:je_rodjen" datatype="xs:string">1999-12-23</datum_rodjenja>
+        <JMBG property="pred:ima_jmbg" datatype="xs:string">2312999850013</JMBG>
+        <broj_pasosa property="pred:ima_broj_pasosa" datatype="xs:string">001000000</broj_pasosa>
+    </licni_podaci>
+    <vakcinacija>
+        <vakcina doza="1">
+            <tip>Pfizer-BioNTech</tip>
+            <proizvodjac_serija>
+                BIONTECH MANUFACTURING GMBH, EX6537
+            </proizvodjac_serija>
+            <datum>2021-06-02</datum>
+            <zdravstvena_ustanova>
+                Dom zdravlja "Bosko Vrebalov"
+            </zdravstvena_ustanova>
+        </vakcina>
+        <vakcina doza="2">
+            <tip>Pfizer-BioNTech</tip>
+            <proizvodjac_serija>
+                BIONTECH MANUFACTURING GMBH, EX7823
+            </proizvodjac_serija>
+            <datum>2021-06-23</datum>
+            <zdravstvena_ustanova>
+                Dom zdravlja "Bosko Vrebalov"
+            </zdravstvena_ustanova>
+        </vakcina>
+    </vakcinacija>
+    <testovi>
+        <RT_test>
+            <vrsta_uzorka></vrsta_uzorka>
+            <proizvodjac></proizvodjac>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
+            <laboratorija></laboratorija>
+        </RT_test>
+        <Ag_RDT_test>
+            <vrsta_uzorka></vrsta_uzorka>
+            <proizvodjac></proizvodjac>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
+            <laboratorija></laboratorija>
+        </Ag_RDT_test>
+        <RBD_S_protein_test>
+            <vrsta_uzorka></vrsta_uzorka>
+            <proizvodjac></proizvodjac>
+            <datum_vreme_uzorkovanja></datum_vreme_uzorkovanja>
+            <datum_vreme_izdavanja_rezultata></datum_vreme_izdavanja_rezultata>
+            <rezultat></rezultat>
+            <laboratorija></laboratorija>
+        </RBD_S_protein_test>
+    </testovi>
+    <potpis></potpis>
+</digitalni_sertifikat>
