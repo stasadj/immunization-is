@@ -58,6 +58,13 @@
 			<optional>true</optional>
 		</dependency>
 
+        <!-- email -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
 	</dependencies>
 
 	<build>

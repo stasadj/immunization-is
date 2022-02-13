@@ -14,43 +14,32 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for radni_status_value.
+ * <p>Java class for status_zahteva_value.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="radni_status_value"&gt;
+ * &lt;simpleType name="status_zahteva_value"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="zaposlen"/&gt;
- *     &lt;enumeration value="nezaposlen"/&gt;
- *     &lt;enumeration value="penzioner"/&gt;
- *     &lt;enumeration value="u\u010denik"/&gt;
- *     &lt;enumeration value="student"/&gt;
- *     &lt;enumeration value="dete"/&gt;
+ *     &lt;enumeration value="NA CEKANJU"/&gt;
+ *     &lt;enumeration value="ODOBREN"/&gt;
+ *     &lt;enumeration value="PRIHVACEN"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
  * </pre>
  * 
  */
-@XmlType(name = "radni_status_value")
+@XmlType(name = "status_zahteva_value")
 @XmlEnum
-public enum RadniStatusValue {
+public enum StatusZahtevaValue {
 
-    @XmlEnumValue("zaposlen")
-    ZAPOSLEN("zaposlen"),
-    @XmlEnumValue("nezaposlen")
-    NEZAPOSLEN("nezaposlen"),
-    @XmlEnumValue("penzioner")
-    PENZIONER("penzioner"),
-    @XmlEnumValue("u\u010denik")
-    U\u010cENIK("u\u010denik"),
-    @XmlEnumValue("student")
-    STUDENT("student"),
-    @XmlEnumValue("dete")
-    DETE("dete");
+    @XmlEnumValue("NA CEKANJU")
+    NA_CEKANJU("NA CEKANJU"),
+    ODOBREN("ODOBREN"),
+    PRIHVACEN("PRIHVACEN");
     private final String value;
 
-    RadniStatusValue(String v) {
+    StatusZahtevaValue(String v) {
         value = v;
     }
 
@@ -58,8 +47,8 @@ public enum RadniStatusValue {
         return value;
     }
 
-    public static RadniStatusValue fromValue(String v) {
-        for (RadniStatusValue c: RadniStatusValue.values()) {
+    public static StatusZahtevaValue fromValue(String v) {
+        for (StatusZahtevaValue c: StatusZahtevaValue.values()) {
             if (c.value.equals(v)) {
                 return c;
             }
