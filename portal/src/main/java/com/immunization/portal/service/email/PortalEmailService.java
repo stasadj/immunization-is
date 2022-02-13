@@ -38,14 +38,25 @@ public class PortalEmailService {
     public void sendInteresovanjeConfirmation(IskazivanjeInteresovanjaZaVakcinaciju interesovanje,
             String recipientEmail) {
 
-        String emailBody = "Dear " + interesovanje.getPacijent().getPunoIme().getValue() + ", \n";
-        emailBody += "Your Interesovanje has been successully sent. Please wait for up to 7 business days for an appointment";
+        String emailBody = "Postovana/i " + interesovanje.getPacijent().getPunoIme().getValue() + ", \n";
+        emailBody += "Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n";
 
-        // TODO ADD XML TO HTML FOR EMAIL BODY
+        emailBody += "Ime pacijenta: " + interesovanje.getPacijent().getPunoIme().getValue() + " \n";
+        emailBody += "JMBG: " + interesovanje.getPacijent().getJmbg().getValue() + " \n";
+        emailBody += "Opstina vakcinacije: " + interesovanje.getZeljenaOpstinaVakcinacije() + " \n";
 
-        emailBody += "\n\nThis is an automatically generated email – please do not reply to it. ©Team404";
+        StringBuilder vaccines = new StringBuilder();
+        interesovanje.getOdabirVakcina().getOpcija().forEach(opcija -> vaccines.append(opcija));
 
-        EmailContent email = new EmailContent("Interesovanje created!", emailBody);
+        String vaccineString = vaccines.toString();
+        if (vaccineString.equals("")){
+            vaccineString = "BILO KOJA";
+        }
+
+        emailBody += "Odabrane vakcine: " + vaccineString + " \n";
+        emailBody += "\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404";
+
+        EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspesno zabelezeno.", emailBody);
         email.addRecipient(recipientEmail);
         sendEmail(email);
 
