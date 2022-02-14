@@ -76,8 +76,12 @@
               "browserTarget": "portal-frontend:build:production"
             },
             "development": {
-              "browserTarget": "portal-frontend:build:development"
+              "browserTarget": "portal-frontend:build:development",
+              "proxyConfig": "./proxy.conf.json"
             }
+          },
+          "options": {
+            "proxyConfig": "./proxy.conf.json"
           },
           "defaultConfiguration": "development"
         },
