@@ -1,11 +1,5 @@
 package com.immunization.trustee.config;
 
-import org.springframework.context.annotation.Bean;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-
 import com.immunization.common.config.JaxBConfiguration;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
@@ -14,6 +8,11 @@ import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.util.NSPrefixMapper;
+import com.immunization.trustee.dto.vaccine.VaccineAmount;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,9 +26,15 @@ public class JaxBTrusteeConfiguration {
 	@Bean
 	@Primary
 	public JAXBContext createTrusteeJAXBContext() throws JAXBException {
-		return JAXBContext.newInstance(DigitalniSertifikat.class, IskazivanjeInteresovanjaZaVakcinaciju.class,
-				IzvestajOImunizaciji.class, PotvrdaOVakcinaciji.class, ObrazacSaglasnostiZaImunizaciju.class,
-				ZahtevZaSertifikat.class);
+		return JAXBContext.newInstance(
+				DigitalniSertifikat.class,
+				IskazivanjeInteresovanjaZaVakcinaciju.class,
+				IzvestajOImunizaciji.class,
+				PotvrdaOVakcinaciji.class,
+				ObrazacSaglasnostiZaImunizaciju.class,
+				ZahtevZaSertifikat.class,
+				VaccineAmount.class
+		);
 	}
 
 	@Bean
