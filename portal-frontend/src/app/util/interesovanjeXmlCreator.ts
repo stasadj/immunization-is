@@ -40,7 +40,7 @@ function getVaccines(opcije: string[]): string {
         `
     }
 
-    let xmlOpcije : string = "";
+    let xmlOpcije: string = "";
     opcije.forEach(opcija => xmlOpcije += `<opcija>${opcija}</opcija>`)
     return xmlOpcije;
 

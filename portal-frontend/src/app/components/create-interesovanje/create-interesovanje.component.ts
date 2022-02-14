@@ -12,11 +12,11 @@ export class CreateInteresovanjeComponent implements OnInit {
 
     public newInteresovanje: Interesovanje = {
         drzavljanstvo: 'srpsko',
-        jmbg: 1234567,
+        jmbg: 1111111111119,
         punoIme: 'Test Test',
         email: 'test@gmail.com',
-        fiksni: 18329,
-        mobilni: 46327,
+        fiksni: 123111111,
+        mobilni: 1611111111,
         davalacKrvi: false,
         opstinaVakcinacije: 'Novi Sad',
         opcije: []
