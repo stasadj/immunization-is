@@ -15,7 +15,7 @@ export class InteresovanjeService {
 
     create(interesovanje: Interesovanje): Observable<void> {
         let xml = createInteresovanjeXML(interesovanje);
-        const headers = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
+        const headers = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'}); //TODO add this to interceptor?
 
         //TODO find fix for response error that happens
         return this.http.post<void>(this.path, xml, {headers});
