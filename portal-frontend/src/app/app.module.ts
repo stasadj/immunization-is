@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { CreateInteresovanjeComponent } from './create-interesovanje/create-interesovanje.component';
+import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
 
 
 @NgModule({

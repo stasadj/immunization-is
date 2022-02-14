@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Interesovanje } from '../model/Interesovanje';
+import { Interesovanje } from '../../model/Interesovanje';
 import { Form, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -42,15 +42,21 @@ export class CreateInteresovanjeComponent implements OnInit {
             return;
         }
 
-        //TODO field validation
-        //todo checkbox validation
+        //TODO ndividual fields validation
+
+        if (!Object.keys(this.opcije.value).some(k => !!this.opcije.value[k])){
+            console.log("Please choose atleast one vaccine option!");
+            return;
+        }
 
 
 
     }
 
     vaccineChosen(){
-        this.opcije.get("biloKoja")?.setValue(false);
+        if (this.opcije.get("biloKoja")?.value === true){
+            this.opcije.get("biloKoja")?.setValue(false);
+        }
 
     }
 

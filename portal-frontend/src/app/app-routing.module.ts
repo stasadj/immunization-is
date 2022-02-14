@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateInteresovanjeComponent } from './create-interesovanje/create-interesovanje.component';
+import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
 
 const routes: Routes = [
     { path: 'create-interesovanje', component: CreateInteresovanjeComponent },

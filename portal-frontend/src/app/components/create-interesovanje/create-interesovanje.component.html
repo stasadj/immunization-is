@@ -33,21 +33,37 @@
         </mat-form-field>
 
         <section class="davalac-krvi-section">
-            <mat-checkbox ngDefaultControl labelPosition="before" [(ngModel)]="newInteresovanje.davalacKrvi">Dobrovoljni sam davalac krvi</mat-checkbox>
+            <mat-checkbox ngDefaultControl labelPosition="before" [(ngModel)]="newInteresovanje.davalacKrvi">Dobrovoljni
+                sam davalac krvi</mat-checkbox>
         </section>
 
         <section class="opcije-section" [formGroup]="opcije">
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="pfizer" (change)="vaccineChosen()">Pfizer-BioNTech</mat-checkbox></div>
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="astra" (change)="vaccineChosen()">Astra Zeneca</mat-checkbox></div>
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="moderna" (change)="vaccineChosen()">Moderna</mat-checkbox></div>
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="sputnik" (change)="vaccineChosen()">Sputnik</mat-checkbox></div>
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="sinopharm" (change)="vaccineChosen()">Sinopharm</mat-checkbox></div>
-            <div><mat-checkbox ngDefaultControl labelPosition="before" formControlName="biloKoja" (change)="anyChosen()">BILO KOJA</mat-checkbox></div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="pfizer"
+                    (change)="vaccineChosen()">Pfizer-BioNTech</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="astra"
+                    (change)="vaccineChosen()">Astra Zeneca</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="moderna"
+                    (change)="vaccineChosen()">Moderna</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="sputnik"
+                    (change)="vaccineChosen()">Sputnik</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="sinopharm"
+                    (change)="vaccineChosen()">Sinopharm</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="biloKoja" (change)="anyChosen()">
+                    BILO KOJA</mat-checkbox>
+            </div>
         </section>
 
-
-
-       
     </mat-card-content>
     <div mat-card-actions>
         <button id="save_item_button" mat-button (click)="onSaveClick()" cdkFocusInitial>Sačuvaj</button>
