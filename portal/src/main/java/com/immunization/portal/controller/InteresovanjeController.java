@@ -22,7 +22,7 @@ public class InteresovanjeController {
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
     ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju> create(@RequestBody IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
-        return new ResponseEntity<IskazivanjeInteresovanjaZaVakcinaciju>(this.interesovanjeService.create(interesovanje), HttpStatus.OK);
+        return new ResponseEntity<>(this.interesovanjeService.create(interesovanje), HttpStatus.OK);
     }
  
 }

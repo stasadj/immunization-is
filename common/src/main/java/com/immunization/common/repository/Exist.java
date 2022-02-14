@@ -14,6 +14,8 @@ import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.transform.OutputKeys;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Exist {
@@ -36,6 +38,7 @@ public class Exist {
         try {
             System.out.println("[INFO] Retrieving the collection: " + collectionId);
             collection = DatabaseManager.getCollection(conn.uri + collectionId);
+            if (collection == null) return null;
             collection.setProperty(OutputKeys.INDENT, "yes");
 
             System.out.println("[INFO] Retrieving the document: " + documentId);
@@ -52,6 +55,30 @@ public class Exist {
             cleanUp(collection, resource);
         }
         return null;
+    }
+
+    public List<Object> retrieveAllDocuments(Class<?> documentClass) throws Exception {
+        String collectionId = basePath + documentClass.getSimpleName();
+
+        initDBDriver();
+        Collection collection = null;
+        XMLResource resource = null;
+        List<Object> list = new ArrayList<>();
+
+        try {
+            System.out.println("[INFO] Retrieving the collection: " + collectionId);
+            collection = DatabaseManager.getCollection(conn.uri + collectionId);
+            if (collection == null) return list;
+            collection.setProperty(OutputKeys.INDENT, "yes");
+
+            for (String documentId : collection.listResources()) {
+                resource = (XMLResource) collection.getResource(documentId);
+                list.add(unmarshallerService.unmarshal(resource.getContent().toString()));
+            }
+        } finally {
+            cleanUp(collection, resource);
+        }
+        return list;
     }
 
     public String save(Object object) throws Exception {
