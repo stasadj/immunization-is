@@ -24,7 +24,7 @@ export class CreateInteresovanjeComponent implements OnInit {
 
     public opcije: FormGroup;
 
-    constructor(private fb: FormBuilder, private interesovanjeService : InteresovanjeService) {
+    constructor(private fb: FormBuilder, private interesovanjeService: InteresovanjeService) {
         this.opcije = fb.group({
             "Pfizer-BioNTech": false,
             "Astra Zeneca": false,
@@ -46,7 +46,7 @@ export class CreateInteresovanjeComponent implements OnInit {
 
         //TODO individual fields validation
 
-        if (!Object.keys(this.opcije.value).some(k => !!this.opcije.value[k])){
+        if (!Object.keys(this.opcije.value).some(k => !!this.opcije.value[k])) {
             console.log("Please choose atleast one vaccine option!");
             return;
         }
@@ -65,16 +65,16 @@ export class CreateInteresovanjeComponent implements OnInit {
 
     }
 
-    vaccineChosen(){
-        if (this.opcije.get("biloKoja")?.value === true){
+    vaccineChosen() {
+        if (this.opcije.get("biloKoja")?.value === true) {
             this.opcije.get("biloKoja")?.setValue(false);
         }
 
     }
 
-    anyChosen(){
+    anyChosen() {
 
-        if(this.opcije.get('biloKoja')?.value === true){
+        if (this.opcije.get('biloKoja')?.value === true) {
             this.opcije = this.fb.group({
                 pfizer: false,
                 astra: false,
@@ -84,7 +84,7 @@ export class CreateInteresovanjeComponent implements OnInit {
                 biloKoja: true
             });
         }
-        
+
     }
 
     ngOnInit(): void {
