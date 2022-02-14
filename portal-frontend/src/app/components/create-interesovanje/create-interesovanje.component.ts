@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Interesovanje } from '../../model/Interesovanje';
 import { Form, FormGroup, FormBuilder } from '@angular/forms';
+import { createInteresovanjeXML } from '../../util/interesovanjeXmlCreator';
 
 @Component({
     selector: 'app-create-interesovanje',
@@ -25,12 +26,12 @@ export class CreateInteresovanjeComponent implements OnInit {
 
     constructor(private fb: FormBuilder) {
         this.opcije = fb.group({
-            pfizer: false,
-            astra: false,
-            moderna: false,
-            sputnik: false,
-            sinopharm: false,
-            biloKoja: false
+            "Pfizer-BioNTech": false,
+            "Astra Zeneca": false,
+            "Moderna": false,
+            "Sputnik": false,
+            "Sinopharm": false,
+            "BILO KOJA": false
 
         });
     }
@@ -42,12 +43,20 @@ export class CreateInteresovanjeComponent implements OnInit {
             return;
         }
 
-        //TODO ndividual fields validation
+        //TODO individual fields validation
 
         if (!Object.keys(this.opcije.value).some(k => !!this.opcije.value[k])){
             console.log("Please choose atleast one vaccine option!");
             return;
         }
+
+        this.newInteresovanje.opcije = Object.keys(this.opcije.value).filter(key => this.opcije.get(key)?.value === true);
+
+        let xml = createInteresovanjeXML(this.newInteresovanje);
+        console.log(xml);
+
+        //TODO call service method for post method
+
 
 
 

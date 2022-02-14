@@ -28,6 +28,11 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Email adresa</mat-label>
+            <input matInput [(ngModel)]="newInteresovanje.email">
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Željena opština vakcinacije</mat-label>
             <input matInput [(ngModel)]="newInteresovanje.opstinaVakcinacije">
         </mat-form-field>
@@ -39,27 +44,27 @@
 
         <section class="opcije-section" [formGroup]="opcije">
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="pfizer"
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Pfizer-BioNTech"
                     (change)="vaccineChosen()">Pfizer-BioNTech</mat-checkbox>
             </div>
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="astra"
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Astra Zeneca"
                     (change)="vaccineChosen()">Astra Zeneca</mat-checkbox>
             </div>
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="moderna"
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Moderna"
                     (change)="vaccineChosen()">Moderna</mat-checkbox>
             </div>
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="sputnik"
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Sputnik"
                     (change)="vaccineChosen()">Sputnik</mat-checkbox>
             </div>
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="sinopharm"
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Sinopharm"
                     (change)="vaccineChosen()">Sinopharm</mat-checkbox>
             </div>
             <div>
-                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="biloKoja" (change)="anyChosen()">
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="BILO KOJA" (change)="anyChosen()">
                     BILO KOJA</mat-checkbox>
             </div>
         </section>

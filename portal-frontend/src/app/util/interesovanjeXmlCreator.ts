@@ -1,9 +1,9 @@
 import { Interesovanje } from "../model/Interesovanje";
 
 
-function createInteresovanjeXML(interesovanje: Interesovanje): string {
+export function createInteresovanjeXML(interesovanje: Interesovanje): string {
 
-    let xml: string = `
+    return `
     <?xml version="1.0" encoding="UTF-8"?>
     <iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje/"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -25,22 +25,25 @@ function createInteresovanjeXML(interesovanje: Interesovanje): string {
         </pacijent>
         <zeljena_opstina_vakcinacije>${interesovanje.opstinaVakcinacije}</zeljena_opstina_vakcinacije>
         <odabir_vakcina>
-            <opcija>
-                Pfizer-BioNTech
-            </opcija>
-            <opcija>
-                AstraZeneca
-            </opcija>
-            <opcija>
-                Moderna
-            </opcija>
+            ${getVaccines(interesovanje.opcije)}
         </odabir_vakcina>
     </iskazivanje_interesovanja_za_vakcinaciju>
 
     `
 
+}
 
 
-    return xml;
+function getVaccines(opcije: string[]): string {
+    if (opcije.length == 1 && opcije[0] === "BILO KOJA") {
+        return `
+            <bilo_koja_vakcina/>
+        `
+    }
+
+    let xmlOpcije : string = "";
+    opcije.forEach(opcija => xmlOpcije += `<opcija>${opcija}</opcija>`)
+    return xmlOpcije;
+
 
 }
