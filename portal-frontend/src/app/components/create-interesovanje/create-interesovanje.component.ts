@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Interesovanje } from '../../model/Interesovanje';
 import { Form, FormGroup, FormBuilder } from '@angular/forms';
-import { createInteresovanjeXML } from '../../util/interesovanjeXmlCreator';
+import { InteresovanjeService } from 'src/app/services/interesovanje.service';
 
 @Component({
     selector: 'app-create-interesovanje',
@@ -11,20 +11,20 @@ import { createInteresovanjeXML } from '../../util/interesovanjeXmlCreator';
 export class CreateInteresovanjeComponent implements OnInit {
 
     public newInteresovanje: Interesovanje = {
-        drzavljanstvo: '',
-        jmbg: 0,
-        punoIme: '',
-        email: '',
-        fiksni: 0,
-        mobilni: 0,
+        drzavljanstvo: 'srpsko',
+        jmbg: 1234567,
+        punoIme: 'Test Test',
+        email: 'test@gmail.com',
+        fiksni: 18329,
+        mobilni: 46327,
         davalacKrvi: false,
-        opstinaVakcinacije: '',
+        opstinaVakcinacije: 'Novi Sad',
         opcije: []
     };
 
     public opcije: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private interesovanjeService : InteresovanjeService) {
         this.opcije = fb.group({
             "Pfizer-BioNTech": false,
             "Astra Zeneca": false,
@@ -37,6 +37,7 @@ export class CreateInteresovanjeComponent implements OnInit {
     }
 
     onSaveClick(): void {
+
         if (!(this.newInteresovanje.drzavljanstvo && this.newInteresovanje.jmbg && this.newInteresovanje.punoIme &&
             this.newInteresovanje.email && this.newInteresovanje.fiksni && this.newInteresovanje.mobilni && this.newInteresovanje.opstinaVakcinacije)) {
             console.log("Please input all fields!");
@@ -52,10 +53,12 @@ export class CreateInteresovanjeComponent implements OnInit {
 
         this.newInteresovanje.opcije = Object.keys(this.opcije.value).filter(key => this.opcije.get(key)?.value === true);
 
-        let xml = createInteresovanjeXML(this.newInteresovanje);
-        console.log(xml);
 
         //TODO call service method for post method
+        this.interesovanjeService.create(this.newInteresovanje).subscribe(res => {
+            console.log(res);
+        });
+
 
 
 

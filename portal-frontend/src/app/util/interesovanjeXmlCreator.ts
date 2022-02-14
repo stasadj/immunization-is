@@ -3,8 +3,7 @@ import { Interesovanje } from "../model/Interesovanje";
 
 export function createInteresovanjeXML(interesovanje: Interesovanje): string {
 
-    return `
-    <?xml version="1.0" encoding="UTF-8"?>
+    return `<?xml version="1.0" encoding="UTF-8"?>
     <iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje/"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
