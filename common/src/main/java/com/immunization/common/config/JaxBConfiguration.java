@@ -2,6 +2,10 @@ package com.immunization.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
@@ -44,4 +48,34 @@ public class JaxBConfiguration {
 		return marshaller;
 	}
 
+	@Bean
+	public MarshallingHttpMessageConverter marshallingHttpMessageConverter() {
+		MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
+
+		marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller());
+		marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller());
+
+		return marshallingHttpMessageConverter;
+	}
+
+	@Bean
+	public Jaxb2Marshaller jaxb2Marshaller() {
+		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+		jaxb2Marshaller.setClassesToBeBound(
+				DigitalniSertifikat.class,
+				IskazivanjeInteresovanjaZaVakcinaciju.class,
+				IzvestajOImunizaciji.class,
+				PotvrdaOVakcinaciji.class,
+				ObrazacSaglasnostiZaImunizaciju.class,
+				ZahtevZaSertifikat.class);
+		jaxb2Marshaller.setSchemas(
+				new ClassPathResource("documents/digitalni_sertifikat.xsd"),
+				new ClassPathResource("documents/interesovanje.xsd"),
+				new ClassPathResource("documents/izvestaj_o_imunizaciji.xsd"),
+				new ClassPathResource("documents/potvrda_o_vakcinaciji.xsd"),
+				new ClassPathResource("documents/saglasnost.xsd"),
+				new ClassPathResource("documents/util.xsd"),
+				new ClassPathResource("documents/zahtev_za_sertifikat.xsd"));
+		return jaxb2Marshaller;
+	}
 }
