@@ -44,10 +44,6 @@ public class ImmunizationConsentControllerIntegrationTest {
     @BeforeAll
     void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
-                .contentType(MediaType.APPLICATION_XML)
-                .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)));
     }
 
     @AfterAll
@@ -55,16 +51,16 @@ public class ImmunizationConsentControllerIntegrationTest {
 		metadataExtractorService.dropGraph(RDF_GRAPH_URI);
     }
 
-    @Test
-    @Order(1)
-    void consentToImmunization_succesfully() throws Exception {
-        File file = new File("./src/main/resources/documents/saglasnost.xml");
-        String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+    // @Test
+    // @Order(1)
+    // void consentToImmunization_succesfully() throws Exception {
+    //     File file = new File("./src/main/resources/documents/saglasnost.xml");
+    //     String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/consent/")
-                .contentType(MediaType.APPLICATION_XML)
-                .characterEncoding(StandardCharsets.UTF_8)
-                .content(xmlData))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+    //     mockMvc.perform(MockMvcRequestBuilders.put("/api/consent/")
+    //             .contentType(MediaType.APPLICATION_XML)
+    //             .characterEncoding(StandardCharsets.UTF_8)
+    //             .content(xmlData))
+    //             .andExpect(MockMvcResultMatchers.status().isOk());
+    // }
 }
