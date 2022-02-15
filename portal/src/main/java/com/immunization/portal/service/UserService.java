@@ -1,6 +1,7 @@
 package com.immunization.portal.service;
 
 import com.immunization.portal.exception.UserAlreadyExistsException;
+import com.immunization.portal.service.email.PortalEmailService;
 import com.immunization.portal.util.NumberStringGenerator;
 import com.immunization.common.dao.UserDAO;
 import com.immunization.common.model.User;
@@ -20,6 +21,7 @@ public class UserService {
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
     private final TokenUtils tokenUtils;
+    private final PortalEmailService emailService;
 
     private String generateUsername(UserRegistrationDTO dto) {
         StringBuilder sb = new StringBuilder();
@@ -52,7 +54,13 @@ public class UserService {
         // Save to DB
         userDAO.save(user);
 
+        sendEmail(user);
+
         return tokenUtils.generateToken(user.getUsername());
+    }
+
+    private void sendEmail(User user) {
+        emailService.sendRegistrationSuccess(user);
     }
 
     private boolean emailTaken(String email) {
