@@ -95,17 +95,33 @@ public class ImmunizationReportService {
 	}
 
 	private RaspodelaDatihVakcinaPoProizvodjacima getDistributionOfGivenVaccinesByManufacturer(String startDate,
-			String endDate) {
+			String endDate) throws Exception {
 		RaspodelaDatihVakcinaPoProizvodjacima raspodela = new RaspodelaDatihVakcinaPoProizvodjacima();
-		Proizvodjac proizvodjac = new Proizvodjac();
-		proizvodjac.setBrojDatihDoza(0);
-		proizvodjac.setNaziv("Pfizer");
 
-		raspodela.getProizvodjac().add(proizvodjac);
-		raspodela.getProizvodjac().add(proizvodjac);
-		raspodela.getProizvodjac().add(proizvodjac);
-		raspodela.getProizvodjac().add(proizvodjac);
-		raspodela.getProizvodjac().add(proizvodjac);
+		Proizvodjac pfizer = new Proizvodjac();
+		pfizer.setBrojDatihDoza(
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Pfizer, BioNTech"));
+		pfizer.setNaziv("Pfizer, BioNTech");
+
+		Proizvodjac sinopharm = new Proizvodjac();
+		sinopharm.setBrojDatihDoza(
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Sinopharm"));
+		sinopharm.setNaziv("Sinopharm");
+
+		Proizvodjac sputnik = new Proizvodjac();
+		sputnik.setBrojDatihDoza(
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Sputnik V"));
+		sputnik.setNaziv("Sputnik V");
+
+		Proizvodjac astra = new Proizvodjac();
+		astra.setBrojDatihDoza(immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate,
+				"Astra Zeneca, Oxford"));
+		astra.setNaziv("Astra Zeneca, Oxford");
+
+		raspodela.getProizvodjac().add(pfizer);
+		raspodela.getProizvodjac().add(sinopharm);
+		raspodela.getProizvodjac().add(sputnik);
+		raspodela.getProizvodjac().add(pfizer);
 		return raspodela;
 	}
 
