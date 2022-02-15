@@ -1,5 +1,6 @@
 package com.immunization.trustee.service;
 
+import com.immunization.common.exception.BadRequestException;
 import com.immunization.trustee.dao.VaccineAmountDAO;
 import com.immunization.trustee.dto.vaccine.VaccineAmount;
 import lombok.AllArgsConstructor;
@@ -19,11 +20,14 @@ public class VaccineAmountService {
         Optional<VaccineAmount> maybeVaccine = vaccineAmountDAO.retrieveById(vaccineAmount.getType());
         if (maybeVaccine.isPresent()) {
             VaccineAmount vaccine = maybeVaccine.get();
+            if (vaccineAmount.getManufacturer().length() > 0)
+                vaccine.setManufacturer(vaccineAmount.getManufacturer());
             boolean updated = false;
             for (VaccineAmount.Series series : vaccineAmount.getSeries()) {
+                if (series.getAmount() == 0) continue;
                 for (VaccineAmount.Series existingSeries : vaccine.getSeries()) {
                     if (Objects.equals(series.getSerialNumber(), existingSeries.getSerialNumber())) {
-                        existingSeries.setAmount(existingSeries.getAmount()+series.getAmount());
+                        existingSeries.setAmount(existingSeries.getAmount() + series.getAmount());
                         updated = true;
                         break;
                     }
@@ -33,6 +37,7 @@ public class VaccineAmountService {
             }
             vaccineAmountDAO.save(vaccineAmount.getType(), vaccine);
         } else {
+            vaccineAmount.setSeries(vaccineAmount.getSeries().stream().filter(s -> s.getAmount() > 0).collect(Collectors.toList()));
             vaccineAmountDAO.save(vaccineAmount.getType(), vaccineAmount);
         }
     }
@@ -47,7 +52,10 @@ public class VaccineAmountService {
             VaccineAmount vaccine = maybeVaccine.get();
             for (VaccineAmount.Series series : vaccine.getSeries()) {
                 if (Objects.equals(series.getSerialNumber(), serialNumber)) {
-                    series.setAmount(series.getAmount()-1);
+                    int newAmount = series.getAmount()-1;
+                    if (newAmount < 0)
+                        throw new BadRequestException("Amount cannot be negative");
+                    series.setAmount(newAmount);
                     vaccineAmountDAO.save(vaccineType, vaccine);
                     return true;
                 }

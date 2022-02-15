@@ -1,0 +1,52 @@
+<div mat-dialog-title class="dialog-title">
+    <h2>Azuriranje kolicina vakcina</h2>
+    <button mat-icon-button [mat-dialog-close]>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content style="height: calc(100% - 115px)">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Tip vakcine</mat-label>
+            <mat-select [(ngModel)]="vaccineAmount.type" name="type">
+                <mat-option *ngFor="let type of types" [value]="type">
+                    {{ type }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Proizvodjac</mat-label>
+            <input matInput [(ngModel)]="vaccineAmount.manufacturer" />
+        </mat-form-field>
+    </div>
+    <div *ngFor="let s of vaccineAmount.series">
+        <mat-form-field appearance="fill">
+            <mat-label>Broj serije</mat-label>
+            <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="s.serialNumber"
+            />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Kolicina</mat-label>
+            <input matInput type="number" min="1" [(ngModel)]="s.amount" />
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="onAdd()">
+        Nova serija
+    </button>
+</div>
+<div mat-dialog-actions align="end">
+    <button
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="vaccineAmount"
+    >
+        Sačuvaj
+    </button>
+</div>
