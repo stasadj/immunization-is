@@ -1,5 +1,6 @@
 package com.immunization.trustee.service;
 
+import com.immunization.common.exception.BadRequestException;
 import com.immunization.trustee.dao.VaccineAmountDAO;
 import com.immunization.trustee.dto.vaccine.VaccineAmount;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,10 @@ public class VaccineAmountService {
             VaccineAmount vaccine = maybeVaccine.get();
             for (VaccineAmount.Series series : vaccine.getSeries()) {
                 if (Objects.equals(series.getSerialNumber(), serialNumber)) {
-                    series.setAmount(series.getAmount()-1);
+                    int newAmount = series.getAmount()-1;
+                    if (newAmount < 0)
+                        throw new BadRequestException("Amount cannot be negative");
+                    series.setAmount(newAmount);
                     vaccineAmountDAO.save(vaccineType, vaccine);
                     return true;
                 }
