@@ -100,7 +100,7 @@ public class ImmunizationReportService {
 
 		Proizvodjac pfizer = new Proizvodjac();
 		pfizer.setBrojDatihDoza(
-				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Pfizer, BioNTech"));
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Pfizer"));
 		pfizer.setNaziv("Pfizer, BioNTech");
 
 		Proizvodjac sinopharm = new Proizvodjac();
@@ -110,12 +110,12 @@ public class ImmunizationReportService {
 
 		Proizvodjac sputnik = new Proizvodjac();
 		sputnik.setBrojDatihDoza(
-				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Sputnik V"));
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Sputnik"));
 		sputnik.setNaziv("Sputnik V");
 
 		Proizvodjac astra = new Proizvodjac();
-		astra.setBrojDatihDoza(immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate,
-				"Astra Zeneca, Oxford"));
+		astra.setBrojDatihDoza(
+				immunizationReportDAO.getNumberOfGivenVaccinesForManufacturer(startDate, endDate, "Astra"));
 		astra.setNaziv("Astra Zeneca, Oxford");
 
 		raspodela.getProizvodjac().add(pfizer);

@@ -46,8 +46,9 @@ public class ImmunizationReportDAO {
 	public long getNumberOfGivenVaccinesForManufacturer(String startDate, String endDate, String manufacturer)
 			throws Exception {
 
-		String xpathExp = "//ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>=" + startDate
-				+ " and number(translate(text(),'-',''))<=" + endDate + "]";
+		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
+				+ startDate + " and number(translate(text(),'-',''))<=" + endDate
+				+ "] and ns5:vakcinacije/ns5:vakcinacija[last()][contains(.,'" + manufacturer + "')]]";
 
 		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
 	}
