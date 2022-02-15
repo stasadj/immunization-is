@@ -21,6 +21,10 @@ export class VaccineAmountService {
         return this.http.post<void>(this.path, xml, { headers });
     }
 
+    getVaccines(): Observable<string> {
+        return this.http.get<string>(this.path);
+    }
+
     private toXML(vaccineAmount: VaccineAmount): string {
         return `
         <vaccine_amount>
