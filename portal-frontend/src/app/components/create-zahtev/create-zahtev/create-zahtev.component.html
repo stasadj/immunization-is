@@ -1,0 +1,58 @@
+<div class="container">
+    <mat-card-title>Zahtev za izdavanje digitalnog sertifikata</mat-card-title>
+    <mat-card-content class="content">
+        <mat-form-field>
+            <mat-label>Ime i prezime</mat-label>
+            <input matInput [(ngModel)]="newZahtev.imeIPrezime" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Datum rođenja</mat-label>
+            <input
+                matInput
+                type="date"
+                [ngModel]="newZahtev.datumRodjenja | date: 'yyyy-MM-dd'"
+                (ngModelChange)="newZahtev.datumRodjenja = $event"
+            />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Pol</mat-label>
+            <mat-select [(ngModel)]="newZahtev.pol">
+                <mat-option [value]="muski"> Muški </mat-option>
+                <mat-option [value]="zenski"> Ženski </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>JMBG</mat-label>
+            <input type="number" matInput [(ngModel)]="newZahtev.jmbg" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Broj pasoša</mat-label>
+            <input type="number" matInput [(ngModel)]="newZahtev.brojPasosa" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mesto izdavanja zahteva</mat-label>
+            <input matInput [(ngModel)]="newZahtev.mestoIzdavanja" />
+        </mat-form-field>
+
+        <mat-form-field id="razlogField">
+            <mat-label>Razlog izdavanja</mat-label>
+            <!-- TODO: rich text edit component! -->
+            <textarea matInput [(ngModel)]="newZahtev.razlog"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+    <div mat-card-actions>
+        <button
+            id="save_item_button"
+            mat-button
+            (click)="onSaveClick()"
+            cdkFocusInitial
+        >
+            Sačuvaj
+        </button>
+    </div>
+</div>
