@@ -48,14 +48,15 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<Authority> authorities = new ArrayList<>();
+        authorities.add(new Authority("ROLE_USER"));
         if (role == ERole.GRADANIN) {
-            authorities.add(new Authority("GRADANIN"));
+            authorities.add(new Authority("ROLE_GRADANIN"));
         }
         if (role == ERole.ZDRAVSTVENI_RADNIK) {
-            authorities.add(new Authority("ZDRAVSTVENI_RADNIK"));
+            authorities.add(new Authority("ROLE_ZDRAVSTVENI_RADNIK"));
         }
         if (role == ERole.SLUZBENIK) {
-            authorities.add(new Authority("SLUZBENIK"));
+            authorities.add(new Authority("ROLE_SLUZBENIK"));
         }
 
         return authorities;

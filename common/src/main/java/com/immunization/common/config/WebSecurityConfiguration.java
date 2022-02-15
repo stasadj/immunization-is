@@ -2,6 +2,9 @@ package com.immunization.common.config;
 
 import com.immunization.common.filter.FrontendRedirectFilter;
 import com.immunization.common.security.RestAuthenticationEntryPoint;
+import com.immunization.common.security.filter.TokenAuthenticationFilter;
+import com.immunization.common.service.UserDetailsServiceImpl;
+import com.immunization.common.util.TokenUtils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +49,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+    private TokenUtils tokenUtils;
+    private UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -57,7 +63,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 // .anyRequest().authenticated()
                 .and().cors()
-                .and().addFilterBefore(new FrontendRedirectFilter(), BasicAuthenticationFilter.class);
+                .and().addFilterBefore(new TokenAuthenticationFilter(tokenUtils, userDetailsService),
+                        BasicAuthenticationFilter.class)
+                .addFilterBefore(new FrontendRedirectFilter(), TokenAuthenticationFilter.class);
 
         http.csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL
                                // PUT, POST, DELETE will get HTTP 403
