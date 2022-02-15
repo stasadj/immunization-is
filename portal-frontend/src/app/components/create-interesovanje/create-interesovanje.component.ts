@@ -66,22 +66,22 @@ export class CreateInteresovanjeComponent implements OnInit {
     }
 
     vaccineChosen() {
-        if (this.opcije.get("biloKoja")?.value === true) {
-            this.opcije.get("biloKoja")?.setValue(false);
+        if (this.opcije.get("BILO KOJA")?.value === true) {
+            this.opcije.get("BILO KOJA")?.setValue(false);
         }
 
     }
 
     anyChosen() {
 
-        if (this.opcije.get('biloKoja')?.value === true) {
+        if (this.opcije.get('BILO KOJA')?.value === true) {
             this.opcije = this.fb.group({
-                pfizer: false,
-                astra: false,
-                moderna: false,
-                sputnik: false,
-                sinopharm: false,
-                biloKoja: true
+                "Pfizer-BioNTech": false,
+                "Astra Zeneca": false,
+                "Moderna": false,
+                "Sputnik": false,
+                "Sinopharm": false,
+                "BILO KOJA": true
             });
         }
 
