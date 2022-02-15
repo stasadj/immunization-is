@@ -1,0 +1,42 @@
+<div class="container">
+    <mat-card-title>Azuriranje kolicina vakcina</mat-card-title>
+    <mat-card-content class="content">
+        <mat-form-field appearance="fill">
+            <mat-label>Tip vakcine</mat-label>
+            <mat-select [(ngModel)]="vaccineAmount.type" name="type">
+                <mat-option *ngFor="let type of types" [value]="type">
+                    {{ type }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Proizvodjac</mat-label>
+            <input matInput [(ngModel)]="vaccineAmount.manufacturer" />
+        </mat-form-field>
+
+        <div *ngFor="let s of vaccineAmount.series">
+            <mat-form-field>
+                <mat-label>Broj serije</mat-label>
+                <input matInput type="number" [(ngModel)]="s.serialNumber" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Kolicina</mat-label>
+                <input matInput type="number" [(ngModel)]="s.amount" />
+            </mat-form-field>
+        </div>
+        <button mat-button (click)="onAdd()" cdkFocusInitial>
+            Nova serija
+        </button>
+    </mat-card-content>
+    <div mat-card-actions>
+        <button
+            id="save_item_button"
+            mat-button
+            (click)="onSubmit()"
+            cdkFocusInitial
+        >
+            Sačuvaj
+        </button>
+    </div>
+</div>
