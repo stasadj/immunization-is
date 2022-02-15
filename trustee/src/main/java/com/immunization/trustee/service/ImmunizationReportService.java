@@ -121,7 +121,7 @@ public class ImmunizationReportService {
 		raspodela.getProizvodjac().add(pfizer);
 		raspodela.getProizvodjac().add(sinopharm);
 		raspodela.getProizvodjac().add(sputnik);
-		raspodela.getProizvodjac().add(pfizer);
+		raspodela.getProizvodjac().add(astra);
 		return raspodela;
 	}
 
