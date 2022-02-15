@@ -41,6 +41,9 @@ public class ZahtevService {
         //setting uuid in about
         zahtev.setAbout("http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/" + uuid);
 
+        //setting podnosilac jmbg in podnosilac about
+        zahtev.getPodnosilacZahteva().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + zahtev.getPodnosilacZahteva().getJmbg().getValue());
+
         //setting new zahtev status
         StatusZahteva status = new StatusZahteva();
         status.setValue(StatusZahtevaValue.NA_CEKANJU);

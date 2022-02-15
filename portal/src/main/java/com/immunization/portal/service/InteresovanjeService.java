@@ -43,7 +43,7 @@ public class InteresovanjeService {
         //setting unique about
         interesovanje.setAbout("http://www.ftn.uns.ac.rs/interesovanje/" + documentId);
 
-        //TODO SETTING PATIENT ABOUT TOO? Da li se ovo ovde radi?
+        //setting patient about 
         interesovanje.getPacijent().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + interesovanje.getPacijent().getJmbg().getValue());
 
         //setting date

@@ -78,7 +78,29 @@
 			<version>2.2.5.1</version>
 		</dependency>
 
-	</dependencies>
+		<!--
+			This dependency allows us to omit writting many of the getters, setters,
+			and constructors typically required in a java project.
+		-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+		</dependency>
+
+		<!-- Validation of XML -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>5.3.15</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.1.9.RELEASE</version>
+		</dependency>
+ </dependencies>
 
 	<build>
 		<plugins>
