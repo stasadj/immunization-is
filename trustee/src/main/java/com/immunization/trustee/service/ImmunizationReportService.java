@@ -92,6 +92,7 @@ public class ImmunizationReportService {
 		raspodela.getDoza().add(doza1);
 		raspodela.getDoza().add(doza2);
 		raspodela.getDoza().add(doza3);
+		raspodela.setUkupnoDato(doza1.getBrojDatihDoza() + doza2.getBrojDatihDoza() + doza3.getBrojDatihDoza());
 		return raspodela;
 	}
 
