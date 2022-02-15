@@ -74,18 +74,18 @@ public class ImmunizationReportService {
 	}
 
 	private RaspodelaDatihVakcinaPoRednomBrojuDoze getDistributionOfGivenVaccinesByDose(String startDate,
-			String endDate) {
+			String endDate) throws Exception {
 		RaspodelaDatihVakcinaPoRednomBrojuDoze raspodela = new RaspodelaDatihVakcinaPoRednomBrojuDoze();
 		Doza doza1 = new Doza();
-		doza1.setBrojDatihDoza(0);
+		doza1.setBrojDatihDoza(immunizationReportDAO.getNumberOfGivenVaccinesByDose(startDate, endDate, 1));
 		doza1.setRedniBroj(BigInteger.valueOf(1));
 
 		Doza doza2 = new Doza();
-		doza2.setBrojDatihDoza(0);
+		doza2.setBrojDatihDoza(immunizationReportDAO.getNumberOfGivenVaccinesByDose(startDate, endDate, 2));
 		doza2.setRedniBroj(BigInteger.valueOf(2));
 
 		Doza doza3 = new Doza();
-		doza3.setBrojDatihDoza(1);
+		doza3.setBrojDatihDoza(immunizationReportDAO.getNumberOfGivenVaccinesByDose(startDate, endDate, 3));
 		doza3.setRedniBroj(BigInteger.valueOf(3));
 
 		raspodela.getDoza().add(doza1);
