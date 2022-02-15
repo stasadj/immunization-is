@@ -137,6 +137,10 @@ public class Exist {
         }
         return list;
     }
+    
+    public List<Object> query(String xPathExp, Class<?> documentClass) throws Exception {
+        return query(xPathExp, documentClass, "", "");
+    }
 
 
     private void initDBDriver() throws Exception {

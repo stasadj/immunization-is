@@ -6,6 +6,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
+import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
@@ -30,7 +31,8 @@ public class JaxBConfiguration {
 				IzvestajOImunizaciji.class,
 				PotvrdaOVakcinaciji.class,
 				ObrazacSaglasnostiZaImunizaciju.class,
-				ZahtevZaSertifikat.class
+				ZahtevZaSertifikat.class,
+				User.class
 		);
 	}
 
