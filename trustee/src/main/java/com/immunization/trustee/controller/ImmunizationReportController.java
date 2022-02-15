@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.xmldb.api.base.XMLDBException;
 
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.trustee.service.ImmunizationReportService;
@@ -28,7 +29,7 @@ public class ImmunizationReportController {
 	public ResponseEntity<IzvestajOImunizaciji> getImmunizationReport(
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate)
-			throws DatatypeConfigurationException {
+			throws Exception {
 		return new ResponseEntity<>(immunizationReportService.getImmunizationReport(startDate, endDate), HttpStatus.OK);
 	}
 
