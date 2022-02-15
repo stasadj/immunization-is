@@ -28,20 +28,23 @@ public class ImmunizationReportService {
 	private final ImmunizationReportDAO immunizationReportDAO;
 
 	public IzvestajOImunizaciji getImmunizationReport(LocalDate startDate, LocalDate endDate) throws Exception {
+		String startDateNum = startDate.toString().replace("-", "");
+		String endDateNum = endDate.toString().replace("-", "");
 
 		IzvestajOImunizaciji izvestajOImunizaciji = new IzvestajOImunizaciji();
 		izvestajOImunizaciji
 				.setAbout("http://www.ftn.uns.ac.rs/izvestaj/" + startDate.toString() + "-" + endDate.toString());
 		izvestajOImunizaciji.setMetaPodaci(this.createMetaData(startDate, endDate));
-		izvestajOImunizaciji.setBrojDokumenataOInteresovanju(immunizationReportDAO.getNumberOfDocumentsOfInterest(
-				startDate.toString().replace("-", ""), endDate.toString().replace("-", "")));
-		izvestajOImunizaciji
-				.setBrojZahtevaZaDigitalniSertifikat(immunizationReportDAO.getNumberOfCertificateRequests());
-		izvestajOImunizaciji
-				.setBrojIzdatihDigitalnihSertifikata(immunizationReportDAO.getNumberOfCeritificatesIssued());
-		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoRednomBrojuDoze(this.getDistributionOfGivenVaccinesByDose());
-		izvestajOImunizaciji
-				.setRaspodelaDatihVakcinaPoProizvodjacima(this.getDistributionOfGivenVaccinesByManufacturer());
+		izvestajOImunizaciji.setBrojDokumenataOInteresovanju(
+				immunizationReportDAO.getNumberOfDocumentsOfInterest(startDateNum, endDateNum));
+		izvestajOImunizaciji.setBrojZahtevaZaDigitalniSertifikat(
+				immunizationReportDAO.getNumberOfCertificateRequests(startDateNum, endDateNum));
+		izvestajOImunizaciji.setBrojIzdatihDigitalnihSertifikata(
+				immunizationReportDAO.getNumberOfCeritificatesIssued(startDateNum, endDateNum));
+		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoRednomBrojuDoze(
+				this.getDistributionOfGivenVaccinesByDose(startDateNum, endDateNum));
+		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoProizvodjacima(
+				this.getDistributionOfGivenVaccinesByManufacturer(startDateNum, endDateNum));
 		return izvestajOImunizaciji;
 	}
 
@@ -70,7 +73,8 @@ public class ImmunizationReportService {
 
 	}
 
-	private RaspodelaDatihVakcinaPoRednomBrojuDoze getDistributionOfGivenVaccinesByDose() {
+	private RaspodelaDatihVakcinaPoRednomBrojuDoze getDistributionOfGivenVaccinesByDose(String startDate,
+			String endDate) {
 		RaspodelaDatihVakcinaPoRednomBrojuDoze raspodela = new RaspodelaDatihVakcinaPoRednomBrojuDoze();
 		Doza doza1 = new Doza();
 		doza1.setBrojDatihDoza(0);
@@ -90,7 +94,8 @@ public class ImmunizationReportService {
 		return raspodela;
 	}
 
-	private RaspodelaDatihVakcinaPoProizvodjacima getDistributionOfGivenVaccinesByManufacturer() {
+	private RaspodelaDatihVakcinaPoProizvodjacima getDistributionOfGivenVaccinesByManufacturer(String startDate,
+			String endDate) {
 		RaspodelaDatihVakcinaPoProizvodjacima raspodela = new RaspodelaDatihVakcinaPoProizvodjacima();
 		Proizvodjac proizvodjac = new Proizvodjac();
 		proizvodjac.setBrojDatihDoza(0);
