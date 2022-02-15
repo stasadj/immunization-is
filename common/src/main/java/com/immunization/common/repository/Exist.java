@@ -7,11 +7,10 @@ import org.exist.xmldb.EXistResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xmldb.api.DatabaseManager;
-import org.xmldb.api.base.Collection;
-import org.xmldb.api.base.Database;
-import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.base.*;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XPathQueryService;
 
 import javax.xml.transform.OutputKeys;
 import java.util.ArrayList;
@@ -106,6 +105,37 @@ public class Exist {
         } finally {
             cleanUp(collection, resource);
         }
+    }
+
+    public List<Object> query(String xPathExp, Class<?> documentClass, String namespace, String prefix) throws Exception {
+        String collectionId = basePath + documentClass.getSimpleName();
+
+        initDBDriver();
+        Collection collection = null;
+        XMLResource resource = null;
+        List<Object> list = new ArrayList<>();
+
+        try {
+            System.out.println("[INFO] Retrieving the collection: " + collectionId);
+            collection = DatabaseManager.getCollection(conn.uri + collectionId);
+            if (collection == null) return list;
+            collection.setProperty(OutputKeys.INDENT, "yes");
+
+            XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
+            xpathService.setProperty("indent", "yes");
+            xpathService.setNamespace(prefix, namespace);
+
+            ResourceSet resourceSet = xpathService.query(xPathExp);
+            ResourceIterator it = resourceSet.getIterator();
+
+            while (it.hasMoreResources()) {
+                resource = (XMLResource) it.nextResource();
+                list.add(unmarshallerService.unmarshal(resource.getContent().toString()));
+            }
+        } finally {
+            cleanUp(collection, resource);
+        }
+        return list;
     }
 
 

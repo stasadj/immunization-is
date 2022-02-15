@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -53,5 +54,9 @@ public class VaccineAmountService {
             }
         }
         return false;
+    }
+
+    public List<String> getTypes() throws Exception {
+        return vaccineAmountDAO.getTypes();
     }
 }

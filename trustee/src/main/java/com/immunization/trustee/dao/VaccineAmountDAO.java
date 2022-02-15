@@ -27,4 +27,9 @@ public class VaccineAmountDAO {
     public void save(String documentId, VaccineAmount vaccineAmount) throws Exception {
         exist.save(documentId, vaccineAmount);
     }
+
+    public List<String> getTypes() throws Exception {
+        return exist.query("//vaccine_amount", VaccineAmount.class, "", "")
+                .stream().map(o->((VaccineAmount)o).getType()).collect(Collectors.toList());
+    }
 }
