@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { VaccineAmount } from 'src/app/model/VaccineAmount';
 import { VaccineAmountService } from 'src/app/services/vaccine-amount.service';
+import { XmlService } from 'src/app/utils/xml.service';
 
 @Component({
     selector: 'app-update-vaccine-amount',
@@ -24,7 +25,8 @@ export class UpdateVaccineAmountComponent implements OnInit {
 
     constructor(
         private vaccineAmountService: VaccineAmountService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private XML: XmlService
     ) {}
 
     ngOnInit(): void {}
@@ -39,5 +41,11 @@ export class UpdateVaccineAmountComponent implements OnInit {
             .subscribe((res) => {
                 this.toastr.success('Uspesno azurirana kolicina');
             });
+    }
+
+    onGet() {
+        this.vaccineAmountService
+            .getVaccines()
+            .subscribe((xml) => console.log(this.XML.parse(xml)));
     }
 }
