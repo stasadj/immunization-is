@@ -25,6 +25,10 @@ public class VaccineAmount {
     @XmlElement(required = true)
     private List<VaccineAmount.Series> series;
 
+    public Integer getAmount() {
+        return series.stream().mapToInt(s -> s.amount).sum();
+    }
+
 
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
