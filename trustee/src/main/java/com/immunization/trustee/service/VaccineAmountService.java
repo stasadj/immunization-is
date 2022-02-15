@@ -20,6 +20,8 @@ public class VaccineAmountService {
         Optional<VaccineAmount> maybeVaccine = vaccineAmountDAO.retrieveById(vaccineAmount.getType());
         if (maybeVaccine.isPresent()) {
             VaccineAmount vaccine = maybeVaccine.get();
+            if (vaccineAmount.getManufacturer().length() > 0)
+                vaccine.setManufacturer(vaccineAmount.getManufacturer());
             boolean updated = false;
             for (VaccineAmount.Series series : vaccineAmount.getSeries()) {
                 if (series.getAmount() == 0) continue;

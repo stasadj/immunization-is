@@ -16,7 +16,7 @@ public class VaccineAmountServiceTest {
 
     @Test
     public void updateTest() throws Exception {
-        VaccineAmount va = new VaccineAmount("Pfizer", "Biontech", new ArrayList<>());
+        VaccineAmount va = new VaccineAmount("Pfizer-BioNTech", "Biontech", new ArrayList<>());
         VaccineAmount.Series series = new VaccineAmount.Series(1000, 12345);
         va.getSeries().add(series);
 
@@ -29,6 +29,4 @@ public class VaccineAmountServiceTest {
         l.forEach(System.out::println);
         System.out.println(l.size());
     }
-
-
 }
