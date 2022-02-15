@@ -22,8 +22,9 @@ public class ZahtevController {
     private final ZahtevService zahtevService; 
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    ResponseEntity<ZahtevZaSertifikat> create(@RequestBody ZahtevZaSertifikat zahtev) throws Exception {
-        return new ResponseEntity<>(this.zahtevService.create(zahtev), HttpStatus.OK);
+    ResponseEntity<Void> create(@RequestBody ZahtevZaSertifikat zahtev) throws Exception {
+        this.zahtevService.create(zahtev);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
  
 }

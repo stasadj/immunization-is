@@ -14,14 +14,10 @@ export class ZahtevService {
 
     constructor(private http: HttpClient) { }
 
-    create(zahtev: ZahtevZaSertifikat): void{
-        let xml = createZahtevXML(zahtev); //TODO
-        console.log(xml);
-        return;
-        // const headers = new HttpHeaders({ 'Content-Type': 'application/xml; charset=utf-8' }); //TODO add this to interceptor?
-
-        // //TODO find fix for response error that happens
-        // return this.http.post<void>(this.path, xml, { headers });
+    create(zahtev: ZahtevZaSertifikat): Observable<void>{
+        let xml = createZahtevXML(zahtev);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/xml; charset=utf-8' }); //TODO add this to interceptor?
+        return this.http.post<void>(this.path, xml, { headers });
 
     }
 }

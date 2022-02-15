@@ -50,11 +50,10 @@ export class CreateZahtevComponent implements OnInit {
         //TODO date of birth before today validation
         //TODO other field validations
 
-        this.zahtevService.create(this.newZahtev);
-        
-        // this.zahtevService.create(this.newZahtev).subscribe(res => {
-        //     this.toastr.success("Successfully submitted zahtev");
-        // })
+
+        this.zahtevService.create(this.newZahtev).subscribe(res => {
+            this.toastr.success("Successfully submitted zahtev");
+        })
     }
 
     parseDate(dateString: string): Date {
