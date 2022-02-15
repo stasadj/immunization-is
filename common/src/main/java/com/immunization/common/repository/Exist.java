@@ -174,10 +174,15 @@ public class Exist {
 		}
 	}
 
-	public Collection getCollection(Class<?> documentClass) throws XMLDBException {
+	public Collection getCollection(Class<?> documentClass) throws Exception {
+		initDBDriver();
 		String collectionId = basePath + documentClass.getSimpleName();
-		Collection collection = DatabaseManager.getCollection(conn.uri + collectionId);
-		return collection;
-
+		Collection collection = null;
+		try {
+			collection = DatabaseManager.getCollection(conn.uri + collectionId);
+			return collection;
+		} finally {
+			cleanUp(collection, null);
+		}
 	}
 }
