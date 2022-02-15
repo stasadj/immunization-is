@@ -1,6 +1,6 @@
 package com.immunization.trustee.service;
 
-import com.immunization.common.exception.BadRequestException;
+import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.trustee.dao.VaccineAmountDAO;
 import com.immunization.trustee.dto.vaccine.VaccineAmount;
 import lombok.AllArgsConstructor;
