@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
+import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.repository.Exist;
@@ -60,6 +61,10 @@ public class ImmunizationReportDAO {
 				+ "] and count(ns5:vakcinacije/ns5:vakcinacija)=" + dose + "]";
 
 		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
+	}
+
+	public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
+		exist.save(documentId + ".xml", izvestajOImunizaciji);
 	}
 
 }

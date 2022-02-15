@@ -45,6 +45,7 @@ public class ImmunizationReportService {
 				this.getDistributionOfGivenVaccinesByDose(startDateNum, endDateNum));
 		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoProizvodjacima(
 				this.getDistributionOfGivenVaccinesByManufacturer(startDateNum, endDateNum));
+		immunizationReportDAO.save(startDateNum + endDateNum, izvestajOImunizaciji);
 		return izvestajOImunizaciji;
 	}
 
