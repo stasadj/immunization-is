@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.oxm.UnmarshallingFailureException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -62,7 +63,8 @@ public class XmlErrorController {
 
     @ExceptionHandler({
         InternalAuthenticationServiceException.class,
-        BadCredentialsException.class
+        BadCredentialsException.class,
+        AccessDeniedException.class
     })
     @ResponseBody
     public ResponseEntity<ErrorDTO> handleUnauthorized(Exception e) {
