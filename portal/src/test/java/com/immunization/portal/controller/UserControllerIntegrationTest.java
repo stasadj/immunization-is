@@ -1,7 +1,7 @@
 package com.immunization.portal.controller;
 
 import com.immunization.common.service.MarshallerService;
-import com.immunization.portal.dto.UserRegistrationDTO;
+import com.immunization.portal.constants.TestConstants;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,6 @@ public class UserControllerIntegrationTest {
 
     private MockMvc mockMvc;
 
-    private final UserRegistrationDTO dto = new UserRegistrationDTO("username", "password", "email@email.com");
-
     @BeforeEach
     void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
@@ -39,15 +37,16 @@ public class UserControllerIntegrationTest {
     void registerUser_successfully() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
                 .contentType(MediaType.APPLICATION_XML)
-                .content(marshallerService.marshal(dto)))
+                .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    // TODO: Add this test back
-    // @Test
-    // @Order(2)
-    // void registerUser_unsuccessfully() throws Exception {
-    // mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register", dto))
-    // .andExpect(MockMvcResultMatchers.status().isConflict());
-    // }
+    @Test
+    @Order(2)
+    void registerUser_unsuccessfully() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
+                .contentType(MediaType.APPLICATION_XML)
+                .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)))
+                .andExpect(MockMvcResultMatchers.status().isConflict());
+    }
 }

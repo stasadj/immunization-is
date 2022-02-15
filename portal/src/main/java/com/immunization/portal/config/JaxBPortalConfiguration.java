@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 
 import com.immunization.common.config.JaxBConfiguration;
+import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
@@ -34,7 +35,8 @@ public class JaxBPortalConfiguration {
 				PotvrdaOVakcinaciji.class,
 				ObrazacSaglasnostiZaImunizaciju.class,
 				ZahtevZaSertifikat.class,
-                UserRegistrationDTO.class
+                UserRegistrationDTO.class,
+				User.class
 		);
 	}
 

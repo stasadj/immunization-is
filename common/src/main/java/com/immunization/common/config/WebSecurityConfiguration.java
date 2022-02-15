@@ -1,8 +1,10 @@
-package com.immunization.trustee.config;
-
+package com.immunization.common.config;
 
 import com.immunization.common.filter.FrontendRedirectFilter;
 import com.immunization.common.security.RestAuthenticationEntryPoint;
+import com.immunization.common.security.filter.TokenAuthenticationFilter;
+import com.immunization.common.service.UserDetailsServiceImpl;
+import com.immunization.common.util.TokenUtils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.AllArgsConstructor;
 
@@ -23,7 +28,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
@@ -37,6 +42,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
+
+    private TokenUtils tokenUtils;
+    private UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -48,7 +63,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 // .anyRequest().authenticated()
                 .and().cors()
-                .and().addFilterBefore(new FrontendRedirectFilter(), BasicAuthenticationFilter.class);
+                .and().addFilterBefore(new TokenAuthenticationFilter(tokenUtils, userDetailsService),
+                        BasicAuthenticationFilter.class)
+                .addFilterBefore(new FrontendRedirectFilter(), TokenAuthenticationFilter.class);
 
         http.csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL
                                // PUT, POST, DELETE will get HTTP 403
