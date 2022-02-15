@@ -6,8 +6,8 @@ import java.util.Optional;
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
-import com.immunization.common.exception.BadRequestException;
 import com.immunization.common.exception.FailedMetadataExtractionException;
+import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
