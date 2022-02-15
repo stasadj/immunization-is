@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
 
 
@@ -31,7 +33,8 @@ import { CreateInteresovanjeComponent } from './components/create-interesovanje/
         MatInputModule,
         MatCheckboxModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        ToastrModule.forRoot()
     ],
     providers: [],
     bootstrap: [AppComponent]
