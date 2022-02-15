@@ -2,10 +2,6 @@ package com.immunization.trustee.dao;
 
 import org.springframework.stereotype.Component;
 
-import org.xmldb.api.base.Collection;
-import org.xmldb.api.base.ResourceSet;
-import org.xmldb.api.modules.XPathQueryService;
-
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
@@ -24,80 +20,45 @@ public class ImmunizationReportDAO {
 	private static final String CONFIRMATION_NAMESPACE = "http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/";
 
 	public long getNumberOfDocumentsOfInterest(String startDate, String endDate) throws Exception {
-		Collection collection = exist.getCollection(IskazivanjeInteresovanjaZaVakcinaciju.class);
 
 		String xpathExp = "//ns3:iskazivanje_interesovanja_za_vakcinaciju[number(translate(@datum,'-',''))>="
 				+ startDate + " and number(translate(@datum,'-',''))<=" + endDate + "]";
 
-		XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
-		xpathService.setProperty("indent", "yes");
-		xpathService.setNamespace("ns3", INTEREST_NAMESPACE);
-
-		ResourceSet result = xpathService.query(xpathExp);
-
-		return result.getSize();
+		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "ns3");
 	}
 
 	public long getNumberOfCertificateRequests(String startDate, String endDate) throws Exception {
-		Collection collection = exist.getCollection(ZahtevZaSertifikat.class);
 
 		String xpathExp = "//ns7:datum_izdavanja[number(translate(text(),'-',''))>=" + startDate
 				+ " and number(translate(text(),'-',''))<=" + endDate + "]";
 
-		XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
-		xpathService.setProperty("indent", "yes");
-		xpathService.setNamespace("ns7", REQUEST_NAMESPACE);
-
-		ResourceSet result = xpathService.query(xpathExp);
-
-		return result.getSize();
+		return exist.count(xpathExp, ZahtevZaSertifikat.class, REQUEST_NAMESPACE, "ns7");
 	}
 
 	public long getNumberOfCeritificatesIssued(String startDate, String endDate) throws Exception {
-		Collection collection = exist.getCollection(DigitalniSertifikat.class);
 
 		String xpathExp = "//ns6:digitalni_sertifikat[number(translate(@datum_izdavanja,'-',''))>=" + startDate
 				+ " and number(translate(@datum_izdavanja,'-',''))<=" + endDate + "]";
 
-		XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
-		xpathService.setProperty("indent", "yes");
-		xpathService.setNamespace("ns6", CERTIFICATE_NAMESPACE);
-
-		ResourceSet result = xpathService.query(xpathExp);
-
-		return result.getSize();
+		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "ns6");
 	}
 
 	public long getNumberOfGivenVaccinesForManufacturer(String startDate, String endDate, String manufacturer)
 			throws Exception {
-		Collection collection = exist.getCollection(PotvrdaOVakcinaciji.class);
 
 		String xpathExp = "//ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>=" + startDate
 				+ " and number(translate(text(),'-',''))<=" + endDate + "]";
 
-		XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
-		xpathService.setProperty("indent", "yes");
-		xpathService.setNamespace("ns5", CONFIRMATION_NAMESPACE);
-
-		ResourceSet result = xpathService.query(xpathExp);
-
-		return result.getSize();
+		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
 	}
 
 	public long getNumberOfGivenVaccinesByDose(String startDate, String endDate, int dose) throws Exception {
-		Collection collection = exist.getCollection(PotvrdaOVakcinaciji.class);
 
 		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
 				+ startDate + " and number(translate(text(),'-',''))<=" + endDate
 				+ "] and count(ns5:vakcinacije/ns5:vakcinacija)=" + dose + "]";
 
-		XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
-		xpathService.setProperty("indent", "yes");
-		xpathService.setNamespace("ns5", CONFIRMATION_NAMESPACE);
-
-		ResourceSet result = xpathService.query(xpathExp);
-
-		return result.getSize();
+		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
 	}
 
 }

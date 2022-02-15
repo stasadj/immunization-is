@@ -1,13 +1,13 @@
 package com.immunization.trustee.service;
 
 import java.math.BigInteger;
+
 import java.time.LocalDate;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
 import org.springframework.stereotype.Service;
-import org.xmldb.api.base.XMLDBException;
 
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci;

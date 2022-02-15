@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XPathQueryService;
 
 import javax.xml.transform.OutputKeys;
 import java.util.ArrayList;
@@ -174,15 +176,29 @@ public class Exist {
 		}
 	}
 
-	public Collection getCollection(Class<?> documentClass) throws Exception {
-		initDBDriver();
+	public long count(String xPathExp, Class<?> documentClass, String namespace, String prefix) throws Exception {
 		String collectionId = basePath + documentClass.getSimpleName();
+
+		initDBDriver();
 		Collection collection = null;
+		XMLResource resource = null;
+
 		try {
+			System.out.println("[INFO] Retrieving the collection: " + collectionId);
 			collection = DatabaseManager.getCollection(conn.uri + collectionId);
-			return collection;
+			if (collection == null)
+				return 0;
+			collection.setProperty(OutputKeys.INDENT, "yes");
+
+			XPathQueryService xpathService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
+			xpathService.setProperty("indent", "yes");
+			xpathService.setNamespace(prefix, namespace);
+
+			ResourceSet resourceSet = xpathService.query(xPathExp);
+			return resourceSet.getSize();
+
 		} finally {
-			cleanUp(collection, null);
+			cleanUp(collection, resource);
 		}
 	}
 }
