@@ -12,17 +12,24 @@ import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci.DatumIzdavanja;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci.PeriodDo;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci.PeriodOd;
-import com.immunization.common.repository.Exist;
+import com.immunization.trustee.dao.ImmunizationReportDAO;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class ImmunizationReportService {
-	private final Exist exist;
+	private final ImmunizationReportDAO immunizationReportDAO;
 
 	public IzvestajOImunizaciji getImmunizationReport(LocalDate startDate, LocalDate endDate)
 			throws DatatypeConfigurationException {
+
+		IzvestajOImunizaciji izvestajOImunizaciji = new IzvestajOImunizaciji();
+		izvestajOImunizaciji.setMetaPodaci(this.createMetaData(startDate, endDate));
+		return izvestajOImunizaciji;
+	}
+
+	private MetaPodaci createMetaData(LocalDate startDate, LocalDate endDate) throws DatatypeConfigurationException {
 		DatumIzdavanja datumIzdavanja = new DatumIzdavanja();
 		datumIzdavanja.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(LocalDate.now().toString()));
 
@@ -37,10 +44,8 @@ public class ImmunizationReportService {
 		metaPodaci.setPeriodOd(periodOd);
 		metaPodaci.setPeriodDo(periodDo);
 
-		IzvestajOImunizaciji izvestajOImunizaciji = new IzvestajOImunizaciji();
-		izvestajOImunizaciji.setMetaPodaci(metaPodaci);
+		return metaPodaci;
 
-		return izvestajOImunizaciji;
 	}
 
 }
