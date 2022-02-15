@@ -39,9 +39,9 @@ public class AuthController {
     public ResponseEntity<User> whoami(@AuthenticationPrincipal User user) {
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            throw new ForbiddenException("Fobidden");
         }
+
+        throw new ForbiddenException("Forbidden");
     }
 
 }
