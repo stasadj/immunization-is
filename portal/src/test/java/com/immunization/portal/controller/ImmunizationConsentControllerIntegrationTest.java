@@ -3,7 +3,10 @@ package com.immunization.portal.controller;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
+import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
+import com.immunization.portal.constants.TestConstants;
+
 import static com.immunization.portal.constants.MetadataConstants.RDF_GRAPH_URI;
 
 import org.apache.commons.io.FileUtils;
@@ -33,15 +36,18 @@ public class ImmunizationConsentControllerIntegrationTest {
     @Autowired
     private MetadataExtractorService metadataExtractorService;
 
-    private MockMvc mockMvc;
+    @Autowired
+    private MarshallerService marshallerService;
 
-	private static final String XML_FILE_SAGLASNOST = "./src/main/resources/documents/saglasnost.xml";
-	private static final String RDF_FILE_SAGLASNOST = "./src/main/resources/rdf/saglasnost.rdf";
+    private MockMvc mockMvc;
 
     @BeforeAll
     void setup() throws Exception {
-		metadataExtractorService.initRDFStore(XML_FILE_SAGLASNOST, RDF_FILE_SAGLASNOST, RDF_GRAPH_URI);
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+        
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
+                .contentType(MediaType.APPLICATION_XML)
+                .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)));
     }
 
     @AfterAll
