@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { VaccineAmount } from '../model/VaccineAmount';
+import { XmlService } from '../utils/xml.service';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,7 @@ import { VaccineAmount } from '../model/VaccineAmount';
 export class VaccineAmountService {
     private readonly path = '/api/vaccine';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private XML: XmlService) {}
 
     updateAmount(vaccineAmount: VaccineAmount): Observable<void> {
         let xml = this.toXML(vaccineAmount);
@@ -21,8 +22,20 @@ export class VaccineAmountService {
         return this.http.post<void>(this.path, xml, { headers });
     }
 
-    getVaccines(): Observable<string> {
-        return this.http.get<string>(this.path);
+    getVaccines(): Observable<VaccineAmount[]> {
+        return this.http.get(this.path, { responseType: 'text' }).pipe(
+            map((xml) => this.XML.parse(xml)),
+            map((o) =>
+                (<any[]>o.VACCINE).map((v) => ({
+                    type: v.TYPE[0],
+                    manufacturer: v.MANUFACTURER[0],
+                    series: (<any[]>v.SERIES).map((s) => ({
+                        serialNumber: +s.SERIALNUMBER[0],
+                        amount: +s.AMOUNT[0],
+                    })),
+                }))
+            )
+        );
     }
 
     private toXML(vaccineAmount: VaccineAmount): string {

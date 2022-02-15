@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
+import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
 
 const routes: Routes = [
-    { path: 'vaccine-amount', component: UpdateVaccineAmountComponent },
+    { path: 'vaccines', component: VaccineReportComponent },
 ];
 
 @NgModule({

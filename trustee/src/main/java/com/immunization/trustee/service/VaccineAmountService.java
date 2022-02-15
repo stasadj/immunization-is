@@ -22,9 +22,10 @@ public class VaccineAmountService {
             VaccineAmount vaccine = maybeVaccine.get();
             boolean updated = false;
             for (VaccineAmount.Series series : vaccineAmount.getSeries()) {
+                if (series.getAmount() == 0) continue;
                 for (VaccineAmount.Series existingSeries : vaccine.getSeries()) {
                     if (Objects.equals(series.getSerialNumber(), existingSeries.getSerialNumber())) {
-                        existingSeries.setAmount(existingSeries.getAmount()+series.getAmount());
+                        existingSeries.setAmount(existingSeries.getAmount() + series.getAmount());
                         updated = true;
                         break;
                     }
@@ -34,6 +35,7 @@ public class VaccineAmountService {
             }
             vaccineAmountDAO.save(vaccineAmount.getType(), vaccine);
         } else {
+            vaccineAmount.setSeries(vaccineAmount.getSeries().stream().filter(s -> s.getAmount() > 0).collect(Collectors.toList()));
             vaccineAmountDAO.save(vaccineAmount.getType(), vaccineAmount);
         }
     }

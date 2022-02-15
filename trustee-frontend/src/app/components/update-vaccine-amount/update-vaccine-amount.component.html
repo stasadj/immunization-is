@@ -1,6 +1,11 @@
-<div class="container">
-    <mat-card-title>Azuriranje kolicina vakcina</mat-card-title>
-    <mat-card-content class="content">
+<div mat-dialog-title class="dialog-title">
+    <h2>Azuriranje kolicina vakcina</h2>
+    <button mat-icon-button [mat-dialog-close]>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content style="height: calc(100% - 115px)">
+    <div>
         <mat-form-field appearance="fill">
             <mat-label>Tip vakcine</mat-label>
             <mat-select [(ngModel)]="vaccineAmount.type" name="type">
@@ -9,36 +14,34 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
 
-        <mat-form-field>
+    <div>
+        <mat-form-field appearance="fill">
             <mat-label>Proizvodjac</mat-label>
             <input matInput [(ngModel)]="vaccineAmount.manufacturer" />
         </mat-form-field>
-
-        <div *ngFor="let s of vaccineAmount.series">
-            <mat-form-field>
-                <mat-label>Broj serije</mat-label>
-                <input matInput type="number" [(ngModel)]="s.serialNumber" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Kolicina</mat-label>
-                <input matInput type="number" [(ngModel)]="s.amount" />
-            </mat-form-field>
-        </div>
-        <button mat-button (click)="onAdd()" cdkFocusInitial>
-            Nova serija
-        </button>
-    </mat-card-content>
-    <div mat-card-actions>
-        <button
-            id="save_item_button"
-            mat-button
-            (click)="onSubmit()"
-            cdkFocusInitial
-        >
-            Sačuvaj
-        </button>
-
-        <button mat-button (click)="onGet()" cdkFocusInitial>GET</button>
     </div>
+    <div *ngFor="let s of vaccineAmount.series">
+        <mat-form-field appearance="fill">
+            <mat-label>Broj serije</mat-label>
+            <input matInput type="number" [(ngModel)]="s.serialNumber" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Kolicina</mat-label>
+            <input matInput type="number" [(ngModel)]="s.amount" />
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="onAdd()">
+        Nova serija
+    </button>
+</div>
+<div mat-dialog-actions align="end">
+    <button
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="vaccineAmount"
+    >
+        Sačuvaj
+    </button>
 </div>

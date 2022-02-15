@@ -13,12 +13,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
+import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
 
 @NgModule({
-    declarations: [AppComponent, UpdateVaccineAmountComponent],
+    declarations: [
+        AppComponent,
+        UpdateVaccineAmountComponent,
+        VaccineReportComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -30,6 +39,10 @@ import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount
         MatInputModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatDialogModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
         HttpClientModule,
         ToastrModule.forRoot(),
     ],
