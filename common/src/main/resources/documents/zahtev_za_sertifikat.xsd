@@ -29,7 +29,7 @@
                             <xs:element name="datum_izdavanja">
                                 <xs:complexType>
                                     <xs:simpleContent>
-                                        <xs:extension base="xs:date">
+                                        <xs:extension base="util:nillableDate">
                                             <xs:attribute name="property" use="required"
                                                 type="xs:string" fixed="pred:ima_datum_izdavanja"/>
                                             <xs:attribute name="datatype" use="required"
