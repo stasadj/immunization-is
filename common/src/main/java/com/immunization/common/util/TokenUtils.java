@@ -10,12 +10,14 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.immunization.common.model.User.ERole;
+
 import java.util.Date;
 
 @Component
 public class TokenUtils {
 
-    @Value("sprint-restaurant-application")
+    @Value("immunization-is")
     private String APP_NAME;
 
     @Value("somesecret")
@@ -37,8 +39,9 @@ public class TokenUtils {
                 .setExpiration(generateExpirationDate());
     }
 
-    public String generateToken(String username) {
-        return getBaseJWTTokenBuilder(username).signWith(SIGNATURE_ALGORITHM, SECRET).compact();
+    public String generateToken(String username, ERole role) {
+        return getBaseJWTTokenBuilder(username).claim("userRole", role.toString())
+                .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
     }
 
     private Date generateExpirationDate() {

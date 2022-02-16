@@ -40,12 +40,14 @@ public class UserService {
         } while (usernameTaken(generatedUsername));
 
         // Create user bean
+        ERole userRole = ERole.GRADANIN;
+
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        user.setRole(ERole.GRADANIN);
+        user.setRole(userRole);
         user.setUsername(generatedUsername);
 
         // Save to DB
@@ -53,7 +55,7 @@ public class UserService {
 
         sendEmail(user);
 
-        return tokenUtils.generateToken(user.getUsername());
+        return tokenUtils.generateToken(user.getUsername(), userRole);
     }
 
     private void sendEmail(User user) {
