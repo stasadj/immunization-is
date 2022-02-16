@@ -28,7 +28,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ImmunizationReportService {
+public class IzvestajOImunizacijiService {
 	private final IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 	private final ZahtevZaSertifikatDAO zahtevDAO;
 	private final DigitalniSertifikatDAO sertifikatDAO;
