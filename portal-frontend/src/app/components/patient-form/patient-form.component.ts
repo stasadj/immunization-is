@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmedValidator } from 'src/app/validators/confirmed.validator';
 
@@ -10,6 +9,7 @@ import { ConfirmedValidator } from 'src/app/validators/confirmed.validator';
     styleUrls: ['./patient-form.component.less'],
 })
 export class PatientFormComponent {
+    success: boolean = false;
     registerForm = new FormGroup(
         {
             firstName: new FormControl('', [Validators.required]),
@@ -25,16 +25,13 @@ export class PatientFormComponent {
         ConfirmedValidator('password', 'confirmPassword')
     );
 
-    constructor(
-        private userService: UserService,
-        private toastr: ToastrService
-    ) {}
+    constructor(private userService: UserService) {}
 
     onSubmit() {
         if (this.registerForm.invalid) return;
-        this.userService
-            .register(this.registerForm.value)
-            .subscribe(() => this.toastr.success('Uspesna registracija'));
+        this.userService.register(this.registerForm.value).subscribe(() => {
+            this.success = true;
+        });
         console.log(this.registerForm.value);
     }
 }

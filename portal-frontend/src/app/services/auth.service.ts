@@ -68,6 +68,6 @@ export class AuthService {
     private changeRoute(role: string) {
         if (role === 'GRADANIN') this.router.navigate([`/gradjanin`]);
         else if (role === 'ZDRAVSTVENI_RADNIK')
-            this.router.navigate([`/zrdravstveni`]);
+            this.router.navigate([`/zdravstveni`]);
     }
 }
