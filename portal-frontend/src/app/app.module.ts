@@ -23,6 +23,7 @@ import { PatientFormComponent } from './components/patient-form/patient-form.com
 import { LoginComponent } from './components/login/login.component';
 import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor'
         CreateZahtevComponent,
         PatientFormComponent,
         LoginComponent,
+        NotFoundComponent,
     ],
     imports: [
         BrowserModule,

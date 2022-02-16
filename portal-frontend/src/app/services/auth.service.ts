@@ -2,6 +2,9 @@ import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { XmlService } from '../util/xml.service';
+import jwt_decode from 'jwt-decode';
+import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +16,8 @@ export class AuthService {
     constructor(
         private handler: HttpBackend,
         private toastr: ToastrService,
-        private XML: XmlService
+        private XML: XmlService,
+        private router: Router
     ) {
         this.http = new HttpClient(handler);
     }
@@ -26,30 +30,30 @@ export class AuthService {
             })
             .subscribe({
                 next: (t) => {
-                    console.log(t), localStorage.setItem('token', t);
-                    this.whoAmI(t);
+                    console.log(t);
+                    localStorage.setItem('token', t);
+                    let d: any = jwt_decode(t);
+                    console.log(d);
+                    localStorage.setItem('username', d.sub);
+                    localStorage.setItem('role', d.userRole);
+                    this.router.navigate([`/${d.userRole}`]);
                 },
                 error: () => {
-                    this.toastr.error('Incorrect username or password.');
+                    this.toastr.error('Pogresno korisnicko ime ili lozinka.');
                 },
             });
     }
 
-    whoAmI(token: string) {
-        this.http
+    whoAmI(): Observable<any> {
+        return this.http
             .get(`${this.path}/whoami`, {
                 responseType: 'text',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/xml; charset=utf-8',
                 },
             })
-            .subscribe((d: any) => {
-                d = this.XML.parse(d);
-                console.log(d);
-                localStorage.setItem('username', d.USERNAME[0]);
-                localStorage.setItem('role', d.ROLE[0]);
-            });
+            .pipe(map((d) => this.XML.parse(d)));
     }
 
     private toXML(credentils: { username: string; password: string }): string {
