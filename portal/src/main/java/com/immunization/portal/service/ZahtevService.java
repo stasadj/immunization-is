@@ -51,7 +51,7 @@ public class ZahtevService {
 
         //setting date
         XMLGregorianCalendar xmlCalendar = calendarUtil.getCurrentDate();
-        zahtev.getMetaPodaci().getDatumIzdavanja().setValue(xmlCalendar);
+        zahtev.getMetaPodaci().getDatumIzdavanja().setValue(xmlCalendar.toString());
 
         //extracting metadata
         if (!extractAndSaveMetadata(zahtev)) {

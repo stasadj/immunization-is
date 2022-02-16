@@ -47,7 +47,7 @@ public class InteresovanjeService {
         interesovanje.getPacijent().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + interesovanje.getPacijent().getJmbg().getValue());
 
         //setting date
-        interesovanje.setDatum(calendarUtil.getCurrentDate());
+        interesovanje.setDatum(calendarUtil.getCurrentDate().toString());
         	
         if (!extractAndSaveMetadata(interesovanje)) {
             throw new FailedMetadataExtractionException();

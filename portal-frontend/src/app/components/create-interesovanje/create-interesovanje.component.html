@@ -8,9 +8,13 @@
         </mat-form-field>
 
         <mat-form-field>
-            <!-- TODO change to select instead of input -->
             <mat-label>Drzavljanstvo</mat-label>
-            <input matInput [(ngModel)]="newInteresovanje.drzavljanstvo">
+            <mat-select [(ngModel)]="newInteresovanje.drzavljanstvo">
+                <mat-option [value]="srpsko">Državljanin Republike Srbije</mat-option>
+                <mat-option [value]="saBoravkom">Strani državljanin sa boravkom u RS</mat-option>
+                <mat-option [value]="bezBoravka">Strani državljanin bez boravka u RS</mat-option>
+
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field>

@@ -13,7 +13,7 @@
         <xs:element ref="zeljena_opstina_vakcinacije"/>
         <xs:element ref="odabir_vakcina"/>
       </xs:sequence>
-      <xs:attribute name="datum" use="required" type="xs:date"/>
+      <xs:attribute name="datum" use="required" type="util:nillableDate"/>
       <xs:attribute name="about" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
@@ -32,7 +32,7 @@
   <xs:element name="drzavljanstvo">
     <xs:complexType>
       <xs:simpleContent>
-        <xs:extension base="xs:string">
+        <xs:extension base="util:drzavljanstvo">
           <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_drzavljanstvo"/>
           <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
         </xs:extension>

@@ -12,16 +12,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ToastrModule } from 'ngx-toastr';
 
 import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
-
+import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev/create-zahtev.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        CreateInteresovanjeComponent
+        CreateInteresovanjeComponent,
+        CreateZahtevComponent
     ],
     imports: [
         BrowserModule,
@@ -32,6 +34,7 @@ import { CreateInteresovanjeComponent } from './components/create-interesovanje/
         MatFormFieldModule,
         MatInputModule,
         MatCheckboxModule,
+        MatSelectModule,
         BrowserAnimationsModule,
         HttpClientModule,
         ToastrModule.forRoot()
