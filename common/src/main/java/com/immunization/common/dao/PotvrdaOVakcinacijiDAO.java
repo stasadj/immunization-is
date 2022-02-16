@@ -1,5 +1,8 @@
 package com.immunization.common.dao;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
@@ -30,5 +33,12 @@ public class PotvrdaOVakcinacijiDAO {
 				+ "] and count(ns5:vakcinacije/ns5:vakcinacija)=" + dose + "]";
 
 		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
+	}
+
+	public List<PotvrdaOVakcinaciji> getAllConfirmationsByJmbg(String jmbg) throws Exception {
+		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:licni_podaci/ns5:jmbg[text()='" + jmbg + "']]";
+
+		return exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5").stream()
+				.map(o -> (PotvrdaOVakcinaciji) o).collect(Collectors.toList());
 	}
 }
