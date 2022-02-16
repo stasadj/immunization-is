@@ -18,12 +18,16 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
 import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev/create-zahtev.component';
+import { PatientFormComponent } from './components/patient-form/patient-form.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CreateInteresovanjeComponent,
-        CreateZahtevComponent
+        CreateZahtevComponent,
+        PatientFormComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
