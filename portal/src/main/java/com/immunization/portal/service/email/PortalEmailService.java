@@ -37,20 +37,17 @@ public class PortalEmailService {
     }
     
     public void sendRegistrationSuccess(User user) {
-        StringBuilder emailBody =  new StringBuilder();
-        emailBody.append("Poštovana/i ").append(String.format("%s %s", user.getFirstName(), user.getLastName())).append(", \n");
-        emailBody.append("Uspešno ste se registrovali na portalu. \n\n");
+        String emailBody = "Poštovana/i " + user.getFirstName() + " " + user.getLastName() + ", \n" +
+                "Uspešno ste se registrovali na portalu. \n\n" +
+                "Vaše korisničko ime je: " + user.getUsername() + " \n";
 
-        emailBody.append("Vaše korisničko ime je: ").append(user.getUsername()).append(" \n");
-
-        EmailContent email = new EmailContent("Uspešna registracija na portal", emailBody.toString());
+        EmailContent email = new EmailContent("Uspešna registracija na portal", emailBody);
         email.addRecipient(user.getEmail());
         sendEmail(email);
     }
 
     public void sendInteresovanjeConfirmation(IskazivanjeInteresovanjaZaVakcinaciju interesovanje,
             String recipientEmail) {
-
         StringBuilder emailBody =  new StringBuilder();
         emailBody.append("Postovana/i ").append(interesovanje.getPacijent().getPunoIme().getValue()).append(", \n");
         emailBody.append("Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n");

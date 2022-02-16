@@ -135,16 +135,7 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="vakcinacijski_punkt" type="xs:string"/>
-                <xs:element name="informacije_o_lekaru">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="ime" type="xs:string"/>
-                            <xs:element name="prezime" type="xs:string"/>
-                            <xs:element name="faksimil" type="xs:string"/>
-                            <xs:element name="broj_telefona" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element ref="informacije_o_lekaru"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

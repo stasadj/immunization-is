@@ -24,11 +24,8 @@ public class UserService {
     private final PortalEmailService emailService;
 
     private String generateUsername(UserRegistrationDTO dto) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(dto.getFirstName().replace(" ", "")).append('.').append(dto.getLastName().replace(" ", ""));
-        sb.append(NumberStringGenerator.generateNumberSequence(4));
-
-        return sb.toString();
+        return dto.getFirstName().replace(" ", "") + '.' + dto.getLastName().replace(" ", "") +
+                NumberStringGenerator.generateNumberSequence(4);
     }
 
     public String registerUser(UserRegistrationDTO dto) throws UserAlreadyExistsException {
@@ -36,7 +33,7 @@ public class UserService {
             throw new UserAlreadyExistsException("Email already taken");
         }
 
-        // Generate unique password
+        // Generate unique username
         String generatedUsername;
         do {
             generatedUsername = generateUsername(dto);
@@ -64,11 +61,11 @@ public class UserService {
     }
 
     private boolean emailTaken(String email) {
-        return userDAO.getByEmail(email).isEmpty() == false;
+        return !userDAO.getByEmail(email).isEmpty();
     }
 
     private boolean usernameTaken(String username) {
-        return userDAO.getByUsername(username).isEmpty() == false;
+        return !userDAO.getByUsername(username).isEmpty();
     }
 
 }

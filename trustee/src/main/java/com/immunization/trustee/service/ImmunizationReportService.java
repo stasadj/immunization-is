@@ -41,7 +41,7 @@ public class ImmunizationReportService {
 
 		IzvestajOImunizaciji izvestajOImunizaciji = new IzvestajOImunizaciji();
 		izvestajOImunizaciji
-				.setAbout("http://www.ftn.uns.ac.rs/izvestaj/" + startDate.toString() + "-" + endDate.toString());
+				.setAbout("http://www.ftn.uns.ac.rs/izvestaj/" + startDate + "-" + endDate);
 		izvestajOImunizaciji.setMetaPodaci(this.createMetaData(startDate, endDate));
 		izvestajOImunizaciji.setBrojDokumenataOInteresovanju(
 				interesovanjeDAO.getNumberOfDocumentsOfInterest(startDateNum, endDateNum));

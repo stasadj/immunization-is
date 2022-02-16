@@ -157,14 +157,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ZdravstvenaUstanova.InformacijeOLekaru }
-     * 
-     */
-    public ZdravstvenaUstanova.InformacijeOLekaru createZdravstvenaUstanovaInformacijeOLekaru() {
-        return new ZdravstvenaUstanova.InformacijeOLekaru();
-    }
-
-    /**
      * Create an instance of {@link IzvrsenaImunizacija }
      * 
      */
@@ -205,11 +197,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link com.immunization.common.model.saglasnost.InformacijeOLekaru }
+     * Create an instance of {@link InformacijeOLekaru }
      * 
      */
-    public com.immunization.common.model.saglasnost.InformacijeOLekaru createInformacijeOLekaru() {
-        return new com.immunization.common.model.saglasnost.InformacijeOLekaru();
+    public InformacijeOLekaru createInformacijeOLekaru() {
+        return new InformacijeOLekaru();
     }
 
     /**
