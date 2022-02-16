@@ -4,7 +4,6 @@ import { ZahtevZaSertifikat } from 'src/app/model/ZahtevZaSertifikat';
 import { ToastrService } from 'ngx-toastr';
 import { ZahtevService } from 'src/app/services/zahtev.service';
 
-declare const Xonomy : any;
 declare const Quill : any;
 
 @Component({

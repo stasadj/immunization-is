@@ -1,6 +1,7 @@
+import { Drzavljanstvo } from "./Drzavljanstvo";
 
 export interface Interesovanje {
-    drzavljanstvo: string;
+    drzavljanstvo: Drzavljanstvo;
     jmbg: number;
     punoIme: string;
     email: string;

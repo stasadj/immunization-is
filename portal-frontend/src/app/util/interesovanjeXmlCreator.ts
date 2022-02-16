@@ -1,5 +1,6 @@
 import { Interesovanje } from "../model/Interesovanje";
 import * as moment from "moment";
+import { Drzavljanstvo } from "../model/Drzavljanstvo";
 
 export function createInteresovanjeXML(interesovanje: Interesovanje): string {
 
@@ -13,7 +14,7 @@ export function createInteresovanjeXML(interesovanje: Interesovanje): string {
         datum="${moment().format('yyyy-MM-DD').toString()}"
         about="">
         <pacijent about="">
-            <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${interesovanje.drzavljanstvo}</drzavljanstvo>
+            <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${getEnum(interesovanje.drzavljanstvo)}</drzavljanstvo>
             <jmbg property="pred:ima_jmbg" datatype="xs:string">${interesovanje.jmbg}</jmbg>
             <puno_ime property="pred:se_zove" datatype="xs:string">${interesovanje.punoIme}</puno_ime>
             <kontakt_informacije>
@@ -45,4 +46,8 @@ function getVaccines(opcije: string[]): string {
     return xmlOpcije;
 
 
+}
+
+function getEnum(value: Drzavljanstvo){
+    return Drzavljanstvo[value];
 }

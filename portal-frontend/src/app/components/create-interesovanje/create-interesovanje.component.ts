@@ -3,6 +3,7 @@ import { Interesovanje } from '../../model/Interesovanje';
 import { Form, FormGroup, FormBuilder } from '@angular/forms';
 import { InteresovanjeService } from 'src/app/services/interesovanje.service';
 import { ToastrService } from 'ngx-toastr';
+import { Drzavljanstvo } from 'src/app/model/Drzavljanstvo';
 
 @Component({
     selector: 'app-create-interesovanje',
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateInteresovanjeComponent implements OnInit {
     public newInteresovanje: Interesovanje = {
-        drzavljanstvo: 'srpsko',
+        drzavljanstvo: Drzavljanstvo['Državljanin Republike Srbije'],
         jmbg: 1111111111119,
         punoIme: 'Test Test',
         email: 'test@gmail.com',
@@ -23,6 +24,10 @@ export class CreateInteresovanjeComponent implements OnInit {
     };
 
     public opcije: FormGroup;
+
+    public srpsko = Drzavljanstvo['Državljanin Republike Srbije']
+    public saBoravkom = Drzavljanstvo['Strani državljanin sa boravkom u RS']
+    public bezBoravka = Drzavljanstvo['Strani državljanin bez boravka u RS']
 
     constructor(
         private fb: FormBuilder,
@@ -68,7 +73,7 @@ export class CreateInteresovanjeComponent implements OnInit {
         this.interesovanjeService
             .create(this.newInteresovanje)
             .subscribe((res) => {
-                this.toastr.success('Interesovanje uspešno zabeleženo. Proverite Vaš mejl.");
+                this.toastr.success('Interesovanje uspešno zabeleženo. Proverite Vaš mejl.');
             },
             (error) => {
                 this.toastr.error('Već postoji interesovanje.'); //TODO add to intereceptor?
