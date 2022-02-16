@@ -19,7 +19,9 @@
         <pol property="pred:ima_pol" datatype="xs:string">M</pol>
         <jmbg property="pred:ima_jmbg" datatype="xs:string">0234567891234</jmbg>
         <broj_pasosa property="pred:ima_broj_pasosa" datatype="xs:string">123456789</broj_pasosa>
-        <razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>
+        <razlog_za_podnosenje_zahteva> 
+            <div xmlns="https://www.w3.org/1999/xhtml">Idem na <b>apsolventsku</b> ekskurziju</div> 
+        </razlog_za_podnosenje_zahteva>
     </podnosilac_zahteva>
     
 </zahtev_za_sertifikat>
