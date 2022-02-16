@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.immunization.trustee.dto.response.Odgovor;
+import com.immunization.trustee.service.ZahtevZaSertifikatService;
 
 import lombok.AllArgsConstructor;
 
@@ -19,13 +20,17 @@ import lombok.AllArgsConstructor;
 		+ ";charset=utf-8", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
 @AllArgsConstructor
 public class ZahtevZaSertifikatController {
+	private final ZahtevZaSertifikatService zahtevZaSertifikatService;
+
 	@PostMapping(value = "/accept")
 	public ResponseEntity<Void> accept(@Valid @RequestBody Odgovor odgovor) {
+		zahtevZaSertifikatService.accept(odgovor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/reject")
 	public ResponseEntity<Void> reject(@Valid @RequestBody Odgovor odgovor) {
+		zahtevZaSertifikatService.reject(odgovor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
