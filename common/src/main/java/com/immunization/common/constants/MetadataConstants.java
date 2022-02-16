@@ -1,4 +1,4 @@
-package com.immunization.portal.constants;
+package com.immunization.common.constants;
 
 public abstract class MetadataConstants {
     public static String ABOUT_PREFIX = "http://www.ftn.uns.ac.rs/";
