@@ -32,7 +32,7 @@
   <xs:element name="drzavljanstvo">
     <xs:complexType>
       <xs:simpleContent>
-        <xs:extension base="xs:string">
+        <xs:extension base="util:drzavljanstvo">
           <xs:attribute name="property" use="required" type="xs:string" fixed="pred:ima_drzavljanstvo"/>
           <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
         </xs:extension>
