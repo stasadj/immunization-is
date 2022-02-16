@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,14 +19,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ToastrModule } from 'ngx-toastr';
-import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
 import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
+import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
+import { LoginComponent } from './components/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
+import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 
 @NgModule({
     declarations: [
         AppComponent,
         UpdateVaccineAmountComponent,
         VaccineReportComponent,
+        LoginComponent,
+        NotFoundComponent,
     ],
     imports: [
         BrowserModule,
@@ -46,7 +52,18 @@ import { VaccineReportComponent } from './components/vaccine-report/vaccine-repo
         HttpClientModule,
         ToastrModule.forRoot(),
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: XmlContentInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HandleErrorInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
