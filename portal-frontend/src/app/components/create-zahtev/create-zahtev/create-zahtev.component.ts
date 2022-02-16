@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ZahtevService } from 'src/app/services/zahtev.service';
 
 declare const Xonomy : any;
+declare const Quill : any;
 
 @Component({
     selector: 'app-create-zahtev',
@@ -36,9 +37,10 @@ export class CreateZahtevComponent implements OnInit {
 
     ngAfterViewInit(): void {
     
-        var xml="<razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>";
-        var editor=document.getElementById("editor");
-        Xonomy.render(xml, editor, null);
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+          });
+
 
       }
 

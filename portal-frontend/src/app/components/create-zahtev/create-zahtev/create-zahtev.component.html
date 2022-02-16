@@ -38,14 +38,15 @@
             <mat-label>Mesto izdavanja zahteva</mat-label>
             <input matInput [(ngModel)]="newZahtev.mestoIzdavanja" />
         </mat-form-field>
-
+<!-- 
         <mat-form-field id="razlogField">
             <mat-label>Razlog izdavanja</mat-label>
-            <!-- TODO: rich text edit component! -->
             <textarea matInput [(ngModel)]="newZahtev.razlog"></textarea>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <div id="editor"></div>
+        <mat-label>Razlog izdavanja zahteva</mat-label>
+        <div id="editor">
+        </div>
 
     </mat-card-content>
     <div mat-card-actions>
