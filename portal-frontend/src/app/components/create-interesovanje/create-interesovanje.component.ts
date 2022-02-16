@@ -50,14 +50,14 @@ export class CreateInteresovanjeComponent implements OnInit {
                 this.newInteresovanje.opstinaVakcinacije
             )
         ) {
-            this.toastr.error('Please input all fields!');
+            this.toastr.error('Molimo Vas da popunite sva polja');
             return;
         }
 
         //TODO individual fields validation
 
         if (!Object.keys(this.opcije.value).some((k) => !!this.opcije.value[k])) {
-            this.toastr.error('Please choose atleast one vaccine option!');
+            this.toastr.error('Morate odabrati barem jednu opciju vakcine');
             return;
         }
 
@@ -68,10 +68,10 @@ export class CreateInteresovanjeComponent implements OnInit {
         this.interesovanjeService
             .create(this.newInteresovanje)
             .subscribe((res) => {
-                this.toastr.success('Interesovanje submitted successfully');
+                this.toastr.success('Interesovanje uspešno zabeleženo. Proverite Vaš mejl.");
             },
             (error) => {
-                this.toastr.error('Interesovanje submition failed - interesovanje already exists!'); //TODO add to intereceptor?
+                this.toastr.error('Već postoji interesovanje.'); //TODO add to intereceptor?
             });
     }
 

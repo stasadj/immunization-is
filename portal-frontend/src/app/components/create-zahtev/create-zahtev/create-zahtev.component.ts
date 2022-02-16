@@ -57,7 +57,7 @@ export class CreateZahtevComponent implements OnInit {
                 this.newZahtev.datumRodjenja
             )
         ) {
-            this.toastr.error('Please input all fields!');
+            this.toastr.error('Molimo Vas da popunite sva polja');
             return;
         }
 
@@ -71,7 +71,7 @@ export class CreateZahtevComponent implements OnInit {
 
 
         this.zahtevService.create(this.newZahtev).subscribe(res => {
-            this.toastr.success("Successfully submitted zahtev");
+            this.toastr.success("Zahtev za sertifikat uspešno poslat.");
         })
     }
 
