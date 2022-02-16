@@ -19,8 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ToastrModule } from 'ngx-toastr';
-import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
 import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
+import { UpdateVaccineAmountComponent } from './components/update-vaccine-amount/update-vaccine-amount.component';
 
 @NgModule({
     declarations: [

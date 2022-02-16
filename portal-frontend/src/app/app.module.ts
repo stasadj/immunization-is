@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -20,6 +21,8 @@ import { CreateInteresovanjeComponent } from './components/create-interesovanje/
 import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev/create-zahtev.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
+import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 
 @NgModule({
     declarations: [
@@ -27,7 +30,7 @@ import { LoginComponent } from './components/login/login.component';
         CreateInteresovanjeComponent,
         CreateZahtevComponent,
         PatientFormComponent,
-        LoginComponent
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
@@ -39,11 +42,23 @@ import { LoginComponent } from './components/login/login.component';
         MatInputModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatButtonModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
     ],
-    providers: [],
-    bootstrap: [AppComponent]
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: XmlContentInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HandleErrorInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
