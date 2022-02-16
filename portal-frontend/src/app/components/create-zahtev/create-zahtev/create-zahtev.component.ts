@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Pol } from 'src/app/model/Pol';
 import { ZahtevZaSertifikat } from 'src/app/model/ZahtevZaSertifikat';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ZahtevService } from 'src/app/services/zahtev.service';
+
+declare const Xonomy : any;
 
 @Component({
     selector: 'app-create-zahtev',
@@ -11,6 +12,8 @@ import { ZahtevService } from 'src/app/services/zahtev.service';
     styleUrls: ['./create-zahtev.component.less'],
 })
 export class CreateZahtevComponent implements OnInit {
+
+
     public newZahtev: ZahtevZaSertifikat = {
         mestoIzdavanja: 'Novi Sad',
         imeIPrezime: 'Proba Proba',
@@ -30,6 +33,14 @@ export class CreateZahtevComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {}
+
+    ngAfterViewInit(): void {
+    
+        var xml="<razlog_za_podnosenje_zahteva>Lični zahtev</razlog_za_podnosenje_zahteva>";
+        var editor=document.getElementById("editor");
+        Xonomy.render(xml, editor, null);
+
+      }
 
     onSaveClick() {
         if (
