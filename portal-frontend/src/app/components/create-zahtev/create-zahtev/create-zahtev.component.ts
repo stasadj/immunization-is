@@ -15,6 +15,7 @@ declare const Quill : any;
 export class CreateZahtevComponent implements OnInit {
 
 
+    public quill : any;
     public newZahtev: ZahtevZaSertifikat = {
         mestoIzdavanja: 'Novi Sad',
         imeIPrezime: 'Proba Proba',
@@ -37,7 +38,7 @@ export class CreateZahtevComponent implements OnInit {
 
     ngAfterViewInit(): void {
     
-        var quill = new Quill('#editor', {
+        this.quill = new Quill('#editor', {
             theme: 'snow'
           });
 
@@ -62,6 +63,10 @@ export class CreateZahtevComponent implements OnInit {
 
         //TODO date of birth before today validation
         //TODO other field validations
+
+        //get text from editor, set to object attr
+        let justHtml = this.quill.root.innerHTML;
+        this.newZahtev.razlog = justHtml;
 
 
         this.zahtevService.create(this.newZahtev).subscribe(res => {
