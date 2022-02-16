@@ -1,5 +1,5 @@
 import { Interesovanje } from "../model/Interesovanje";
-
+import * as moment from "moment";
 
 export function createInteresovanjeXML(interesovanje: Interesovanje): string {
 
@@ -10,7 +10,7 @@ export function createInteresovanjeXML(interesovanje: Interesovanje): string {
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
         xsi:schemaLocation="http://www.ftn.uns.ac.rs/interesovanje/ interesovanje.xsd" 
-        datum="1970-01-01"
+        datum="${moment().format('yyyy-MM-DD').toString()}"
         about="">
         <pacijent about="">
             <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${interesovanje.drzavljanstvo}</drzavljanstvo>

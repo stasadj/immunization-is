@@ -1,6 +1,5 @@
 import { Pol } from "../model/Pol";
 import { ZahtevZaSertifikat } from "../model/ZahtevZaSertifikat";
-import { Moment } from "moment";
 import * as moment from "moment";
 
 export function createZahtevXML(zahtev: ZahtevZaSertifikat): string {

@@ -69,6 +69,9 @@ export class CreateInteresovanjeComponent implements OnInit {
             .create(this.newInteresovanje)
             .subscribe((res) => {
                 this.toastr.success('Interesovanje submitted successfully');
+            },
+            (error) => {
+                this.toastr.error('Interesovanje submition failed - interesovanje already exists!'); //TODO add to intereceptor?
             });
     }
 
