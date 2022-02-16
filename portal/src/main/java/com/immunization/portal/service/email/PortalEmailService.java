@@ -3,6 +3,7 @@ package com.immunization.portal.service.email;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.immunization.common.model.User;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 
 import org.springframework.mail.SimpleMailMessage;
@@ -33,6 +34,18 @@ public class PortalEmailService {
         email.setSubject(content.getSubject());
         email.setText(content.getBody());
         quickService.submit(() -> javaMailSender.send(email));
+    }
+    
+    public void sendRegistrationSuccess(User user) {
+        StringBuilder emailBody =  new StringBuilder();
+        emailBody.append("Poštovana/i ").append(String.format("%s %s", user.getFirstName(), user.getLastName())).append(", \n");
+        emailBody.append("Uspešno ste se registrovali na portalu. \n\n");
+
+        emailBody.append("Vaše korisničko ime je: ").append(user.getUsername()).append(" \n");
+
+        EmailContent email = new EmailContent("Uspešna registracija na portal", emailBody.toString());
+        email.addRecipient(user.getEmail());
+        sendEmail(email);
     }
 
     public void sendInteresovanjeConfirmation(IskazivanjeInteresovanjaZaVakcinaciju interesovanje,

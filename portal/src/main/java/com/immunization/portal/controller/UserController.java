@@ -1,5 +1,7 @@
 package com.immunization.portal.controller;
 
+import javax.validation.Valid;
+
 import com.immunization.portal.dto.UserRegistrationDTO;
 import com.immunization.portal.service.UserService;
 
@@ -24,11 +26,8 @@ public class UserController {
 
     @ResponseBody
     @PutMapping(value="/register")
-    public ResponseEntity<Void> registerUser(@RequestBody UserRegistrationDTO dto) {
-        if (userService.registerUser(dto)) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO dto) {
+        String token = userService.registerUser(dto);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
