@@ -1,7 +1,7 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { XmlService } from '../util/xml.service';
+import { XmlService } from '../utils/xml.service';
 import jwt_decode from 'jwt-decode';
 import { map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -66,9 +66,7 @@ export class AuthService {
     }
 
     private changeRoute(role: string) {
-        if (role === 'GRADANIN') this.router.navigate([`/gradjanin`]);
-        else if (role === 'ZDRAVSTVENI_RADNIK')
-            this.router.navigate([`/zdravstveni`]);
+        if (role === 'SLUZBENIK') this.router.navigate([`/sluzbenik`]);
         else this.toastr.error('Nemoguc pristup');
     }
 }
