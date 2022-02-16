@@ -36,7 +36,7 @@ export class AuthService {
                     console.log(d);
                     localStorage.setItem('username', d.sub);
                     localStorage.setItem('role', d.userRole);
-                    this.router.navigate([`/${d.userRole}`]);
+                    this.changeRoute(d.userRole);
                 },
                 error: () => {
                     this.toastr.error('Pogresno korisnicko ime ili lozinka.');
@@ -63,5 +63,11 @@ export class AuthService {
             <password>${credentils.password}</password>
         </user_login>
     `;
+    }
+
+    private changeRoute(role: string) {
+        if (role === 'GRADANIN') this.router.navigate([`/gradjanin`]);
+        else if (role === 'ZDRAVSTVENI_RADNIK')
+            this.router.navigate([`/zrdravstveni`]);
     }
 }
