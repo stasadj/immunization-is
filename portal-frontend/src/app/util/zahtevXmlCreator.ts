@@ -15,6 +15,7 @@ export function createZahtevXML(zahtev: ZahtevZaSertifikat): string {
         <meta_podaci>
             <mesto_izdavanja property="pred:ima_mesto_izdavanja" datatype="xs:string">${zahtev.mestoIzdavanja}</mesto_izdavanja>
             <datum_izdavanja property="pred:ima_datum_izdavanja" datatype="xs:string">${moment().format('yyyy-MM-DD').toString()}</datum_izdavanja>
+            <status_zahteva property="pred:ima_status" datatype="xs:string">NA CEKANJU</status_zahteva>
         </meta_podaci>
         
         <podnosilac_zahteva about="">
@@ -23,7 +24,9 @@ export function createZahtevXML(zahtev: ZahtevZaSertifikat): string {
             <pol property="pred:ima_pol" datatype="xs:string">${getEnum(zahtev.pol)}</pol>
             <jmbg property="pred:ima_jmbg" datatype="xs:string">${zahtev.jmbg}</jmbg>
             <broj_pasosa property="pred:ima_broj_pasosa" datatype="xs:string">${zahtev.brojPasosa}</broj_pasosa>
-            <razlog_za_podnosenje_zahteva>${zahtev.razlog}</razlog_za_podnosenje_zahteva>
+            <razlog_za_podnosenje_zahteva> 
+                <div xmlns="https://www.w3.org/1999/xhtml">${zahtev.razlog}</div> 
+            </razlog_za_podnosenje_zahteva> 
         </podnosilac_zahteva>
     </zahtev_za_sertifikat>
     `

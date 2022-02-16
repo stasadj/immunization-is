@@ -66,6 +66,7 @@ export class CreateZahtevComponent implements OnInit {
 
         //get text from editor, set to object attr
         let justHtml = this.quill.root.innerHTML;
+        console.log(justHtml);
         this.newZahtev.razlog = justHtml;
 
 
