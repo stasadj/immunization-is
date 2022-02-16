@@ -3,13 +3,14 @@ import { Interesovanje } from "../model/Interesovanje";
 
 export function createInteresovanjeXML(interesovanje: Interesovanje): string {
 
+    //TODO change to actual date OR fix .xsd
     return `<?xml version="1.0" encoding="UTF-8"?>
     <iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje/"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
         xsi:schemaLocation="http://www.ftn.uns.ac.rs/interesovanje/ interesovanje.xsd" 
-        datum=""
+        datum="1970-01-01"
         about="">
         <pacijent about="">
             <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${interesovanje.drzavljanstvo}</drzavljanstvo>
@@ -27,7 +28,6 @@ export function createInteresovanjeXML(interesovanje: Interesovanje): string {
             ${getVaccines(interesovanje.opcije)}
         </odabir_vakcina>
     </iskazivanje_interesovanja_za_vakcinaciju>
-
     `
 
 }
