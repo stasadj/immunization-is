@@ -14,7 +14,7 @@ export function createZahtevXML(zahtev: ZahtevZaSertifikat): string {
         
         <meta_podaci>
             <mesto_izdavanja property="pred:ima_mesto_izdavanja" datatype="xs:string">${zahtev.mestoIzdavanja}</mesto_izdavanja>
-            <datum_izdavanja property="pred:ima_datum_izdavanja" datatype="xs:string"></datum_izdavanja>
+            <datum_izdavanja property="pred:ima_datum_izdavanja" datatype="xs:string">${moment().format('yyyy-MM-DD').toString()}</datum_izdavanja>
         </meta_podaci>
         
         <podnosilac_zahteva about="">

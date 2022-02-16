@@ -19,8 +19,8 @@ export class CreateZahtevComponent implements OnInit {
         imeIPrezime: 'Proba Proba',
         datumRodjenja: new Date('01-01-1999'),
         pol: Pol.M,
-        jmbg: 123456789,
-        brojPasosa: 65432,
+        jmbg: 1111111112345,
+        brojPasosa: 111111111,
         razlog: 'Apsolventska ekskurzija',
     };
 
