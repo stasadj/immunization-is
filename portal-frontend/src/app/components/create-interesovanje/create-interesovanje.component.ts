@@ -106,8 +106,7 @@ export class CreateInteresovanjeComponent implements OnInit {
             ),
         };
 
-
-        this.interesovanjeService.create(newInteresovanje).subscribe(
+        this.interesovanjeService.create(newInteresovanje).subscribe( 
             (res) => {
                 this.toastr.success(
                     'Interesovanje uspešno zabeleženo. Proverite Vaš mejl.'
