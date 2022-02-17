@@ -10,9 +10,9 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class IzvestajOImunizacijiDAO {
-	private final Exist exist;
+    private final Exist exist;
 
-	public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
-		exist.save(documentId + ".xml", izvestajOImunizaciji);
-	}
+    public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
+        exist.save(documentId, izvestajOImunizaciji);
+    }
 }

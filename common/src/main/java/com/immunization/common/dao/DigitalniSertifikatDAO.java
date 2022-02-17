@@ -10,25 +10,25 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class DigitalniSertifikatDAO {
-	private final Exist exist;
-	private static final String CERTIFICATE_NAMESPACE = "http://www.ftn.uns.ac.rs/digitalni-sertifikat/";
+    private final Exist exist;
+    private static final String CERTIFICATE_NAMESPACE = "http://www.ftn.uns.ac.rs/digitalni-sertifikat/";
 
-	public long getNumberOfCeritificatesIssued(String startDate, String endDate) throws Exception {
+    public long getNumberOfCeritificatesIssued(String startDate, String endDate) throws Exception {
 
-		String xpathExp = "//sert:digitalni_sertifikat[number(translate(@datum_izdavanja,'-',''))>=" + startDate
-				+ " and number(translate(@datum_izdavanja,'-',''))<=" + endDate + "]";
+        String xpathExp = "//sert:digitalni_sertifikat[number(translate(@datum_izdavanja,'-',''))>=" + startDate
+                + " and number(translate(@datum_izdavanja,'-',''))<=" + endDate + "]";
 
-		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
-	}
+        return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
+    }
 
-	public long getNumberOfCeritificatesIssued() throws Exception {
+    public long getNumberOfCeritificatesIssued() throws Exception {
 
-		String xpathExp = "//sert:digitalni_sertifikat";
+        String xpathExp = "//sert:digitalni_sertifikat";
 
-		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
-	}
+        return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
+    }
 
-	public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
-		exist.save(documentId + ".xml", sertifikat);
-	}
+    public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
+        exist.save(documentId, sertifikat);
+    }
 }
