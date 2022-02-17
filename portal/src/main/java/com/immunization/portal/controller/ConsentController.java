@@ -26,7 +26,7 @@ public class ConsentController {
     @PreAuthorize("hasRole('GRADANIN')")
     public ResponseEntity<Void> immunizationConsent(@AuthenticationPrincipal User user, @RequestBody ObrazacSaglasnostiZaImunizaciju form)
             throws Exception {
-        if (consentService.fileConsent(form)) {
+        if (consentService.fileConsent(form, user)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
