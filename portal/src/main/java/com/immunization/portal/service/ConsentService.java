@@ -59,7 +59,16 @@ public class ConsentService {
     }
 
     private void clearVaccinationRecord(ObrazacSaglasnostiZaImunizaciju form) {
-        form.setEvidencijaOVakcinaciji(new EvidencijaOVakcinaciji());
+        EvidencijaOVakcinaciji evidencija = form.getEvidencijaOVakcinaciji();
+        evidencija.getIzvrsenaImunizacija().getVakcina().clear();
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setFaksimil("");
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setIme("");
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setPrezime("");
+        evidencija.getZdravstvenaUstanova().getNaziv().setValue("");
+        evidencija.getZdravstvenaUstanova().setVakcinacijskiPunkt("");
+        evidencija.getKontraindikacija().getPrivremeneKontraindikacije().setDatumUtvrdjivanja("");
+        evidencija.getKontraindikacija().getPrivremeneKontraindikacije().setDijagnoza("");
+        evidencija.getKontraindikacija().getTrajneKontraindikacije().setOdlukaKomisije("");
     }
 
     private void setFormAbouts(ObrazacSaglasnostiZaImunizaciju form, User user) {
