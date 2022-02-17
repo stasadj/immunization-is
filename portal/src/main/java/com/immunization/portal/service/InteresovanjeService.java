@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
@@ -13,7 +14,6 @@ import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVak
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
-import com.immunization.portal.constants.MetadataConstants;
 import com.immunization.portal.dao.InteresovanjeDAO;
 import com.immunization.portal.service.email.PortalEmailService;
 
@@ -24,43 +24,44 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class InteresovanjeService {
-	
+
     private InteresovanjeDAO interesovanjeDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private PortalEmailService emailService;
     private XMLCalendarService calendarUtil;
 
+    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user)
+            throws Exception {
 
-    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user) throws Exception {
-    	
-    	String documentId = user.getUsername() + ".xml";
-    
+        String documentId = user.getUsername() + ".xml";
+
         Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
         if (result.isPresent()) {
-        	throw new BadRequestException("Interesovanje for this user already exists. ");
-        } 
+            throw new BadRequestException("Interesovanje for this user already exists. ");
+        }
 
-        //setting unique about
+        // setting unique about
         interesovanje.setAbout("http://www.ftn.uns.ac.rs/interesovanje/" + documentId);
 
-        //setting patient about 
+        // setting patient about
         interesovanje.getPacijent().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + user.getUsername());
 
-        //setting date
+        // setting date
         interesovanje.setDatum(calendarUtil.getCurrentDate().toString());
-        	
+
         if (!extractAndSaveMetadata(interesovanje)) {
             throw new FailedMetadataExtractionException();
         }
 
         interesovanjeDAO.save(documentId, interesovanje);
 
-        //send email to patient 
-        emailService.sendInteresovanjeConfirmation(interesovanje, interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
+        // send email to patient
+        emailService.sendInteresovanjeConfirmation(interesovanje,
+                interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
 
         return interesovanje;
-    		
+
     }
 
     private boolean extractAndSaveMetadata(IskazivanjeInteresovanjaZaVakcinaciju form) {

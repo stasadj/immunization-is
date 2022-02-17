@@ -15,9 +15,20 @@ public class DigitalniSertifikatDAO {
 
 	public long getNumberOfCeritificatesIssued(String startDate, String endDate) throws Exception {
 
-		String xpathExp = "//ns6:digitalni_sertifikat[number(translate(@datum_izdavanja,'-',''))>=" + startDate
+		String xpathExp = "//sert:digitalni_sertifikat[number(translate(@datum_izdavanja,'-',''))>=" + startDate
 				+ " and number(translate(@datum_izdavanja,'-',''))<=" + endDate + "]";
 
-		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "ns6");
+		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
+	}
+
+	public long getNumberOfCeritificatesIssued() throws Exception {
+
+		String xpathExp = "//sert:digitalni_sertifikat";
+
+		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
+	}
+
+	public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
+		exist.save(documentId + ".xml", sertifikat);
 	}
 }
