@@ -45,6 +45,7 @@ public class XhtmlTransformer {
             transformer.transform(source, result);
             retVal = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         } finally {
             assert file != null;
             boolean r = file.delete();

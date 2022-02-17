@@ -1,5 +1,6 @@
 package com.immunization.portal.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVak
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
+import com.immunization.common.util.PdfTransformer;
+import com.immunization.common.util.XhtmlTransformer;
 import com.immunization.portal.constants.MetadataConstants;
 import com.immunization.portal.dao.InteresovanjeDAO;
 import com.immunization.portal.service.email.PortalEmailService;
@@ -29,6 +32,8 @@ public class InteresovanjeService {
     private MarshallerService marshallerService;
     private PortalEmailService emailService;
     private XMLCalendarService calendarUtil;
+    private PdfTransformer pdfTransformer;
+    private XhtmlTransformer xhtmlTransformer;
 
 
     public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
@@ -70,6 +75,18 @@ public class InteresovanjeService {
         }
 
         return true;
+    }
+
+    public ByteArrayInputStream generatePdf(String documentId) throws Exception {
+        String xml = interesovanjeDAO.getXML(documentId);
+        System.out.println(xml);
+        return pdfTransformer.generatePDF(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
+    }
+
+    public ByteArrayInputStream generateXhtml(String documentId) throws Exception {
+        String xml = interesovanjeDAO.getXML(documentId);
+        System.out.println(xml);
+        return xhtmlTransformer.generateXHTML(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
     }
 
 }

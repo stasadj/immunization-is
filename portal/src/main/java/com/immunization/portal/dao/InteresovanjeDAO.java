@@ -24,7 +24,10 @@ public class InteresovanjeDAO {
 
     public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
         exist.save(documentId, interesovanje);
-		
 	}
+
+    public String getXML(String documentId) throws Exception {
+        return exist.retrieveRawXmlById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+    }
 
 }

@@ -20,7 +20,6 @@ export class XmlContentInterceptor implements HttpInterceptor {
                 'Content-Type': 'application/xml; charset=utf-8',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-            responseType: 'text',
         });
 
         return next.handle(request);
