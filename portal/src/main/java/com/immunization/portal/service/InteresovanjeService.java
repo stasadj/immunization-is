@@ -14,7 +14,7 @@ import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVak
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
-import com.immunization.portal.dao.InteresovanjeDAO;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.portal.service.email.PortalEmailService;
 
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class InteresovanjeService {
 
-    private InteresovanjeDAO interesovanjeDAO;
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private PortalEmailService emailService;

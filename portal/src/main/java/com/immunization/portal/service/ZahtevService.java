@@ -17,7 +17,7 @@ import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
 import com.immunization.common.service.XMLCalendarService;
-import com.immunization.portal.dao.ZahtevDAO;
+import com.immunization.common.dao.ZahtevZaSertifikatDAO;
 
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ZahtevService {
 
-    private ZahtevDAO zahtevDAO;
+    private ZahtevZaSertifikatDAO zahtevDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private UUIDService uuidService;

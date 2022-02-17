@@ -23,5 +23,12 @@ import lombok.AllArgsConstructor;
 public class GradjaninDocsController {
     private GradjaninDocsService docsService;
 
+    @GetMapping
+    public ResponseEntity<Void> getGradjaninDocuments(@AuthenticationPrincipal User user) throws Exception{
+        // this.docsService.getAllGradjaninDocuments(user.getUsername());
+        this.docsService.getAllGradjaninDocuments("Dina.Petrov1125");
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
 
 }

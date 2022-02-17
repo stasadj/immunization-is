@@ -1,4 +1,5 @@
-package com.immunization.portal.dao;
+package com.immunization.common.dao;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +8,12 @@ import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.common.repository.Exist;
 
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+
+@Component
+@AllArgsConstructor
 public class SaglasnostDAO {
 
     private Exist exist;

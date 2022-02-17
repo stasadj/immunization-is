@@ -1,14 +1,14 @@
 package com.immunization.portal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.immunization.common.dao.DigitalniSertifikatDAO;
-import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
-import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
-import com.immunization.portal.dao.ZahtevDAO;
-import com.immunization.portal.dao.InteresovanjeDAO;
-import com.immunization.portal.dao.PotvrdaDAO;
-import com.immunization.portal.dao.SaglasnostDAO;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
+import com.immunization.common.dao.PotvrdaOVakcinacijiDAO;
+import com.immunization.common.dao.SaglasnostDAO;
+import com.immunization.common.dao.ZahtevZaSertifikatDAO;
+import com.immunization.portal.dto.GradjaninDocuments;
 
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,55 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class GradjaninDocsService {
-    private ZahtevDAO zahtevDAO;
-    private InteresovanjeDAO interesovanjeDAO;
+    private ZahtevZaSertifikatDAO zahtevDAO;
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
     private DigitalniSertifikatDAO sertifikatDAO;
-    private PotvrdaDAO potvrdaDAO;
+    private PotvrdaOVakcinacijiDAO potvrdaDAO;
     private SaglasnostDAO saglasnostDAO;
 
 
-    public void getAllGradjaninDocuments(String gradjaninUsername){
-        //TODO get all patient docs 
+    public GradjaninDocuments getAllGradjaninDocuments(String gradjaninUsername) throws Exception{
+
+        GradjaninDocuments docs = new GradjaninDocuments();
+
+        //zahtevi
+        docs.zahtev = new ArrayList<String>();
+        zahtevDAO.getByUsername(gradjaninUsername).forEach(doc -> {
+            getIdFromAboutAndAddToList(doc.getAbout(), docs.zahtev);
+        });
+
+        //interesovanja
+        docs.interesovanje = new ArrayList<String>();
+        interesovanjeDAO.getByUsername(gradjaninUsername).forEach(doc -> {
+            getIdFromAboutAndAddToList(doc.getAbout(), docs.interesovanje);
+        });
+
+        //saglasnosti
+        docs.saglasnost = new ArrayList<String>();
+        saglasnostDAO.getByUsername(gradjaninUsername).forEach(doc -> {
+            getIdFromAboutAndAddToList(doc.getAbout(), docs.saglasnost);
+        });
+
+        //potvrde
+        docs.potvrda = new ArrayList<String>();
+        potvrdaDAO.getByUsername(gradjaninUsername).forEach(doc -> {
+            getIdFromAboutAndAddToList(doc.getAbout(), docs.potvrda);
+        });
+
+        //digitalni sertifikati
+        docs.sertifikat = new ArrayList<String>();
+        sertifikatDAO.getByUsername(gradjaninUsername).forEach(doc -> {
+            getIdFromAboutAndAddToList(doc.getAbout(), docs.sertifikat);
+        });
+
+        return docs;
+    }
+
+
+    private void getIdFromAboutAndAddToList(String about, List<String> list){
+        String id = about.replaceAll("http://www.ftn.uns.ac.rs/", "");
+        System.out.println(id); //for testing
+        list.add(id);
 
     }
 
