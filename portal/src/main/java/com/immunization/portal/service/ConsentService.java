@@ -37,7 +37,7 @@ public class ConsentService {
         // Set abouts before extracting metadata
         setFormAbouts(form, currentUser);
 
-        // Check if the user already consented
+        // Check if the patient already has already filed in an prerequisite interest form
         if (patientGivenInterestForm(currentUser) == false) {
             throw new BadRequestException("Nije popunjen dokument o interesovanju.");
         }
