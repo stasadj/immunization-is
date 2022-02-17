@@ -31,4 +31,8 @@ public class DigitalniSertifikatDAO {
 	public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
 		exist.save(documentId + ".xml", sertifikat);
 	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, DigitalniSertifikat.class);
+	}
 }

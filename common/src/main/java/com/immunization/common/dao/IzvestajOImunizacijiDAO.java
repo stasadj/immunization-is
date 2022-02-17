@@ -15,4 +15,8 @@ public class IzvestajOImunizacijiDAO {
 	public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
 		exist.save(documentId + ".xml", izvestajOImunizaciji);
 	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, IzvestajOImunizaciji.class);
+	}
 }

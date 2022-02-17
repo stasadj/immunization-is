@@ -41,4 +41,8 @@ public class PotvrdaOVakcinacijiDAO {
 		return exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv").stream()
 				.map(o -> (PotvrdaOVakcinaciji) o).collect(Collectors.toList());
 	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, PotvrdaOVakcinaciji.class);
+	}
 }

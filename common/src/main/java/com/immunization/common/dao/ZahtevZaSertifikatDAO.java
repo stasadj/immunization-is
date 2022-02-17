@@ -31,4 +31,8 @@ public class ZahtevZaSertifikatDAO {
 	public void save(String documentId, ZahtevZaSertifikat zahtev) throws Exception {
 		exist.save(documentId, zahtev);
 	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, ZahtevZaSertifikat.class);
+	}
 }
