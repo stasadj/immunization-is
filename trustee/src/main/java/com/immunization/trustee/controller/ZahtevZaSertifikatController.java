@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.trustee.dto.response.Odgovor;
 import com.immunization.trustee.service.ZahtevZaSertifikatService;
 
@@ -23,9 +24,8 @@ public class ZahtevZaSertifikatController {
 	private final ZahtevZaSertifikatService zahtevZaSertifikatService;
 
 	@PostMapping(value = "/accept")
-	public ResponseEntity<Void> accept(@Valid @RequestBody Odgovor odgovor) throws Exception {
-		zahtevZaSertifikatService.accept(odgovor);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<DigitalniSertifikat> accept(@Valid @RequestBody Odgovor odgovor) throws Exception {
+		return new ResponseEntity<>(zahtevZaSertifikatService.accept(odgovor), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/reject")
