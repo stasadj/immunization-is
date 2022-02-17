@@ -1,0 +1,105 @@
+<div>
+    <h1>Izveštaj o imunizaciji za odabrani vremenski period</h1>
+    <mat-form-field color="accent" appearance="fill">
+        <mat-label>Od:</mat-label>
+        <input
+            matInput
+            [matDatepicker]="od"
+            [(ngModel)]="datumOd"
+            (dateChange)="handleInputChange()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="od"></mat-datepicker-toggle>
+        <mat-datepicker #od></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="fill">
+        <mat-label>Do:</mat-label>
+        <input
+            matInput
+            [matDatepicker]="do"
+            [(ngModel)]="datumDo"
+            (dateChange)="handleInputChange()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="do"></mat-datepicker-toggle>
+        <mat-datepicker #do></mat-datepicker>
+    </mat-form-field>
+    <div *ngIf="izvestaj">
+        <h2>Raspodela podnetih/izdatih dokumenata</h2>
+
+        <table id="table1" border="1" class="mat-elevation-z8">
+            <tr>
+                <th mat-sort-header="date">Tip dokumenta</th>
+                <th mat-sort-header="amount">Broj</th>
+            </tr>
+
+            <tr>
+                <td>Interesovanje za imunizaciju</td>
+                <td>{{ izvestaj.interesovanjeNum }}</td>
+            </tr>
+            <tr>
+                <td>Zahtev za digitalni zeleni sertifikat</td>
+                <td>{{ izvestaj.zahtevNum }}</td>
+            </tr>
+            <tr>
+                <td>Digitalni zeleni sertifikat</td>
+                <td>{{ izvestaj.sertifikatNum }}</td>
+            </tr>
+        </table>
+
+        <h2>Raspodela datih vakcina po rednom broju doze</h2>
+
+        <table id="table2" border="1" class="mat-elevation-z8">
+            <tr>
+                <th mat-sort-header="date">Redni broj doze</th>
+                <th mat-sort-header="amount">Broj datih doza</th>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>{{ izvestaj.doza1Num }}</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>{{ izvestaj.doza2Num }}</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>{{ izvestaj.doza3Num }}</td>
+            </tr>
+            <tr>
+                <td><b>Ukupno dato</b></td>
+                <td>
+                    <b>{{ izvestaj.ukupnoDatoNum }}</b>
+                </td>
+            </tr>
+        </table>
+
+        <h2>Raspodela datih vakcina po proizvođačima</h2>
+
+        <table id="table3" border="1" class="mat-elevation-z8">
+            <tr>
+                <th mat-sort-header="date">Naziv proizvođača</th>
+                <th mat-sort-header="amount">Broj datih doza</th>
+            </tr>
+
+            <tr>
+                <td>Pfizer, BioNTech</td>
+                <td>{{ izvestaj.pfizerNum }}</td>
+            </tr>
+            <tr>
+                <td>Sinopharm</td>
+                <td>{{ izvestaj.sinopharmNum }}</td>
+            </tr>
+            <tr>
+                <td>Sputnik V</td>
+                <td>{{ izvestaj.sputnikNum }}</td>
+            </tr>
+            <tr>
+                <td>AstraZeneca, Oxford</td>
+                <td>{{ izvestaj.astraNum }}</td>
+            </tr>
+        </table>
+
+        <button mat-raised-button color="primary">Preuzmi PDF</button>
+        <button mat-raised-button color="primary">Preuzmi XHTML</button>
+    </div>
+</div>
