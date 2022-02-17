@@ -5,5 +5,8 @@
 // Generated on: 2022.02.17 at 08:23:02 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/interesovanje/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/interesovanje/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = {
+@javax.xml.bind.annotation.XmlNs(prefix = "inte", namespaceURI = "http://www.ftn.uns.ac.rs/interesovanje/"),
+@javax.xml.bind.annotation.XmlNs(prefix = "pred", namespaceURI = "http://www.ftn.uns.ac.rs/rdf/predicate/"),
+@javax.xml.bind.annotation.XmlNs(prefix = "xs", namespaceURI = "http://www.w3.org/2001/XMLSchema#") })
 package com.immunization.common.model.interesovanje;
