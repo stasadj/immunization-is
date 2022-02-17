@@ -25,8 +25,6 @@ public class GradjaninDocsController {
     @GetMapping
     @ResponseBody
     public ResponseEntity<GradjaninDocumentsDTO> getGradjaninDocuments(@AuthenticationPrincipal User user) throws Exception{
-        return new ResponseEntity<GradjaninDocumentsDTO>(this.docsService.getAllGradjaninDocuments(user.getUsername()), HttpStatus.OK);
+        return new ResponseEntity<>(docsService.getAllGradjaninDocuments(user.getUsername()), HttpStatus.OK);
     }
-
-
 }

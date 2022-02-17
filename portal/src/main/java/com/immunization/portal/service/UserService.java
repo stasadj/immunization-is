@@ -28,7 +28,7 @@ public class UserService {
                 NumberStringGenerator.generateNumberSequence(4);
     }
 
-    public String registerUser(UserRegistrationDTO dto) throws UserAlreadyExistsException {
+    public String registerUser(UserRegistrationDTO dto) throws Exception {
         if (emailTaken(dto.getEmail())) {
             throw new UserAlreadyExistsException("Email already taken");
         }
@@ -62,11 +62,11 @@ public class UserService {
         emailService.sendRegistrationSuccess(user);
     }
 
-    private boolean emailTaken(String email) {
+    private boolean emailTaken(String email) throws Exception {
         return !userDAO.getByEmail(email).isEmpty();
     }
 
-    private boolean usernameTaken(String username) {
+    private boolean usernameTaken(String username) throws Exception {
         return !userDAO.getByUsername(username).isEmpty();
     }
 

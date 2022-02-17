@@ -21,7 +21,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping(value="/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO dto) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO dto) throws Exception {
         String token = userService.registerUser(dto);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }

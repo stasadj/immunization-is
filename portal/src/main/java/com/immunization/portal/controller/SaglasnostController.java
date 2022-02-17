@@ -2,7 +2,7 @@ package com.immunization.portal.controller;
 
 import com.immunization.common.model.User;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
-import com.immunization.portal.service.ConsentService;
+import com.immunization.portal.service.SaglasnostService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,17 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/api/consent", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
-public class ConsentController {
-    private ConsentService consentService;
+public class SaglasnostController {
+    private SaglasnostService consentService;
 
     @PutMapping(value = "/")
     @PreAuthorize("hasRole('GRADANIN')")
-    public ResponseEntity<Void> immunizationConsent(@AuthenticationPrincipal User user, @RequestBody ObrazacSaglasnostiZaImunizaciju form)
-            throws Exception {
-        if (consentService.fileConsent(form, user)) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Void> immunizationConsent(@AuthenticationPrincipal User user, @RequestBody ObrazacSaglasnostiZaImunizaciju form) throws Exception {
+        consentService.create(form, user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

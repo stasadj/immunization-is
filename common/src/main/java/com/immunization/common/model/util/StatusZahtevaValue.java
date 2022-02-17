@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;simpleType name="status_zahteva_value"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
  *     &lt;enumeration value="NA CEKANJU"/&gt;
- *     &lt;enumeration value="ODOBREN"/&gt;
+ *     &lt;enumeration value="ODBIJEN"/&gt;
  *     &lt;enumeration value="PRIHVACEN"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
@@ -35,7 +35,7 @@ public enum StatusZahtevaValue {
 
     @XmlEnumValue("NA CEKANJU")
     NA_CEKANJU("NA CEKANJU"),
-    ODOBREN("ODOBREN"),
+    ODBIJEN("ODBIJEN"),
     PRIHVACEN("PRIHVACEN");
     private final String value;
 

@@ -1,10 +1,5 @@
 package com.immunization.portal.service;
 
-import java.io.IOException;
-
-import javax.xml.crypto.MarshalException;
-import javax.xml.transform.TransformerException;
-
 import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.dao.ObrazacSaglasnostiZaImunizacijuDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
@@ -12,25 +7,38 @@ import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
 import com.immunization.common.model.saglasnost.EvidencijaOVakcinaciji;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
+import com.immunization.common.service.DocumentService;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
 import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 
+import com.immunization.common.util.PdfTransformer;
+import com.immunization.common.util.XhtmlTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
-public class ConsentService {
-    private MarshallerService marshallerService;
-    private MetadataExtractorService metadataExtractorService;
-    private UUIDService uuidService;
-    private ObrazacSaglasnostiZaImunizacijuDAO obrazacSaglasnostiZaImunizacijuDAO;
-    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
+public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImunizaciju> {
+    private final UUIDService uuidService;
+    private final IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 
-    public boolean fileConsent(ObrazacSaglasnostiZaImunizaciju form, User currentUser) {
+    @Autowired
+    public SaglasnostService(ObrazacSaglasnostiZaImunizacijuDAO documentDAO,
+                             MetadataExtractorService metadataExtractorService,
+                             MarshallerService marshallerService,
+                             PdfTransformer pdfTransformer,
+                             XhtmlTransformer xhtmlTransformer,
+                             UUIDService uuidService,
+                             IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO) {
+        super(ObrazacSaglasnostiZaImunizaciju.class,
+                documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
+        this.uuidService = uuidService;
+        this.interesovanjeDAO = interesovanjeDAO;
+    }
+
+    @Override
+    public void create(ObrazacSaglasnostiZaImunizaciju form, User currentUser) throws Exception {
         // Remove any vaccination records as these cannot be filed in by a patient
         clearVaccinationRecord(form);
 
@@ -38,7 +46,7 @@ public class ConsentService {
         setFormAbouts(form, currentUser);
 
         // Check if the patient already has already filed in an prerequisite interest form
-        if (patientGivenInterestForm(currentUser) == false) {
+        if (!patientGivenInterestForm(currentUser)) {
             throw new BadRequestException("Nije popunjen dokument o interesovanju.");
         }
 
@@ -46,16 +54,9 @@ public class ConsentService {
             throw new FailedMetadataExtractionException();
         }
 
-        try {
-            saveForm(form);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+        String id = form.getAbout().substring(MetadataConstants.ABOUT_CONSENT_PREFIX.length());
 
-    private void saveForm(ObrazacSaglasnostiZaImunizaciju form) throws Exception {
-        obrazacSaglasnostiZaImunizacijuDAO.save(form);
+        documentDAO.save(id, form);
     }
 
     private void clearVaccinationRecord(ObrazacSaglasnostiZaImunizaciju form) {
@@ -82,39 +83,22 @@ public class ConsentService {
     }
 
     private String createFormAboutString(String uuid) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(MetadataConstants.ABOUT_CONSENT_PREFIX).append(uuid);
-        return sb.toString();
+        return MetadataConstants.ABOUT_CONSENT_PREFIX + uuid;
     }
 
     private String createResidenceAboutString(String username) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(MetadataConstants.ABOUT_RESIDENCE_PREFIX).append(username);
-        return sb.toString();
+        return MetadataConstants.ABOUT_RESIDENCE_PREFIX + username;
     }
 
     private String createPatientAboutString(String username) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX).append(username);
-        return sb.toString();
-    }
-
-    private boolean extractAndSaveMetadata(ObrazacSaglasnostiZaImunizaciju form) {
-        try {
-            metadataExtractorService.insertFromString(marshallerService.marshal(form), MetadataConstants.RDF_GRAPH_URI);
-        } catch (IOException | TransformerException | MarshalException e) {
-            return false;
-        }
-
-        return true;
+        return MetadataConstants.ABOUT_LICNI_PODACI_PREFIX + username;
     }
 
     private boolean patientGivenInterestForm(User user) {
         try {
-            return interesovanjeDAO.retrieveById(user.getUsername().concat(".xml")).isPresent();
+            return interesovanjeDAO.retrieveById(user.getUsername()).isPresent();
         } catch (Exception e) {
             return false;
         }
     }
-
 }

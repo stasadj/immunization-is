@@ -5,6 +5,7 @@ import java.util.List;
 import com.immunization.common.dao.UserDAO;
 import com.immunization.common.model.User;
 
+import lombok.SneakyThrows;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDAO userDao;
 
+    @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> matches = userDao.getByUsername(username);

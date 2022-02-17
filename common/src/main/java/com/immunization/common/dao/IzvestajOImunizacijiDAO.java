@@ -1,22 +1,15 @@
 package com.immunization.common.dao;
 
-import org.springframework.stereotype.Component;
-
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.common.repository.Exist;
-
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
-public class IzvestajOImunizacijiDAO {
-	private final Exist exist;
+public class IzvestajOImunizacijiDAO extends DocumentDAO<IzvestajOImunizaciji> {
 
-	public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
-		exist.save(documentId, izvestajOImunizaciji);
-	}
-
-	public String getXML(String documentId) throws Exception {
-		return exist.retrieveRawXmlById(documentId, IzvestajOImunizaciji.class);
+	@Autowired
+	public IzvestajOImunizacijiDAO(Exist exist) {
+		super(exist, IzvestajOImunizaciji.class);
 	}
 }
