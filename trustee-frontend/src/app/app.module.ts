@@ -28,7 +28,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 import { ImmunizationReportComponent } from './components/immunization-report/immunization-report.component';
-import { CertificateIssuingComponent } from './components/certificate-issuing/certificate-issuing.component';
+import { CertificateRequestsComponent } from './components/certificate-issuing/certificate-requests/certificate-requests.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +38,7 @@ import { CertificateIssuingComponent } from './components/certificate-issuing/ce
         LoginComponent,
         NotFoundComponent,
         ImmunizationReportComponent,
-        CertificateIssuingComponent,
+        CertificateRequestsComponent,
     ],
     imports: [
         BrowserModule,
