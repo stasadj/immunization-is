@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
+import com.immunization.common.constants.MetadataConstants;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
@@ -16,8 +18,6 @@ import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
 import com.immunization.common.util.PdfTransformer;
 import com.immunization.common.util.XhtmlTransformer;
-import com.immunization.portal.constants.MetadataConstants;
-import com.immunization.portal.dao.InteresovanjeDAO;
 import com.immunization.portal.service.email.PortalEmailService;
 
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class InteresovanjeService {
 
-    private InteresovanjeDAO interesovanjeDAO;
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private PortalEmailService emailService;

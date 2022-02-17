@@ -7,6 +7,8 @@ import com.immunization.common.repository.Exist;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
@@ -20,4 +22,18 @@ public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
 
 		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "inte");
 	}
+
+	public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
+		IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+		return interesovanje == null ? Optional.empty() : Optional.of(interesovanje);
+	}
+
+	public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
+		exist.save(documentId, interesovanje);
+	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+	}
+
 }

@@ -3,9 +3,11 @@ package com.immunization.trustee.service;
 import java.math.BigInteger;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.xml.datatype.DatatypeFactory;
 
+import com.immunization.common.exception.base.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.immunization.common.constants.MetadataConstants;
@@ -44,7 +46,9 @@ public class ZahtevZaSertifikatService {
 
 	public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
 		String zahtevUUID = this.extractUUIDFromAbout(odgovor.getZahtevURI());
-		ZahtevZaSertifikat zahtev = zahtevDAO.getByUUID(zahtevUUID);
+
+		Optional<ZahtevZaSertifikat> maybeZahtev = zahtevDAO.retrieveById(zahtevUUID);
+		ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(()->new NotFoundException(""));
 		zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
 		zahtevDAO.save(zahtevUUID + ".xml", zahtev);
 
@@ -59,7 +63,8 @@ public class ZahtevZaSertifikatService {
 
 	public void reject(Odgovor odgovor) throws Exception {
 		String zahtevUUID = this.extractUUIDFromAbout(odgovor.getZahtevURI());
-		ZahtevZaSertifikat zahtev = zahtevDAO.getByUUID(zahtevUUID);
+		Optional<ZahtevZaSertifikat> maybeZahtev = zahtevDAO.retrieveById(zahtevUUID);
+		ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(()->new NotFoundException(""));
 		zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
 		zahtevDAO.save(zahtevUUID + ".xml", zahtev);
 
