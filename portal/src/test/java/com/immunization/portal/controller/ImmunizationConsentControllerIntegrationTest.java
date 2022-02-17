@@ -1,13 +1,14 @@
 package com.immunization.portal.controller;
 
 import java.io.File;
+
 import java.nio.charset.StandardCharsets;
 
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.portal.constants.TestConstants;
 
-import static com.immunization.portal.constants.MetadataConstants.RDF_GRAPH_URI;
+import static com.immunization.common.constants.MetadataConstants.RDF_GRAPH_URI;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
@@ -30,37 +31,37 @@ import org.springframework.web.context.WebApplicationContext;
 @AutoConfigureMockMvc
 public class ImmunizationConsentControllerIntegrationTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private MetadataExtractorService metadataExtractorService;
+	@Autowired
+	private MetadataExtractorService metadataExtractorService;
 
-    @Autowired
-    private MarshallerService marshallerService;
+	@Autowired
+	private MarshallerService marshallerService;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @BeforeAll
-    void setup() throws Exception {
-        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
+	@BeforeAll
+	void setup() throws Exception {
+		mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+	}
 
-    @AfterAll
-    void dropGraph() throws Exception {
+	@AfterAll
+	void dropGraph() throws Exception {
 		metadataExtractorService.dropGraph(RDF_GRAPH_URI);
-    }
+	}
 
-    // @Test
-    // @Order(1)
-    // void consentToImmunization_succesfully() throws Exception {
-    //     File file = new File("./src/main/resources/documents/saglasnost.xml");
-    //     String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+	// @Test
+	// @Order(1)
+	// void consentToImmunization_succesfully() throws Exception {
+	// File file = new File("./src/main/resources/documents/saglasnost.xml");
+	// String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
-    //     mockMvc.perform(MockMvcRequestBuilders.put("/api/consent/")
-    //             .contentType(MediaType.APPLICATION_XML)
-    //             .characterEncoding(StandardCharsets.UTF_8)
-    //             .content(xmlData))
-    //             .andExpect(MockMvcResultMatchers.status().isOk());
-    // }
+	// mockMvc.perform(MockMvcRequestBuilders.put("/api/consent/")
+	// .contentType(MediaType.APPLICATION_XML)
+	// .characterEncoding(StandardCharsets.UTF_8)
+	// .content(xmlData))
+	// .andExpect(MockMvcResultMatchers.status().isOk());
+	// }
 }

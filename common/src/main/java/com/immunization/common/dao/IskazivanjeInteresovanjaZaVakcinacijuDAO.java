@@ -15,9 +15,9 @@ public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
 
 	public long getNumberOfDocumentsOfInterest(String startDate, String endDate) throws Exception {
 
-		String xpathExp = "//ns3:iskazivanje_interesovanja_za_vakcinaciju[number(translate(@datum,'-',''))>="
+		String xpathExp = "//inte:iskazivanje_interesovanja_za_vakcinaciju[number(translate(@datum,'-',''))>="
 				+ startDate + " and number(translate(@datum,'-',''))<=" + endDate + "]";
 
-		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "ns3");
+		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "inte");
 	}
 }
