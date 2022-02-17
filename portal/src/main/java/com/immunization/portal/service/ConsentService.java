@@ -6,14 +6,16 @@ import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
 import com.immunization.common.constants.MetadataConstants;
-import com.immunization.common.dao.UserDAO;
+import com.immunization.common.dao.ObrazacSaglasnostiZaImunizacijuDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
-import com.immunization.common.exception.base.ForbiddenException;
+import com.immunization.common.model.User;
+import com.immunization.common.model.saglasnost.EvidencijaOVakcinaciji;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
-import com.immunization.common.repository.Exist;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
+import com.immunization.common.service.UUIDService;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 
 import org.springframework.stereotype.Service;
 
@@ -22,65 +24,97 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ConsentService {
-	private Exist exist;
-	private MarshallerService marshallerService;
-	private MetadataExtractorService metadataExtractorService;
-	private UserDAO userDAO;
+    private MarshallerService marshallerService;
+    private MetadataExtractorService metadataExtractorService;
+    private UUIDService uuidService;
+    private ObrazacSaglasnostiZaImunizacijuDAO obrazacSaglasnostiZaImunizacijuDAO;
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 
-	public boolean fileConsent(ObrazacSaglasnostiZaImunizaciju form) {
-		// Check if patient exists
-		String username = extractUsernameFromAbout(form.getInformacijeOPacijentu().getAbout());
-		if (!patientExists(username)) {
-			throw new ForbiddenException("Patient does not exist");
-		}
+    public boolean fileConsent(ObrazacSaglasnostiZaImunizaciju form, User currentUser) {
+        // Remove any vaccination records as these cannot be filed in by a patient
+        clearVaccinationRecord(form);
 
-		// Check if he already consented
-		if (patientAlreadyConsented(username)) {
-			throw new BadRequestException("Patient already consented");
-		}
+        // Set abouts before extracting metadata
+        setFormAbouts(form, currentUser);
 
-		if (!extractAndSaveMetadata(form)) {
-			throw new FailedMetadataExtractionException();
-		}
+        // Check if the patient already has already filed in an prerequisite interest form
+        if (patientGivenInterestForm(currentUser) == false) {
+            throw new BadRequestException("Nije popunjen dokument o interesovanju.");
+        }
 
-		try {
-			saveForm(form);
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
+        if (!extractAndSaveMetadata(form)) {
+            throw new FailedMetadataExtractionException();
+        }
 
-	private String extractUsernameFromAbout(String about) {
-		return about.substring(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX.length());
-	}
+        try {
+            saveForm(form);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 
-	private void saveForm(ObrazacSaglasnostiZaImunizaciju form) throws Exception {
-		// TODO: Get uuid here
-		String uuid = "123";
-		String formID = MetadataConstants.CONSENT_ABOUT_PREFIX.concat(uuid);
-		String filename = uuid.concat(".xml");
-		form.setAbout(formID);
-		exist.save(filename, form);
-	}
+    private void saveForm(ObrazacSaglasnostiZaImunizaciju form) throws Exception {
+        obrazacSaglasnostiZaImunizacijuDAO.save(form);
+    }
 
-	private boolean extractAndSaveMetadata(ObrazacSaglasnostiZaImunizaciju form) {
-		try {
-			metadataExtractorService.insertFromString(marshallerService.marshal(form), MetadataConstants.RDF_GRAPH_URI);
-		} catch (IOException | TransformerException | MarshalException e) {
-			return false;
-		}
+    private void clearVaccinationRecord(ObrazacSaglasnostiZaImunizaciju form) {
+        EvidencijaOVakcinaciji evidencija = form.getEvidencijaOVakcinaciji();
+        evidencija.getIzvrsenaImunizacija().getVakcina().clear();
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setFaksimil("");
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setIme("");
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setPrezime("");
+        evidencija.getZdravstvenaUstanova().getNaziv().setValue("");
+        evidencija.getZdravstvenaUstanova().setVakcinacijskiPunkt("");
+        evidencija.getKontraindikacija().getPrivremeneKontraindikacije().setDatumUtvrdjivanja("");
+        evidencija.getKontraindikacija().getPrivremeneKontraindikacije().setDijagnoza("");
+        evidencija.getKontraindikacija().getTrajneKontraindikacije().setOdlukaKomisije("");
+    }
 
-		return true;
-	}
+    private void setFormAbouts(ObrazacSaglasnostiZaImunizaciju form, User user) {
+        String formURI = createFormAboutString(uuidService.getUUID());
+        String residenceURI = createResidenceAboutString(user.getUsername());
+        String patientURI = createPatientAboutString(user.getUsername());
 
-	private boolean patientAlreadyConsented(String username) {
-		// TODO: Look for patient through exist?
-		return false;
-	}
+        form.getInformacijeOPacijentu().setAbout(patientURI);
+        form.getInformacijeOPacijentu().getPrebivaliste().setAbout(residenceURI);
+        form.setAbout(formURI);
+    }
 
-	private boolean patientExists(String username) {
-		return userDAO.getByUsername(username).isEmpty() == false;
-	}
+    private String createFormAboutString(String uuid) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(MetadataConstants.ABOUT_CONSENT_PREFIX).append(uuid);
+        return sb.toString();
+    }
+
+    private String createResidenceAboutString(String username) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(MetadataConstants.ABOUT_RESIDENCE_PREFIX).append(username);
+        return sb.toString();
+    }
+
+    private String createPatientAboutString(String username) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX).append(username);
+        return sb.toString();
+    }
+
+    private boolean extractAndSaveMetadata(ObrazacSaglasnostiZaImunizaciju form) {
+        try {
+            metadataExtractorService.insertFromString(marshallerService.marshal(form), MetadataConstants.RDF_GRAPH_URI);
+        } catch (IOException | TransformerException | MarshalException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean patientGivenInterestForm(User user) {
+        try {
+            return interesovanjeDAO.retrieveById(user.getUsername().concat(".xml")).isPresent();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
