@@ -13,6 +13,7 @@ import com.immunization.common.dao.DigitalniSertifikatDAO;
 import com.immunization.common.dao.PotvrdaOVakcinacijiDAO;
 import com.immunization.common.dao.UserDAO;
 import com.immunization.common.dao.ZahtevZaSertifikatDAO;
+import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.digitalni_sertifikat.LicniPodaci;
@@ -36,8 +37,10 @@ public class ZahtevZaSertifikatService {
 	private final DigitalniSertifikatDAO sertifikatDAO;
 	private final PotvrdaOVakcinacijiDAO potvrdaDAO;
 	private final UserDAO userDAO;
+
+	private final TrusteeMetadataExtractorService metadataExtractorService;
 	private final TrusteeEmailService emailService;
-	private UUIDService uuidService;
+	private final UUIDService uuidService;
 
 	public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
 		String zahtevUUID = this.extractUUIDFromAbout(odgovor.getZahtevURI());
@@ -77,6 +80,11 @@ public class ZahtevZaSertifikatService {
 		sertifikat.setTestovi(this.createTestovi());
 		byte b[] = { 20, 10, 30, 5 };
 		sertifikat.setPotpis(b);
+
+		if (!metadataExtractorService.extractAndSaveMetadata(sertifikat)) {
+			throw new FailedMetadataExtractionException();
+		}
+
 		sertifikatDAO.save(uuid, sertifikat);
 
 		return sertifikat;
@@ -142,5 +150,4 @@ public class ZahtevZaSertifikatService {
 	private String extractUUIDFromAbout(String about) {
 		return about.substring(MetadataConstants.REQUEST_ABOUT_PREFIX.length());
 	}
-
 }
