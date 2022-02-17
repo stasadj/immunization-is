@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class ZahtevZaSertifikatDAO {
@@ -26,9 +28,9 @@ public class ZahtevZaSertifikatDAO {
 		return exist.count(xpathExp, ZahtevZaSertifikat.class, REQUEST_NAMESPACE, "zaht");
 	}
 
-	public ZahtevZaSertifikat getByUUID(String uuid) throws Exception {
-		ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(uuid + ".xml", ZahtevZaSertifikat.class);
-		return zahtev;
+	public Optional<ZahtevZaSertifikat> retrieveById(String documentId) throws Exception {
+		ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(documentId, ZahtevZaSertifikat.class);
+		return zahtev == null ? Optional.empty() : Optional.of(zahtev);
 	}
 
 

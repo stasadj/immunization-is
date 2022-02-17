@@ -8,6 +8,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.TransformerException;
 
 import com.immunization.common.constants.MetadataConstants;
+import com.immunization.common.dao.ZahtevZaSertifikatDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.User;
 import com.immunization.common.model.util.StatusZahtevaValue;

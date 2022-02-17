@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
@@ -45,4 +47,9 @@ public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
 		exist.save(documentId, interesovanje);
 
 	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+	}
+
 }
