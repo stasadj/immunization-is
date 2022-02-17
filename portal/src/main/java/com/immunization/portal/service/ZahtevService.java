@@ -9,6 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.TransformerException;
 
 import com.immunization.common.exception.FailedMetadataExtractionException;
+import com.immunization.common.model.User;
 import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat.MetaPodaci.StatusZahteva;
@@ -34,7 +35,7 @@ public class ZahtevService {
     private XMLCalendarService calendarUtil;
 
 
-    public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev) throws Exception {
+    public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev, User user) throws Exception {
 
         String uuid = uuidService.getUUID();
 
@@ -42,7 +43,7 @@ public class ZahtevService {
         zahtev.setAbout("http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/" + uuid);
 
         //setting podnosilac jmbg in podnosilac about
-        zahtev.getPodnosilacZahteva().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + zahtev.getPodnosilacZahteva().getJmbg().getValue());
+        zahtev.getPodnosilacZahteva().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + user.getUsername());
 
         //setting new zahtev status
         StatusZahteva status = new StatusZahteva();
