@@ -49,6 +49,7 @@
         <button
             id="save_item_button"
             mat-button
+            [disabled]="newZahtevFormGroup.invalid"
             (click)="onSaveClick()"
             cdkFocusInitial
         >
