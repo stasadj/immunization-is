@@ -7,6 +7,8 @@ import com.immunization.common.repository.Exist;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
@@ -15,9 +17,23 @@ public class IskazivanjeInteresovanjaZaVakcinacijuDAO {
 
 	public long getNumberOfDocumentsOfInterest(String startDate, String endDate) throws Exception {
 
-		String xpathExp = "//ns3:iskazivanje_interesovanja_za_vakcinaciju[number(translate(@datum,'-',''))>="
+		String xpathExp = "//inte:iskazivanje_interesovanja_za_vakcinaciju[number(translate(@datum,'-',''))>="
 				+ startDate + " and number(translate(@datum,'-',''))<=" + endDate + "]";
 
-		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "ns3");
+		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "inte");
 	}
+
+	public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
+		IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+		return interesovanje == null ? Optional.empty() : Optional.of(interesovanje);
+	}
+
+	public void save(String documentId, IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
+		exist.save(documentId, interesovanje);
+	}
+
+	public String getXML(String documentId) throws Exception {
+		return exist.retrieveRawXmlById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);
+	}
+
 }

@@ -1,19 +1,23 @@
 package com.immunization.portal.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
+import com.immunization.common.constants.MetadataConstants;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
+import com.immunization.common.model.User;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
-import com.immunization.common.constants.MetadataConstants;
-import com.immunization.portal.dao.InteresovanjeDAO;
+import com.immunization.common.util.PdfTransformer;
+import com.immunization.common.util.XhtmlTransformer;
 import com.immunization.portal.service.email.PortalEmailService;
 
 import org.springframework.stereotype.Service;
@@ -23,43 +27,46 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class InteresovanjeService {
-	
-    private InteresovanjeDAO interesovanjeDAO;
+
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
     private MetadataExtractorService metadataExtractorService;
     private MarshallerService marshallerService;
     private PortalEmailService emailService;
     private XMLCalendarService calendarUtil;
+    private PdfTransformer pdfTransformer;
+    private XhtmlTransformer xhtmlTransformer;
 
+    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user)
+            throws Exception {
 
-    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje) throws Exception {
-    	
-    	String documentId = interesovanje.getPacijent().getJmbg().getValue() + ".xml";
-    
+        String documentId = user.getUsername() + ".xml";
+
         Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
         if (result.isPresent()) {
-        	throw new BadRequestException("Interesovanje for this user already exists. ");
-        } 
+            throw new BadRequestException("Interesovanje for this user already exists. ");
+        }
 
-        //setting unique about
+        // setting unique about
         interesovanje.setAbout("http://www.ftn.uns.ac.rs/interesovanje/" + documentId);
 
-        //setting patient about 
-        interesovanje.getPacijent().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + interesovanje.getPacijent().getJmbg().getValue());
+        // setting patient about
+        interesovanje.getPacijent().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + user.getUsername());
 
-        //setting date
+        // setting date
         interesovanje.setDatum(calendarUtil.getCurrentDate().toString());
-        	
+
         if (!extractAndSaveMetadata(interesovanje)) {
             throw new FailedMetadataExtractionException();
         }
 
         interesovanjeDAO.save(documentId, interesovanje);
 
-        //send email to patient 
-        emailService.sendInteresovanjeConfirmation(interesovanje, interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
+        // send email to patient
+        emailService.sendInteresovanjeConfirmation(interesovanje,
+                interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
 
         return interesovanje;
-    		
+
     }
 
     private boolean extractAndSaveMetadata(IskazivanjeInteresovanjaZaVakcinaciju form) {
@@ -70,6 +77,18 @@ public class InteresovanjeService {
         }
 
         return true;
+    }
+
+    public ByteArrayInputStream generatePdf(String documentId) throws Exception {
+        String xml = interesovanjeDAO.getXML(documentId);
+        System.out.println(xml);
+        return pdfTransformer.generatePDF(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
+    }
+
+    public ByteArrayInputStream generateXhtml(String documentId) throws Exception {
+        String xml = interesovanjeDAO.getXML(documentId);
+        System.out.println(xml);
+        return xhtmlTransformer.generateXHTML(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
     }
 
 }

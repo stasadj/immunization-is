@@ -29,10 +29,10 @@ public class ObrazacSaglasnostiZaImunizacijuDAO {
         List<ObrazacSaglasnostiZaImunizaciju> list = new ArrayList<>();
         try {
             exist.query(String.format(
-                    "//ns5:obrazac_saglasnosti_za_imunizaciju[ns5:informacije_o_pacijentu[@about=\"%s\"]]",
+                    "//sagl:obrazac_saglasnosti_za_imunizaciju[sagl:informacije_o_pacijentu[@about=\"%s\"]]",
                     aboutUri), ObrazacSaglasnostiZaImunizaciju.class,
                     CONSENT_NAMESPACE,
-                    "ns5")
+                    "sagl")
                     .forEach(item -> list.add((ObrazacSaglasnostiZaImunizaciju) item));
         } catch (Exception e) {
         }

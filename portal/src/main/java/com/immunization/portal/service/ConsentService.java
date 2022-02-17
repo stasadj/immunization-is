@@ -15,7 +15,7 @@ import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
-import com.immunization.portal.dao.InteresovanjeDAO;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class ConsentService {
     private MetadataExtractorService metadataExtractorService;
     private UUIDService uuidService;
     private ObrazacSaglasnostiZaImunizacijuDAO obrazacSaglasnostiZaImunizacijuDAO;
-    private InteresovanjeDAO interesovanjeDAO;
+    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 
     public boolean fileConsent(ObrazacSaglasnostiZaImunizaciju form, User currentUser) {
         // Remove any vaccination records as these cannot be filed in by a patient

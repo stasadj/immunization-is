@@ -14,6 +14,7 @@ import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.common.dao.IzvestajOImunizacijiDAO;
 import com.immunization.common.dao.PotvrdaOVakcinacijiDAO;
 import com.immunization.common.dao.ZahtevZaSertifikatDAO;
+import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci.DatumIzdavanja;
@@ -28,20 +29,21 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ImmunizationReportService {
+public class IzvestajOImunizacijiService {
 	private final IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 	private final ZahtevZaSertifikatDAO zahtevDAO;
 	private final DigitalniSertifikatDAO sertifikatDAO;
 	private final PotvrdaOVakcinacijiDAO potvrdaDAO;
 	private final IzvestajOImunizacijiDAO izvestajDAO;
 
+	private final TrusteeMetadataExtractorService metadataExtractorService;
+
 	public IzvestajOImunizaciji getImmunizationReport(LocalDate startDate, LocalDate endDate) throws Exception {
 		String startDateNum = startDate.toString().replace("-", "");
 		String endDateNum = endDate.toString().replace("-", "");
 
 		IzvestajOImunizaciji izvestajOImunizaciji = new IzvestajOImunizaciji();
-		izvestajOImunizaciji
-				.setAbout("http://www.ftn.uns.ac.rs/izvestaj/" + startDate + "-" + endDate);
+		izvestajOImunizaciji.setAbout("http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/" + startDate + "-" + endDate);
 		izvestajOImunizaciji.setMetaPodaci(this.createMetaData(startDate, endDate));
 		izvestajOImunizaciji.setBrojDokumenataOInteresovanju(
 				interesovanjeDAO.getNumberOfDocumentsOfInterest(startDateNum, endDateNum));
@@ -53,7 +55,13 @@ public class ImmunizationReportService {
 				this.getDistributionOfGivenVaccinesByDose(startDateNum, endDateNum));
 		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoProizvodjacima(
 				this.getDistributionOfGivenVaccinesByManufacturer(startDateNum, endDateNum));
+
+		if (!metadataExtractorService.extractAndSaveMetadata(izvestajOImunizaciji)) {
+			throw new FailedMetadataExtractionException();
+		}
+
 		izvestajDAO.save(startDateNum + endDateNum, izvestajOImunizaciji);
+
 		return izvestajOImunizaciji;
 	}
 

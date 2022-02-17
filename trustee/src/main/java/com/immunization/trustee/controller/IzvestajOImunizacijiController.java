@@ -12,21 +12,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
-import com.immunization.trustee.service.ImmunizationReportService;
+import com.immunization.trustee.service.IzvestajOImunizacijiService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/api/immunization-report", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
 @AllArgsConstructor
-public class ImmunizationReportController {
-	private final ImmunizationReportService immunizationReportService;
+public class IzvestajOImunizacijiController {
+	private final IzvestajOImunizacijiService izvestajOImunizacijiService;
 
 	@GetMapping
 	public ResponseEntity<IzvestajOImunizaciji> getImmunizationReport(
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws Exception {
-		return new ResponseEntity<>(immunizationReportService.getImmunizationReport(startDate, endDate), HttpStatus.OK);
+		return new ResponseEntity<>(izvestajOImunizacijiService.getImmunizationReport(startDate, endDate),
+				HttpStatus.OK);
 	}
 
 }

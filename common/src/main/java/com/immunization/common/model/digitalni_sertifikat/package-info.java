@@ -5,5 +5,8 @@
 // Generated on: 2022.02.16 at 11:58:33 AM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/digitalni-sertifikat/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/digitalni-sertifikat/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = {
+		@javax.xml.bind.annotation.XmlNs(prefix = "sert", namespaceURI = "http://www.ftn.uns.ac.rs/digitalni-sertifikat/"),
+		@javax.xml.bind.annotation.XmlNs(prefix = "pred", namespaceURI = "http://www.ftn.uns.ac.rs/rdf/predicate/"),
+		@javax.xml.bind.annotation.XmlNs(prefix = "xs", namespaceURI = "http://www.w3.org/2001/XMLSchema#") })
 package com.immunization.common.model.digitalni_sertifikat;
