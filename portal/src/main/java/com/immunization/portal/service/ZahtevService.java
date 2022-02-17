@@ -1,6 +1,7 @@
 package com.immunization.portal.service;
 
 import java.io.IOException;
+import java.io.ObjectInputFilter.Status;
 
 import javax.xml.crypto.MarshalException;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -43,9 +44,7 @@ public class ZahtevService {
         zahtev.getPodnosilacZahteva().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + user.getUsername());
 
         // setting new zahtev status
-        StatusZahteva status = new StatusZahteva();
-        status.setValue(StatusZahtevaValue.NA_CEKANJU);
-        zahtev.getMetaPodaci().setStatusZahteva(status);
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.NA_CEKANJU);
 
         // setting date
         XMLGregorianCalendar xmlCalendar = calendarUtil.getCurrentDate();
