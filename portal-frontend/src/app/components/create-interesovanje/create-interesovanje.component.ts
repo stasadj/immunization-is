@@ -4,6 +4,7 @@ import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InteresovanjeService } from 'src/app/services/interesovanje.service';
 import { ToastrService } from 'ngx-toastr';
 import { Drzavljanstvo } from 'src/app/model/Drzavljanstvo';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-create-interesovanje',
@@ -11,19 +12,7 @@ import { Drzavljanstvo } from 'src/app/model/Drzavljanstvo';
     styleUrls: ['./create-interesovanje.component.less'],
 })
 export class CreateInteresovanjeComponent implements OnInit {
-
-    //TODO delete default values after testing
-    public newInteresovanje: Interesovanje = {
-        drzavljanstvo: Drzavljanstvo['Državljanin Republike Srbije'],
-        jmbg: 1111111111111,
-        punoIme: 'Test Test',
-        email: 'test@gmail.com',
-        fiksni: 123111111,
-        mobilni: 1611111111,
-        davalacKrvi: false,
-        opstinaVakcinacije: 'Novi Sad',
-        opcije: [],
-    };
+    public loggedUser = { FIRST_NAME: '', LAST_NAME: '', EMAIL: '' };
 
     public opcije: FormGroup;
     public newInteresovanjeFormGroup: FormGroup;
@@ -35,6 +24,7 @@ export class CreateInteresovanjeComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private interesovanjeService: InteresovanjeService,
+        private authService: AuthService,
         private toastr: ToastrService
     ) {
         this.opcije = fb.group({
@@ -47,9 +37,9 @@ export class CreateInteresovanjeComponent implements OnInit {
         });
 
         this.newInteresovanjeFormGroup = this.fb.group({
-            drzavljanstvo: [this.newInteresovanje.drzavljanstvo, Validators.required],
+            drzavljanstvo: [null, Validators.required],
             jmbg: [
-                this.newInteresovanje.jmbg,
+                null,
                 [
                     Validators.required,
                     Validators.minLength(13),
@@ -57,40 +47,43 @@ export class CreateInteresovanjeComponent implements OnInit {
                     Validators.pattern('[0-9]{13}'),
                 ],
             ],
-            punoIme: [
-                this.newInteresovanje.punoIme,
-                Validators.required,
-            ],
+            punoIme: [{ value: null, disabled: true }, Validators.required],
 
             email: [
-                this.newInteresovanje.email,
+                { value: null, disabled: true },
                 [Validators.required, Validators.email],
             ],
             mobilni: [
-                this.newInteresovanje.mobilni,
+                null,
                 [Validators.required, Validators.pattern('[0-9]{9,11}')],
             ],
             fiksni: [
-                this.newInteresovanje.fiksni,
+                null,
                 [Validators.required, Validators.pattern('[0-9]{9,10}')],
             ],
-            opstinaVakcinacije: [
-                this.newInteresovanje.opstinaVakcinacije,
-                Validators.required,
-            ],
-            davalacKrvi: [
-                this.newInteresovanje.davalacKrvi,
-                Validators.required,
-            ],
+            opstinaVakcinacije: [null, Validators.required],
+            davalacKrvi: [false, Validators.required],
         });
     }
 
-    ngAfterViewInit(){
-        
+    ngOnInit(): void {
+        this.authService.whoAmI().subscribe((res) => {
+            this.loggedUser = res;
+
+            this.newInteresovanjeFormGroup.patchValue({
+                punoIme:
+                    this.loggedUser.FIRST_NAME +
+                    ' ' +
+                    this.loggedUser.LAST_NAME,
+
+                email: this.loggedUser.EMAIL,
+            });
+        });
     }
 
-    onSaveClick(): void {
+    ngAfterViewInit() {}
 
+    onSaveClick(): void {
         if (
             !Object.keys(this.opcije.value).some((k) => !!this.opcije.value[k])
         ) {
@@ -98,23 +91,23 @@ export class CreateInteresovanjeComponent implements OnInit {
             return;
         }
 
-
-        this.newInteresovanje = {
+        let newInteresovanje: Interesovanje = {
             drzavljanstvo: this.newInteresovanjeFormGroup.value.drzavljanstvo,
             jmbg: this.newInteresovanjeFormGroup.value.jmbg,
-            punoIme: this.newInteresovanjeFormGroup.value.punoIme,
-            email: this.newInteresovanjeFormGroup.value.email,
+            punoIme: this.newInteresovanjeFormGroup.getRawValue().punoIme,
+            email: this.newInteresovanjeFormGroup.getRawValue().email,
             fiksni: this.newInteresovanjeFormGroup.value.fiksni,
             mobilni: this.newInteresovanjeFormGroup.value.mobilni,
             davalacKrvi: this.newInteresovanjeFormGroup.value.davalacKrvi,
-            opstinaVakcinacije: this.newInteresovanjeFormGroup.value.opstinaVakcinacije,
-            opcije:  Object.keys(this.opcije.value).filter(
+            opstinaVakcinacije:
+                this.newInteresovanjeFormGroup.value.opstinaVakcinacije,
+            opcije: Object.keys(this.opcije.value).filter(
                 (key) => this.opcije.get(key)?.value === true
             ),
         };
 
 
-        this.interesovanjeService.create(this.newInteresovanje).subscribe(
+        this.interesovanjeService.create(newInteresovanje).subscribe(
             (res) => {
                 this.toastr.success(
                     'Interesovanje uspešno zabeleženo. Proverite Vaš mejl.'
@@ -144,6 +137,4 @@ export class CreateInteresovanjeComponent implements OnInit {
             });
         }
     }
-
-    ngOnInit(): void {}
 }

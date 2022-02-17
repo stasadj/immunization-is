@@ -66,9 +66,9 @@ export class CreateZahtevComponent implements OnInit {
 
             this.newZahtevFormGroup.patchValue({
                 imeIPrezime:
-                    this.loggedUser.FIRST_NAME[0] +
+                    this.loggedUser.FIRST_NAME +
                     ' ' +
-                    this.loggedUser.LAST_NAME[0],
+                    this.loggedUser.LAST_NAME,
             });
         });
     }
@@ -82,10 +82,7 @@ export class CreateZahtevComponent implements OnInit {
     onSaveClick() {
         let newZahtev: ZahtevZaSertifikat = {
             mestoIzdavanja: this.newZahtevFormGroup.value.mestoIzdavanja,
-            imeIPrezime:
-                this.loggedUser.FIRST_NAME[0] +
-                ' ' +
-                this.loggedUser.LAST_NAME[0],
+            imeIPrezime: this.newZahtevFormGroup.getRawValue().imeIPrezime,
             datumRodjenja: this.newZahtevFormGroup.value.datumRodjenja,
             pol: this.newZahtevFormGroup.value.pol,
             jmbg: this.newZahtevFormGroup.value.jmbg,

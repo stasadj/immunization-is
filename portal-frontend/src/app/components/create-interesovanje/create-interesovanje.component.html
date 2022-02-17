@@ -5,11 +5,16 @@
         <form [formGroup]="newInteresovanjeFormGroup" *ngIf="newInteresovanjeFormGroup">
         <mat-form-field>
             <mat-label>Puno ime</mat-label>
-            <input formControlName="punoIme" matInput>
+            <input matInput formControlName="punoIme" readonly>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Drzavljanstvo</mat-label>
+            <mat-label>E-mail adresa</mat-label>
+            <input matInput formControlName="email" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Državljanstvo</mat-label>
             <mat-select formControlName="drzavljanstvo">
                 <mat-option [value]="srpsko">Državljanin Republike Srbije</mat-option>
                 <mat-option [value]="saBoravkom">Strani državljanin sa boravkom u RS</mat-option>
@@ -31,11 +36,6 @@
         <mat-form-field>
             <mat-label>Mobilni telefon</mat-label>
             <input matInput formControlName="mobilni">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>E-mail adresa</mat-label>
-            <input matInput formControlName="email">
         </mat-form-field>
 
         <mat-form-field>
