@@ -8,26 +8,18 @@
                 <th>JMBG korisnika</th>
                 <th></th>
             </tr>
-
             <tr>
                 <td>12343543543534</td>
                 <td>2021-01-01</td>
                 <td>1234567891111</td>
                 <td>
-                    <button mat-flat-button color="primary">Odgovori</button>
-                    <button mat-flat-button color="accent">
-                        Prikaži dokument
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>12343543543534</td>
-                <td>2021-01-01</td>
-                <td>1234567891111</td>
-                <td>
-                    <button mat-flat-button color="primary">Odgovori</button>
-                    <button mat-flat-button color="accent">
-                        Prikaži dokument
+                    <button mat-flat-button>Prikaži dokument</button>
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        (click)="handleRespond()"
+                    >
+                        Odgovori
                     </button>
                 </td>
             </tr>
