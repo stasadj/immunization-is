@@ -16,12 +16,16 @@ export class GradjaninPageComponent implements OnInit {
         this.authService.whoAmI().subscribe((res) => {
             console.log(res);
             this.loggedUser = res;
+            this.gradjaninService.getDocs().subscribe(res => {
+                    console.log(res);
+                    this.documents = res;
+                })
         })
 
-        this.gradjaninService.getDocs().subscribe(res => {
-            console.log(res);
-            this.documents = res;
-        })
+        // this.gradjaninService.getDocs().subscribe(res => {
+        //     console.log(res);
+        //     this.documents = res;
+        // })
         
     }
     ngOnInit(): void {
