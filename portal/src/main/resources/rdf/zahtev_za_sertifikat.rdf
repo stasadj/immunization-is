@@ -5,6 +5,9 @@
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/0234567891234">
     <pred:ima_datum_izdavanja xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2021-10-01</pred:ima_datum_izdavanja>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev-za-sertifikat/0234567891234">
+    <pred:ima_status xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NA CEKANJU</pred:ima_status>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/licni-podaci/0234567891234">
     <pred:se_zove xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Petar Petrović</pred:se_zove>
   </rdf:Description>

@@ -18,12 +18,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 
 import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
-import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev/create-zahtev.component';
+import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
         PatientFormComponent,
         LoginComponent,
         NotFoundComponent,
+        GradjaninPageComponent,
     ],
     imports: [
         BrowserModule,

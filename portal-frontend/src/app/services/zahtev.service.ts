@@ -16,6 +16,7 @@ export class ZahtevService {
 
     create(zahtev: ZahtevZaSertifikat): Observable<void>{
         let xml = createZahtevXML(zahtev);
+        console.log(xml); //TODO: delete after testing
         const headers = new HttpHeaders({ 'Content-Type': 'application/xml; charset=utf-8' }); //TODO add this to interceptor?
         return this.http.post<void>(this.path, xml, { headers });
 
