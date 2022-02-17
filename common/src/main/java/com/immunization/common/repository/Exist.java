@@ -28,6 +28,14 @@ public class Exist {
 	private final String basePath = "/db/Team404/";
 
 	public Object retrieveById(String documentId, Class<?> documentClass) throws Exception {
+		return retrieveById(documentId, documentClass, false);
+	}
+
+	public String retrieveRawXmlById(String documentId, Class<?> documentClass) throws Exception {
+		return (String) retrieveById(documentId, documentClass, true);
+	}
+
+	private Object retrieveById(String documentId, Class<?> documentClass, boolean rawXml) throws Exception {
 		String collectionId = basePath + documentClass.getSimpleName();
 
 		initDBDriver();
@@ -47,8 +55,8 @@ public class Exist {
 			if (resource == null) {
 				System.out.println("[WARNING] Document '" + documentId + "' can not be found!");
 			} else {
-				System.out.println("[INFO] Showing the document as XML resource: ");
-				System.out.println(resource.getContent());
+				String xmlString = resource.getContent().toString();
+				if (rawXml) return xmlString;
 				return unmarshallerService.unmarshal(resource.getContent().toString());
 			}
 		} finally {
