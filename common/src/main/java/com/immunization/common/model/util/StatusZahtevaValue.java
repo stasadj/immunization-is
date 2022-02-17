@@ -5,19 +5,21 @@
 // Generated on: 2022.02.16 at 11:58:33 AM CET 
 //
 
-
 package com.immunization.common.model.util;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for status_zahteva_value.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for status_zahteva_value.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="status_zahteva_value"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
@@ -33,27 +35,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum StatusZahtevaValue {
 
-    @XmlEnumValue("NA CEKANJU")
-    NA_CEKANJU("NA CEKANJU"),
-    ODOBREN("ODOBREN"),
-    PRIHVACEN("PRIHVACEN");
-    private final String value;
+	@XmlEnumValue("NA CEKANJU")
+	NA_CEKANJU("NA CEKANJU"), ODBIJEN("ODBIJEN"), PRIHVACEN("PRIHVACEN");
 
-    StatusZahtevaValue(String v) {
-        value = v;
-    }
+	private final String value;
 
-    public String value() {
-        return value;
-    }
+	StatusZahtevaValue(String v) {
+		value = v;
+	}
 
-    public static StatusZahtevaValue fromValue(String v) {
-        for (StatusZahtevaValue c: StatusZahtevaValue.values()) {
-            if (c.value.equals(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
-    }
+	public String value() {
+		return value;
+	}
+
+	public static StatusZahtevaValue fromValue(String v) {
+		for (StatusZahtevaValue c : StatusZahtevaValue.values()) {
+			if (c.value.equals(v)) {
+				return c;
+			}
+		}
+		throw new IllegalArgumentException(v);
+	}
 
 }

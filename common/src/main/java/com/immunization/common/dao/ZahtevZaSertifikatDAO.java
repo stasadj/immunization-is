@@ -20,4 +20,13 @@ public class ZahtevZaSertifikatDAO {
 
 		return exist.count(xpathExp, ZahtevZaSertifikat.class, REQUEST_NAMESPACE, "ns7");
 	}
+
+	public ZahtevZaSertifikat getByUUID(String uuid) throws Exception {
+		ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(uuid + ".xml", ZahtevZaSertifikat.class);
+		return zahtev;
+	}
+
+	public void save(String documentId, ZahtevZaSertifikat zahtev) throws Exception {
+		exist.save(documentId, zahtev);
+	}
 }

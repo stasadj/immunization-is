@@ -23,13 +23,13 @@ public class ZahtevZaSertifikatController {
 	private final ZahtevZaSertifikatService zahtevZaSertifikatService;
 
 	@PostMapping(value = "/accept")
-	public ResponseEntity<Void> accept(@Valid @RequestBody Odgovor odgovor) {
+	public ResponseEntity<Void> accept(@Valid @RequestBody Odgovor odgovor) throws Exception {
 		zahtevZaSertifikatService.accept(odgovor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/reject")
-	public ResponseEntity<Void> reject(@Valid @RequestBody Odgovor odgovor) {
+	public ResponseEntity<Void> reject(@Valid @RequestBody Odgovor odgovor) throws Exception {
 		zahtevZaSertifikatService.reject(odgovor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
