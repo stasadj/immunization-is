@@ -4,7 +4,7 @@
         <form class="content" [formGroup]="newZahtevFormGroup" *ngIf="newZahtevFormGroup">
         <mat-form-field>
             <mat-label>Ime i prezime</mat-label>
-            <input matInput formControlName="imeIPrezime" />
+            <input matInput formControlName="imeIPrezime" readonly/>
         </mat-form-field>
 
         <mat-form-field>
@@ -26,12 +26,12 @@
 
         <mat-form-field>
             <mat-label>JMBG</mat-label>
-            <input type="number" matInput formControlName="jmbg" />
+            <input  matInput formControlName="jmbg" />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Broj pasoša</mat-label>
-            <input type="number" matInput formControlName="brojPasosa" />
+            <input matInput formControlName="brojPasosa" />
         </mat-form-field>
 
         <mat-form-field>
@@ -41,7 +41,7 @@
 
         <mat-label>Razlog izdavanja zahteva</mat-label>
         <div id="editor">
-            {{newZahtev.razlog}}
+            Licni zahtev
         </div>
     </form>
     </mat-card-content>

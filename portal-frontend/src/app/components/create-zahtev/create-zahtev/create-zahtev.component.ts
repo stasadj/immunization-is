@@ -12,6 +12,8 @@ import {
 } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
+import { ɵNoopAnimationStyleNormalizer } from '@angular/animations/browser';
 
 declare const Quill: any;
 
@@ -24,62 +26,52 @@ declare const Quill: any;
 export class CreateZahtevComponent implements OnInit {
     public quill: any;
 
-    //TODO: delete default values after testing
-    public newZahtev: ZahtevZaSertifikat = {
-        mestoIzdavanja: 'Novi Sad',
-        imeIPrezime: 'Proba Proba',
-        datumRodjenja: new Date('01-01-1999'),
-        pol: Pol["M"],
-        jmbg: 1111111112345,
-        brojPasosa: 111111111,
-        razlog: 'Apsolventska ekskurzija',
-    };
+    public loggedUser = { FIRST_NAME: '', LAST_NAME: '' };
 
     public newZahtevFormGroup: FormGroup;
 
-    public muski = Pol["M"];
-    public zenski = Pol["Ž"];
+    public muski = Pol['M'];
+    public zenski = Pol['Ž'];
 
     constructor(
         private toastr: ToastrService,
         private zahtevService: ZahtevService,
+        private authService: AuthService,
         private fb: FormBuilder,
         private datePipe: DatePipe
     ) {
         this.newZahtevFormGroup = this.fb.group({
             jmbg: [
-                this.newZahtev.jmbg,
-                [
-                    Validators.required,
-                    Validators.minLength(13),
-                    Validators.maxLength(13),
-                    Validators.pattern('[0-9]{13}'),
-                ],
+                null,
+                [Validators.required, Validators.pattern('[0-9]{13}')],
             ],
-            imeIPrezime: [this.newZahtev.imeIPrezime, Validators.required],
+            imeIPrezime: [{ value: null, disabled: true }, Validators.required],
 
             datumRodjenja: [
-                [
-                    this.datePipe.transform(
-                        this.newZahtev.datumRodjenja,
-                        'yyyy-MM-dd'
-                    ),
-                ],
+                [this.datePipe.transform(new Date('01-01-1999'), 'yyyy-MM-dd')],
                 [Validators.required, this.dateValidator()],
             ],
-            pol: [this.newZahtev.pol, [Validators.required]],
+            pol: [null, [Validators.required]],
             brojPasosa: [
-                this.newZahtev.brojPasosa,
+                null,
                 [Validators.required, Validators.pattern('[0-9]{9}')],
             ],
-            mestoIzdavanja: [
-                this.newZahtev.mestoIzdavanja,
-                Validators.required,
-            ],
+            mestoIzdavanja: [null, Validators.required],
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.authService.whoAmI().subscribe((res) => {
+            this.loggedUser = res;
+
+            this.newZahtevFormGroup.patchValue({
+                imeIPrezime:
+                    this.loggedUser.FIRST_NAME[0] +
+                    ' ' +
+                    this.loggedUser.LAST_NAME[0],
+            });
+        });
+    }
 
     ngAfterViewInit(): void {
         this.quill = new Quill('#editor', {
@@ -88,9 +80,12 @@ export class CreateZahtevComponent implements OnInit {
     }
 
     onSaveClick() {
-        this.newZahtev = {
+        let newZahtev: ZahtevZaSertifikat = {
             mestoIzdavanja: this.newZahtevFormGroup.value.mestoIzdavanja,
-            imeIPrezime: this.newZahtevFormGroup.value.imeIPrezime,
+            imeIPrezime:
+                this.loggedUser.FIRST_NAME[0] +
+                ' ' +
+                this.loggedUser.LAST_NAME[0],
             datumRodjenja: this.newZahtevFormGroup.value.datumRodjenja,
             pol: this.newZahtevFormGroup.value.pol,
             jmbg: this.newZahtevFormGroup.value.jmbg,
@@ -98,13 +93,9 @@ export class CreateZahtevComponent implements OnInit {
             razlog: this.quill.root.innerHTML, //getting razlog from quill
         };
 
-        this.zahtevService.create(this.newZahtev).subscribe((res) => {
+        this.zahtevService.create(newZahtev).subscribe((res) => {
             this.toastr.success('Zahtev za sertifikat uspešno poslat.');
         });
-    }
-
-    parseDate(dateString: string): Date {
-        return new Date(dateString);
     }
 
     dateValidator(): ValidatorFn {
