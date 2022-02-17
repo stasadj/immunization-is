@@ -6,5 +6,7 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = {
-		@javax.xml.bind.annotation.XmlNs(prefix = "pred", namespaceURI = "http://www.ftn.uns.ac.rs/rdf/predicate/") })
+		@javax.xml.bind.annotation.XmlNs(prefix = "izve", namespaceURI = "http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/"),
+		@javax.xml.bind.annotation.XmlNs(prefix = "pred", namespaceURI = "http://www.ftn.uns.ac.rs/rdf/predicate/"),
+		@javax.xml.bind.annotation.XmlNs(prefix = "xs", namespaceURI = "http://www.w3.org/2001/XMLSchema#") })
 package com.immunization.common.model.izvestaj_o_imunizaciji;
