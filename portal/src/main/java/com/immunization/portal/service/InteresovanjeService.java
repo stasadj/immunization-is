@@ -16,6 +16,7 @@ import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVak
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
+import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.common.util.PdfTransformer;
 import com.immunization.common.util.XhtmlTransformer;
 import com.immunization.portal.service.email.PortalEmailService;
@@ -39,7 +40,7 @@ public class InteresovanjeService {
     public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user)
             throws Exception {
 
-        String documentId = user.getUsername() + ".xml";
+        String documentId = user.getUsername();
 
         Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
         if (result.isPresent()) {

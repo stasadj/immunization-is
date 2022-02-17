@@ -13,7 +13,7 @@ public class IzvestajOImunizacijiDAO {
 	private final Exist exist;
 
 	public void save(String documentId, IzvestajOImunizaciji izvestajOImunizaciji) throws Exception {
-		exist.save(documentId + ".xml", izvestajOImunizaciji);
+		exist.save(documentId, izvestajOImunizaciji);
 	}
 
 	public String getXML(String documentId) throws Exception {

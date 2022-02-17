@@ -3,10 +3,11 @@ package com.immunization.common.dao;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
-
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.repository.Exist;
+
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 
@@ -40,6 +41,15 @@ public class PotvrdaOVakcinacijiDAO {
 
 		return exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv").stream()
 				.map(o -> (PotvrdaOVakcinaciji) o).collect(Collectors.toList());
+	}
+
+    public List<PotvrdaOVakcinaciji> getByUsername(String gradjaninUsername) throws Exception {
+        String about = MetadataConstants.ABOUT_LICNI_PODACI_PREFIX + gradjaninUsername;
+        String xpathExp = "//potv:potvrda_o_vakcinaciji[potv:licni_podaci[@about='" + about + "']]";
+
+        return  exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv").stream()
+				.map(o -> (PotvrdaOVakcinaciji) o).collect(Collectors.toList());
+
 	}
 
 	public String getXML(String documentId) throws Exception {

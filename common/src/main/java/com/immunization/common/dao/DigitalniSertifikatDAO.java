@@ -1,9 +1,13 @@
 package com.immunization.common.dao;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.repository.Exist;
+
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 
@@ -28,9 +32,17 @@ public class DigitalniSertifikatDAO {
 		return exist.count(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert");
 	}
 
-	public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
-		exist.save(documentId + ".xml", sertifikat);
+    public List<DigitalniSertifikat> getByUsername(String gradjaninUsername) throws Exception {
+        String about = MetadataConstants.ABOUT_LICNI_PODACI_PREFIX + gradjaninUsername;
+        String xpathExp = "//sert:digitalni_sertifikat[sert:licni_podaci[@about='" + about + "']]";
+
+        return  exist.query(xpathExp, DigitalniSertifikat.class, CERTIFICATE_NAMESPACE, "sert").stream()
+				.map(o -> (DigitalniSertifikat) o).collect(Collectors.toList());
+
 	}
+    public void save(String documentId, DigitalniSertifikat sertifikat) throws Exception {
+        exist.save(documentId, sertifikat);
+    }
 
 	public String getXML(String documentId) throws Exception {
 		return exist.retrieveRawXmlById(documentId, DigitalniSertifikat.class);

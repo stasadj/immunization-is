@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ImmunizationReportComponent } from './components/immunization-report/immunization-report.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
@@ -7,6 +8,7 @@ import { VaccineReportComponent } from './components/vaccine-report/vaccine-repo
 const routes: Routes = [
     { path: 'vaccines', component: VaccineReportComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'immunization-report', component: ImmunizationReportComponent },
     { path: '**', component: NotFoundComponent },
 ];
 
