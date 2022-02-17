@@ -4,17 +4,26 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MyDocuments", propOrder = {
+@XmlType(name = "gradjanin_documents", propOrder = {
         "interesovanje",
         "saglasnost",
         "zahtev",
         "sertifikat",
         "potvrda"
 })
-public class GradjaninDocuments {
+@XmlRootElement(name = "gradjanin_documents")
+public class GradjaninDocumentsDTO {
     public List<String> interesovanje;
     public List<String> saglasnost;
     public List<String> zahtev;

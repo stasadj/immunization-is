@@ -56,7 +56,7 @@ public class ZahtevService {
         }
 
         // saving
-        String documentId = uuid + ".xml";
+        String documentId = uuid;
         zahtevDAO.save(documentId, zahtev);
         return zahtev;
 

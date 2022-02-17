@@ -1,9 +1,8 @@
 package com.immunization.portal.controller;
 
-import java.util.List;
 
 import com.immunization.common.model.User;
-import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.portal.dto.GradjaninDocumentsDTO;
 import com.immunization.portal.service.GradjaninDocsService;
 
 import org.springframework.http.HttpStatus;
@@ -24,10 +23,9 @@ public class GradjaninDocsController {
     private GradjaninDocsService docsService;
 
     @GetMapping
-    public ResponseEntity<Void> getGradjaninDocuments(@AuthenticationPrincipal User user) throws Exception{
-        // this.docsService.getAllGradjaninDocuments(user.getUsername());
-        this.docsService.getAllGradjaninDocuments("Dina.Petrov1125");
-        return new ResponseEntity<Void>(HttpStatus.OK);
+    @ResponseBody
+    public ResponseEntity<GradjaninDocumentsDTO> getGradjaninDocuments(@AuthenticationPrincipal User user) throws Exception{
+        return new ResponseEntity<GradjaninDocumentsDTO>(this.docsService.getAllGradjaninDocuments(user.getUsername()), HttpStatus.OK);
     }
 
 

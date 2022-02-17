@@ -34,7 +34,7 @@ public class InteresovanjeService {
     public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user)
             throws Exception {
 
-        String documentId = user.getUsername() + ".xml";
+        String documentId = user.getUsername();
 
         Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
         if (result.isPresent()) {

@@ -8,7 +8,7 @@ import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
 import com.immunization.common.dao.PotvrdaOVakcinacijiDAO;
 import com.immunization.common.dao.SaglasnostDAO;
 import com.immunization.common.dao.ZahtevZaSertifikatDAO;
-import com.immunization.portal.dto.GradjaninDocuments;
+import com.immunization.portal.dto.GradjaninDocumentsDTO;
 
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,9 @@ public class GradjaninDocsService {
     private SaglasnostDAO saglasnostDAO;
 
 
-    public GradjaninDocuments getAllGradjaninDocuments(String gradjaninUsername) throws Exception{
+    public GradjaninDocumentsDTO getAllGradjaninDocuments(String gradjaninUsername) throws Exception{
 
-        GradjaninDocuments docs = new GradjaninDocuments();
+        GradjaninDocumentsDTO docs = new GradjaninDocumentsDTO();
 
         //zahtevi
         docs.zahtev = new ArrayList<String>();
