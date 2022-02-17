@@ -25,7 +25,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         User user = (User) authentication.getPrincipal();
-        return tokenUtils.generateToken(user.getUsername());
+        return tokenUtils.generateToken(user.getUsername(), user.getRole());
     }
     
 }

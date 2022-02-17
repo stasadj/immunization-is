@@ -35,7 +35,7 @@ public class UserControllerIntegrationTest {
     @Test
     @Order(1)
     void registerUser_successfully() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
                 .contentType(MediaType.APPLICATION_XML)
                 .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -44,7 +44,7 @@ public class UserControllerIntegrationTest {
     @Test
     @Order(2)
     void registerUser_unsuccessfully() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
                 .contentType(MediaType.APPLICATION_XML)
                 .content(marshallerService.marshal(TestConstants.USER_REGISTRATION_DTO)))
                 .andExpect(MockMvcResultMatchers.status().isConflict());

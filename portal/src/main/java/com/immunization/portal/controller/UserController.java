@@ -8,14 +8,9 @@ import com.immunization.portal.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -25,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @ResponseBody
-    @PutMapping(value="/register")
+    @PostMapping(value="/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO dto) {
         String token = userService.registerUser(dto);
         return new ResponseEntity<>(token, HttpStatus.OK);
