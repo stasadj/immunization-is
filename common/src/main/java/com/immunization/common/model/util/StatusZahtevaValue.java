@@ -35,7 +35,7 @@ public enum StatusZahtevaValue {
 
     @XmlEnumValue("NA CEKANJU")
     NA_CEKANJU("NA CEKANJU"),
-    ODOBREN("ODOBREN"),
+    ODBIJEN("ODBIJEN"),
     PRIHVACEN("PRIHVACEN");
     private final String value;
 
