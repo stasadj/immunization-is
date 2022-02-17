@@ -34,11 +34,6 @@ public class ZahtevZaSertifikatDAO {
 	}
 
 
-    public Optional<ZahtevZaSertifikat> retrieveById(String documentId) throws Exception {
-        ZahtevZaSertifikat zahtev = (ZahtevZaSertifikat) exist.retrieveById(documentId, ZahtevZaSertifikat.class);
-        return zahtev == null ? Optional.empty() : Optional.of(zahtev);
-	}
-
     public List<ZahtevZaSertifikat> getByUsername(String gradjaninUsername) throws Exception {
         String about = MetadataConstants.ABOUT_LICNI_PODACI_PREFIX + gradjaninUsername;
         System.out.println(about);
