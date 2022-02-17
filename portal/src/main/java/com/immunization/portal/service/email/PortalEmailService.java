@@ -50,14 +50,17 @@ public class PortalEmailService {
             String recipientEmail) {
         StringBuilder emailBody =  new StringBuilder();
         emailBody.append("Postovana/i ").append(interesovanje.getPacijent().getPunoIme().getValue()).append(", \n");
-        emailBody.append("Vase interesovanje je uspesno zabelezeno. Ocekujte termin vakcinacije u roku od 7 radnih dana. \n\n");
+        emailBody.append("Vaše interesovanje je uspesno zabeleženo. Očekujte termin vakcinacije u roku od 7 radnih dana. \n\n");
 
         emailBody.append("Ime pacijenta: ").append(interesovanje.getPacijent().getPunoIme().getValue()).append(" \n");
         emailBody.append("JMBG: ").append(interesovanje.getPacijent().getJmbg().getValue()).append(" \n");
-        emailBody.append("Opstina vakcinacije: ").append(interesovanje.getZeljenaOpstinaVakcinacije()).append(" \n");
+        emailBody.append("Opština vakcinacije: ").append(interesovanje.getZeljenaOpstinaVakcinacije()).append(" \n");
 
         StringBuilder vaccines = new StringBuilder();
-        interesovanje.getOdabirVakcina().getOpcija().forEach(vaccines::append);
+        // interesovanje.getOdabirVakcina().getOpcija().forEach(vaccines::append);
+        for (String opcija: interesovanje.getOdabirVakcina().getOpcija()){
+            vaccines.append("\n").append(opcija);
+        }
 
         String vaccineString = vaccines.toString();
         if (vaccineString.equals("")){
@@ -67,7 +70,7 @@ public class PortalEmailService {
         emailBody.append("Odabrane vakcine: ").append(vaccineString).append(" \n");
         emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
 
-        EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspesno zabelezeno.", emailBody.toString());
+        EmailContent email = new EmailContent("Interesovanje za vakcinaciju uspešno zabeleženo.", emailBody.toString());
         email.addRecipient(recipientEmail);
         sendEmail(email);
 

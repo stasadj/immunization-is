@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pol } from 'src/app/model/Pol';
 import { ZahtevZaSertifikat } from 'src/app/model/ZahtevZaSertifikat';
 import { ToastrService } from 'ngx-toastr';
@@ -26,7 +26,11 @@ declare const Quill: any;
 export class CreateZahtevComponent implements OnInit {
     public quill: any;
 
-    public loggedUser = { FIRST_NAME: '', LAST_NAME: '' };
+    @Input() public loggedUser: any = {
+        FIRST_NAME: '',
+        LAST_NAME: '',
+        EMAIL: '',
+    };
 
     public newZahtevFormGroup: FormGroup;
 
@@ -61,15 +65,9 @@ export class CreateZahtevComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.whoAmI().subscribe((res) => {
-            this.loggedUser = res;
-
-            this.newZahtevFormGroup.patchValue({
-                imeIPrezime:
-                    this.loggedUser.FIRST_NAME +
-                    ' ' +
-                    this.loggedUser.LAST_NAME,
-            });
+        this.newZahtevFormGroup.patchValue({
+            imeIPrezime:
+                this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME,
         });
     }
 

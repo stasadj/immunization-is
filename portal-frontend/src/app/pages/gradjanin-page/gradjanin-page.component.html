@@ -1,5 +1,5 @@
 <div>
     <!-- TODO separate into tabs or smth -->
-    <app-create-interesovanje></app-create-interesovanje>
-    <app-create-zahtev></app-create-zahtev>
+    <app-create-interesovanje [loggedUser]="loggedUser" *ngIf="loggedUser"></app-create-interesovanje>
+    <app-create-zahtev [loggedUser]="loggedUser" *ngIf="loggedUser" ></app-create-zahtev>
 </div>

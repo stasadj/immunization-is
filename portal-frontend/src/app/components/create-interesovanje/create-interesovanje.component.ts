@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Interesovanje } from '../../model/Interesovanje';
 import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InteresovanjeService } from 'src/app/services/interesovanje.service';
@@ -12,7 +12,11 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./create-interesovanje.component.less'],
 })
 export class CreateInteresovanjeComponent implements OnInit {
-    public loggedUser = { FIRST_NAME: '', LAST_NAME: '', EMAIL: '' };
+    @Input() public loggedUser: any = {
+        FIRST_NAME: '',
+        LAST_NAME: '',
+        EMAIL: '',
+    };
 
     public opcije: FormGroup;
     public newInteresovanjeFormGroup: FormGroup;
@@ -47,7 +51,13 @@ export class CreateInteresovanjeComponent implements OnInit {
                     Validators.pattern('[0-9]{13}'),
                 ],
             ],
-            punoIme: [{ value: null, disabled: true }, Validators.required],
+            punoIme: [
+                {
+                    value: null,
+                    disabled: true,
+                },
+                Validators.required,
+            ],
 
             email: [
                 { value: null, disabled: true },
@@ -67,18 +77,12 @@ export class CreateInteresovanjeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.whoAmI().subscribe((res) => {
-            this.loggedUser = res;
-
-            this.newInteresovanjeFormGroup.patchValue({
-                punoIme:
-                    this.loggedUser.FIRST_NAME +
-                    ' ' +
-                    this.loggedUser.LAST_NAME,
-
-                email: this.loggedUser.EMAIL,
-            });
-        });
+        this.newInteresovanjeFormGroup.controls['punoIme'].setValue(
+            this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME
+        );
+        this.newInteresovanjeFormGroup.controls['email'].setValue(
+            this.loggedUser.EMAIL
+        );
     }
 
     ngAfterViewInit() {}
@@ -106,7 +110,7 @@ export class CreateInteresovanjeComponent implements OnInit {
             ),
         };
 
-        this.interesovanjeService.create(newInteresovanje).subscribe( 
+        this.interesovanjeService.create(newInteresovanje).subscribe(
             (res) => {
                 this.toastr.success(
                     'Interesovanje uspešno zabeleženo. Proverite Vaš mejl.'
