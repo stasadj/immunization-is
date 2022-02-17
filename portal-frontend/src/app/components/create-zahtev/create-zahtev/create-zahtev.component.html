@@ -1,9 +1,10 @@
 <div class="container">
     <mat-card-title>Zahtev za izdavanje digitalnog sertifikata</mat-card-title>
     <mat-card-content class="content">
+        <form class="content" [formGroup]="newZahtevFormGroup" *ngIf="newZahtevFormGroup">
         <mat-form-field>
             <mat-label>Ime i prezime</mat-label>
-            <input matInput [(ngModel)]="newZahtev.imeIPrezime" />
+            <input matInput formControlName="imeIPrezime" />
         </mat-form-field>
 
         <mat-form-field>
@@ -11,14 +12,13 @@
             <input
                 matInput
                 type="date"
-                [ngModel]="newZahtev.datumRodjenja | date: 'yyyy-MM-dd'"
-                (ngModelChange)="newZahtev.datumRodjenja = $event"
+                formControlName="datumRodjenja"
             />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Pol</mat-label>
-            <mat-select [(ngModel)]="newZahtev.pol">
+            <mat-select formControlName="pol">
                 <mat-option [value]="muski"> Muški </mat-option>
                 <mat-option [value]="zenski"> Ženski </mat-option>
             </mat-select>
@@ -26,24 +26,24 @@
 
         <mat-form-field>
             <mat-label>JMBG</mat-label>
-            <input type="number" matInput [(ngModel)]="newZahtev.jmbg" />
+            <input type="number" matInput formControlName="jmbg" />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Broj pasoša</mat-label>
-            <input type="number" matInput [(ngModel)]="newZahtev.brojPasosa" />
+            <input type="number" matInput formControlName="brojPasosa" />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Mesto izdavanja zahteva</mat-label>
-            <input matInput [(ngModel)]="newZahtev.mestoIzdavanja" />
+            <input matInput formControlName="mestoIzdavanja" />
         </mat-form-field>
 
         <mat-label>Razlog izdavanja zahteva</mat-label>
         <div id="editor">
             {{newZahtev.razlog}}
         </div>
-
+    </form>
     </mat-card-content>
     <div mat-card-actions>
         <button
