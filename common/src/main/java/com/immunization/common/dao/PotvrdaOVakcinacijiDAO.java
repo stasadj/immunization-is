@@ -19,26 +19,26 @@ public class PotvrdaOVakcinacijiDAO {
 	public long getNumberOfGivenVaccinesForManufacturer(String startDate, String endDate, String manufacturer)
 			throws Exception {
 
-		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
+		String xpathExp = "//potv:potvrda_o_vakcinaciji[potv:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
 				+ startDate + " and number(translate(text(),'-',''))<=" + endDate
-				+ "] and ns5:vakcinacije/ns5:vakcinacija[last()][contains(.,'" + manufacturer + "')]]";
+				+ "] and potv:vakcinacije/potv:vakcinacija[last()][contains(.,'" + manufacturer + "')]]";
 
-		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
+		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv");
 	}
 
 	public long getNumberOfGivenVaccinesByDose(String startDate, String endDate, int dose) throws Exception {
 
-		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
+		String xpathExp = "//potv:potvrda_o_vakcinaciji[potv:datum_izdavanja_potvrde[number(translate(text(),'-',''))>="
 				+ startDate + " and number(translate(text(),'-',''))<=" + endDate
-				+ "] and count(ns5:vakcinacije/ns5:vakcinacija)=" + dose + "]";
+				+ "] and count(potv:vakcinacije/potv:vakcinacija)=" + dose + "]";
 
-		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5");
+		return exist.count(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv");
 	}
 
 	public List<PotvrdaOVakcinaciji> getAllConfirmationsByJmbg(String jmbg) throws Exception {
-		String xpathExp = "//ns5:potvrda_o_vakcinaciji[ns5:licni_podaci/ns5:jmbg[text()='" + jmbg + "']]";
+		String xpathExp = "//potv:potvrda_o_vakcinaciji[potv:licni_podaci/potv:jmbg[text()='" + jmbg + "']]";
 
-		return exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "ns5").stream()
+		return exist.query(xpathExp, PotvrdaOVakcinaciji.class, CONFIRMATION_NAMESPACE, "potv").stream()
 				.map(o -> (PotvrdaOVakcinaciji) o).collect(Collectors.toList());
 	}
 }
