@@ -16,7 +16,7 @@ import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.UUIDService;
 import com.immunization.common.service.XMLCalendarService;
-import com.immunization.portal.constants.MetadataConstants;
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.portal.dao.ZahtevDAO;
 
 import org.springframework.stereotype.Service;

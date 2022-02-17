@@ -1,12 +1,11 @@
 package com.immunization.portal.service;
 
-import com.immunization.portal.constants.MetadataConstants;
-
 import java.io.IOException;
 
 import javax.xml.crypto.MarshalException;
 import javax.xml.transform.TransformerException;
 
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;

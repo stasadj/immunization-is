@@ -7,7 +7,7 @@ import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.portal.constants.TestConstants;
 
-import static com.immunization.portal.constants.MetadataConstants.RDF_GRAPH_URI;
+import static com.immunization.common.constants.MetadataConstants.RDF_GRAPH_URI;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.*;
