@@ -1,0 +1,31 @@
+<div>
+    <h1 mat-dialog-title>Potvrde o vakcinaciji</h1>
+    <mat-dialog-content class="mat-typography"
+        ><div>
+            <table border="1" class="mat-elevation-z8">
+                <tr>
+                    <th>ID potvrde</th>
+                    <th>Datum izdavanja</th>
+                    <th>Redni broj primljene doze</th>
+                    <th>Tip vakcine</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>12343543543534</td>
+                    <td>2021-01-01</td>
+                    <td>3</td>
+                    <td>Pfizer</td>
+                    <td>
+                        <button mat-flat-button>Prikaži dokument</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary">Prihvati</button>
+        <button mat-raised-button color="accent" (click)="handleReject()">
+            Odbij
+        </button>
+    </mat-dialog-actions>
+</div>

@@ -28,6 +28,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 import { ImmunizationReportComponent } from './components/immunization-report/immunization-report.component';
+import { CertificateRequestsComponent } from './components/certificate-issuing/certificate-requests/certificate-requests.component';
+import { ResponseComponent } from './components/certificate-issuing/response/response.component';
+import { ReasonForRejectionComponent } from './components/certificate-issuing/reason-for-rejection/reason-for-rejection.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +40,9 @@ import { ImmunizationReportComponent } from './components/immunization-report/im
         LoginComponent,
         NotFoundComponent,
         ImmunizationReportComponent,
+        CertificateRequestsComponent,
+        ResponseComponent,
+        ReasonForRejectionComponent,
     ],
     imports: [
         BrowserModule,
