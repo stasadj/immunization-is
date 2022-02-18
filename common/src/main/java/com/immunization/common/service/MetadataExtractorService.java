@@ -25,6 +25,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 @Service
@@ -63,7 +64,7 @@ public class MetadataExtractorService {
 	public void insertFromString(String data, String graphUri)
 			throws TransformerException, IOException {
 		// TODO: Refactor and remove System.out
-        byte[] byteArray = Charset.forName("UTF-8").encode(data).array();
+        byte[] byteArray = StandardCharsets.UTF_8.encode(data).array();
 		// Special fuckery with encododed byte array having inexplicably a set amount o null characters in the end.
 		// Found this by writing the byteArray to a file.
 		int nullCount = 0;

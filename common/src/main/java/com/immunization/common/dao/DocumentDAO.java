@@ -17,8 +17,8 @@ public abstract class DocumentDAO<T> {
         throw new Exception("Not implemented");
     }
 
-    public void save(String documentId, T document) throws Exception {
-        exist.save(documentId, document);
+    public String save(String documentId, T document) throws Exception {
+        return exist.save(documentId, document);
     }
 
     public String getXML(String documentId) throws Exception {

@@ -49,10 +49,11 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
 		zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
 		documentDAO.save(zahtevUUID + ".xml", zahtev);
 
-		DigitalniSertifikat sertifikat = sertifikatService.createCertificate(zahtev);
-
 		String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
 		User user = userDAO.getByUsername(username).get(0);
+
+		DigitalniSertifikat sertifikat = sertifikatService.createCertificate(zahtev, user);
+
 		emailService.sendCertificateRequestAccepted(user);
 
 		return sertifikat;

@@ -2,7 +2,9 @@ package com.immunization.trustee.service;
 
 import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.dao.DigitalniSertifikatDAO;
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
+import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.*;
 import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 public class SertifikatService extends DocumentService<DigitalniSertifikat> {
     private final UUIDService uuidService;
     private final PotvrdaOVakcinacijiService potvrdaService;
+    private final UserDAO userDAO;
 
     @Autowired
     protected SertifikatService(DigitalniSertifikatDAO documentDAO,
@@ -31,14 +34,16 @@ public class SertifikatService extends DocumentService<DigitalniSertifikat> {
                                 PdfTransformer pdfTransformer,
                                 XhtmlTransformer xhtmlTransformer,
                                 UUIDService uuidService,
-                                PotvrdaOVakcinacijiService potvrdaService) {
+                                PotvrdaOVakcinacijiService potvrdaService,
+                                UserDAO userDAO) {
         super(DigitalniSertifikat.class,
                 documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
         this.uuidService = uuidService;
         this.potvrdaService = potvrdaService;
+        this.userDAO = userDAO;
     }
 
-    public DigitalniSertifikat createCertificate(ZahtevZaSertifikat zahtev) throws Exception {
+    public DigitalniSertifikat createCertificate(ZahtevZaSertifikat zahtev, User user) throws Exception {
         DigitalniSertifikat sertifikat = new DigitalniSertifikat();
         String uuid = uuidService.getUUID();
         sertifikat.setAbout(MetadataConstants.CERTIFICATE_ABOUT_PREFIX + uuid);
@@ -56,6 +61,9 @@ public class SertifikatService extends DocumentService<DigitalniSertifikat> {
         }
 
         documentDAO.save(uuid, sertifikat);
+
+        user.getDocuments().getSertifikat().add(uuid);
+        userDAO.save(user);
 
         return sertifikat;
     }

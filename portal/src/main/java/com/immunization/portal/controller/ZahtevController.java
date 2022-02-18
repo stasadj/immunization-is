@@ -1,4 +1,3 @@
-
 package com.immunization.portal.controller;
 
 import com.immunization.common.controller.DocumentController;
@@ -30,4 +29,3 @@ public class ZahtevController extends DocumentController<ZahtevZaSertifikat> {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
-

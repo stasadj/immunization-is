@@ -3,6 +3,7 @@ package com.immunization.portal.service;
 import java.util.Optional;
 
 import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 public class InteresovanjeService extends DocumentService<IskazivanjeInteresovanjaZaVakcinaciju> {
     private final PortalEmailService emailService;
     private final XMLCalendarService calendarUtil;
+    private final UserDAO userDAO;
 
     @Autowired
     public InteresovanjeService(IskazivanjeInteresovanjaZaVakcinacijuDAO documentDAO,
@@ -30,11 +32,13 @@ public class InteresovanjeService extends DocumentService<IskazivanjeInteresovan
                                 PdfTransformer pdfTransformer,
                                 XhtmlTransformer xhtmlTransformer,
                                 PortalEmailService emailService,
-                                XMLCalendarService calendarUtil) {
+                                XMLCalendarService calendarUtil,
+                                UserDAO userDAO) {
         super(IskazivanjeInteresovanjaZaVakcinaciju.class,
                 documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
         this.emailService = emailService;
         this.calendarUtil = calendarUtil;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -60,6 +64,9 @@ public class InteresovanjeService extends DocumentService<IskazivanjeInteresovan
         }
 
         documentDAO.save(documentId, interesovanje);
+
+        user.getDocuments().getInteresovanje().add(documentId);
+        userDAO.save(user);
 
         // send email to patient
         emailService.sendInteresovanjeConfirmation(interesovanje,

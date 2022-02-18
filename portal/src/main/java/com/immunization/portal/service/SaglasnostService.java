@@ -2,6 +2,7 @@ package com.immunization.portal.service;
 
 import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.dao.ObrazacSaglasnostiZaImunizacijuDAO;
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImunizaciju> {
     private final UUIDService uuidService;
     private final IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
+    private final UserDAO userDAO;
 
     @Autowired
     public SaglasnostService(ObrazacSaglasnostiZaImunizacijuDAO documentDAO,
@@ -30,23 +32,25 @@ public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImuni
                              PdfTransformer pdfTransformer,
                              XhtmlTransformer xhtmlTransformer,
                              UUIDService uuidService,
-                             IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO) {
+                             IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO,
+                             UserDAO userDAO) {
         super(ObrazacSaglasnostiZaImunizaciju.class,
                 documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
         this.uuidService = uuidService;
         this.interesovanjeDAO = interesovanjeDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
-    public void create(ObrazacSaglasnostiZaImunizaciju form, User currentUser) throws Exception {
+    public void create(ObrazacSaglasnostiZaImunizaciju form, User user) throws Exception {
         // Remove any vaccination records as these cannot be filed in by a patient
         clearVaccinationRecord(form);
 
         // Set abouts before extracting metadata
-        setFormAbouts(form, currentUser);
+        setFormAbouts(form, user);
 
         // Check if the patient already has already filed in an prerequisite interest form
-        if (!patientGivenInterestForm(currentUser)) {
+        if (!patientGivenInterestForm(user)) {
             throw new BadRequestException("Nije popunjen dokument o interesovanju.");
         }
 
@@ -57,6 +61,9 @@ public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImuni
         String id = form.getAbout().substring(MetadataConstants.ABOUT_CONSENT_PREFIX.length());
 
         documentDAO.save(id, form);
+
+        user.getDocuments().getSaglasnost().add(id);
+        userDAO.save(user);
     }
 
     private void clearVaccinationRecord(ObrazacSaglasnostiZaImunizaciju form) {
