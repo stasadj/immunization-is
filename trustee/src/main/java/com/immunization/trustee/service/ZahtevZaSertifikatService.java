@@ -61,16 +61,16 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
 
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
-        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
-        documentDAO.save(zahtevUUID, zahtev);
-
+        
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);
-
+        
         DigitalniSertifikat sertifikat = sertifikatService.createCertificate(zahtev, user);
-
+        
         emailService.sendCertificateRequestAccepted(user, this.extractUUIDFromAboutCertificate(sertifikat.getAbout()));
-
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
+        documentDAO.save(zahtevUUID, zahtev);
+        
         return sertifikat;
     }
 
@@ -78,12 +78,12 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
         String zahtevUUID = odgovor.getUuid();
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
-        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
-        documentDAO.save(zahtevUUID, zahtev);
-
+        
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);
         emailService.sendCertificateRequestRejected(odgovor.getRazlogOdbijanja(), user);
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
+        documentDAO.save(zahtevUUID, zahtev);
     }
 
     private String extractUsernameFromAbout(String about) {
