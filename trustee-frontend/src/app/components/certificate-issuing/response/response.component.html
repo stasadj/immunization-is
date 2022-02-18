@@ -16,7 +16,9 @@
                     <td>{{ potvrda.doza }}</td>
                     <td>{{ potvrda.tip }}</td>
                     <td>
-                        <button mat-flat-button>Prikaži dokument</button>
+                        <button mat-flat-button (click)="display(potvrda.uuid)">
+                            Prikaži dokument
+                        </button>
                     </td>
                 </tr>
             </table>

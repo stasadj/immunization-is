@@ -30,4 +30,11 @@ export class CertificateRequestsComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(() => window.location.reload());
     };
+
+    display = (uuid: string) => {
+        window.open(
+            `http://localhost:8081/api/certificate-request/pdf/${uuid}`,
+            '_blank'
+        );
+    };
 }

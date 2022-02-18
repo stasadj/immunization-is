@@ -45,4 +45,11 @@ export class ResponseComponent implements OnInit {
             data: { zahtev: this.data.zahtev },
         });
     };
+
+    display = (uuid: string) => {
+        window.open(
+            `http://localhost:8081/api/confirmation/pdf/${uuid}`,
+            '_blank'
+        );
+    };
 }

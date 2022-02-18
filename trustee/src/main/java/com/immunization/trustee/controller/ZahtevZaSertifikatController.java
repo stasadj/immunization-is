@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/certificate-request", produces = MediaType.APPLICATION_XML_VALUE
-        + ";charset=utf-8", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+        + ";charset=utf-8")
 public class ZahtevZaSertifikatController extends DocumentController<ZahtevZaSertifikat> {
 
     @Autowired

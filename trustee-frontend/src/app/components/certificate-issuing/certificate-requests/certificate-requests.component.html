@@ -13,7 +13,9 @@
                 <td>{{ zahtev.date }}</td>
                 <td>{{ zahtev.jmbg }}</td>
                 <td>
-                    <button mat-flat-button>Prikaži dokument</button>
+                    <button mat-flat-button (click)="display(zahtev.uuid)">
+                        Prikaži dokument
+                    </button>
                     <button
                         mat-flat-button
                         color="primary"
