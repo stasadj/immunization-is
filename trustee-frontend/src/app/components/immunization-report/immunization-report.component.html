@@ -99,7 +99,11 @@
             </tr>
         </table>
 
-        <button mat-raised-button color="primary">Preuzmi PDF</button>
-        <button mat-raised-button color="primary">Preuzmi XHTML</button>
+        <button mat-raised-button color="primary" (click)="handleSavePDF()">
+            Preuzmi PDF
+        </button>
+        <button mat-raised-button color="primary" (click)="handleSaveXHTML()">
+            Preuzmi XHTML
+        </button>
     </div>
 </div>

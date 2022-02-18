@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping(value = "/api/immunization-report", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+@RequestMapping(value = "/api/immunization-report")
 public class IzvestajOImunizacijiController extends DocumentController<IzvestajOImunizaciji> {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class IzvestajOImunizacijiController extends DocumentController<IzvestajO
 		super(documentService);
 	}
 
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
 	public ResponseEntity<IzvestajOImunizaciji> getImmunizationReport(
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws Exception {
