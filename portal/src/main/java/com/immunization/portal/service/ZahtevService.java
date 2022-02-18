@@ -1,5 +1,6 @@
 package com.immunization.portal.service;
 
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.dao.ZahtevZaSertifikatDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.User;
@@ -17,6 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class ZahtevService extends DocumentService<ZahtevZaSertifikat> {
     private final UUIDService uuidService;
     private final XMLCalendarService calendarUtil;
+    private final UserDAO userDAO;
 
     @Autowired
     public ZahtevService(ZahtevZaSertifikatDAO documentDAO,
@@ -25,11 +27,13 @@ public class ZahtevService extends DocumentService<ZahtevZaSertifikat> {
                          PdfTransformer pdfTransformer,
                          XhtmlTransformer xhtmlTransformer,
                          UUIDService uuidService,
-                         XMLCalendarService calendarUtil) {
+                         XMLCalendarService calendarUtil,
+                         UserDAO userDAO) {
         super(ZahtevZaSertifikat.class,
                 documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
         this.uuidService = uuidService;
         this.calendarUtil = calendarUtil;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -55,5 +59,8 @@ public class ZahtevService extends DocumentService<ZahtevZaSertifikat> {
         }
 
         documentDAO.save(uuid, zahtev);
+
+        user.getDocuments().getZahtev().add(uuid);
+        userDAO.save(user);
     }
 }
