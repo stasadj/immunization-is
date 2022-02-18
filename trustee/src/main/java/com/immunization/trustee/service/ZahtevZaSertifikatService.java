@@ -1,5 +1,8 @@
 package com.immunization.trustee.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.Optional;
 
 import com.immunization.common.dao.*;
@@ -17,6 +20,8 @@ import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.trustee.dto.request.Zahtev;
+import com.immunization.trustee.dto.request.Zahtevi;
 import com.immunization.trustee.dto.response.Odgovor;
 import com.immunization.trustee.service.email.TrusteeEmailService;
 
@@ -37,6 +42,18 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
         this.userDAO = userDAO;
         this.emailService = emailService;
         this.sertifikatService = sertifikatService;
+    }
+
+    public Zahtevi getAllPendingRequests() throws Exception {
+        Zahtevi zahteviOut = new Zahtevi();
+        zahteviOut.setZahtev(new ArrayList<Zahtev>());
+        List<ZahtevZaSertifikat> zahteviIn = ((ZahtevZaSertifikatDAO) documentDAO).getAllPendingRequests();
+        for (ZahtevZaSertifikat z : zahteviIn) {
+            String uuid = this.extractUUIDFromAboutRequest(z.getAbout());
+            zahteviOut.getZahtev().add(new Zahtev(uuid, z.getMetaPodaci().getDatumIzdavanja().getValue(),
+                    z.getPodnosilacZahteva().getJmbg().getValue()));
+        }
+        return zahteviOut;
     }
 
     public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {

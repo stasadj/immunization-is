@@ -1,6 +1,7 @@
 package com.immunization.trustee.config;
 
 import com.immunization.common.config.JaxBConfiguration;
+
 import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
