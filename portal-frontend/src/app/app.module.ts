@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -55,6 +57,7 @@ import { DocumentTableComponent } from './components/gradjanin-documents/documen
         MatButtonModule,
         MatTableModule,
         MatIconModule,
+        MatTabsModule,
         BrowserAnimationsModule,
         HttpClientModule,
         ToastrModule.forRoot(),
