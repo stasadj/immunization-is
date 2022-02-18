@@ -20,6 +20,10 @@ export class ReasonForRejectionComponent implements OnInit {
     ngOnInit(): void {}
 
     handleReject = () => {
+        if (!this.razlog) {
+            this.toastr.error('Morate uneti razlog odbijanja.');
+            return;
+        }
         this.certificateRequestService
             .reject({
                 uuid: this.data.zahtev.uuid,
