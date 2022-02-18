@@ -1,5 +1,7 @@
 package com.immunization.common.config;
 
+import java.util.Arrays;
+
 import com.immunization.common.filter.FrontendRedirectFilter;
 import com.immunization.common.security.RestAuthenticationEntryPoint;
 import com.immunization.common.security.filter.TokenAuthenticationFilter;
@@ -45,7 +47,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration corsConfig = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfig.setAllowedMethods(Arrays.asList("*"));
+        corsConfig.setAllowedHeaders(Arrays.asList("*"));
+        source.registerCorsConfiguration("/**", corsConfig);
         return source;
     }
 
