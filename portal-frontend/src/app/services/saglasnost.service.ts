@@ -8,7 +8,7 @@ import { createSaglasnostXML } from '../util/saglasnostXmlCreator';
   providedIn: 'root'
 })
 export class SaglasnostService {
-  private readonly path = '/api/consent/';
+  private readonly path = '/api/saglasnost/';
 
   constructor(private http: HttpClient) { }
 

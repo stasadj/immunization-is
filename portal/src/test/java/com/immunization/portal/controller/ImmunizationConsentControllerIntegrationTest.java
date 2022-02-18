@@ -58,7 +58,7 @@ public class ImmunizationConsentControllerIntegrationTest {
 	// File file = new File("./src/main/resources/documents/saglasnost.xml");
 	// String xmlData = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
-	// mockMvc.perform(MockMvcRequestBuilders.put("/api/consent/")
+	// mockMvc.perform(MockMvcRequestBuilders.put("/api/saglasnost/")
 	// .contentType(MediaType.APPLICATION_XML)
 	// .characterEncoding(StandardCharsets.UTF_8)
 	// .content(xmlData))
