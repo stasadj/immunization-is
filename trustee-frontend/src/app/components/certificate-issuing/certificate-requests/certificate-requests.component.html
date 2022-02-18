@@ -8,10 +8,10 @@
                 <th>JMBG korisnika</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>12343543543534</td>
-                <td>2021-01-01</td>
-                <td>1234567891111</td>
+            <tr *ngFor="let zahtev of zahtevi">
+                <td>{{ zahtev.uuid }}</td>
+                <td>{{ zahtev.date }}</td>
+                <td>{{ zahtev.jmbg }}</td>
                 <td>
                     <button mat-flat-button>Prikaži dokument</button>
                     <button

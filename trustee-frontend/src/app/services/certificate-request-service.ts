@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { XmlService } from '../utils/xml.service';
+import { CertificateRequest } from '../model/CertificateRequest';
 
 @Injectable({
     providedIn: 'root',
@@ -11,52 +12,20 @@ export class CertificateRequestService {
 
     constructor(private http: HttpClient, private XML: XmlService) {}
 
-    getPendingRequests(): Observable<any> {
+    getPendingRequests(): Observable<CertificateRequest[]> {
         return this.http
             .get(`${this.path}/pending`, {
                 responseType: 'text',
             })
             .pipe(
                 map((xml) => this.XML.parse(xml)),
-                map((i) => ({
-                    interesovanjeNum:
-                        i['IZVE:BROJ_DOKUMENATA_O_INTERESOVANJU'][0],
-                    zahtevNum: i['IZVE:BROJ_IZDATIH_DIGITALNIH_SERTIFIKATA'][0],
-                    sertifikatNum:
-                        i['IZVE:BROJ_ZAHTEVA_ZA_DIGITALNI_SERTIFIKAT'][0],
-                    ukupnoDatoNum:
-                        i[
-                            'IZVE:RASPODELA_DATIH_VAKCINA_PO_REDNOM_BROJU_DOZE'
-                        ][0].$.UKUPNO_DATO,
-                    doza1Num:
-                        i[
-                            'IZVE:RASPODELA_DATIH_VAKCINA_PO_REDNOM_BROJU_DOZE'
-                        ][0]['IZVE:DOZA'][0]['IZVE:BROJ_DATIH_DOZA'][0],
-                    doza2Num:
-                        i[
-                            'IZVE:RASPODELA_DATIH_VAKCINA_PO_REDNOM_BROJU_DOZE'
-                        ][0]['IZVE:DOZA'][1]['IZVE:BROJ_DATIH_DOZA'][0],
-                    doza3Num:
-                        i[
-                            'IZVE:RASPODELA_DATIH_VAKCINA_PO_REDNOM_BROJU_DOZE'
-                        ][0]['IZVE:DOZA'][2]['IZVE:BROJ_DATIH_DOZA'][0],
-                    pfizerNum:
-                        i['IZVE:RASPODELA_DATIH_VAKCINA_PO_PROIZVODJACIMA'][0][
-                            'IZVE:PROIZVODJAC'
-                        ][0]['IZVE:BROJ_DATIH_DOZA'][0],
-                    sinopharmNum:
-                        i['IZVE:RASPODELA_DATIH_VAKCINA_PO_PROIZVODJACIMA'][0][
-                            'IZVE:PROIZVODJAC'
-                        ][1]['IZVE:BROJ_DATIH_DOZA'][0],
-                    sputnikNum:
-                        i['IZVE:RASPODELA_DATIH_VAKCINA_PO_PROIZVODJACIMA'][0][
-                            'IZVE:PROIZVODJAC'
-                        ][2]['IZVE:BROJ_DATIH_DOZA'][0],
-                    astraNum:
-                        i['IZVE:RASPODELA_DATIH_VAKCINA_PO_PROIZVODJACIMA'][0][
-                            'IZVE:PROIZVODJAC'
-                        ][3]['IZVE:BROJ_DATIH_DOZA'][0],
-                }))
+                map((o) =>
+                    (<any[]>o.ZAHTEV).map((z) => ({
+                        uuid: z.UUID[0],
+                        date: z.DATUM[0],
+                        jmbg: z.JMBG[0],
+                    }))
+                )
             );
     }
 }
