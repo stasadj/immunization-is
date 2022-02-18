@@ -94,10 +94,13 @@ export class ZdravstveniPageComponent implements OnInit {
         console.log(this.evidencija);
         this.immunizationService
             .addEvidencija(this.evidencija, this.saglasnostId)
-            .subscribe((r) => {
-                this.toastr.success('Vakcinacija je evidentirana');
-                this.formView = false;
-                this.saglasnostId = '';
-            });
+            .subscribe(
+                (r) => {
+                    this.toastr.success('Vakcinacija je evidentirana');
+                    this.formView = false;
+                    this.saglasnostId = '';
+                },
+                () => this.toastr.error('Neuspesna evidencija')
+            );
     }
 }

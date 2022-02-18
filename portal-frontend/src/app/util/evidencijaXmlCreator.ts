@@ -22,7 +22,11 @@ export function createEvidencijaXML(
       </vakcina>
     `)
     );
-    return `<evidencija_o_vakcinaciji xmlns="http://www.ftn.uns.ac.rs/saglasnost/">
+    return `<evidencija_o_vakcinaciji xmlns="http://www.ftn.uns.ac.rs/saglasnost/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/saglasnost/ saglasnost.xsd">
             <zdravstvena_ustanova>
                 <naziv property="pred:vakcinisan_u" datatype="xs:string"></naziv>
                 <vakcinacijski_punkt>${evidencija.vakcinacijskiPunkt}</vakcinacijski_punkt>
@@ -39,10 +43,10 @@ export function createEvidencijaXML(
             <kontraindikacija>
                 <privremene_kontraindikacije>
                     <datum_utvrdjivanja></datum_utvrdjivanja>
-                    <dijagnoza></dijagnoza>
+                    <dijagnoza>${evidencija.kontraindikacije}</dijagnoza>
                 </privremene_kontraindikacije>
                 <trajne_kontraindikacije>
-                    <odluka_komisije></odluka_komisije>
+                    <odluka_komisije>${evidencija.odluka}</odluka_komisije>
                 </trajne_kontraindikacije>
             </kontraindikacija> 
         </evidencija_o_vakcinaciji>

@@ -96,7 +96,7 @@ public class PotvrdaService extends DocumentService<PotvrdaOVakcinaciji> {
         Vakcinacija last = vakcinacije.getVakcinacija().get(vakcinacije.getVakcinacija().size()-1);
         potvrda.setVakcinacije(vakcinacije);
 
-        vaccineAmountService.decrementAmount(last.getNazivVakcine(), last.getBrojSerije().intValue());
+        //vaccineAmountService.decrementAmount(last.getNazivVakcine(), last.getBrojSerije().intValue());
 
         documentDAO.save(uuid, potvrda);
 
