@@ -23,7 +23,7 @@ public class InteresovanjeController extends DocumentController<IskazivanjeInter
         super(documentService);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     ResponseEntity<Void> create(@RequestBody IskazivanjeInteresovanjaZaVakcinaciju interesovanje, @AuthenticationPrincipal User user) throws Exception {
         documentService.create(interesovanje, user);
         return new ResponseEntity<>(HttpStatus.OK);

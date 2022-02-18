@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { InteresovanjeService } from 'src/app/services/interesovanje.service';
 
 @Component({
     selector: 'app-document-table',
@@ -8,12 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DocumentTableComponent implements OnInit {
     @Input() public documents: any[] = [];
     public displayedColumns: string[] = ['name', 'view', 'download'];
-    constructor() {}
+    constructor(private interesovanjeService : InteresovanjeService) {}
     ngOnInit(): void {}
 
     viewDoc(docName : string){
-        console.log("viewing " + docName);
-        //TODO
+        let [documentType, documentName] = docName.split("/");
+        console.log(documentType, documentName);
+        window.open(
+            `http://localhost:8080/api/${documentType}/xhtml/${documentName}`,
+            '_blank'
+        );
 
     }
 
