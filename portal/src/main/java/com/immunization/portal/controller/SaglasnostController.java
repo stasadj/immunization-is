@@ -14,7 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/consent", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+@RequestMapping(value = "/api/saglasnost")
 public class SaglasnostController extends DocumentController<ObrazacSaglasnostiZaImunizaciju> {
 
     @Autowired
@@ -22,14 +22,14 @@ public class SaglasnostController extends DocumentController<ObrazacSaglasnostiZ
         super(documentService);
     }
 
-    @PutMapping(value = "/")
+    @PutMapping(value = "/", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     @PreAuthorize("hasRole('GRADANIN')")
     public ResponseEntity<Void> create(@AuthenticationPrincipal User user, @RequestBody ObrazacSaglasnostiZaImunizaciju form) throws Exception {
         documentService.create(form, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/vaccination-record/:documentId")
+    @PutMapping(value = "/vaccination-record/:documentId", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     @PreAuthorize("hasRole('ZDRAVSTVENI_RADNIK')")
     public ResponseEntity<Void> addVaccinationRecord(@RequestBody EvidencijaOVakcinaciji evidencija, @PathVariable String documentId) throws Exception {
         ((SaglasnostService)documentService).addVaccinationRecord(evidencija, documentId);
