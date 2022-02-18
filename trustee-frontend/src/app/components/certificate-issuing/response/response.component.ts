@@ -42,6 +42,7 @@ export class ResponseComponent implements OnInit {
     handleReject = () => {
         this.dialog.open(ReasonForRejectionComponent, {
             width: '40%',
+            data: { zahtev: this.data.zahtev },
         });
     };
 }
