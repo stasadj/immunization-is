@@ -22,60 +22,62 @@ import com.immunization.trustee.service.email.TrusteeEmailService;
 
 @Service
 public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifikat> {
-	private final UserDAO userDAO;
-	private final TrusteeEmailService emailService;
+    private final UserDAO userDAO;
+    private final TrusteeEmailService emailService;
 
-	private final DigitalniSertifikatService sertifikatService;
+    private final DigitalniSertifikatService sertifikatService;
 
-	@Autowired
-	public ZahtevZaSertifikatService(ZahtevZaSertifikatDAO documentDAO,
-									 MetadataExtractorService metadataExtractorService,
-									 MarshallerService marshallerService,
-									 PdfTransformer pdfTransformer,
-									 XhtmlTransformer xhtmlTransformer,
-									 UserDAO userDAO, TrusteeEmailService emailService, DigitalniSertifikatService sertifikatService) {
-		super(ZahtevZaSertifikat.class,
-				documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
-		this.userDAO = userDAO;
-		this.emailService = emailService;
-		this.sertifikatService = sertifikatService;
-	}
+    @Autowired
+    public ZahtevZaSertifikatService(ZahtevZaSertifikatDAO documentDAO,
+            MetadataExtractorService metadataExtractorService, MarshallerService marshallerService,
+            PdfTransformer pdfTransformer, XhtmlTransformer xhtmlTransformer, UserDAO userDAO,
+            TrusteeEmailService emailService, DigitalniSertifikatService sertifikatService) {
+        super(ZahtevZaSertifikat.class, documentDAO, metadataExtractorService, marshallerService, pdfTransformer,
+                xhtmlTransformer);
+        this.userDAO = userDAO;
+        this.emailService = emailService;
+        this.sertifikatService = sertifikatService;
+    }
 
-	public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
-		String zahtevUUID = this.extractUUIDFromAbout(odgovor.getZahtevURI());
+    public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
+        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
 
-		Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
-		ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(()->new NotFoundException(""));
-		zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
-		documentDAO.save(zahtevUUID + ".xml", zahtev);
+        Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
+        ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
+        documentDAO.save(zahtevUUID + ".xml", zahtev);
 
-		String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
-		User user = userDAO.getByUsername(username).get(0);
+        String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
+        User user = userDAO.getByUsername(username).get(0);
 
-		DigitalniSertifikat sertifikat = sertifikatService.createCertificate(zahtev, user);
+        DigitalniSertifikat sertifikat = sertifikatService.createCertificate(zahtev, user);
 
-		emailService.sendCertificateRequestAccepted(user);
+        emailService.sendCertificateRequestAccepted(user, this.extractUUIDFromAboutCertificate(sertifikat.getAbout()));
 
-		return sertifikat;
-	}
+        return sertifikat;
+    }
 
-	public void reject(Odgovor odgovor) throws Exception {
-		String zahtevUUID = this.extractUUIDFromAbout(odgovor.getZahtevURI());
-		Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
-		ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(()->new NotFoundException(""));
-		zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
-		documentDAO.save(zahtevUUID + ".xml", zahtev);
+    public void reject(Odgovor odgovor) throws Exception {
+        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
+        Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
+        ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
+        documentDAO.save(zahtevUUID + ".xml", zahtev);
 
-		String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
-		User user = userDAO.getByUsername(username).get(0);
-		emailService.sendCertificateRequestRejected(odgovor.getRazlogOdbijanja(), user);
-	}
+        String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
+        User user = userDAO.getByUsername(username).get(0);
+        emailService.sendCertificateRequestRejected(odgovor.getRazlogOdbijanja(), user);
+    }
 
-	private String extractUsernameFromAbout(String about) {
-		return about.substring(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX.length());
-	}
+    private String extractUsernameFromAbout(String about) {
+        return about.substring(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX.length());
+    }
 
-	private String extractUUIDFromAbout(String about) {
-		return about.substring(MetadataConstants.REQUEST_ABOUT_PREFIX.length());
-	}
+    private String extractUUIDFromAboutRequest(String about) {
+        return about.substring(MetadataConstants.REQUEST_ABOUT_PREFIX.length());
+    }
+
+    private String extractUUIDFromAboutCertificate(String about) {
+        return about.substring(MetadataConstants.CERTIFICATE_ABOUT_PREFIX.length());
+    }
 }
