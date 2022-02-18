@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { ToastrModule } from 'ngx-toastr';
 import { VaccineReportComponent } from './components/vaccine-report/vaccine-report.component';
@@ -25,6 +27,10 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
+import { ImmunizationReportComponent } from './components/immunization-report/immunization-report.component';
+import { CertificateRequestsComponent } from './components/certificate-issuing/certificate-requests/certificate-requests.component';
+import { ResponseComponent } from './components/certificate-issuing/response/response.component';
+import { ReasonForRejectionComponent } from './components/certificate-issuing/reason-for-rejection/reason-for-rejection.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +39,10 @@ import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor'
         VaccineReportComponent,
         LoginComponent,
         NotFoundComponent,
+        ImmunizationReportComponent,
+        CertificateRequestsComponent,
+        ResponseComponent,
+        ReasonForRejectionComponent,
     ],
     imports: [
         BrowserModule,
@@ -51,6 +61,8 @@ import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor'
         MatButtonModule,
         HttpClientModule,
         ToastrModule.forRoot(),
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     providers: [
         {

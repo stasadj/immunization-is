@@ -16,7 +16,7 @@ public class EmailContent {
 
 	public EmailContent(String subject, String body) {
 		this.subject = subject;
-		this.recipients = new ArrayList<String>();
+		this.recipients = new ArrayList<>();
 		this.body = body;
 	}
 
@@ -30,15 +30,12 @@ public class EmailContent {
 
 	public List<String> getRecipients() {
 		if (recipients == null) {
-			this.recipients = new ArrayList<String>();
+			this.recipients = new ArrayList<>();
 		}
 		return recipients;
 	}
 
 	public void setRecipients(List<String> recipients) {
-		if (recipients == null) {
-			this.recipients = new ArrayList<String>();
-		}
 		this.recipients = recipients;
 	}
 
@@ -52,7 +49,7 @@ public class EmailContent {
 
 	public void addRecipient(String recipient) {
 		if (recipients == null) {
-			this.recipients = new ArrayList<String>();
+			this.recipients = new ArrayList<>();
 		}
 		if (!recipients.contains(recipient)) {
 			this.recipients.add(recipient);

@@ -1,6 +1,16 @@
 <div>
-    <!-- TODO separate into tabs or smth -->
-    <app-create-interesovanje></app-create-interesovanje>
-    <app-create-saglasnost></app-create-saglasnost>
-    <app-create-zahtev></app-create-zahtev>
+    <nav mat-tab-nav-bar>
+        <a
+            mat-tab-link
+            *ngFor="let link of navLinks"
+            [routerLink]="link.link"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [active]="rla.isActive"
+        >
+            >
+            {{ link.label }}
+        </a>
+    </nav>
+    <router-outlet></router-outlet>
 </div>

@@ -1,39 +1,43 @@
 package com.immunization.portal.service;
 
-import java.io.IOException;
-
-import javax.xml.crypto.MarshalException;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.transform.TransformerException;
-
-import com.immunization.common.constants.MetadataConstants;
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.dao.ZahtevZaSertifikatDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.User;
 import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
-import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat.MetaPodaci.StatusZahteva;
-import com.immunization.common.service.MarshallerService;
-import com.immunization.common.service.MetadataExtractorService;
-import com.immunization.common.service.UUIDService;
-import com.immunization.common.service.XMLCalendarService;
-
+import com.immunization.common.service.*;
+import com.immunization.common.util.PdfTransformer;
+import com.immunization.common.util.XhtmlTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 @Service
-@AllArgsConstructor
-public class ZahtevService {
+public class ZahtevService extends DocumentService<ZahtevZaSertifikat> {
+    private final UUIDService uuidService;
+    private final XMLCalendarService calendarUtil;
+    private final UserDAO userDAO;
 
-    private ZahtevZaSertifikatDAO zahtevDAO;
-    private MetadataExtractorService metadataExtractorService;
-    private MarshallerService marshallerService;
-    private UUIDService uuidService;
-    private XMLCalendarService calendarUtil;
+    @Autowired
+    public ZahtevService(ZahtevZaSertifikatDAO documentDAO,
+                         MetadataExtractorService metadataExtractorService,
+                         MarshallerService marshallerService,
+                         PdfTransformer pdfTransformer,
+                         XhtmlTransformer xhtmlTransformer,
+                         UUIDService uuidService,
+                         XMLCalendarService calendarUtil,
+                         UserDAO userDAO) {
+        super(ZahtevZaSertifikat.class,
+                documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
+        this.uuidService = uuidService;
+        this.calendarUtil = calendarUtil;
+        this.userDAO = userDAO;
+    }
 
-    public ZahtevZaSertifikat create(ZahtevZaSertifikat zahtev, User user) throws Exception {
-
+    @Override
+    public void create(ZahtevZaSertifikat zahtev, User user) throws Exception {
         String uuid = uuidService.getUUID();
 
         // setting uuid in about
@@ -43,9 +47,7 @@ public class ZahtevService {
         zahtev.getPodnosilacZahteva().setAbout("http://www.ftn.uns.ac.rs/licni-podaci/" + user.getUsername());
 
         // setting new zahtev status
-        StatusZahteva status = new StatusZahteva();
-        status.setValue(StatusZahtevaValue.NA_CEKANJU);
-        zahtev.getMetaPodaci().setStatusZahteva(status);
+        zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.NA_CEKANJU);
 
         // setting date
         XMLGregorianCalendar xmlCalendar = calendarUtil.getCurrentDate();
@@ -56,21 +58,9 @@ public class ZahtevService {
             throw new FailedMetadataExtractionException();
         }
 
-        // saving
-        String documentId = uuid + ".xml";
-        zahtevDAO.save(documentId, zahtev);
-        return zahtev;
+        documentDAO.save(uuid, zahtev);
 
+        user.getDocuments().getZahtev().add(uuid);
+        userDAO.save(user);
     }
-
-    private boolean extractAndSaveMetadata(ZahtevZaSertifikat form) {
-        try {
-            metadataExtractorService.insertFromString(marshallerService.marshal(form), MetadataConstants.RDF_GRAPH_URI);
-        } catch (IOException | TransformerException | MarshalException e) {
-            return false;
-        }
-
-        return true;
-    }
-
 }

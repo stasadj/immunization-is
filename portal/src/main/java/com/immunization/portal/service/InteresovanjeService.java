@@ -1,18 +1,14 @@
 package com.immunization.portal.service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.Optional;
 
-import javax.xml.crypto.MarshalException;
-import javax.xml.transform.TransformerException;
-
-import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
+import com.immunization.common.dao.UserDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.exception.base.BadRequestException;
 import com.immunization.common.model.User;
 import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVakcinaciju;
+import com.immunization.common.service.DocumentService;
 import com.immunization.common.service.MarshallerService;
 import com.immunization.common.service.MetadataExtractorService;
 import com.immunization.common.service.XMLCalendarService;
@@ -20,28 +16,36 @@ import com.immunization.common.util.PdfTransformer;
 import com.immunization.common.util.XhtmlTransformer;
 import com.immunization.portal.service.email.PortalEmailService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
-public class InteresovanjeService {
+public class InteresovanjeService extends DocumentService<IskazivanjeInteresovanjaZaVakcinaciju> {
+    private final PortalEmailService emailService;
+    private final XMLCalendarService calendarUtil;
+    private final UserDAO userDAO;
 
-    private IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
-    private MetadataExtractorService metadataExtractorService;
-    private MarshallerService marshallerService;
-    private PortalEmailService emailService;
-    private XMLCalendarService calendarUtil;
-    private PdfTransformer pdfTransformer;
-    private XhtmlTransformer xhtmlTransformer;
+    @Autowired
+    public InteresovanjeService(IskazivanjeInteresovanjaZaVakcinacijuDAO documentDAO,
+                                MetadataExtractorService metadataExtractorService,
+                                MarshallerService marshallerService,
+                                PdfTransformer pdfTransformer,
+                                XhtmlTransformer xhtmlTransformer,
+                                PortalEmailService emailService,
+                                XMLCalendarService calendarUtil,
+                                UserDAO userDAO) {
+        super(IskazivanjeInteresovanjaZaVakcinaciju.class,
+                documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
+        this.emailService = emailService;
+        this.calendarUtil = calendarUtil;
+        this.userDAO = userDAO;
+    }
 
-    public IskazivanjeInteresovanjaZaVakcinaciju create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user)
-            throws Exception {
+    @Override
+    public void create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user) throws Exception {
+        String documentId = user.getUsername();
 
-        String documentId = user.getUsername() + ".xml";
-
-        Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = interesovanjeDAO.retrieveById(documentId);
+        Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = ((IskazivanjeInteresovanjaZaVakcinacijuDAO)documentDAO).retrieveById(documentId);
         if (result.isPresent()) {
             throw new BadRequestException("Interesovanje for this user already exists. ");
         }
@@ -59,36 +63,13 @@ public class InteresovanjeService {
             throw new FailedMetadataExtractionException();
         }
 
-        interesovanjeDAO.save(documentId, interesovanje);
+        documentDAO.save(documentId, interesovanje);
+
+        user.getDocuments().getInteresovanje().add(documentId);
+        userDAO.save(user);
 
         // send email to patient
         emailService.sendInteresovanjeConfirmation(interesovanje,
                 interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
-
-        return interesovanje;
-
     }
-
-    private boolean extractAndSaveMetadata(IskazivanjeInteresovanjaZaVakcinaciju form) {
-        try {
-            metadataExtractorService.insertFromString(marshallerService.marshal(form), MetadataConstants.RDF_GRAPH_URI);
-        } catch (IOException | TransformerException | MarshalException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public ByteArrayInputStream generatePdf(String documentId) throws Exception {
-        String xml = interesovanjeDAO.getXML(documentId);
-        System.out.println(xml);
-        return pdfTransformer.generatePDF(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
-    }
-
-    public ByteArrayInputStream generateXhtml(String documentId) throws Exception {
-        String xml = interesovanjeDAO.getXML(documentId);
-        System.out.println(xml);
-        return xhtmlTransformer.generateXHTML(xml, IskazivanjeInteresovanjaZaVakcinaciju.class);
-    }
-
 }

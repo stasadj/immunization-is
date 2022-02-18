@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:ns3="http://www.ftn.uns.ac.rs/interesovanje/"
+                xmlns:inte="http://www.ftn.uns.ac.rs/interesovanje/"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="/">
@@ -24,30 +24,30 @@
                               text-align="center">
                         Iskazivanje interesovanja za vakcinisanje protiv COVID-19
                     </fo:block>
-                    <xsl:if test="//ns3:drzavljanstvo/text() = 'srpsko'">
+                    <xsl:if test="//inte:drzavljanstvo/text() = 'srpsko'">
                         <fo:block font-size="13px" padding="10px">
                             Drzavljanstvo:
                             <fo:inline font-weight="bold">Drzavljanin Republike Srbije</fo:inline>
                         </fo:block>
                     </xsl:if>
-                    <xsl:if test="//ns3:drzavljanstvo/text() = 'strano sa boravkom'">
+                    <xsl:if test="//inte:drzavljanstvo/text() = 'strano sa boravkom'">
                         <fo:block font-size="13px" padding="10px">
                             Drzavljanstvo:
                             <fo:inline font-weight="bold">Strani drzavljanin sa boravkom u RS</fo:inline>
                         </fo:block>
                     </xsl:if>
-                    <xsl:if test="//ns3:drzavljanstvo/text() = 'strano bez boravka'">
+                    <xsl:if test="//inte:drzavljanstvo/text() = 'strano bez boravka'">
                         <fo:block font-size="13px" padding="10px">
                             Drzavljanstvo:
                             <fo:inline font-weight="bold">Strani drzavljanin bez boravka u RS</fo:inline>
                         </fo:block>
                     </xsl:if>
                     <xsl:choose>
-                        <xsl:when test="string-length(//ns3:jmbg/text()) = 13">
+                        <xsl:when test="string-length(//inte:jmbg/text()) = 13">
                             <fo:block font-family="sans-serif" font-size="13px" padding="10px">
                                 JMBG:
                                 <fo:inline font-weight="bold">
-                                    <xsl:value-of select="concat(' ', //ns3:jmbg)"/>
+                                    <xsl:value-of select="concat(' ', //inte:jmbg)"/>
                                 </fo:inline>
                             </fo:block>
                         </xsl:when>
@@ -55,7 +55,7 @@
                             <fo:block font-family="sans-serif" font-size="13px" padding="10px">
                                 Broj pasosa:
                                 <fo:inline font-weight="bold">
-                                    <xsl:value-of select="concat(' ', //ns3:jmbg)"/>
+                                    <xsl:value-of select="concat(' ', //inte:jmbg)"/>
                                 </fo:inline>
                             </fo:block>
                         </xsl:otherwise>
@@ -63,32 +63,32 @@
                     <fo:block font-size="13px" padding="10px">
                         Ime:
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="//ns3:puno_ime"/>
+                            <xsl:value-of select="//inte:puno_ime"/>
                         </fo:inline>
                     </fo:block>
 
                     <fo:block font-size="13px" padding="10px">
                         Adresa elektronske poste:
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="//ns3:email_adresa"/>
+                            <xsl:value-of select="//inte:email_adresa"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block font-size="13px" padding="10px">
                         Broj mobilnog telefona (navesti broj u formatu 06X... bez razmaka i crtica):
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="//ns3:mobilni_telefon"/>
+                            <xsl:value-of select="//inte:mobilni_telefon"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block font-size="13px" padding="10px">
                         Broj fiksnog telefona (navesti broj u formatu (DDD) DDD-DDD):
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="//ns3:fiksni_telefon"/>
+                            <xsl:value-of select="//inte:fiksni_telefon"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block font-size="13px" padding="10px">
                         Lokacija:
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="//ns3:zeljena_opstina_vakcinacije"/>
+                            <xsl:value-of select="//inte:zeljena_opstina_vakcinacije"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="13px" padding="20px">
@@ -96,7 +96,7 @@
                         za lekove i medicinska sredstva potvrdi bezbednost, efikasnost i kvalitet i izda dozvolu za
                         upotrebu leka:
                     </fo:block>
-                    <xsl:for-each select="//ns3:odabir_vakcina/ns3:opcija">
+                    <xsl:for-each select="//inte:odabir_vakcina/inte:opcija">
                         <fo:block font-size="13px" text-indent="40px" padding="2px" margin="0">
                             <fo:inline font-weight="bold">
                                 <xsl:value-of select="text()"/>
@@ -107,7 +107,7 @@
                         Da li ste dobrovoljni davalac krvi:
                     </fo:block>
                     <xsl:choose>
-                        <xsl:when test="//ns3:dobrovoljni_davalac_krvi = true()">
+                        <xsl:when test="//inte:dobrovoljni_davalac_krvi = true()">
                             <fo:block font-size="13px" text-indent="40px" padding="2px" margin="0">
                                 <fo:inline font-weight="bold">Da</fo:inline>
                             </fo:block>
