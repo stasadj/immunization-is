@@ -30,14 +30,14 @@ public class SaglasnostController extends DocumentController<ObrazacSaglasnostiZ
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/vaccination-record/:documentId", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+    @PutMapping(value = "/vaccination-record/{documentId}", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     @PreAuthorize("hasRole('ZDRAVSTVENI_RADNIK')")
     public ResponseEntity<Void> addVaccinationRecord(@RequestBody EvidencijaOVakcinaciji evidencija, @PathVariable String documentId) throws Exception {
         ((SaglasnostService)documentService).addVaccinationRecord(evidencija, documentId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/:idNumber")
+    @GetMapping(value = "/latest/{idNumber}", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     @PreAuthorize("hasRole('ZDRAVSTVENI_RADNIK')")
     public ResponseEntity<String> getLatestSaglIdFor(@PathVariable String idNumber) throws Exception {
         String id = ((SaglasnostService)documentService).getLatestForPatient(idNumber)

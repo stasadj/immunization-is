@@ -35,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { GradjaninDocumentsComponent } from './components/gradjanin-documents/gradjanin-documents.component';
 import { DocumentTableComponent } from './components/gradjanin-documents/document-table/document-table.component';
 import { ZdravstveniPageComponent } from './pages/zdravstveni-page/zdravstveni-page.component';
+import { EvidencijaComponent } from './components/evidencija/evidencija.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { ZdravstveniPageComponent } from './pages/zdravstveni-page/zdravstveni-p
         GradjaninDocumentsComponent,
         DocumentTableComponent,
         ZdravstveniPageComponent,
+        EvidencijaComponent,
     ],
     imports: [
         BrowserModule,

@@ -50,7 +50,7 @@ public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImuni
 
     public ObrazacSaglasnostiZaImunizaciju getLatestForPatient(String idNumber) throws Exception {
         List<ObrazacSaglasnostiZaImunizaciju> saglasnosti = ((ObrazacSaglasnostiZaImunizacijuDAO) documentDAO).getByIdNumber(idNumber);
-        if (saglasnosti.size() == 0) throw new NotFoundException("");
+        if (saglasnosti.size() == 0) throw new NotFoundException(idNumber+" NOTFOUND");
         return saglasnosti.stream().reduce((s1, s2) -> s1.getDatum().compare(s2.getDatum()) > 0 ? s1 : s2).get();
     }
 

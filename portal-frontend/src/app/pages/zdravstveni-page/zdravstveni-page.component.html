@@ -1,15 +1,103 @@
-<mat-card>
+<mat-card *ngIf="!formView">
     <mat-card-title>Licni broj:</mat-card-title>
     <mat-card-content>
         <mat-form-field appearance="fill">
             <mat-label>JMBG ili broj pasosa</mat-label>
             <input matInput [(ngModel)]="idNumber" />
         </mat-form-field>
-        <a *ngIf="saglasnostId" routerLink="/register">Registracija</a>
+        <div *ngIf="saglasnostId">
+            <button mat-raised-button color="primary" (click)="display()">
+                Pregled saglasnosti {{ saglasnostId }}
+            </button>
+            <button mat-raised-button color="primary" (click)="open()">
+                Popuni evidenciju
+            </button>
+        </div>
     </mat-card-content>
     <mat-card-actions align="end">
         <button mat-raised-button color="accent" (click)="search()">
             Pretrazi
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="formView">
+    <mat-card-title>Evidencija o vakcinaciji</mat-card-title>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Zdravstvena ustanova</mat-label>
+            <input matInput [(ngModel)]="evidencija.zdravstvenaUstanova" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ime lekara</mat-label>
+            <input matInput [(ngModel)]="evidencija.imeLekara" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Prezime lekara</mat-label>
+            <input matInput [(ngModel)]="evidencija.prezimeLekara" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Telefon lekara</mat-label>
+            <input matInput [(ngModel)]="evidencija.telefon" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Vakcinacijski punkt</mat-label>
+            <input matInput [(ngModel)]="evidencija.vakcinacijskiPunkt" />
+        </mat-form-field>
+
+        <div
+            *ngFor="let v of evidencija.vakcinacije; let i = index"
+            [attr.data-index]="i"
+        >
+            <h3>Doza {{ i + 1 }}</h3>
+            <mat-form-field appearance="fill">
+                <mat-label>Broj serije</mat-label>
+                <input matInput type="number" min="1" [(ngModel)]="v.serija" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Naziv</mat-label>
+                <input matInput [(ngModel)]="v.proizvodjac" [disabled]="true" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Datum rođenja</mat-label>
+                <input
+                    matInput
+                    [matDatepicker]="picker"
+                    [(ngModel)]="v.datumDavanja"
+                />
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Tip vakcine</mat-label>
+                <mat-select [(ngModel)]="v.proizvodjac" name="type">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                        {{ type }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field>
+            <mat-label>Privremene kontraindikacije</mat-label>
+            <input matInput [(ngModel)]="evidencija.kontraindikacije" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Odluka komisije za trajne kontraindikacije</mat-label>
+            <input matInput [(ngModel)]="evidencija.odluka" />
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="accent" (click)="submit()">
+            Zavrsi
         </button>
     </mat-card-actions>
 </mat-card>

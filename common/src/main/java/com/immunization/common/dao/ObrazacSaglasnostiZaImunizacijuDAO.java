@@ -35,8 +35,11 @@ public class ObrazacSaglasnostiZaImunizacijuDAO extends DocumentDAO<ObrazacSagla
     }
 
     public List<ObrazacSaglasnostiZaImunizaciju> getByIdNumber(String idNumber) throws Exception {
-        String xPathExp = "//sagl:obrazac_saglasnosti_za_imunizaciju[sagl:"
-                + ((idNumber.length() == 13) ? "jmbg" : "broj_pasosa_ili_ebs") + " = '" + idNumber + "']";
+        String xPathExp = "//sagl:obrazac_saglasnosti_za_imunizaciju[sagl:informacije_o_pacijentu/sagl:drzavljanstvo/";
+        if (idNumber.length() == 13)
+            xPathExp += "sagl:srpsko_drzavljanstvo/sagl:jmbg='"+idNumber+"']";
+        else
+            xPathExp += "sagl:strano_drzavljanstvo/sagl:broj_pasosa_ili_ebs='"+idNumber+"']";
         return exist.query(xPathExp, ObrazacSaglasnostiZaImunizaciju.class, CONSENT_NAMESPACE, "sagl").stream()
                 .map(o -> (ObrazacSaglasnostiZaImunizaciju) o).collect(Collectors.toList());
     }
