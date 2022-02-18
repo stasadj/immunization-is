@@ -65,9 +65,11 @@ export class CreateZahtevComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.newZahtevFormGroup.patchValue({
-            imeIPrezime:
-                this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME,
+        this.authService.whoAmI().subscribe((res) => {
+            this.loggedUser = res;
+            this.newZahtevFormGroup.controls['imeIPrezime'].setValue(
+                this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME
+            );
         });
     }
 

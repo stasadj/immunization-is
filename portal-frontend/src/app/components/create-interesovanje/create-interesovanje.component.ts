@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Interesovanje } from '../../model/Interesovanje';
-import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InteresovanjeService } from 'src/app/services/interesovanje.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Drzavljanstvo } from 'src/app/model/Drzavljanstvo';
 import { AuthService } from 'src/app/services/auth.service';
+import { InteresovanjeService } from 'src/app/services/interesovanje.service';
+import { Interesovanje } from '../../model/Interesovanje';
 
 @Component({
     selector: 'app-create-interesovanje',
@@ -25,11 +25,12 @@ export class CreateInteresovanjeComponent implements OnInit {
     public saBoravkom = Drzavljanstvo['Strani državljanin sa boravkom u RS'];
     public bezBoravka = Drzavljanstvo['Strani državljanin bez boravka u RS'];
 
+
     constructor(
         private fb: FormBuilder,
         private interesovanjeService: InteresovanjeService,
         private authService: AuthService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
     ) {
         this.opcije = fb.group({
             'Pfizer-BioNTech': false,
@@ -77,12 +78,18 @@ export class CreateInteresovanjeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.newInteresovanjeFormGroup.controls['punoIme'].setValue(
-            this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME
-        );
-        this.newInteresovanjeFormGroup.controls['email'].setValue(
-            this.loggedUser.EMAIL
-        );
+        this.authService.whoAmI().subscribe(res =>{
+            this.loggedUser = res;
+            this.newInteresovanjeFormGroup.controls['punoIme'].setValue(
+                this.loggedUser.FIRST_NAME + ' ' + this.loggedUser.LAST_NAME
+            );
+            this.newInteresovanjeFormGroup.controls['email'].setValue(
+                this.loggedUser.EMAIL
+            );
+
+        })
+
+        
     }
 
     ngAfterViewInit() {}

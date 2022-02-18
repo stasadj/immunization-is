@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { GradjaninService } from 'src/app/services/gradjanin.service';
 
 @Component({
     selector: 'app-gradjanin-documents',
@@ -6,9 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./gradjanin-documents.component.less'],
 })
 export class GradjaninDocumentsComponent implements OnInit {
-    @Input() public gradjaninDocuments = {ZAHTEV: [], INTERESOVANJE: [], POTVRDA: [], SAGLASNOST:[], SERTIFIKAT: []};
+    public documents = {ZAHTEV: [], INTERESOVANJE: [], POTVRDA: [], SAGLASNOST:[], SERTIFIKAT: []};
     public displayedColumns: string[] = ['name', 'view', 'download'];
-    constructor() {}
+    constructor(private gradjaninService: GradjaninService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.gradjaninService.getDocs().subscribe((res) => {
+            console.log(res);
+            this.documents = res;
+        });
+    }
 }

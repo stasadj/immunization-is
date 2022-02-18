@@ -9,8 +9,6 @@ import { PatientFormComponent } from './components/patient-form/patient-form.com
 import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.component';
 
 const routes: Routes = [
-    // { path: 'create-interesovanje', component: CreateInteresovanjeComponent },
-    // { path: 'create-zahtev', component: CreateZahtevComponent },
     {
         path: 'gradjanin',
         component: GradjaninPageComponent,
@@ -32,7 +30,6 @@ const routes: Routes = [
     { path: 'register', component: PatientFormComponent },
     { path: 'login', component: LoginComponent },
     { path: '**', component: NotFoundComponent },
-    // { path: 'gradjanin-documents', component: GradjaninDocumentsComponent },
 ];
 
 @NgModule({
