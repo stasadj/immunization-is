@@ -75,5 +75,7 @@ public class XhtmlTransformer {
             XSL_FILE = "to-xhtml/zahtev_za_sertifikat.xsl";
         else if (classOfDocument.equals(DigitalniSertifikat.class))
             XSL_FILE = "to-xhtml/digitalni_sertifikat.xsl";
+        else 
+            XSL_FILE = "to-xhtml/izvestaj_o_imunizaciji.xsl";
     }
 }

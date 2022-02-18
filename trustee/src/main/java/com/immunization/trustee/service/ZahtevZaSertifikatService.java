@@ -1,5 +1,8 @@
 package com.immunization.trustee.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.Optional;
 
 import com.immunization.common.dao.*;
@@ -17,6 +20,8 @@ import com.immunization.common.model.User;
 import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.common.model.util.StatusZahtevaValue;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
+import com.immunization.trustee.dto.request.Zahtev;
+import com.immunization.trustee.dto.request.Zahtevi;
 import com.immunization.trustee.dto.response.Odgovor;
 import com.immunization.trustee.service.email.TrusteeEmailService;
 
@@ -39,13 +44,25 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
         this.sertifikatService = sertifikatService;
     }
 
+    public Zahtevi getAllPendingRequests() throws Exception {
+        Zahtevi zahteviOut = new Zahtevi();
+        zahteviOut.setZahtev(new ArrayList<Zahtev>());
+        List<ZahtevZaSertifikat> zahteviIn = ((ZahtevZaSertifikatDAO) documentDAO).getAllPendingRequests();
+        for (ZahtevZaSertifikat z : zahteviIn) {
+            String uuid = this.extractUUIDFromAboutRequest(z.getAbout());
+            zahteviOut.getZahtev().add(new Zahtev(uuid, z.getMetaPodaci().getDatumIzdavanja().getValue(),
+                    z.getPodnosilacZahteva().getJmbg().getValue()));
+        }
+        return zahteviOut;
+    }
+
     public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
-        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
+        String zahtevUUID = odgovor.getUuid();
 
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
         zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
-        documentDAO.save(zahtevUUID + ".xml", zahtev);
+        documentDAO.save(zahtevUUID, zahtev);
 
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);
@@ -58,11 +75,11 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
     }
 
     public void reject(Odgovor odgovor) throws Exception {
-        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
+        String zahtevUUID = odgovor.getUuid();
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
         zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
-        documentDAO.save(zahtevUUID + ".xml", zahtev);
+        documentDAO.save(zahtevUUID, zahtev);
 
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);

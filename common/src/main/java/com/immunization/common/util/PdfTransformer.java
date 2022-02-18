@@ -72,5 +72,7 @@ public class PdfTransformer {
             XSL_FILE = "to-pdf/zahtev_za_sertifikat.xsl";
         else if (classOfDocument.equals(DigitalniSertifikat.class))
             XSL_FILE = "to-pdf/digitalni_sertifikat.xsl";
+        else 
+            XSL_FILE = "to-pdf/izvestaj_o_imunizaciji.xsl";
     }
 }

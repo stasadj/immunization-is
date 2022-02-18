@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ImmunizationReport } from 'src/app/model/ImmunizationReport';
 import { ImmunizationReportService } from 'src/app/services/immunization-report-service';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-immunization-report',
@@ -37,5 +38,72 @@ export class ImmunizationReportComponent implements OnInit {
                     .subscribe((izvestaj) => (this.izvestaj = izvestaj));
             }
         }
+    };
+
+    handleSavePDF = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        this.immunizationReportService.getPDF(uuid).subscribe((res: any) => {
+            this.onReturnedDocument(
+                res,
+                'application/pdf;charset=utf-8',
+                `${uuid}.pdf`
+            );
+        });
+    };
+
+    handleSaveXHTML = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        this.immunizationReportService.getXHTML(uuid).subscribe((res: any) => {
+            this.onReturnedDocument(
+                res,
+                'application/xhtml;charset=utf-8',
+                `${uuid}.xhtml`
+            );
+        });
+    };
+
+    onReturnedDocument = (res: any, type: string, filename: string) => {
+        let blob = new Blob([res], { type: type });
+        saveAs(blob, filename);
+    };
+
+    displayPDF = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        window.open(
+            `http://localhost:8081/api/immunization-report/pdf/${uuid}`,
+            '_blank'
+        );
+    };
+
+    displayXHTML = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        window.open(
+            `http://localhost:8081/api/immunization-report/xhtml/${uuid}`,
+            '_blank'
+        );
     };
 }

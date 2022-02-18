@@ -25,8 +25,9 @@ export class ImmunizationReportService {
                 map((i) => ({
                     interesovanjeNum:
                         i['IZVE:BROJ_DOKUMENATA_O_INTERESOVANJU'][0],
-                    zahtevNum: i['IZVE:BROJ_IZDATIH_DIGITALNIH_SERTIFIKATA'][0],
                     sertifikatNum:
+                        i['IZVE:BROJ_IZDATIH_DIGITALNIH_SERTIFIKATA'][0],
+                    zahtevNum:
                         i['IZVE:BROJ_ZAHTEVA_ZA_DIGITALNI_SERTIFIKAT'][0],
                     ukupnoDatoNum:
                         i[
@@ -62,5 +63,17 @@ export class ImmunizationReportService {
                         ][3]['IZVE:BROJ_DATIH_DOZA'][0],
                 }))
             );
+    }
+
+    getPDF(uuid: string): Observable<string> {
+        return this.http.get<string>(`${this.path}/pdf/${uuid}`, {
+            responseType: 'arraybuffer' as 'json',
+        });
+    }
+
+    getXHTML(uuid: string): Observable<string> {
+        return this.http.get<string>(`${this.path}/xhtml/${uuid}`, {
+            responseType: 'arraybuffer' as 'json',
+        });
     }
 }

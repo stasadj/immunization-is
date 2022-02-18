@@ -1,6 +1,5 @@
-package com.immunization.trustee.dto.response;
+package com.immunization.trustee.dto.request;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -13,17 +12,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "uuid", "razlogOdbijanja" })
-@XmlRootElement(name = "odgovor")
+@XmlType(name = "", propOrder = { "uuid", "datum", "jmbg" })
+@XmlRootElement(name = "zahtev")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Odgovor {
-	@NotNull(message = "Request UUID is missing.")
-	@XmlElement(name = "uuid")
-	private String uuid;
-
-	@XmlElement(name = "razlog_odbijanja")
-	private String razlogOdbijanja;
+public class Zahtev {
+    @XmlElement(name = "uuid")
+    private String uuid;
+    @XmlElement(name = "datum")
+    private String datum;
+    @XmlElement(name = "jmbg")
+    private String jmbg;
 }

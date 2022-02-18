@@ -10,20 +10,24 @@
                     <th>Tip vakcine</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>12343543543534</td>
-                    <td>2021-01-01</td>
-                    <td>3</td>
-                    <td>Pfizer</td>
+                <tr *ngFor="let potvrda of potvrde">
+                    <td>{{ potvrda.uuid }}</td>
+                    <td>{{ potvrda.date }}</td>
+                    <td>{{ potvrda.doza }}</td>
+                    <td>{{ potvrda.tip }}</td>
                     <td>
-                        <button mat-flat-button>Prikaži dokument</button>
+                        <button mat-flat-button (click)="display(potvrda.uuid)">
+                            Prikaži dokument
+                        </button>
                     </td>
                 </tr>
             </table>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-raised-button color="primary">Prihvati</button>
+        <button mat-raised-button color="primary" (click)="handleAccept()">
+            Prihvati
+        </button>
         <button mat-raised-button color="accent" (click)="handleReject()">
             Odbij
         </button>
