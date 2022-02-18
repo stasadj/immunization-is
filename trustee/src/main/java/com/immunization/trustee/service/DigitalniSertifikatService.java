@@ -22,13 +22,13 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Service
-public class SertifikatService extends DocumentService<DigitalniSertifikat> {
+public class DigitalniSertifikatService extends DocumentService<DigitalniSertifikat> {
     private final UUIDService uuidService;
     private final PotvrdaOVakcinacijiService potvrdaService;
     private final UserDAO userDAO;
 
     @Autowired
-    protected SertifikatService(DigitalniSertifikatDAO documentDAO,
+    protected DigitalniSertifikatService(DigitalniSertifikatDAO documentDAO,
                                 MetadataExtractorService metadataExtractorService,
                                 MarshallerService marshallerService,
                                 PdfTransformer pdfTransformer,
