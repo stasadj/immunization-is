@@ -23,7 +23,7 @@ public class ZahtevController extends DocumentController<ZahtevZaSertifikat> {
         super(documentService);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
     ResponseEntity<Void> create(@RequestBody ZahtevZaSertifikat zahtev, @AuthenticationPrincipal User user) throws Exception {
         documentService.create(zahtev, user);
         return new ResponseEntity<>(HttpStatus.OK);

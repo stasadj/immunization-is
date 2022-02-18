@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:ns3="http://www.ftn.uns.ac.rs/interesovanje/"
+                xmlns:inte="http://www.ftn.uns.ac.rs/interesovanje/"
                 version="2.0">
     <xsl:template match="/">
         <html>
@@ -38,60 +38,60 @@
             </head>
             <body>
                 <h1 style="margin-top: 10vh;">Iskazivanje interesovanja za vakcinisanje protiv COVID-19</h1>
-                <xsl:if test="//ns3:drzavljanstvo/text() = 'srpsko'">
+                <xsl:if test="//inte:drzavljanstvo/text() = 'srpsko'">
                     <p class="indent-paragraph">Drzavljanstvo:
                         <b>Drzavljanin Republike Srbije</b>
                     </p>
                 </xsl:if>
-                <xsl:if test="//ns3:drzavljanstvo/text() = 'strano sa boravkom'">
+                <xsl:if test="//inte:drzavljanstvo/text() = 'strano sa boravkom'">
                     <p class="indent-paragraph">Drzavljanstvo:
                         <b>Strani drzavljanin sa boravkom u RS</b>
                     </p>
                 </xsl:if>
-                <xsl:if test="//ns3:drzavljanstvo/text() = 'strano bez boravka'">
+                <xsl:if test="//inte:drzavljanstvo/text() = 'strano bez boravka'">
                     <p class="indent-paragraph">Drzavljanstvo:
                         <b>Strani drzavljanin bez boravka u RS</b>
                     </p>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="string-length(//ns3:jmbg/text()) = 13">
+                    <xsl:when test="string-length(//inte:jmbg/text()) = 13">
                         <p class="indent-paragraph">JMBG:
                             <b>
-                                <xsl:value-of select="concat(' ', //ns3:jmbg)"/>
+                                <xsl:value-of select="concat(' ', //inte:jmbg)"/>
                             </b>
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
                         <p class="indent-paragraph">Broj pasosa:
                             <b>
-                                <xsl:value-of select="concat(' ', //ns3:jmbg)"/>
+                                <xsl:value-of select="concat(' ', //inte:jmbg)"/>
                             </b>
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
                 <p class="indent-paragraph">Puno ime:
                     <b>
-                        <xsl:value-of select="//ns3:puno_ime"/>
+                        <xsl:value-of select="//inte:puno_ime"/>
                     </b>
                 </p>
                 <p class="indent-paragraph">Adresa elektronske poste:
                     <b>
-                        <xsl:value-of select="//ns3:email_adresa"/>
+                        <xsl:value-of select="//inte:email_adresa"/>
                     </b>
                 </p>
                 <p class="indent-paragraph">Broj mobilnog telefona (navesti broj u formatu 06X... bez razmaka i crtica):
                     <b>
-                        <xsl:value-of select="//ns3:mobilni_telefon"/>
+                        <xsl:value-of select="//inte:mobilni_telefon"/>
                     </b>
                 </p>
                 <p class="indent-paragraph">Broj fiksnog telefona (navesti broj u formatu (DDD) DDD-DDD):
                     <b>
-                        <xsl:value-of select="//ns3:fiksni_telefon"/>
+                        <xsl:value-of select="//inte:fiksni_telefon"/>
                     </b>
                 </p>
                 <p class="indent-paragraph">Lokacija:
                     <b>
-                        <xsl:value-of select="//ns3:zeljena_opstina_vakcinacije"/>
+                        <xsl:value-of select="//inte:zeljena_opstina_vakcinacije"/>
                     </b>
                 </p>
                 <p class="indent-paragraph" style="margin-right: 10vw;">
@@ -99,7 +99,7 @@
                     za lekove i medicinska sredstva potvrdi bezbednost, efikasnost i kvalitet i izda dozvolu za upotrebu
                     leka:
                 </p>
-                <xsl:for-each select="//ns3:odabir_vakcina/ns3:opcija">
+                <xsl:for-each select="//inte:odabir_vakcina/inte:opcija">
                     <p class="indent-vaccine">
                         <b>
                             <xsl:value-of select="text()"/>
@@ -108,7 +108,7 @@
                 </xsl:for-each>
                 <p class="indent-paragraph">Da li ste dobrovoljni davalac krvi:</p>
                 <xsl:choose>
-                    <xsl:when test="//ns3:dobrovoljni_davalac_krvi = true()">
+                    <xsl:when test="//inte:dobrovoljni_davalac_krvi = true()">
                         <p class="indent-vaccine">
                             <b>Da</b>
                         </p>
