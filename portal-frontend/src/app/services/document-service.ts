@@ -13,6 +13,9 @@ export class DocumentService {
     constructor(private http: HttpClient) {}
 
     getFile(id: string, documentFormat: string, documentType: string): Observable<string> {
+        if (documentType.startsWith("potvrda")){
+            documentType = "potvrda";
+        }
         return this.http.get<string>(`${this.path}/${documentType}/${documentFormat}/${id}`, {
             responseType: 'arraybuffer' as 'json',
         });
