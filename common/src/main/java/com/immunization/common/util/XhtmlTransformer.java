@@ -18,6 +18,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 @Component
 public class XhtmlTransformer {
@@ -37,7 +39,16 @@ public class XhtmlTransformer {
             transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.METHOD, "xhtml");
-            StreamSource source = new StreamSource(new ByteArrayInputStream(documentXml.getBytes()));
+
+            byte[] byteArray = StandardCharsets.UTF_8.encode(documentXml).array();
+            int nullCount = 0;
+            for (byte byteVar : byteArray) {
+                if (byteVar == 0) {
+                    nullCount++;
+                }
+            }
+            byte[] filteredByteArray = Arrays.copyOfRange(byteArray, 0, byteArray.length - nullCount);
+            StreamSource source = new StreamSource(new ByteArrayInputStream(filteredByteArray));
             String HTML_FILE = "document.html";
             file = new File(HTML_FILE);
             FileOutputStream output = new FileOutputStream(file);
