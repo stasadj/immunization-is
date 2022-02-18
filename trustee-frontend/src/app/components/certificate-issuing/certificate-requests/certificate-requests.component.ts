@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {
+    MatDialog,
+    throwMatDialogContentAlreadyAttachedError,
+} from '@angular/material/dialog';
 import { CertificateRequest } from 'src/app/model/CertificateRequest';
 import { CertificateRequestService } from 'src/app/services/certificate-request-service';
 import { ResponseComponent } from '../response/response.component';
@@ -23,9 +26,11 @@ export class CertificateRequestsComponent implements OnInit {
     }
 
     handleRespond = (zahtev: CertificateRequest) => {
-        this.dialog.open(ResponseComponent, {
+        let dialogRef = this.dialog.open(ResponseComponent, {
             width: '50%',
-            data: { zahtev: zahtev },
+            data: { zahtev: zahtev, reloadData: this.reloadData },
         });
+
+        dialogRef.afterClosed().subscribe(() => window.location.reload());
     };
 }

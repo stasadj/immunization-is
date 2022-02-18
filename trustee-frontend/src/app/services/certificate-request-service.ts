@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { XmlService } from '../utils/xml.service';
 import { CertificateRequest } from '../model/CertificateRequest';
+import { Odgovor } from '../model/Odgovor';
 
 @Injectable({
     providedIn: 'root',
@@ -27,5 +28,24 @@ export class CertificateRequestService {
                     }))
                 )
             );
+    }
+
+    public accept(odgovor: Odgovor): Observable<void> {
+        let xml = this.toXML(odgovor);
+        return this.http.post<void>(`${this.path}/accept`, xml);
+    }
+
+    public reject(odgovor: Odgovor): Observable<void> {
+        let xml = this.toXML(odgovor);
+        return this.http.post<void>(`${this.path}/reject`, xml);
+    }
+
+    private toXML(odgovor: Odgovor): string {
+        return `
+        <odgovor>
+          <uuid>${odgovor.uuid}</uuid>
+          <razlog_odbijanja>${odgovor.reason}</razlog_odbijanja>
+        </odgovor>
+      `;
     }
 }

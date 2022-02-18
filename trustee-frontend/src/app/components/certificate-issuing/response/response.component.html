@@ -23,7 +23,9 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-raised-button color="primary">Prihvati</button>
+        <button mat-raised-button color="primary" (click)="handleAccept()">
+            Prihvati
+        </button>
         <button mat-raised-button color="accent" (click)="handleReject()">
             Odbij
         </button>

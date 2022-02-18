@@ -62,7 +62,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
         zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.PRIHVACEN);
-        documentDAO.save(zahtevUUID + ".xml", zahtev);
+        documentDAO.save(zahtevUUID, zahtev);
 
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);
@@ -79,7 +79,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
         zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);
-        documentDAO.save(zahtevUUID + ".xml", zahtev);
+        documentDAO.save(zahtevUUID, zahtev);
 
         String username = this.extractUsernameFromAbout(zahtev.getPodnosilacZahteva().getAbout());
         User user = userDAO.getByUsername(username).get(0);
