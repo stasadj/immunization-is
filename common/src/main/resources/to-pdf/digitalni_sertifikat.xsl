@@ -60,11 +60,11 @@
                                 </fo:inline>
                             </fo:block>
                         </fo:block-container>
-                        <fo:block-container width="50%" left="50%" top="0in" position="absolute">
-                            <fo:block font-family="sans-serif" font-size="11px" font-weight="bold">Datum i vreme
+                        <fo:block-container width="50%" left="70%" top="0in" position="absolute">
+                            <fo:block font-family="sans-serif" font-size="7px" font-weight="bold">Datum i vreme
                                 izdavanja sertifikata /
                             </fo:block>
-                            <fo:block font-family="sans-serif" font-size="11px" font-weight="bold">
+                            <fo:block font-family="sans-serif" font-size="7px" font-weight="bold">
                                 Certificate issuing date and time:
                                 <fo:inline font-weight="normal">
                                     <xsl:value-of

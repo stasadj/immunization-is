@@ -23,33 +23,33 @@ import java.time.LocalDate;
 
 @Service
 public class DigitalniSertifikatService extends DocumentService<DigitalniSertifikat> {
+    private final UserDAO userDAO;
+
     private final UUIDService uuidService;
     private final PotvrdaOVakcinacijiService potvrdaService;
-    private final UserDAO userDAO;
+    private final QRCodeService qrService;
 
     @Autowired
     protected DigitalniSertifikatService(DigitalniSertifikatDAO documentDAO,
-                                MetadataExtractorService metadataExtractorService,
-                                MarshallerService marshallerService,
-                                PdfTransformer pdfTransformer,
-                                XhtmlTransformer xhtmlTransformer,
-                                UUIDService uuidService,
-                                PotvrdaOVakcinacijiService potvrdaService,
-                                UserDAO userDAO) {
-        super(DigitalniSertifikat.class,
-                documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
+            MetadataExtractorService metadataExtractorService, MarshallerService marshallerService,
+            PdfTransformer pdfTransformer, XhtmlTransformer xhtmlTransformer, UUIDService uuidService,
+            PotvrdaOVakcinacijiService potvrdaService, UserDAO userDAO, QRCodeService qrService) {
+        super(DigitalniSertifikat.class, documentDAO, metadataExtractorService, marshallerService, pdfTransformer,
+                xhtmlTransformer);
         this.uuidService = uuidService;
         this.potvrdaService = potvrdaService;
         this.userDAO = userDAO;
+        this.qrService = qrService;
     }
 
     public DigitalniSertifikat createCertificate(ZahtevZaSertifikat zahtev, User user) throws Exception {
         DigitalniSertifikat sertifikat = new DigitalniSertifikat();
         String uuid = uuidService.getUUID();
         sertifikat.setAbout(MetadataConstants.CERTIFICATE_ABOUT_PREFIX + uuid);
-        sertifikat.setBroj(BigInteger.valueOf(((DigitalniSertifikatDAO)documentDAO).getNumberOfCeritificatesIssued() + 1));
+        sertifikat.setBroj(
+                BigInteger.valueOf(((DigitalniSertifikatDAO) documentDAO).getNumberOfCeritificatesIssued() + 1));
         sertifikat.setDatumIzdavanja(DatatypeFactory.newInstance().newXMLGregorianCalendar(LocalDate.now().toString()));
-        sertifikat.setQr(sertifikat.getAbout());
+        sertifikat.setQr(qrService.getBase64(MetadataConstants.CERTIFICATE_URI_PREFIX + uuid));
         sertifikat.setLicniPodaci(this.createLicniPodaci(zahtev));
         sertifikat.setVakcinacija(this.createVakcinacija(zahtev));
         sertifikat.setTestovi(this.createTestovi());
@@ -97,9 +97,10 @@ public class DigitalniSertifikatService extends DocumentService<DigitalniSertifi
     private Vakcinacija createVakcinacija(ZahtevZaSertifikat zahtev) throws Exception {
         PotvrdaOVakcinaciji potvrda = potvrdaService
                 .getAllConfirmationsForUser(zahtev.getPodnosilacZahteva().getJmbg().getValue()).getPotvrde().stream()
-                .reduce((p1, p2) -> p1.getVakcinacije().getVakcinacija().size() > p2.getVakcinacije().getVakcinacija().size()
-                        ? p1
-                        : p2)
+                .reduce((p1,
+                        p2) -> p1.getVakcinacije().getVakcinacija().size() > p2.getVakcinacije().getVakcinacija().size()
+                                ? p1
+                                : p2)
                 .orElseThrow(Exception::new);
 
         Vakcinacija vakcinacija = new Vakcinacija();
