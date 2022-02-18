@@ -9,5 +9,18 @@
 - Dina Petrov SW-52/2018
 - Stefan Krnajski SW-69/2018
 
+## Instalacija paketa
+Za instalaciju backend servisa, pokrenuti:
+```
+    mvn clean install -DskipTests
+```
+Za instalaciju frontend servisa, pokrenuti:
+```
+    cd portal-frontend
+    npm i
+    cd ../trustee-frontend
+    npm i
+```
+
 ## Pokretanje
 Za pokretanje svih aplikacija, potrebno je izvršiti **start.bat** skriptu
