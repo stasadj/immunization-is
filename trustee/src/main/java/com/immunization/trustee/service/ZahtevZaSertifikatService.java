@@ -25,7 +25,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
 	private final UserDAO userDAO;
 	private final TrusteeEmailService emailService;
 
-	private final SertifikatService sertifikatService;
+	private final DigitalniSertifikatService sertifikatService;
 
 	@Autowired
 	public ZahtevZaSertifikatService(ZahtevZaSertifikatDAO documentDAO,
@@ -33,7 +33,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
 									 MarshallerService marshallerService,
 									 PdfTransformer pdfTransformer,
 									 XhtmlTransformer xhtmlTransformer,
-									 UserDAO userDAO, TrusteeEmailService emailService, SertifikatService sertifikatService) {
+									 UserDAO userDAO, TrusteeEmailService emailService, DigitalniSertifikatService sertifikatService) {
 		super(ZahtevZaSertifikat.class,
 				documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
 		this.userDAO = userDAO;
