@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateInteresovanjeComponent } from './components/create-interesovanje/create-interesovanje.component';
+import { CreateSaglasnostComponent } from './components/create-saglasnost/create-saglasnost.component';
 import { CreateZahtevComponent } from './components/create-zahtev/create-zahtev.component';
 import { GradjaninDocumentsComponent } from './components/gradjanin-documents/gradjanin-documents.component';
 import { LoginComponent } from './components/login/login.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
             {
                 path: 'gradjanin-documents',
                 component: GradjaninDocumentsComponent,
+            },
+            {
+                path: 'create-saglasnost',
+                component: CreateSaglasnostComponent,
             },
         ],
     },
