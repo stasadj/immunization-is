@@ -100,7 +100,7 @@ public class PotvrdaService extends DocumentService<PotvrdaOVakcinaciji> {
 
         documentDAO.save(uuid, potvrda);
 
-        user.getDocuments().getSaglasnost().add(uuid);
+        user.getDocuments().getPotvrda().add(uuid);
         userDAO.save(user);
 
         portalEmailService.sendConfirmation(user, uuid, generatePdf(uuid));
