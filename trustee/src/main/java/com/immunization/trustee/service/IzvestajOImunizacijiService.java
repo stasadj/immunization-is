@@ -7,13 +7,15 @@ import java.time.LocalDate;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import com.immunization.common.dao.*;
+import com.immunization.common.service.DocumentService;
+import com.immunization.common.service.MarshallerService;
+import com.immunization.common.service.MetadataExtractorService;
+import com.immunization.common.util.PdfTransformer;
+import com.immunization.common.util.XhtmlTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.immunization.common.dao.DigitalniSertifikatDAO;
-import com.immunization.common.dao.IskazivanjeInteresovanjaZaVakcinacijuDAO;
-import com.immunization.common.dao.IzvestajOImunizacijiDAO;
-import com.immunization.common.dao.PotvrdaOVakcinacijiDAO;
-import com.immunization.common.dao.ZahtevZaSertifikatDAO;
 import com.immunization.common.exception.FailedMetadataExtractionException;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.MetaPodaci;
@@ -25,18 +27,30 @@ import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.RaspodelaDatihVakcinaPoProizvodjacima;
 import com.immunization.common.model.izvestaj_o_imunizaciji.IzvestajOImunizaciji.RaspodelaDatihVakcinaPoProizvodjacima.Proizvodjac;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
-public class IzvestajOImunizacijiService {
+public class IzvestajOImunizacijiService extends DocumentService<IzvestajOImunizaciji> {
 	private final IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO;
 	private final ZahtevZaSertifikatDAO zahtevDAO;
 	private final DigitalniSertifikatDAO sertifikatDAO;
 	private final PotvrdaOVakcinacijiDAO potvrdaDAO;
-	private final IzvestajOImunizacijiDAO izvestajDAO;
 
-	private final TrusteeMetadataExtractorService metadataExtractorService;
+	@Autowired
+	protected IzvestajOImunizacijiService(IzvestajOImunizacijiDAO documentDAO,
+										  MetadataExtractorService metadataExtractorService,
+										  MarshallerService marshallerService,
+										  PdfTransformer pdfTransformer,
+										  XhtmlTransformer xhtmlTransformer,
+										  IskazivanjeInteresovanjaZaVakcinacijuDAO interesovanjeDAO,
+										  ZahtevZaSertifikatDAO zahtevDAO,
+										  DigitalniSertifikatDAO sertifikatDAO,
+										  PotvrdaOVakcinacijiDAO potvrdaDAO) {
+		super(IzvestajOImunizaciji.class,
+				documentDAO, metadataExtractorService, marshallerService, pdfTransformer, xhtmlTransformer);
+		this.interesovanjeDAO = interesovanjeDAO;
+		this.zahtevDAO = zahtevDAO;
+		this.sertifikatDAO = sertifikatDAO;
+		this.potvrdaDAO = potvrdaDAO;
+	}
 
 	public IzvestajOImunizaciji getImmunizationReport(LocalDate startDate, LocalDate endDate) throws Exception {
 		String startDateNum = startDate.toString().replace("-", "");
@@ -56,11 +70,11 @@ public class IzvestajOImunizacijiService {
 		izvestajOImunizaciji.setRaspodelaDatihVakcinaPoProizvodjacima(
 				this.getDistributionOfGivenVaccinesByManufacturer(startDateNum, endDateNum));
 
-		if (!metadataExtractorService.extractAndSaveMetadata(izvestajOImunizaciji)) {
+		if (!extractAndSaveMetadata(izvestajOImunizaciji)) {
 			throw new FailedMetadataExtractionException();
 		}
 
-		izvestajDAO.save(startDateNum + endDateNum, izvestajOImunizaciji);
+		documentDAO.save(startDateNum + endDateNum, izvestajOImunizaciji);
 
 		return izvestajOImunizaciji;
 	}
@@ -87,7 +101,6 @@ public class IzvestajOImunizacijiService {
 		metaPodaci.setPeriodDo(periodDo);
 
 		return metaPodaci;
-
 	}
 
 	private RaspodelaDatihVakcinaPoRednomBrojuDoze getDistributionOfGivenVaccinesByDose(String startDate,
