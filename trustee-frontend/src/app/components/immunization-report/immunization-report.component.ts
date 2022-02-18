@@ -78,4 +78,32 @@ export class ImmunizationReportComponent implements OnInit {
         let blob = new Blob([res], { type: type });
         saveAs(blob, filename);
     };
+
+    displayPDF = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        window.open(
+            `http://localhost:8081/api/immunization-report/pdf/${uuid}`,
+            '_blank'
+        );
+    };
+
+    displayXHTML = () => {
+        let uuid = '';
+        if (this.datumOd && this.datumDo) {
+            uuid =
+                this.datumOd?.toISOString().substring(0, 10) +
+                this.datumDo?.toISOString().substring(0, 10);
+            uuid = uuid.split('-').join('');
+        }
+        window.open(
+            `http://localhost:8081/api/immunization-report/xhtml/${uuid}`,
+            '_blank'
+        );
+    };
 }
