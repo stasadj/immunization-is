@@ -1,4 +1,4 @@
-# Informacioni sistem za vakcinaciju građana 💉 Tim 404 💉 SIIT 2021/2022
+# Informacioni sistem za vakcinaciju građana 💉 Tim 404 😷 SIIT 2021/2022
 
 ## Predmet:
 - XML i veb servisi
