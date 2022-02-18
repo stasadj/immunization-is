@@ -1,0 +1,152 @@
+<div class="container">
+    <mat-card-title>Saglasnost za sprovođenje preporučene imunizacije</mat-card-title>
+    <mat-card-content class="content">
+
+        <form [formGroup]="saglasnostFormGroup" *ngIf="saglasnostFormGroup">
+            <mat-form-field>
+                <mat-label>JMBG</mat-label>
+                <input matInput formControlName="jmbg">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Naziv stranog državljanstva</mat-label>
+                <input matInput formControlName="nazivStranogDrzavljanstva">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Broj pasosa</mat-label>
+                <input matInput formControlName="brojPasosa">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ime i prezime</mat-label>
+                <input matInput formControlName="punoIme">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ime roditelja</mat-label>
+                <input matInput formControlName="imeRoditelja">
+            </mat-form-field>
+            <div>
+                <ng-container [formGroup]="polFormGroup">
+                    <label id="polFormGroupLabel">Pol</label>
+                    <mat-radio-group formControlName="options" aria-labelledby="polFormGroupLabel" class="form-radio-group">
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="male">M</mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="female">Ž</mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </div>
+            <mat-form-field>
+                <mat-label>Datum rođenja</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="datumRodjenja">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Mesto rođenja</mat-label>
+                <input matInput formControlName="mestoRodjenja">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="ulica">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Broj ulice</mat-label>
+                <input matInput formControlName="ulicaBroj">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Mesto</mat-label>
+                <input matInput formControlName="mesto">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Opština</mat-label>
+                <input matInput formControlName="opstina">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Fiksni</mat-label>
+                <input matInput formControlName="fiksni">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Mobilni</mat-label>
+                <input matInput formControlName="mobilni">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+            <div>
+                <ng-container [formGroup]="radniStatusFormGroup">
+                    <label id="radniStatusFormGroupLabel">Radni status</label>
+                    <mat-radio-group formControlName="options" aria-labelledby="radniStatusFormGroupLabel" class="form-radio-group">
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="zaposlen" (change)="radniStatusChanged($event)">Zaposlen
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="nezaposlen" (change)="radniStatusChanged($event)">Nezaposlen
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="penzioner" (change)="radniStatusChanged($event)">Penzioner
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="ucenik" (change)="radniStatusChanged($event)">Učenik
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="student" (change)="radniStatusChanged($event)">Student
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="dete" (change)="radniStatusChanged($event)">Dete
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </div>
+            <div>
+                <ng-container [formGroup]="zanimanjeFormGroup">
+                    <label id="zanimanjeFormGroupLabel">Zanimanje zaposlenog</label>
+                    <mat-radio-group [disabled]="radniStatusFormGroup.value.options !== zaposlen" formControlName="options" aria-labelledby="zanimanjeFormGroupLabel" class="form-radio-group">
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[zdravstvenaZastita]>
+                            Zdravstvena Zaštita</mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[socijalnaZastita]>
+                            Socijalna zaštita</mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[prosveta]>Prosveta
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[mup]>MUP
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[vojskaRS]>Vojska RS
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[drugo]>Drugo
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </div>
+            <div>
+                <ng-container [formGroup]="korisnikSocZastFormGroup">
+                    <label id="korisnikSocZastFormGroupLabel">Korisnik ustanove soc. zašt</label>
+                    <mat-radio-group formControlName="options" aria-labelledby="korisnikSocZastFormGroupLabel" class="form-radio-group">
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="true">DA
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="false">NE
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </div>
+            <mat-form-field>
+                <mat-label>Naziv i opština sedišta</mat-label>
+                <input matInput formControlName="nazivOpstinaSedistaZdravstveneUstanove">
+            </mat-form-field>
+            <div>
+                <ng-container [formGroup]="saglasanFormGroup">
+                    <label id="saglasanFormGroupLabel">Saglasan</label>
+                    <mat-radio-group formControlName="options" aria-labelledby="saglasanFormGroupLabel" class="form-radio-group">
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="true">DA
+                        </mat-radio-button>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="false">NE
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </div>
+            <mat-form-field>
+                <mat-label>Naziv leka</mat-label>
+                <input matInput formControlName="nazivLeka">
+            </mat-form-field>
+        </form>
+
+    </mat-card-content>
+    <div mat-card-actions>
+        <button id="save_item_button" [disabled]="saglasnostFormGroup.invalid" mat-button (click)="onSaveClick()"
+            cdkFocusInitial>Sačuvaj</button>
+    </div>
+
+
+
+
+</div>
