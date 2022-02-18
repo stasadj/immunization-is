@@ -1,9 +1,8 @@
-import { Interesovanje } from "../model/Interesovanje";
-import * as moment from "moment";
-import { Drzavljanstvo } from "../model/Drzavljanstvo";
+import { Interesovanje } from '../model/Interesovanje';
+import * as moment from 'moment';
+import { Drzavljanstvo } from '../model/Drzavljanstvo';
 
 export function createInteresovanjeXML(interesovanje: Interesovanje): string {
-
     //TODO change to actual date OR fix .xsd
     return `<?xml version="1.0" encoding="UTF-8"?>
     <iskazivanje_interesovanja_za_vakcinaciju xmlns="http://www.ftn.uns.ac.rs/interesovanje/"
@@ -14,40 +13,46 @@ export function createInteresovanjeXML(interesovanje: Interesovanje): string {
         datum="${moment().format('yyyy-MM-DD').toString()}"
         about="">
         <pacijent about="">
-            <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${getEnum(interesovanje.drzavljanstvo)}</drzavljanstvo>
-            <jmbg property="pred:ima_jmbg" datatype="xs:string">${interesovanje.jmbg}</jmbg>
-            <puno_ime property="pred:se_zove" datatype="xs:string">${interesovanje.punoIme}</puno_ime>
+            <drzavljanstvo property="pred:ima_drzavljanstvo" datatype="xs:string">${getEnum(
+                interesovanje.drzavljanstvo
+            )}</drzavljanstvo>
+            <jmbg property="pred:ima_jmbg" datatype="xs:string">${
+                interesovanje.jmbg
+            }</jmbg>
+            <puno_ime property="pred:se_zove" datatype="xs:string">${
+                interesovanje.punoIme
+            }</puno_ime>
             <kontakt_informacije>
                 <email_adresa>${interesovanje.email}</email_adresa>
                 <fiksni_telefon>${interesovanje.fiksni}</fiksni_telefon>
                 <mobilni_telefon>${interesovanje.mobilni}</mobilni_telefon>
             </kontakt_informacije>
-            <dobrovoljni_davalac_krvi property="pred:je_dobrovoljni_davalac_krvi" datatype="xs:string">${interesovanje.davalacKrvi}</dobrovoljni_davalac_krvi>
+            <dobrovoljni_davalac_krvi property="pred:je_dobrovoljni_davalac_krvi" datatype="xs:string">${
+                interesovanje.davalacKrvi
+            }</dobrovoljni_davalac_krvi>
         </pacijent>
-        <zeljena_opstina_vakcinacije>${interesovanje.opstinaVakcinacije}</zeljena_opstina_vakcinacije>
+        <zeljena_opstina_vakcinacije>${
+            interesovanje.opstinaVakcinacije
+        }</zeljena_opstina_vakcinacije>
         <odabir_vakcina>
             ${getVaccines(interesovanje.opcije)}
         </odabir_vakcina>
     </iskazivanje_interesovanja_za_vakcinaciju>
-    `
-
+    `;
 }
-
 
 function getVaccines(opcije: string[]): string {
-    if (opcije.length == 1 && opcije[0] === "BILO KOJA") {
+    if (opcije.length == 1 && opcije[0] === 'BILO KOJA') {
         return `
             <bilo_koja_vakcina/>
-        `
+        `;
     }
 
-    let xmlOpcije: string = "";
-    opcije.forEach(opcija => xmlOpcije += `<opcija>${opcija}</opcija>`)
+    let xmlOpcije: string = '';
+    opcije.forEach((opcija) => (xmlOpcije += `<opcija>${opcija}</opcija>`));
     return xmlOpcije;
-
-
 }
 
-function getEnum(value: Drzavljanstvo){
+function getEnum(value: Drzavljanstvo) {
     return Drzavljanstvo[value];
 }

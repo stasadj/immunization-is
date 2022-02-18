@@ -85,7 +85,7 @@ public class PortalEmailService {
     public void sendConfirmation(User user, String certificateUUID, ByteArrayInputStream pdf) throws Exception {
         StringBuilder emailBody = new StringBuilder();
         emailBody.append("Poštovana/i ").append(user.getFirstName()).append(" ").append(user.getLastName()).append(", \n\n");
-        emailBody.append("Vaša potvrda o izvrsenoj imunizaciji se nalazi u prilogu ove poruke. \n\n");
+        emailBody.append("Vaša potvrda o izvršenoj imunizaciji se nalazi u prilogu ove poruke. \n\n");
 
         emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
 
@@ -108,6 +108,10 @@ public class PortalEmailService {
         helper.setText(content.getBody());
         helper.addAttachment(documentId + ".pdf", attachmentPDF);
         quickService.submit(() -> javaMailSender.send(message));
+    }
+
+    public void sendMailAboutAppointment() {
+
     }
 
 }
