@@ -10,11 +10,11 @@
                     <th>Tip vakcine</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>12343543543534</td>
-                    <td>2021-01-01</td>
-                    <td>3</td>
-                    <td>Pfizer</td>
+                <tr *ngFor="let potvrda of potvrde">
+                    <td>{{ potvrda.uuid }}</td>
+                    <td>{{ potvrda.date }}</td>
+                    <td>{{ potvrda.doza }}</td>
+                    <td>{{ potvrda.tip }}</td>
                     <td>
                         <button mat-flat-button>Prikaži dokument</button>
                     </td>

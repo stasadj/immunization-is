@@ -22,7 +22,10 @@ export class CertificateRequestsComponent implements OnInit {
             .subscribe((zahtevi) => (this.zahtevi = zahtevi));
     }
 
-    handleRespond = () => {
-        this.dialog.open(ResponseComponent, { width: '50%' });
+    handleRespond = (zahtev: CertificateRequest) => {
+        this.dialog.open(ResponseComponent, {
+            width: '50%',
+            data: { zahtev: zahtev },
+        });
     };
 }
