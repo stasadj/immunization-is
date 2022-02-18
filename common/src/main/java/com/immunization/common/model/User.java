@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
     "password",
     "firstName",
     "lastName",
-    "role"
+    "role", "documents"
 })
 @XmlRootElement(name = "user")
 public class User implements UserDetails {
@@ -44,6 +44,14 @@ public class User implements UserDetails {
     private String lastName;
     
     private ERole role;
+
+    private GradjaninDocuments documents;
+
+    public GradjaninDocuments getDocuments() {
+        if (documents == null)
+            documents = new GradjaninDocuments();
+        return documents;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

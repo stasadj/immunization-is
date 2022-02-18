@@ -27,7 +27,7 @@ export class NotFoundComponent implements OnInit {
 
     display(): void {
         window.open(
-            `http://localhost:8080/api/interesovanje/xhtml/2312999850013.xml`,
+            `http://localhost:8080/api/interesovanje/xhtml/Albert.Makan3879`,
             '_blank'
         );
     }
