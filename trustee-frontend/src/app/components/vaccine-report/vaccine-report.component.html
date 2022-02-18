@@ -1,0 +1,27 @@
+<button mat-raised-button color="primary" (click)="openDialog()">
+    Azuriraj kolicinu
+</button>
+
+<mat-card *ngFor="let vaccine of vaccines">
+    <mat-card-title>{{ vaccine.type }}</mat-card-title>
+    <mat-card-subtitle>
+        Proizvodjac: {{ vaccine.manufacturer }}
+    </mat-card-subtitle>
+
+    <mat-card-content>
+        <table mat-table [dataSource]="vaccine.series">
+            <ng-container matColumnDef="serialNumber">
+                <th mat-header-cell *matHeaderCellDef>Broj serije</th>
+                <td mat-cell *matCellDef="let s">{{ s.serialNumber }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef>Kolicina</th>
+                <td mat-cell *matCellDef="let s">{{ s.amount }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

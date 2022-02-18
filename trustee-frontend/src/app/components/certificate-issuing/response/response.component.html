@@ -1,0 +1,35 @@
+<div>
+    <h1 mat-dialog-title>Potvrde o vakcinaciji</h1>
+    <mat-dialog-content class="mat-typography"
+        ><div>
+            <table border="1" class="mat-elevation-z8">
+                <tr>
+                    <th>ID potvrde</th>
+                    <th>Datum izdavanja</th>
+                    <th>Redni broj primljene doze</th>
+                    <th>Tip vakcine</th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let potvrda of potvrde">
+                    <td>{{ potvrda.uuid }}</td>
+                    <td>{{ potvrda.date }}</td>
+                    <td>{{ potvrda.doza }}</td>
+                    <td>{{ potvrda.tip }}</td>
+                    <td>
+                        <button mat-flat-button (click)="display(potvrda.uuid)">
+                            Prikaži dokument
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="handleAccept()">
+            Prihvati
+        </button>
+        <button mat-raised-button color="accent" (click)="handleReject()">
+            Odbij
+        </button>
+    </mat-dialog-actions>
+</div>

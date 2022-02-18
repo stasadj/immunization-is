@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/"
+    xmlns="http://www.ftn.uns.ac.rs/izvestaj-o-imunizaciji/"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/">
+
+    <xs:element name="izvestaj_o_imunizaciji">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meta_podaci">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="period_od">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="pred:obuhvata_period_od"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="period_do">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="pred:obuhvata_period_do"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="datum_izdavanja">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute name="property" use="required"
+                                                type="xs:string" fixed="pred:izdato"/>
+                                            <xs:attribute name="datatype" use="required" type="xs:string" fixed="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element default="0" name="broj_dokumenata_o_interesovanju" type="xs:unsignedInt"/>
+                <xs:element default="0" name="broj_zahteva_za_digitalni_sertifikat"
+                    type="xs:unsignedInt"/>
+                <xs:element default="0" name="broj_izdatih_digitalnih_sertifikata"
+                    type="xs:unsignedInt"/>
+                <xs:element name="raspodela_datih_vakcina_po_rednom_broju_doze">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="3" name="doza">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="1" name="redni_broj"
+                                            type="xs:positiveInteger"/>
+                                        <xs:element name="broj_datih_doza" type="xs:unsignedInt"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="ukupno_dato" type="xs:unsignedInt"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="raspodela_datih_vakcina_po_proizvodjacima">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="4" name="proizvodjac">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="naziv" type="xs:string"/>
+                                        <xs:element name="broj_datih_doza" type="xs:unsignedInt"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="about" use="required" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

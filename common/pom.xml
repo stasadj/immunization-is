@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.immunization</groupId>
+		<artifactId>spring-boot-angular</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.immunization</groupId>
+	<artifactId>common</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>common</name>
+	<description>Common library project for XML course - Team 404</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		
+		<!--
+			Dependency for writing JUnit tests
+		
+			Example usage of this library can be found here:
+			https://medium.com/javarevisited/writing-a-unit-test-using-spring-boot-part-2-b16847484cb9
+		 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Exist DataBase -->
+		<dependency>
+			<groupId>org.exist-db</groupId>
+			<artifactId>exist-core</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+
+		<!-- Jena Fuseki -->
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<type>pom</type>
+			<version>3.17.0</version>
+		</dependency>
+
+		<!--
+			Dependency required for having authentication and
+			authorization on our backend RESTful application.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!--
+			This is used for validating java beans during runtime
+			using the decorator annotation.
+
+			Example usage of this library can be found here:
+			https://www.baeldung.com/spring-boot-bean-validation
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.5.1</version>
+		</dependency>
+
+		<!--
+			This dependency allows us to omit writting many of the getters, setters,
+			and constructors typically required in a java project.
+		-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+		</dependency>
+
+		<!-- Validation of XML -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>5.3.15</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>2.1.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>10.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>fop</artifactId>
+			<version>2.6</version>
+		</dependency>
+ </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<attach>false</attach>
+				</configuration>
+			</plugin>
+
+			<!-- Plugin za automatsko generisanje klasa na osnovu nasih sema (xsd 
+				fajlova) -->
+			<!-- Klase se generisu u target/generated-sources/xjc -->
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaDirectory>src/main/resources/documents</schemaDirectory>
+					<schemaIncludes>
+						<include>*.xsd</include>
+					</schemaIncludes>
+					<packageName>com.immunization.common</packageName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

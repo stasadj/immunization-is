@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<potvrda_o_vakcinaciji xmlns="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pred="http://www.ftn.uns.ac.rs/rdf/predicate/"
+    xsi:schemaLocation="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji potvrda_o_vakcinaciji.xsd"
+    potreban_pecat="false" about="http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/0123456789">
+    <sifra_potvrde>0123456789</sifra_potvrde>
+    <datum_izdavanja_potvrde>2021-11-21</datum_izdavanja_potvrde>
+    <qr_kod>zdravstvena-ustanova.gov.rs/putanja/ka/dokumentu</qr_kod>
+    <licni_podaci about="http://www.ftn.uns.ac.rs/licni-podaci/2001990111111" vocab="http://www.ftn.uns.ac.rs/rdf/predicate/">
+        <ime_prezime property="pred:se_zove" datatype="xs:string">Pera Peric</ime_prezime>
+        <pol property="pred:ima_pol" datatype="xs:string">M</pol>
+        <jmbg property="pred:ima_jmbg" datatype="xs:string">2001990111111</jmbg>
+    </licni_podaci>
+    <vakcinacije zdravstvena_ustanova="Dom Zdravlja Novi Sad">
+        <vakcinacija>
+            <naziv_vakcine>Pfizer-BioNTech</naziv_vakcine>
+            <datum_davanja>2021-04-10</datum_davanja>
+            <broj_serije>14</broj_serije>
+        </vakcinacija>
+        <vakcinacija>
+            <naziv_vakcine>Pfizer-BioNTech</naziv_vakcine>
+            <datum_davanja>2021-10-10</datum_davanja>
+            <broj_serije>15</broj_serije>
+        </vakcinacija>
+    </vakcinacije>
+</potvrda_o_vakcinaciji>

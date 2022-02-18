@@ -1,0 +1,87 @@
+<div class="container">
+    <mat-card-title>Interesovanje za imunizaciju</mat-card-title>
+    <mat-card-content class="content">
+
+        <form [formGroup]="newInteresovanjeFormGroup" *ngIf="newInteresovanjeFormGroup">
+        <mat-form-field>
+            <mat-label>Puno ime</mat-label>
+            <input matInput formControlName="punoIme" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>E-mail adresa</mat-label>
+            <input matInput formControlName="email" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Državljanstvo</mat-label>
+            <mat-select formControlName="drzavljanstvo">
+                <mat-option [value]="srpsko">Državljanin Republike Srbije</mat-option>
+                <mat-option [value]="saBoravkom">Strani državljanin sa boravkom u RS</mat-option>
+                <mat-option [value]="bezBoravka">Strani državljanin bez boravka u RS</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>JMBG</mat-label>
+            <input matInput formControlName="jmbg">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fiksni telefon</mat-label>
+            <input matInput formControlName="fiksni">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mobilni telefon</mat-label>
+            <input matInput formControlName="mobilni">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Željena opština vakcinacije</mat-label>
+            <input matInput formControlName="opstinaVakcinacije">
+        </mat-form-field>
+
+        <section class="davalac-krvi-section">
+            <mat-checkbox ngDefaultControl labelPosition="before"formControlName="davalacKrvi">Dobrovoljni
+                sam davalac krvi</mat-checkbox>
+        </section>
+
+        <section class="opcije-section" [formGroup]="opcije">
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Pfizer-BioNTech"
+                    (change)="vaccineChosen()">Pfizer-BioNTech</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Astra Zeneca"
+                    (change)="vaccineChosen()">Astra Zeneca</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Moderna"
+                    (change)="vaccineChosen()">Moderna</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Sputnik"
+                    (change)="vaccineChosen()">Sputnik</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="Sinopharm"
+                    (change)="vaccineChosen()">Sinopharm</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox ngDefaultControl labelPosition="before" formControlName="BILO KOJA" (change)="anyChosen()">
+                    BILO KOJA</mat-checkbox>
+            </div>
+        </section>
+    </form>
+
+    </mat-card-content>
+    <div mat-card-actions>
+        <button id="save_item_button" [disabled]="newInteresovanjeFormGroup.invalid" mat-button (click)="onSaveClick()" cdkFocusInitial>Sačuvaj</button>
+    </div>
+    
+
+
+
+</div>
