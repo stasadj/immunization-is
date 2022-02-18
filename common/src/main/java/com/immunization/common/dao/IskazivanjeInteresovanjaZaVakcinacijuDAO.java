@@ -26,6 +26,7 @@ public class IskazivanjeInteresovanjaZaVakcinacijuDAO extends DocumentDAO<Iskazi
 		return exist.count(xpathExp, IskazivanjeInteresovanjaZaVakcinaciju.class, INTEREST_NAMESPACE, "inte");
 	}
 
+	@Override
     public Optional<IskazivanjeInteresovanjaZaVakcinaciju> retrieveById(String documentId) throws Exception {
 		IskazivanjeInteresovanjaZaVakcinaciju interesovanje = (IskazivanjeInteresovanjaZaVakcinaciju) exist
 				.retrieveById(documentId, IskazivanjeInteresovanjaZaVakcinaciju.class);

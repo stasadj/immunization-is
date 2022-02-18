@@ -1,8 +1,7 @@
 package com.immunization.trustee.service;
 
-import com.immunization.common.exception.base.BadRequestException;
-import com.immunization.trustee.dao.VaccineAmountDAO;
-import com.immunization.trustee.dto.vaccine.VaccineAmount;
+import com.immunization.common.dao.VaccineAmountDAO;
+import com.immunization.common.model.VaccineAmount;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,24 +43,6 @@ public class VaccineAmountService {
 
     public List<VaccineAmount> getAll() throws Exception {
         return vaccineAmountDAO.retrieveAll();
-    }
-
-    public boolean decrementAmount(String vaccineType, Integer serialNumber) throws Exception {
-        Optional<VaccineAmount> maybeVaccine = vaccineAmountDAO.retrieveById(vaccineType);
-        if (maybeVaccine.isPresent()) {
-            VaccineAmount vaccine = maybeVaccine.get();
-            for (VaccineAmount.Series series : vaccine.getSeries()) {
-                if (Objects.equals(series.getSerialNumber(), serialNumber)) {
-                    int newAmount = series.getAmount()-1;
-                    if (newAmount < 0)
-                        throw new BadRequestException("Amount cannot be negative");
-                    series.setAmount(newAmount);
-                    vaccineAmountDAO.save(vaccineType, vaccine);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public List<String> getTypes() throws Exception {

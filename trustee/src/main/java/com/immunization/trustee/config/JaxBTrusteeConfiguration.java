@@ -10,7 +10,7 @@ import com.immunization.common.model.potvrda_o_vakcinaciji.PotvrdaOVakcinaciji;
 import com.immunization.common.model.saglasnost.ObrazacSaglasnostiZaImunizaciju;
 import com.immunization.common.model.zahtev_za_sertifikat.ZahtevZaSertifikat;
 import com.immunization.common.util.NSPrefixMapper;
-import com.immunization.trustee.dto.vaccine.VaccineAmount;
+import com.immunization.common.model.VaccineAmount;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

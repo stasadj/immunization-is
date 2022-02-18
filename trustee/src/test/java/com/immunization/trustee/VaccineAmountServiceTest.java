@@ -1,6 +1,6 @@
 package com.immunization.trustee;
 
-import com.immunization.trustee.dto.vaccine.VaccineAmount;
+import com.immunization.common.model.VaccineAmount;
 import com.immunization.trustee.service.VaccineAmountService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

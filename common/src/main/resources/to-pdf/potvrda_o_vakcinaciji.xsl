@@ -64,7 +64,7 @@
                     <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
                         <fo:inline font-weight="bold">Datum rodjenja:</fo:inline>
                         <fo:inline>
-                            <xsl:value-of select="concat(' ', substring(//potv:jmbg,0,2),'-',substring(//potv:jmbg,2,2),'-',substring(//potv:jmbg,2,3))"/>
+                            <xsl:value-of select="concat(' ', //potv:datum_rodjenja)"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block font-family="sans-serif" color="gray" font-size="12px">Datum rodjenja / Date Of Birth

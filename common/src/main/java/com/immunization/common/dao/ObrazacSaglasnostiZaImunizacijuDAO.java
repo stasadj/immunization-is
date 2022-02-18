@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +24,20 @@ public class ObrazacSaglasnostiZaImunizacijuDAO extends DocumentDAO<ObrazacSagla
         String about = MetadataConstants.ABOUT_LICNI_PODACI_PREFIX.concat(username);
         String xpathExp = "//sagl:obrazac_saglasnosti_za_imunizaciju[sagl:informacije_o_pacijentu[@about='" + about + "']]";
         return exist.query(xpathExp, ObrazacSaglasnostiZaImunizaciju.class, CONSENT_NAMESPACE, "sagl").stream()
+                .map(o -> (ObrazacSaglasnostiZaImunizaciju) o).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<ObrazacSaglasnostiZaImunizaciju> retrieveById(String documentId) throws Exception {
+        ObrazacSaglasnostiZaImunizaciju saglasnost = (ObrazacSaglasnostiZaImunizaciju) exist
+                .retrieveById(documentId, ObrazacSaglasnostiZaImunizaciju.class);
+        return saglasnost == null ? Optional.empty() : Optional.of(saglasnost);
+    }
+
+    public List<ObrazacSaglasnostiZaImunizaciju> getByIdNumber(String idNumber) throws Exception {
+        String xPathExp = "//sagl:obrazac_saglasnosti_za_imunizaciju[sagl:"
+                + ((idNumber.length() == 13) ? "jmbg" : "broj_pasosa_ili_ebs") + " = '" + idNumber + "']";
+        return exist.query(xPathExp, ObrazacSaglasnostiZaImunizaciju.class, CONSENT_NAMESPACE, "sagl").stream()
                 .map(o -> (ObrazacSaglasnostiZaImunizaciju) o).collect(Collectors.toList());
     }
 }

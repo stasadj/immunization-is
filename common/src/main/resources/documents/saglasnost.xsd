@@ -162,7 +162,7 @@
                 <xs:element name="faksimil" type="xs:string"/>
                 <xs:element name="broj_telefona">
                     <xs:simpleType>
-                        <xs:restriction base="xs:positiveInteger">
+                        <xs:restriction base="xs:string">
                             <xs:pattern value="[0-9]{9,10}"/>
                         </xs:restriction>
                     </xs:simpleType>

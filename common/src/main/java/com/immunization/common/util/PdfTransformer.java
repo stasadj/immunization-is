@@ -22,6 +22,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 @Component
 public class PdfTransformer {
@@ -38,7 +40,15 @@ public class PdfTransformer {
             setXSLFile(classOfDocument);
 
             StreamSource transformSource = new StreamSource(new ClassPathResource(XSL_FILE).getFile());
-            StreamSource source = new StreamSource(new ByteArrayInputStream(documentXml.getBytes()));
+            byte[] byteArray = StandardCharsets.UTF_8.encode(documentXml).array();
+            int nullCount = 0;
+            for (byte byteVar : byteArray) {
+                if (byteVar == 0) {
+                    nullCount++;
+                }
+            }
+            byte[] filteredByteArray = Arrays.copyOfRange(byteArray, 0, byteArray.length - nullCount);
+            StreamSource source = new StreamSource(new ByteArrayInputStream(filteredByteArray));
             FOUserAgent userAgent = fopFactory.newFOUserAgent();
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             Transformer xslFoTransformer = transformerFactory.newTransformer(transformSource);

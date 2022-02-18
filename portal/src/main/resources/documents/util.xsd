@@ -38,7 +38,7 @@
     </xs:complexType>
 
     <xs:simpleType name="jmbg_value">
-        <xs:restriction base="xs:positiveInteger">
+        <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{13}"/>
         </xs:restriction>
     </xs:simpleType>
@@ -53,7 +53,7 @@
     </xs:complexType>
     
     <xs:simpleType name="broj_pasosa_value">
-        <xs:restriction base="xs:positiveInteger">
+        <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{9}"/>
         </xs:restriction>
     </xs:simpleType>
@@ -74,13 +74,13 @@
     </xs:simpleType>
     
     <xs:simpleType name="fiksni">
-        <xs:restriction base="xs:positiveInteger">
+        <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{9,10}"/>
         </xs:restriction>
     </xs:simpleType>
     
     <xs:simpleType name="mobilni">
-        <xs:restriction base="xs:positiveInteger">
+        <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{9,11}"/>
         </xs:restriction>
     </xs:simpleType>

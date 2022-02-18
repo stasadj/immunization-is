@@ -1,5 +1,6 @@
 package com.immunization.portal.service.email;
 
+import java.io.ByteArrayInputStream;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -8,9 +9,14 @@ import com.immunization.common.model.interesovanje.IskazivanjeInteresovanjaZaVak
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+
+import javax.activation.DataSource;
+import javax.mail.internet.MimeMessage;
+import javax.mail.util.ByteArrayDataSource;
 
 @Service
 @AllArgsConstructor
@@ -74,6 +80,34 @@ public class PortalEmailService {
         email.addRecipient(recipientEmail);
         sendEmail(email);
 
+    }
+
+    public void sendConfirmation(User user, String certificateUUID, ByteArrayInputStream pdf) throws Exception {
+        StringBuilder emailBody = new StringBuilder();
+        emailBody.append("Poštovana/i ").append(user.getFirstName()).append(" ").append(user.getLastName()).append(", \n\n");
+        emailBody.append("Vaša potvrda o izvrsenoj imunizaciji se nalazi u prilogu ove poruke. \n\n");
+
+        emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
+
+        EmailContent email = new EmailContent("Zahtev za izdavanje sertifikata prihvaćen", emailBody.toString());
+        email.addRecipient(user.getEmail());
+
+        DataSource attachmentPDF = new ByteArrayDataSource(pdf, "application/octet-stream");
+        this.sendEmailWithAttachments(email, certificateUUID, attachmentPDF);
+    }
+
+    private void sendEmailWithAttachments(EmailContent content, String documentId, DataSource attachmentPDF) throws Exception {
+        String[] emailIds = new String[content.getRecipients().size()];
+        for (int i = 0; i < content.getRecipients().size(); i++) {
+            emailIds[i] = content.getRecipients().get(i);
+        }
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setSubject(content.getSubject());
+        helper.setTo(emailIds);
+        helper.setText(content.getBody());
+        helper.addAttachment(documentId + ".pdf", attachmentPDF);
+        quickService.submit(() -> javaMailSender.send(message));
     }
 
 }

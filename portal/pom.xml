@@ -53,6 +53,18 @@
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>2.5.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.immunization</groupId>
+            <artifactId>trustee</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0</version>
+			<scope>compile</scope>
+		</dependency>
 
 	</dependencies>
 

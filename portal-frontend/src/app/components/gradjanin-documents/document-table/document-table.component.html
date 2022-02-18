@@ -1,0 +1,56 @@
+<table mat-table [dataSource]="documents" class="mat-elevation-z8">
+    <!-- Doc Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Document name</th>
+        <td mat-cell *matCellDef="let element">{{ element }}</td>
+    </ng-container>
+
+    <!-- View Column -->
+    <ng-container matColumnDef="open as XHTML">
+        <th mat-header-cell *matHeaderCellDef>open as XHTML</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="primary" (click)="viewDoc(element, 'xhtml')">
+                View
+            </button>
+        </td>
+    </ng-container>
+
+    <!-- View Column2 -->
+    <ng-container matColumnDef="open as PDF">
+        <th mat-header-cell *matHeaderCellDef>open as PDF</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="primary" (click)="viewDoc(element, 'pdf')">
+                View
+            </button>
+        </td>
+    </ng-container>
+
+    <!-- Download Column -->
+    <ng-container matColumnDef="download XHTML">
+        <th mat-header-cell *matHeaderCellDef>Download XHTML</th>
+
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="accent" (click)="downloadDoc(element, 'xhtml')">
+                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                    >cloud_download</mat-icon
+                >
+            </button>
+        </td>
+    </ng-container>
+
+        <!-- Download Column 2-->
+        <ng-container matColumnDef="download PDF">
+            <th mat-header-cell *matHeaderCellDef>Download PDF</th>
+    
+            <td mat-cell *matCellDef="let element">
+                <button mat-button color="accent" (click)="downloadDoc(element, 'pdf')">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon"
+                        >cloud_download</mat-icon
+                    >
+                </button>
+            </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

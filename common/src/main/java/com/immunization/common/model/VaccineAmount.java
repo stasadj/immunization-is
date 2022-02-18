@@ -1,4 +1,4 @@
-package com.immunization.trustee.dto.vaccine;
+package com.immunization.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

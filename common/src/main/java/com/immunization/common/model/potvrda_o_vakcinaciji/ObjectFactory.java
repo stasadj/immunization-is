@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
+
+import com.immunization.common.model.util.DatumRodjenja;
 import com.immunization.common.model.util.ImePrezime;
 import com.immunization.common.model.util.Jmbg;
 import com.immunization.common.model.util.Pol;
@@ -135,6 +137,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/", name = "ime_prezime")
     public JAXBElement<ImePrezime> createImePrezime(ImePrezime value) {
         return new JAXBElement<ImePrezime>(_ImePrezime_QNAME, ImePrezime.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DatumRodjenja }{@code >}
+     *
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link DatumRodjenja }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.ftn.uns.ac.rs/potvrda-o-vakcinaciji/", name = "datum_rodjenja")
+    public JAXBElement<DatumRodjenja> createDatumRodjenja(DatumRodjenja value) {
+        return new JAXBElement<DatumRodjenja>(_ImePrezime_QNAME, DatumRodjenja.class, null, value);
     }
 
     /**
