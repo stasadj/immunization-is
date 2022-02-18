@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "zahtevURI", "razlogOdbijanja" })
+@XmlType(name = "", propOrder = { "uuid", "razlogOdbijanja" })
 @XmlRootElement(name = "odgovor")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +21,8 @@ import lombok.Setter;
 @Setter
 public class Odgovor {
 	@NotNull(message = "Request UUID is missing.")
-	@XmlElement(name = "zahtev_uri")
-	private String zahtevURI;
+	@XmlElement(name = "uuid")
+	private String uuid;
 
 	@XmlElement(name = "razlog_odbijanja")
 	private String razlogOdbijanja;

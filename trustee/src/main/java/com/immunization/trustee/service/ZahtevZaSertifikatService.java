@@ -57,7 +57,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
     }
 
     public DigitalniSertifikat accept(Odgovor odgovor) throws Exception {
-        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
+        String zahtevUUID = odgovor.getUuid();
 
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
@@ -75,7 +75,7 @@ public class ZahtevZaSertifikatService extends DocumentService<ZahtevZaSertifika
     }
 
     public void reject(Odgovor odgovor) throws Exception {
-        String zahtevUUID = this.extractUUIDFromAboutRequest(odgovor.getZahtevURI());
+        String zahtevUUID = odgovor.getUuid();
         Optional<ZahtevZaSertifikat> maybeZahtev = ((ZahtevZaSertifikatDAO) documentDAO).retrieveById(zahtevUUID);
         ZahtevZaSertifikat zahtev = maybeZahtev.orElseThrow(() -> new NotFoundException(""));
         zahtev.getMetaPodaci().getStatusZahteva().setValue(StatusZahtevaValue.ODBIJEN);

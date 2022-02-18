@@ -23,6 +23,10 @@ export class ResponseComponent implements OnInit {
             .subscribe((potvrde) => (this.potvrde = potvrde));
     }
 
+    handleAccept = () => {
+        this.dialog.closeAll();
+    };
+
     handleReject = () => {
         this.dialog.open(ReasonForRejectionComponent, { width: '30%' });
     };
