@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+
+import com.immunization.common.model.util.DatumRodjenja;
 import com.immunization.common.model.util.ImePrezime;
 import com.immunization.common.model.util.Jmbg;
 import com.immunization.common.model.util.Pol;
@@ -46,6 +48,7 @@ import com.immunization.common.model.util.Pol;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "imePrezime",
+    "datumRodjenja",
     "pol",
     "jmbg"
 })
@@ -54,6 +57,8 @@ public class LicniPodaci {
 
     @XmlElement(name = "ime_prezime", required = true)
     protected ImePrezime imePrezime;
+    @XmlElement(name = "datum_rodjenja", required = true)
+    protected DatumRodjenja datumRodjenja;
     @XmlElement(required = true)
     protected Pol pol;
     @XmlElement(required = true)
@@ -87,6 +92,30 @@ public class LicniPodaci {
      */
     public void setImePrezime(ImePrezime value) {
         this.imePrezime = value;
+    }
+
+    /**
+     * Gets the value of the datumRodjenja property.
+     *
+     * @return
+     *     possible object is
+     *     {@link DatumRodjenja }
+     *
+     */
+    public DatumRodjenja getDatumRodjenja() {
+        return datumRodjenja;
+    }
+
+    /**
+     * Sets the value of the datumRodjenja property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link DatumRodjenja }
+     *
+     */
+    public void setDatumRodjenja(DatumRodjenja value) {
+        this.datumRodjenja = value;
     }
 
     /**

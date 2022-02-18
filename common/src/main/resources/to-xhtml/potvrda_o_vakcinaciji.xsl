@@ -65,7 +65,7 @@
                 </p>
                 <p class="indent-paragraph">
                     <b>Datum rodjenja:</b>
-                    <xsl:value-of select="concat(' ', substring(//potv:jmbg,0,2),'-',substring(//potv:jmbg,2,2),'-',substring(//potv:jmbg,2,3))"/>
+                    <xsl:value-of select="concat(' ', //potv:datum_rodjenja)"/>
                 </p>
                 <p class="indent-paragraph" style="font-size: 1.3em; color: grey;">Datum rodjenja / Date Of Birth</p>
                 <p class="indent-paragraph">

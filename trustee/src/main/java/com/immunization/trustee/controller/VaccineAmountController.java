@@ -1,6 +1,6 @@
 package com.immunization.trustee.controller;
 
-import com.immunization.trustee.dto.vaccine.VaccineAmount;
+import com.immunization.common.model.VaccineAmount;
 import com.immunization.trustee.dto.vaccine.VaccineReport;
 import com.immunization.trustee.service.VaccineAmountService;
 import lombok.AllArgsConstructor;

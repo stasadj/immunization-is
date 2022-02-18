@@ -1,7 +1,7 @@
-package com.immunization.trustee.dao;
+package com.immunization.common.dao;
 
+import com.immunization.common.model.VaccineAmount;
 import com.immunization.common.repository.Exist;
-import com.immunization.trustee.dto.vaccine.VaccineAmount;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -11,4 +11,5 @@ public abstract class MetadataConstants {
     public static String RDF_GRAPH_URI = "/immunization-metadata";
 
     public static String CERTIFICATE_URI_PREFIX = "http://localhost:8080/api/digitalni-sertifikat/pdf/";
+    public static String CONFIRMATION_URI_PREFIX = "http://localhost:8080/api/potvrda/pdf/";
 }

@@ -26,6 +26,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="ime_prezime"/>
+        <xs:element name="datum_rodjenja" type="util:datum_rodjenja"/>
         <xs:element ref="pol"/>
         <xs:element ref="jmbg"/>
       </xs:sequence>
