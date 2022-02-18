@@ -8,7 +8,6 @@
 
 package com.immunization.common.model.saglasnost;
 
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -61,7 +60,7 @@ public class InformacijeOLekaru {
     @XmlElement(required = true)
     protected String faksimil;
     @XmlElement(name = "broj_telefona", required = true)
-    protected BigInteger brojTelefona;
+    protected String brojTelefona;
 
     /**
      * Gets the value of the ime property.
@@ -140,10 +139,10 @@ public class InformacijeOLekaru {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link String }
      *     
      */
-    public BigInteger getBrojTelefona() {
+    public String getBrojTelefona() {
         return brojTelefona;
     }
 
@@ -152,10 +151,10 @@ public class InformacijeOLekaru {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link String }
      *     
      */
-    public void setBrojTelefona(BigInteger value) {
+    public void setBrojTelefona(String value) {
         this.brojTelefona = value;
     }
 

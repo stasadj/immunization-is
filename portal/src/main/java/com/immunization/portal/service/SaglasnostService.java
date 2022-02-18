@@ -72,6 +72,7 @@ public class SaglasnostService extends DocumentService<ObrazacSaglasnostiZaImuni
         evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setFaksimil("");
         evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setIme("");
         evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setPrezime("");
+        evidencija.getZdravstvenaUstanova().getInformacijeOLekaru().setBrojTelefona("");
         evidencija.getZdravstvenaUstanova().getNaziv().setValue("");
         evidencija.getZdravstvenaUstanova().setVakcinacijskiPunkt("");
         evidencija.getKontraindikacija().getPrivremeneKontraindikacije().setDatumUtvrdjivanja("");
