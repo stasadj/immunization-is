@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-title>Licni broj:</mat-card-title>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>JMBG ili broj pasosa</mat-label>
+            <input matInput [(ngModel)]="idNumber" />
+        </mat-form-field>
+        <a *ngIf="saglasnostId" routerLink="/register">Registracija</a>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="accent" (click)="search()">
+            Pretrazi
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -45,7 +45,7 @@ public class InteresovanjeService extends DocumentService<IskazivanjeInteresovan
     public void create(IskazivanjeInteresovanjaZaVakcinaciju interesovanje, User user) throws Exception {
         String documentId = user.getUsername();
 
-        Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = ((IskazivanjeInteresovanjaZaVakcinacijuDAO)documentDAO).retrieveById(documentId);
+        Optional<IskazivanjeInteresovanjaZaVakcinaciju> result = documentDAO.retrieveById(documentId);
         if (result.isPresent()) {
             throw new BadRequestException("Interesovanje for this user already exists. ");
         }

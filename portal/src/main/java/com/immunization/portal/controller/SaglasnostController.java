@@ -1,5 +1,6 @@
 package com.immunization.portal.controller;
 
+import com.immunization.common.constants.MetadataConstants;
 import com.immunization.common.controller.DocumentController;
 import com.immunization.common.model.User;
 import com.immunization.common.model.saglasnost.EvidencijaOVakcinaciji;
@@ -35,4 +36,13 @@ public class SaglasnostController extends DocumentController<ObrazacSaglasnostiZ
         ((SaglasnostService)documentService).addVaccinationRecord(evidencija, documentId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/:idNumber")
+    @PreAuthorize("hasRole('ZDRAVSTVENI_RADNIK')")
+    public ResponseEntity<String> getLatestSaglIdFor(@PathVariable String idNumber) throws Exception {
+        String id = ((SaglasnostService)documentService).getLatestForPatient(idNumber)
+                .getAbout().substring(MetadataConstants.ABOUT_CONSENT_PREFIX.length());;
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
 }

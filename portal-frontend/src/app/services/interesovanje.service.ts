@@ -17,10 +17,4 @@ export class InteresovanjeService {
 
         return this.http.post<void>(this.path, xml);
     }
-
-    getPDF(id: string): Observable<string> {
-        return this.http.get<string>(`${this.path}/pdf/${id}`, {
-            responseType: 'arraybuffer' as 'json',
-        });
-    }
 }

@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.component';
+import { ZdravstveniPageComponent } from './pages/zdravstveni-page/zdravstveni-page.component';
 
 const routes: Routes = [
     {
@@ -27,6 +28,7 @@ const routes: Routes = [
             },
         ],
     },
+    { path: 'zdravstveni', component: ZdravstveniPageComponent },
     { path: 'register', component: PatientFormComponent },
     { path: 'login', component: LoginComponent },
     { path: '**', component: NotFoundComponent },

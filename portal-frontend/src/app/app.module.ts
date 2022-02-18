@@ -31,6 +31,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.component';
 import { GradjaninDocumentsComponent } from './components/gradjanin-documents/gradjanin-documents.component';
 import { DocumentTableComponent } from './components/gradjanin-documents/document-table/document-table.component';
+import { ZdravstveniPageComponent } from './pages/zdravstveni-page/zdravstveni-page.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { DocumentTableComponent } from './components/gradjanin-documents/documen
         GradjaninPageComponent,
         GradjaninDocumentsComponent,
         DocumentTableComponent,
+        ZdravstveniPageComponent,
     ],
     imports: [
         BrowserModule,
