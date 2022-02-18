@@ -25,10 +25,15 @@ export class GradjaninPageComponent implements OnInit {
                 index: 1,
             },
             {
-                label: 'Moji dokumenti',
-                link: '/gradjanin/gradjanin-documents',
+                label: 'Podnošenje saglasnosti za imunizacijom',
+                link: '/gradjanin/create-saglasnost',
                 index: 2,
             },
+            {
+                label: 'Moji dokumenti',
+                link: '/gradjanin/gradjanin-documents',
+                index: 3,
+            }
         ];
     }
     ngOnInit(): void {
