@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -25,6 +27,8 @@ import { XmlContentInterceptor } from './interceptors/xml-content.interceptor';
 import { HandleErrorInterceptor } from './interceptors/handle-error.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.component';
+import { GradjaninDocumentsComponent } from './components/gradjanin-documents/gradjanin-documents.component';
+import { DocumentTableComponent } from './components/gradjanin-documents/document-table/document-table.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +39,8 @@ import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.co
         LoginComponent,
         NotFoundComponent,
         GradjaninPageComponent,
+        GradjaninDocumentsComponent,
+        DocumentTableComponent,
     ],
     imports: [
         BrowserModule,
@@ -47,6 +53,8 @@ import { GradjaninPageComponent } from './pages/gradjanin-page/gradjanin-page.co
         MatCheckboxModule,
         MatSelectModule,
         MatButtonModule,
+        MatTableModule,
+        MatIconModule,
         BrowserAnimationsModule,
         HttpClientModule,
         ToastrModule.forRoot(),
