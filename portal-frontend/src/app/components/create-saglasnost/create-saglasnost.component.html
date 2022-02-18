@@ -93,17 +93,17 @@
                 <ng-container [formGroup]="zanimanjeFormGroup">
                     <label id="zanimanjeFormGroupLabel">Zanimanje zaposlenog</label>
                     <mat-radio-group [disabled]="radniStatusFormGroup.value.options !== zaposlen" formControlName="options" aria-labelledby="zanimanjeFormGroupLabel" class="form-radio-group">
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[zdravstvenaZastita]>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="zdravstvenaZastita">
                             Zdravstvena Zaštita</mat-radio-button>
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[socijalnaZastita]>
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="socijalnaZastita">
                             Socijalna zaštita</mat-radio-button>
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[prosveta]>Prosveta
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="prosveta">Prosveta
                         </mat-radio-button>
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[mup]>MUP
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="mup">MUP
                         </mat-radio-button>
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[vojskaRS]>Vojska RS
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="vojskaRS">Vojska RS
                         </mat-radio-button>
-                        <mat-radio-button labelPosition="before" class="form-radio-button" value=[drugo]>Drugo
+                        <mat-radio-button labelPosition="before" class="form-radio-button" [value]="drugo">Drugo
                         </mat-radio-button>
                     </mat-radio-group>
                 </ng-container>
@@ -120,8 +120,12 @@
                 </ng-container>
             </div>
             <mat-form-field>
-                <mat-label>Naziv i opština sedišta</mat-label>
-                <input matInput formControlName="nazivOpstinaSedistaZdravstveneUstanove">
+                <mat-label>Naziv sedišta</mat-label>
+                <input matInput formControlName="nazivSocZdravstveneUstanove">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Opština sedišta</mat-label>
+                <input matInput formControlName="opstinaSedistaSocZdravstveneUstanove">
             </mat-form-field>
             <div>
                 <ng-container [formGroup]="saglasanFormGroup">

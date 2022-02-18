@@ -97,7 +97,8 @@ export class CreateSaglasnostComponent implements OnInit {
         null,
         [Validators.required, Validators.email],
       ],
-      nazivOpstinaSedistaZdravstveneUstanove: [null],
+      nazivSocZdravstveneUstanove: [null],
+      opstinaSedistaSocZdravstveneUstanove: [null],
       nazivLeka: [null, Validators.required],
     });
   }
@@ -106,7 +107,8 @@ export class CreateSaglasnostComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    const nazivOpstineZdravUstanove: string | undefined = this.saglasnostFormGroup.value.nazivOpstinaSedistaZdravstveneUstanove;
+    const opstinaSedistaSocZdravstveneUstanove: string | undefined = this.saglasnostFormGroup.value.opstinaSedistaSocZdravstveneUstanove;
+    const nazivSocZdravstveneUstanove: string | undefined = this.saglasnostFormGroup.value.nazivSocZdravstveneUstanove;
     const jmbg: string | undefined = this.saglasnostFormGroup.value.jmbg;
     const nazivStranogDrzavljanstva: string | undefined = this.saglasnostFormGroup.value.nazivStranogDrzavljanstva;
     const brojPasosa: string | undefined = this.saglasnostFormGroup.value.brojPasosa;
@@ -132,7 +134,7 @@ export class CreateSaglasnostComponent implements OnInit {
 
     if (
       this.radniStatusFormGroup.value.options === RadniStatus.zaposlen &&
-      (zanimanjeZaposlenog === undefined)
+      (zanimanjeZaposlenog === undefined || !zanimanjeZaposlenog)
     ) {
       this.toastr.error('Morate odabrati zanimanje');
       return;
@@ -152,13 +154,21 @@ export class CreateSaglasnostComponent implements OnInit {
     console.log(this.korisnikSocZastFormGroup.value.option)
 
     console.log('nazivOpstineZdravUstanove')
-    console.log(nazivOpstineZdravUstanove)
+    console.log(nazivSocZdravstveneUstanove)
     if (
       this.korisnikSocZastFormGroup.value.options &&
       (
-        nazivOpstineZdravUstanove === undefined ||
-        !nazivOpstineZdravUstanove ||
-        nazivOpstineZdravUstanove.length === 0
+        (
+          nazivSocZdravstveneUstanove === undefined ||
+          !nazivSocZdravstveneUstanove ||
+          nazivSocZdravstveneUstanove.length === 0
+        )
+        ||
+        (
+          opstinaSedistaSocZdravstveneUstanove === undefined ||
+          !opstinaSedistaSocZdravstveneUstanove ||
+          opstinaSedistaSocZdravstveneUstanove.length === 0
+        )
       )
     ) {
       this.toastr.error('Morate navesti naziv i opštinu sedišta ustanove za socijalnu zaštitu');
@@ -185,8 +195,9 @@ export class CreateSaglasnostComponent implements OnInit {
       brojPasosa: brojPasosa && brojPasosa.length !== 0 ? brojPasosa : undefined,
       nazivStranogDrzavljanstva: nazivStranogDrzavljanstva && nazivStranogDrzavljanstva.length !== 0 ? nazivStranogDrzavljanstva : undefined,
       jmbg: jmbg && jmbg.length !== 0 ? jmbg : undefined,
-      nazivOpstinaSedistaZdravstveneUstanove: nazivOpstineZdravUstanove && nazivOpstineZdravUstanove.length !== 0 ? nazivOpstineZdravUstanove : undefined,
-      zanimanjeZaposlenog: zanimanjeZaposlenog
+      nazivSocZdravstveneUstanove: nazivSocZdravstveneUstanove && nazivSocZdravstveneUstanove.length !== 0 ? nazivSocZdravstveneUstanove : undefined,
+      nazivSedistaOpstineSocZdravstveneUstanove: opstinaSedistaSocZdravstveneUstanove && opstinaSedistaSocZdravstveneUstanove.length !== 0 ? opstinaSedistaSocZdravstveneUstanove : undefined,
+      zanimanjeZaposlenog: zanimanjeZaposlenog ? zanimanjeZaposlenog : undefined
     };
 
     console.log(newSaglasnost)

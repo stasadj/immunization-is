@@ -22,7 +22,8 @@ export interface Saglasnost {
     radniStatus: RadniStatus;
     zanimanjeZaposlenog?: ZanimanjeZaposlenog;
     korisnikZdravstveneZastite: boolean;
-    nazivOpstinaSedistaZdravstveneUstanove?: string;
+    nazivSocZdravstveneUstanove?: string;
+    nazivSedistaOpstineSocZdravstveneUstanove?: string;
     saglasan: boolean;
     nazivLeka: string;
 }

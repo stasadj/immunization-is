@@ -49,8 +49,8 @@ export function createSaglasnostXML(saglasnost: Saglasnost): string {
             <zanimanje_zaposlenog>${saglasnost.radniStatus === RadniStatus.zaposlen && saglasnost.zanimanjeZaposlenog ? getZanimanjeEnum(saglasnost.zanimanjeZaposlenog) : ''}</zanimanje_zaposlenog>
             <ustanova_socijalne_zastite>
                 <pacijent_koristi_zastitu>${saglasnost.korisnikZdravstveneZastite ? 'true' : 'false'}</pacijent_koristi_zastitu>
-                <naziv_sedista>${saglasnost.nazivOpstinaSedistaZdravstveneUstanove}</naziv_sedista>
-                <opstina_sedista></opstina_sedista>
+                <naziv_sedista>${saglasnost.nazivSocZdravstveneUstanove}</naziv_sedista>
+                <opstina_sedista>${saglasnost.nazivSedistaOpstineSocZdravstveneUstanove}</opstina_sedista>
             </ustanova_socijalne_zastite>
             <izjava_saglasnosti>
                 <saglasan>${saglasnost.saglasan ? 'true' : 'false'}</saglasan>
