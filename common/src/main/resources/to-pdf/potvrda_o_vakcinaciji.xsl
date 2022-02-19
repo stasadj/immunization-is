@@ -28,11 +28,11 @@
                             </fo:block>
                         </fo:block-container>
                         <fo:block-container width="70%" left="30%" top="0in" position="absolute">
-                            <fo:block font-family="sans-serif" font-size="14px" font-weight="bold" text-align="center"
+                            <fo:block font-family="sans-serif" font-size="13px" font-weight="bold" text-align="center"
                                       linefeed-treatment="preserve" margin="0">
                                 INSTITUT ZA JAVNO ZDRAVLJE SRBIJE&#xA;"Dr Milan Jankovic Batut"
                                 <fo:inline color="gray" font-weight="normal" linefeed-treatment="preserve"
-                                           font-size="13px" margin="0">
+                                           font-size="12px" margin="0">
                                     INSTITUT ZA JAVNO ZDRAVLJE SRBIJE&#xA;"Dr Milan Jankovic Batut"
                                     INSTITUTE OF PUBLIC HEALTH OF SERBIA&#xA;"Dr Milan Jankovic Batut"
                                 </fo:inline>
@@ -99,7 +99,7 @@
                         <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
                             <fo:inline font-weight="bold">
                                 Datum davanja i broj serije
-                                <xsl:value-of select="position()+1"/>
+                                <xsl:value-of select="position()"/>
                                 . doze vakcine:
                             </fo:inline>
                             <fo:inline>
@@ -107,13 +107,21 @@
                             </fo:inline>
                         </fo:block>
                         <fo:block font-family="sans-serif" color="gray" font-size="12px">Datum
-                            <xsl:value-of select="position()+1"/>
+                            <xsl:value-of select="position()"/>
                             vakcinacije /
-                            <xsl:value-of select="position()+1"/>
+                            <xsl:value-of select="position()"/>
                             Vaccination Date
                         </fo:block>
+                        <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
+                            <fo:inline font-weight="bold">Naziv vakcine:</fo:inline>
+                            <fo:inline>
+                                <xsl:value-of select="concat(' ', potv:naziv_vakcine)"/>
+                            </fo:inline>
+                        </fo:block>
+                        <fo:block font-family="sans-serif" color="gray" font-size="12px">Naziv vakcine / Name of vaccine
+                        </fo:block>
                     </xsl:for-each>
-                    <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
+                    <fo:block page-break-before="always" font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
                         <fo:inline font-weight="bold">Zdravstvena ustanova koja vakcinise:</fo:inline>
                         <fo:inline>
                             <xsl:value-of select="concat(' ', //potv:vakcinacije/@zdravstvena_ustanova)"/>
@@ -121,14 +129,6 @@
                     </fo:block>
                     <fo:block font-family="sans-serif" color="gray" font-size="12px">Zdravstvena ustanova koja vakcinise
                         / Health care institution of vaccination
-                    </fo:block>
-                    <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
-                        <fo:inline font-weight="bold">Naziv vakcine:</fo:inline>
-                        <fo:inline>
-                            <xsl:value-of select="concat(' ', //potv:naziv_vakcine)"/>
-                        </fo:inline>
-                    </fo:block>
-                    <fo:block font-family="sans-serif" color="gray" font-size="12px">Naziv vakcine / Name of vaccine
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="13px" padding="5px" margin-top="10px">
                         <fo:inline font-weight="bold">Datum izdavanja potvrde:</fo:inline>
@@ -149,6 +149,7 @@
                     <fo:block font-family="sans-serif" color="gray" font-size="12px" text-align="right">Zdravstvena
                         ustanova / Medical institution
                     </fo:block>
+
                     <fo:block-container>
                         <fo:block-container width="75%" left="0in" top="0in" position="absolute">
                             <fo:block font-family="sans-serif" font-size="11px" padding="5px" margin-top="90px">Ova

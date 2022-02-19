@@ -13,10 +13,10 @@
             <fo:page-sequence master-reference="izvestaj-page">
                 <fo:flow flow-name="xsl-region-body">
                     <fo:block text-align="center" font-family="sans-serif" font-size="24px" font-weight="bold" padding="10px">
-                        Izvestaj o imunizaciji
+                        Izveštaj o imunizaciji
                     </fo:block>
                     <fo:block font-size="13px" padding="10px">
-                        <fo:inline>Izvestaj se odnosi na period od
+                        <fo:inline>Izveštaj se odnosi na period od
                             <fo:inline font-weight="bold">
                                 <xsl:value-of select="//izve:period_od"/>.
                             </fo:inline>do
@@ -97,12 +97,12 @@
                                 <fo:table-row border="1px solid black">
                                     <fo:table-cell padding="10px" border="1px solid black">
                                         <fo:block font-weight="bold">
-                                            <xsl:value-of select="//izve:redni_broj"/>
+                                            <xsl:value-of select="izve:redni_broj"/>
                                         </fo:block>
                                     </fo:table-cell>
                                     <fo:table-cell padding="10px" border="1px solid black">
                                         <fo:block>
-                                            <xsl:value-of select="//izve:broj_datih_doza"/>
+                                            <xsl:value-of select="izve:broj_datih_doza"/>
                                         </fo:block>
                                     </fo:table-cell>
                                 </fo:table-row>
@@ -125,10 +125,10 @@
                                         <fo:block>
                                             <fo:inline>
                                                 <fo:inline font-family="Arial" font-weight="bold">
-                                                    - <xsl:value-of select="//izve:naziv"/> -
-                                                    <xsl:value-of select="//izve:broj_datih_doza"/>
+                                                    - <xsl:value-of select="izve:naziv"/>:
+                                                    <xsl:value-of select="izve:broj_datih_doza"/>
                                                 </fo:inline>
-                                                doza;
+                                                doza
                                             </fo:inline>
                                         </fo:block>
                                     </fo:list-item-body>

@@ -22,7 +22,7 @@ import javax.mail.util.ByteArrayDataSource;
 @AllArgsConstructor
 public class PortalEmailService {
 
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     private static final int NUM_OF_QUICK_SERVICE_THREADS = 10;
 
@@ -89,7 +89,7 @@ public class PortalEmailService {
 
         emailBody.append("\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404");
 
-        EmailContent email = new EmailContent("Zahtev za izdavanje sertifikata prihvaćen", emailBody.toString());
+        EmailContent email = new EmailContent("Potvrda o imunizaciji", emailBody.toString());
         email.addRecipient(user.getEmail());
 
         DataSource attachmentPDF = new ByteArrayDataSource(pdf, "application/octet-stream");
@@ -108,6 +108,7 @@ public class PortalEmailService {
         helper.setText(content.getBody());
         helper.addAttachment(documentId + ".pdf", attachmentPDF);
         quickService.submit(() -> javaMailSender.send(message));
+        System.out.println("EMAIL SENT TO "+emailIds[0]);
     }
 
     public void sendMailAboutAppointment() {

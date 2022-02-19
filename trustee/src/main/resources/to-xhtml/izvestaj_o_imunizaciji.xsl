@@ -31,7 +31,7 @@
                     th, td {
                         border: 1px solid black;
                         text-align: center;
-                        padding: 10px;
+                        padding: 5px;
                     }
                     th {
                         border: 1px solid black;
@@ -51,7 +51,7 @@
                 </style>
             </head>
             <body>
-                <h1 id = "naslov">Izvestaj o imunizaciji</h1>
+                <h1 id = "naslov">Izveštaj o imunizaciji</h1>
                 <p style = "padding-top:10px">Izvestaj se odnosi na period od
                     <b><xsl:value-of select="//izve:period_od"/></b> do
                     <b><xsl:value-of select="//izve:period_do"/></b>.
@@ -70,15 +70,15 @@
                     Dato je <b><xsl:value-of select="//izve:raspodela_datih_vakcina_po_rednom_broju_doze/@ukupno_dato"/></b>
                     doza vakcine protiv COVID-19 virusa u sledecoj kolicini:
                 </p>
-                <table>
+                <table style = "border-spacing: 0; border-collapse: collapse;">
                     <tr>
                         <th>Redni broj doze</th>
                         <th>Broj datih doza</th>
                     </tr>
                     <xsl:for-each select="//izve:doza">
                         <tr>
-                            <td><b><xsl:value-of select="//izve:redni_broj"/></b></td>
-                            <td><xsl:value-of select="//izve:broj_datih_doza"/></td>
+                            <td><b><xsl:value-of select="izve:redni_broj"/></b></td>
+                            <td><xsl:value-of select="izve:broj_datih_doza"/></td>
                         </tr>
                     </xsl:for-each>
                 </table>
@@ -87,8 +87,8 @@
                     <ul list-style-type = "circle">
                         <xsl:for-each select="//izve:proizvodjac">
                             <li>
-                                <b><xsl:value-of select="//izve:naziv"/></b> -
-                                <b><xsl:value-of select="//izve:broj_datih_doza"/></b> doza;
+                                <b><xsl:value-of select="concat(izve:naziv, ': ')"/></b>
+                                <xsl:value-of select="izve:broj_datih_doza"/> doza
                             </li>
                         </xsl:for-each>
                     </ul>

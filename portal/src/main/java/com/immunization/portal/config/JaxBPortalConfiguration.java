@@ -1,5 +1,6 @@
 package com.immunization.portal.config;
 
+import com.immunization.common.model.VaccineAmount;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -38,7 +39,8 @@ public class JaxBPortalConfiguration {
 				ZahtevZaSertifikat.class,
                 UserRegistrationDTO.class,
 				User.class,
-                GradjaninDocumentsDTO.class
+                GradjaninDocumentsDTO.class,
+				VaccineAmount.class
 		);
 	}
 

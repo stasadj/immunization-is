@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/potvrda", consumes = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+@RequestMapping(value = "/api/potvrda")
 public class PotvrdaController extends DocumentController<PotvrdaOVakcinaciji> {
 
     @Autowired

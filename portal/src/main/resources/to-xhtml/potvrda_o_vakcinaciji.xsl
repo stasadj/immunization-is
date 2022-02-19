@@ -87,18 +87,23 @@
                     <p class="indent-paragraph">
                         <b>
                             Datum davanja i broj serije
-                            <xsl:value-of select="position()+1"/>
+                            <xsl:value-of select="position()"/>
                             doze vakcine:
                         </b>
                         <xsl:value-of select="concat(' ', potv:datum_davanja, ', serija: ', potv:broj_serije)"/>
                     </p>
                     <p class="indent-paragraph" style="font-size: 1.3em; color: grey;">
                         Datum
-                        <xsl:value-of select="position()+1"/>
+                        <xsl:value-of select="position()"/>
                         vakcinacije /
-                        <xsl:value-of select="position()+1"/>
+                        <xsl:value-of select="position()"/>
                         Vaccination Date
                     </p>
+                    <p class="indent-paragraph">
+                        <b>Naziv vakcine:</b>
+                        <xsl:value-of select="concat(' ', potv:naziv_vakcine)"/>
+                    </p>
+                    <p class="indent-paragraph" style="font-size: 1.3em; color: grey;">Naziv vakcine / Name of vaccine</p>
                 </xsl:for-each>
                 <p class="indent-paragraph">
                     <b>Zdravstvena ustanova koja vakcinise:</b>
@@ -107,11 +112,6 @@
                 <p class="indent-paragraph" style="font-size: 1.3em; color: grey;">Zdravstvena ustanova koja vakcinise /
                     Health care institution of vaccination
                 </p>
-                <p class="indent-paragraph">
-                    <b>Naziv vakcine:</b>
-                    <xsl:value-of select="concat(' ', //potv:naziv_vakcine)"/>
-                </p>
-                <p class="indent-paragraph" style="font-size: 1.3em; color: grey;">Naziv vakcine / Name of vaccine</p>
                 <p class="indent-paragraph">
                     <b>Datum izdavanja potvrde:</b>
                     <xsl:value-of select="concat(' ', //potv:datum_izdavanja_potvrde)"/>
