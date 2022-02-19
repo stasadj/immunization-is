@@ -66,7 +66,7 @@ public class PotvrdaService extends DocumentService<PotvrdaOVakcinaciji> {
 
         PotvrdaOVakcinaciji potvrda = new PotvrdaOVakcinaciji();
         String uuid = uuidService.getUUID();
-        potvrda.setAbout(MetadataConstants.ABOUT_PREFIX+uuid);
+        potvrda.setAbout(MetadataConstants.ABOUT_PREFIX+"potvrda/"+uuid);
         potvrda.setSifraPotvrde(BigInteger.valueOf(Long.parseLong(uuid)));
 
         LicniPodaci licniPodaci = new LicniPodaci();
@@ -74,7 +74,7 @@ public class PotvrdaService extends DocumentService<PotvrdaOVakcinaciji> {
         licniPodaci.setImePrezime(saglasnost.getInformacijeOPacijentu().getPunoIme().getImePrezime());
         if (saglasnost.getInformacijeOPacijentu().getDrzavljanstvo().getSrpskoDrzavljanstvo()!=null)
             licniPodaci.setJmbg(saglasnost.getInformacijeOPacijentu().getDrzavljanstvo().getSrpskoDrzavljanstvo().getJmbg());
-        licniPodaci.setAbout(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX+licniPodaci.getJmbg());
+        licniPodaci.setAbout(MetadataConstants.ABOUT_LICNI_PODACI_PREFIX+username);
         licniPodaci.setDatumRodjenja(saglasnost.getInformacijeOPacijentu().getDatumIMestoRodjenja().getDatumRodjenja());
         potvrda.setLicniPodaci(licniPodaci);
 

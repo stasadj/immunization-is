@@ -7,7 +7,7 @@ public abstract class MetadataConstants {
     public static String ABOUT_RESIDENCE_PREFIX = ABOUT_PREFIX.concat("prebivaliste/");
     public static String REQUEST_ABOUT_PREFIX = ABOUT_PREFIX.concat("zahtev-za-sertifikat/");
     public static String CERTIFICATE_ABOUT_PREFIX = ABOUT_PREFIX.concat("digitalni-sertifikat/");
-    public static String CONFIRMATION_ABOUT_PREFIX = ABOUT_PREFIX.concat("potvrda-o-vakcinaciji/");
+    public static String CONFIRMATION_ABOUT_PREFIX = ABOUT_PREFIX.concat("potvrda/");
 
     public static String RDF_GRAPH_URI = "/immunization-metadata";
 
