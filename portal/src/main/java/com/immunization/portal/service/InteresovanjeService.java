@@ -71,5 +71,6 @@ public class InteresovanjeService extends DocumentService<IskazivanjeInteresovan
         // send email to patient
         emailService.sendInteresovanjeConfirmation(interesovanje,
                 interesovanje.getPacijent().getKontaktInformacije().getEmailAdresa());
+        emailService.sendMailAboutAppointment(user, 3);
     }
 }

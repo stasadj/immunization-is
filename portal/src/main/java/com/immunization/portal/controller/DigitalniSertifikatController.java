@@ -11,7 +11,7 @@ import com.immunization.common.model.digitalni_sertifikat.DigitalniSertifikat;
 import com.immunization.portal.service.DigitalniSertifikatService;
 
 @RestController
-@RequestMapping(value = "/api/digitalni-sertifikat", produces = MediaType.APPLICATION_XML_VALUE + ";charset=utf-8")
+@RequestMapping(value = "/api/digitalni-sertifikat")
 public class DigitalniSertifikatController extends DocumentController<DigitalniSertifikat> {
 
     @Autowired

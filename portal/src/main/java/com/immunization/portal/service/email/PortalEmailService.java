@@ -1,6 +1,8 @@
 package com.immunization.portal.service.email;
 
 import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -111,8 +113,18 @@ public class PortalEmailService {
         System.out.println("EMAIL SENT TO "+emailIds[0]);
     }
 
-    public void sendMailAboutAppointment() {
+    public void sendMailAboutAppointment(User user, int daysFromNow) {
+        Random r = new Random();
+        LocalDateTime app = LocalDateTime.now().plusDays(daysFromNow).withHour(r.nextInt(12)+7).withMinute(r.nextInt(12)*5);
 
+        String emailBody = "Poštovana/i " + user.getFirstName() + " " + user.getLastName() + ", \n\n" +
+                "Vaše vakcinisanje je " + app.getDayOfMonth() + "." + app.getMonthValue() + ". u "
+                + app.getHour() + ":" + app.getMinute() + "h u najbližem vakcinacijskom punktu. \n\n" +
+                "\n\nOvo je automatski generisan mejl. Molimo Vas da na njega ne odgovarate. ©Team404";
+
+        EmailContent email = new EmailContent("Vakcinacija", emailBody);
+        email.addRecipient(user.getEmail());
+        sendEmail(email);
     }
 
 }

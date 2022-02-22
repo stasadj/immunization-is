@@ -102,6 +102,7 @@ public class PotvrdaService extends DocumentService<PotvrdaOVakcinaciji> {
         userDAO.save(user);
 
         portalEmailService.sendConfirmation(user, uuid, generatePdf(uuid));
+        if (vakcinacije.getVakcinacija().size()<3) portalEmailService.sendMailAboutAppointment(user, 21);
 
         vaccineAmountService.decrementAmount(last.getNazivVakcine(), last.getBrojSerije().intValue());
     }
